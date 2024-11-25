@@ -31,7 +31,7 @@ export class MaliyetComponent {
           label: 'Süspansiyon',
           icon: 'fa fa-inbox',
           submenu: [],
-          href: '',
+          href: '/maliyet/suspansiyon-maliyet',
           expanded: false,
         },
         {

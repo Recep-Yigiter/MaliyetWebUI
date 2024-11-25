@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
       icon: 'fa-solid fa-receipt',
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
       href: 'satis-fiyati',
-      disabled: false,
+      disabled: true,
     },
     
     {
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
       icon: 'fa-solid fa-receipt',
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
       href: 'tanimlar',
-      disabled: false,
+      disabled: true,
     },
     
    

@@ -5,11 +5,11 @@ import { AG_GRID_LOCALE_TR } from 'AG_GRID_LOCALE_TR ';
 import { defaultColDef } from 'default-col-def';
 
 @Component({
-  selector: 'app-buton-maliyet',
-  templateUrl: './buton-maliyet.component.html',
-  styleUrls: ['./buton-maliyet.component.scss'],
+  selector: 'app-suspansiyon-maliyet',
+  templateUrl: './suspansiyon-maliyet.component.html',
+  styleUrls: ['./suspansiyon-maliyet.component.scss']
 })
-export class ButonMaliyetComponent {
+export class SuspansiyonMaliyetComponent {
   rowData: any[];
   public rowSelection: 'single' | 'multiple' = 'multiple';
   private gridApi!: GridApi<any>;
@@ -21,25 +21,45 @@ export class ButonMaliyetComponent {
   constructor(private fb: FormBuilder) {}
 
   public frm: FormGroup = this.fb.group({
-    kod: [null, [Validators.required, Validators.maxLength(16)]],
     ad: [null, [Validators.required, Validators.maxLength(16)]],
     aciklama: [null, [Validators.required, Validators.maxLength(16)]],
+    kapasite: [null, [Validators.required, Validators.maxLength(16)]],
+    askiTipi: [null, [Validators.required, Validators.maxLength(16)]],
+    rayArasi: [null, [Validators.required, Validators.maxLength(16)]],
+    sacAgirlik: [null, [Validators.required, Validators.maxLength(16)]],
+    kosebent: [null, [Validators.required, Validators.maxLength(16)]],
+
+
+
   });
-  get kod() {
-    return this.frm.get('kod');
-  }
+
   get ad() {
     return this.frm.get('ad');
   }
+  get kapasite() {
+    return this.frm.get('kapasite');
+  }
+  get askiTipi() {
+    return this.frm.get('askiTipi');
+  }
+  get rayArasi() {
+    return this.frm.get('rayArasi');
+  }
+  get kosebent() {
+    return this.frm.get('kosebent');
+  }
+  get sacAgirlik() {
+    return this.frm.get('sacAgirlik');
+  }
+
   get aciklama() {
     return this.frm.get('aciklama');
   }
 
   colDefs: ColDef[] = [
-    { field: 'ad', width: 300,
-        headerCheckboxSelection: true,  // Tüm satırlar için checkbox ekler
-      checkboxSelection: true, },
-    { field: 'miktar', width: 70,editable:true },
+    { field: 'ad', width: 300, headerCheckboxSelection: true,  // Tüm satırlar için checkbox ekler
+      checkboxSelection: true,  }, // Tüm satırlar için checkbox ekler checkboxSelection: true,
+    { field: 'miktar', width: 70, },
     { field: 'birim', width: 70,  },
     { field: 'birimFiyat', width: 70,  },
   ];
@@ -47,12 +67,15 @@ export class ButonMaliyetComponent {
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
     this.rowData = [
-      { ad: 'BUTON KASASI SAC', miktar: 6.5, birim: 'KG', birimFiyat: 234 },
-      { ad: 'BOYA ', miktar: 6.5, birim: 'KG', birimFiyat: 34 },
-      { ad: 'KAPAK SATİNE 1.5MM ', miktar: 0.77, birim: 'KG', birimFiyat: 346 },
-      { ad: 'BUTON KARTI KIRMIZI LED ', miktar: 5.75, birim: 'ADET', birimFiyat: 66 },
-      { ad: 'BUTON KASA(PLASTİK GRUP) ', miktar: 7, birim: 'KG', birimFiyat: 228 },
-      { ad: 'GDOT 6 GÖSTERGE ', miktar: 7, birim: 'KG', birimFiyat: 4 },
+      { ad: 'SAC', miktar: 1, birim: 'KG', birimFiyat: 28 },
+      { ad: 'M12*30 C.S.P.R ', miktar: 1, birim: 'TAKIM', birimFiyat: 5.18 },
+      { ad: 'M10*20 C.S.P.R', miktar: 1, birim: 'TAKIM', birimFiyat: 3.23 },
+      { ad: 'M8*20 C.S.P.R', miktar: 1, birim: 'TAKIM', birimFiyat: 1.87 },
+      { ad: 'FREN BLOĞU ', miktar: 1, birim: 'ADET', birimFiyat: 3915 },
+      { ad: 'BOYA ', miktar:1, birim: 'KG', birimFiyat: 2.5 },
+      { ad: 'KABİN PATEN BLOĞU ', miktar: 1, birim: 'ADET', birimFiyat: 257.5 },
+      { ad: 'YAĞDANLIK	 ', miktar: 1, birim: 'ADET', birimFiyat: 40 },
+      { ad: 'RADANSA	 ', miktar: 1, birim: 'ADET', birimFiyat: 30 },
     ];
   }
 

@@ -1,20 +1,32 @@
-
 <div class="grid grid-cols-[2fr_2fr_1fr] gap-1 ">
     <div class=" p-1 text-white">
 
-        <div class="card h-full">
-            <div class="card-body max-w-sm rounded overflow-hidden ">
+        <div class="card h-full ">
+            <div class="card-body  rounded overflow-hidden ">
                 <form [formGroup]="frm">
                     <div style="display: grid;grid-template-columns: auto;padding: 0 10px;">
 
-                        <buton-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="ad" [span]="130"
-                            [label]="'Ad '" [field]="'Mekanik Kabin Butonu'"></buton-maliyet-form-label>
-                        <buton-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="kod" [span]="130"
-                            [label]="'Durak Sayısı '" [field]="2"></buton-maliyet-form-label>
+                        <suspansiyon-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="ad"
+                            [span]="130" [label]="'Ad '"
+                            [field]="'KABİN SÜSPANSİYONU 2/1'"></suspansiyon-maliyet-form-label>
+
+                        <suspansiyon-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="kapasite"
+                            [span]="130" [label]="'Kapasite '" [field]="'1250 den küçük'"></suspansiyon-maliyet-form-label>
 
 
-                        <buton-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="aciklama"
-                            [span]="130" [label]="'Açıklama '"></buton-maliyet-form-label>
+                        <suspansiyon-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="askiTipi"
+                            [span]="130" [label]="'Askı Tipi'"
+                            [field]="'2/1'"></suspansiyon-maliyet-form-label>
+
+                        <suspansiyon-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="rayArasi"
+                            [span]="130" [label]="'Ray Arası'" [field]="'1570 mm'"></suspansiyon-maliyet-form-label>
+
+                        <suspansiyon-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="kosebent"
+                            [span]="130" [label]="'Köşebent'" [field]="20"></suspansiyon-maliyet-form-label>
+                        <suspansiyon-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="sacAgirlik"
+                            [span]="130" [label]="'Sac Ağırlığı'" [field]="'312.71 kg'"></suspansiyon-maliyet-form-label>
+                        <suspansiyon-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="aciklama"
+                            [span]="130" [label]="'Açıklama'"></suspansiyon-maliyet-form-label>
                     </div>
 
                 </form>
@@ -23,7 +35,7 @@
             </div>
             <div class="card-footer py-1">
                 <small class="text-muted flex justify-between items-center">
-                    Son Hesapla: 3 gün önce 
+                    Son Hesapla: 3 gün önce
 
                     <div class="hover:cursor-pointer hover:bg-slate-200 p-1 rounded-sm text-base">Hesapla</div>
                 </small>
@@ -47,7 +59,7 @@
         </ag-grid-angular>
     </div>
 
-   
+
     <table class="yks_table_group ">
         <tbody>
 
@@ -121,5 +133,6 @@
 
         </tbody>
     </table>
+
 
 </div>

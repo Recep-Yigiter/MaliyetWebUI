@@ -18,6 +18,21 @@ import { TanimlarComponent } from './tanimlar/tanimlar.component';
     RouterModule.forChild([
       {
         path: '',
+        component: MaliyetComponent,
+        
+        children: [
+          {
+            path: 'maliyet',
+            loadChildren: () =>
+              import(
+                '../pages/maliyet/maliyet.module'
+              ).then((m) => m.MaliyetModule),
+           
+          },
+        ],
+      },
+      {
+        path: '',
         component: TanimlarComponent,
         
         children: [
@@ -46,21 +61,7 @@ import { TanimlarComponent } from './tanimlar/tanimlar.component';
           },
         ],
       },
-      {
-        path: '',
-        component: MaliyetComponent,
-        
-        children: [
-          {
-            path: 'maliyet',
-            loadChildren: () =>
-              import(
-                '../pages/maliyet/maliyet.module'
-              ).then((m) => m.MaliyetModule),
-           
-          },
-        ],
-      },
+      
 
     ]),
   ]
