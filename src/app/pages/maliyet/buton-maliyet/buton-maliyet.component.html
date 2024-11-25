@@ -1,0 +1,52 @@
+
+<div class="grid grid-cols-[2fr_2fr_1fr] gap-1 ">
+    <div class=" p-1 text-white">
+
+        <div class="card ">
+            <div class="card-body max-w-sm rounded overflow-hidden ">
+                <form [formGroup]="frm">
+                    <div style="display: grid;grid-template-columns: auto;padding: 0 10px;">
+
+                        <buton-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="ad" [span]="130"
+                            [label]="'Ad '"></buton-maliyet-form-label>
+                        <buton-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="kod" [span]="130"
+                            [label]="'Durak Sayısı '"></buton-maliyet-form-label>
+
+
+                        <buton-maliyet-form-label style=" grid-column: 1/span 2; " [formControlNames]="aciklama"
+                            [span]="130" [label]="'Açıklama '"></buton-maliyet-form-label>
+                    </div>
+
+                </form>
+
+
+            </div>
+            <div class="card-footer">
+                <small class="text-muted flex justify-between items-center">
+                    Son Hesapla: 3 gün önce 
+
+                    <div class="hover:cursor-pointer hover:bg-slate-200 p-2 rounded-sm">Hesapla</div>
+                </small>
+            </div>
+        </div>
+    </div>
+    <div class=" p-1 text-white">
+
+        <ag-grid-angular #agGrid style="height:calc(100vh - 380px);" class="ag-theme-quartz" [rowData]="rowData"
+            [defaultColDef]="defaultColDef" [columnDefs]="colDefs" (gridReady)="getList($event)"
+            (selectionChanged)="rowClick()" [rowSelection]="rowSelection" [rowHeight]="27" [headerHeight]="23"
+            [localeText]="localeText" [rowMultiSelectWithClick]="true">
+        </ag-grid-angular>
+
+    </div>
+    <div class=" p-1 text-white">
+        <ag-grid-angular #agGrid style="height:calc(100vh - 380px);" class="ag-theme-quartz" [rowData]="rowDataPersonel"
+            [defaultColDef]="defaultColDef" [columnDefs]="colDefsPersonel" (gridReady)="getList($event)"
+            (selectionChanged)="rowClick()" [rowSelection]="rowSelectionPersonel" [rowHeight]="27" [headerHeight]="23"
+            [localeText]="localeText" [rowMultiSelectWithClick]="true">
+        </ag-grid-angular>
+    </div>
+
+    <div></div>
+
+</div>
