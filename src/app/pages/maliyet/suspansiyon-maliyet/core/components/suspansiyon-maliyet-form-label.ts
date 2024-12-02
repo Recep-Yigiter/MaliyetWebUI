@@ -31,17 +31,20 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
                 align-items:  center;
                 font-style: oblique;">
 
-            <input  [(ngModel)]="field"  [formControl]="formControlNames"  [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "  class="form-control shadow-none  " id="exampleFormControlInput1"> 
+            <input  [(ngModel)]="field" name="{{name}}"   [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "  class="form-control shadow-none  " id="exampleFormControlInput1"> 
             </td>
         </tr>
-
+{{
+    name 
+}}
             `,
 
 })
 export class SuspansiyonMaliyetFormLabelComponent implements AfterViewInit {
 
     @Input() label: any;
-    @Input() formControlNames: any;
+    @Input() name: any;
+    @Input() formControlNames?: any;
     @Input() field: any;
     @Input() span: any;
     @Input() labelNone: any=true;

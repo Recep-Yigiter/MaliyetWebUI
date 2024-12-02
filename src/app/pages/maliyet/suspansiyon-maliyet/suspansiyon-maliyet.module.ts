@@ -7,10 +7,11 @@ import { SuspansiyonMaliyetFormLabelComponent } from './core/components/suspansi
 import { SuspansiyonMaliyetFormDropDownComponent } from './core/components/suspansiyon-maliyet-form-dropdown';
 import { SuspansiyonMaliyetFormDateComponent } from './core/components/suspansiyon-maliyet-form-date';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AgGridAngular } from 'ag-grid-angular';
+import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
 import { RouterModule } from '@angular/router';
-
-
+import { MaliyetFormComponent } from './core/components/maliyet-form';
+import { TableModule } from 'primeng/table';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,15 @@ import { RouterModule } from '@angular/router';
     SuspansiyonMaliyetFormLabelComponent,
     SuspansiyonMaliyetFormDropDownComponent,
     SuspansiyonMaliyetFormDateComponent,
-
+    MaliyetFormComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     AgGridAngular,
+    AgGridModule,
+    TableModule,
+    AutoCompleteModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

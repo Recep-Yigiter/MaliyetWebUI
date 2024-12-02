@@ -32,7 +32,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
                 font-style: oblique;">
 
 
-                <input style="padding:0 0.25rem 0 0.75rem !important;" [formControl]="formControlNames" [(ngModel)]="field" type="date" [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "  class="form-control shadow-none" id="exampleFormControlInput1">
+                <input style="padding:0 0.25rem 0 0.75rem !important;" [(ngModel)]="field" type="date" [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "  class="form-control shadow-none" id="exampleFormControlInput1">
             </td>
         </tr>
 

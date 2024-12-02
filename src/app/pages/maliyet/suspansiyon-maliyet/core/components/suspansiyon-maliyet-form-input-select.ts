@@ -32,7 +32,7 @@ import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetecto
                 font-style: oblique;position: relative; ">
 
                
-            <input style=" padding: 0px 0 0px 0.75rem; "  [(ngModel)]="field"  [formControl]="formControlNames" [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "   class="form-control shadow-none " id="exampleFormControlInput1"> 
+            <input style=" padding: 0px 0 0px 0.75rem; "  [(ngModel)]="field"   [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "   class="form-control shadow-none " id="exampleFormControlInput1"> 
 
             
             <div style="position: absolute;top: 0;right: 3px; display: flex;align-items: center;justify-content: center; height: 100%; width: 20px;">
