@@ -1,51 +1,39 @@
 <div class="grid grid-cols-[2fr_2fr_1fr] gap-1 ">
-    <div class=" p-1 text-white">
 
+    <div class=" p-1 text-white">
         <div class="card h-full ">
             <div class="card-body  rounded overflow-hidden ">
-
                 <div style="padding: 0 10px;">
-                    <!-- <input [(ngModel)]="frm.ad" name="ad" type="text" class="login-username" autofocus="true"
-                        placeholder="Tenant" /> -->
+                    <maliyet-form [span]="130" [label]="'Karkas Tipi'">
+                        <p-dropdown form-control [options]="suspansiyonCinsi" [(ngModel)]="frm.suspansiyonCinsi" optionLabel="ad"
+                            (ngModelChange)="ngModelChange()"  />
+                    </maliyet-form>
 
-
-                    <!-- 
                     <maliyet-form [span]="130" [label]="'Ad'">
-                        <input form-control [(ngModel)]="frm.ad" name="name"
-                            class="form-control shadow-none form-control-nullable w-full" id="exampleFormControlInput1">
-                    </maliyet-form> -->
-                    <maliyet-form [span]="130" [label]="'Ad'">
-                        <p-autoComplete form-control [(ngModel)]="selectedUrunler" [dropdown]="true" (onFocus)="onFocus()" (ngModelChange)="ngModelChange()"
-                            [suggestions]="filteredUrunler" (completeMethod)="filterCountry($event)"
-                            optionLabel="ad" field="ad"/>
+                        <p-autoComplete form-control [(ngModel)]="selectedUrunler" [dropdown]="true"
+                            placeholder="Ürün giriniz.." (onFocus)="onFocus()" (ngModelChange)="ngModelChange()"
+                            [suggestions]="filteredUrunler" (completeMethod)="filterUrunler($event)" optionLabel="ad"
+                            field="ad" />
                     </maliyet-form>
 
                     <maliyet-form [span]="130" [label]="'Kapasite'">
-                        <input form-control [(ngModel)]="frm.kapasite" name="kapasite"
-                            class="form-control shadow-none form-control-nullable w-full" id="exampleFormControlInput1">
+                        <p-dropdown form-control [options]="kapasite" [(ngModel)]="frm.kapasite" optionLabel="ad"
+                            (ngModelChange)="ngModelChange()" placeholder="Kapasite seçiniz.." />
                     </maliyet-form>
 
                     <maliyet-form [span]="130" [label]="'Askı Tipi'">
-                        <select form-control [(ngModel)]="frm.askiTipi" name="askiTipi"
-                            style="height :31.5px;border-radius: 0; padding:16px 12px;"
-                            class="form-select shadow-none form-control form-control-nullable"
-                            aria-label="Default select example">
-                            <option [selected]="true" [ngValue]="null">Lütfen seçim yapınız...
-                            </option>
-                            <option *ngFor="let item of deneme" [ngValue]="item.ad">
-                                {{item.ad}} </option>
-                        </select>
+                        <p-dropdown (ngModelChange)="ngModelChange()" form-control [options]="askiTipleri" [(ngModel)]="frm.askiTipi" optionLabel="ad"
+                            placeholder="Askı tipi seçiniz.." />
                     </maliyet-form>
 
-
+                    <!-- <maliyet-form [span]="130" [label]="'Ray Arası'">
+                        <p-dropdown form-control [options]="rayArasi" [(ngModel)]="frm.rayArasi" optionLabel="ad"
+                            placeholder="Ray arası seçiniz.." />
+                    </maliyet-form> -->
                     <maliyet-form [span]="130" [label]="'Ray Arası'">
-                        <input form-control [(ngModel)]="frm.rayArasi" name="rayArasi"
-                            class="form-control shadow-none form-control-nullable w-full" id="exampleFormControlInput1">
+                        <input form-control [(ngModel)]="frm.rayArasi" name="kosebent"
+                            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
                     </maliyet-form>
-
-                    <!-- <suspansiyon-maliyet-form-dropdown [dataSource]="deneme" style=" grid-column: 1/span 2; "
-                        [span]="130" [label]="'Askı Tipi'" [field]="frm.askiTipi"></suspansiyon-maliyet-form-dropdown> -->
-
 
                     <maliyet-form [span]="130" [label]="'Köşebent'">
                         <input form-control [(ngModel)]="frm.kosebent" name="kosebent"
@@ -57,13 +45,15 @@
                             class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
                     </maliyet-form>
 
+                    <maliyet-form [span]="130" [label]="'Top. Ağırlık'">
+                        <input form-control [(ngModel)]="frm.toplamAgirlik" name="toplamAgirlik"
+                            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+                    </maliyet-form>
+
                     <maliyet-form [span]="130" [label]="'Açıklama'">
                         <input form-control [(ngModel)]="frm.aciklama" name="aciklama"
                             class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
                     </maliyet-form>
-
-
-
                 </div>
 
 
@@ -80,18 +70,9 @@
             </div>
         </div>
     </div>
-    <div class=" p-1 text-white flex flex-col">
+    <div class=" p-1 text-white flex flex-col border">
 
-        <!-- <ag-grid-angular #agGrid style="height:calc(100vh - 380px);" class="ag-theme-quartz" [rowData]="rowData"
-            [columnDefs]="colDefs" (gridReady)="getList($event)" (selectionChanged)="rowClick()"
-            [rowSelection]="'multiple'" [rowHeight]="27" [headerHeight]="23" [rowMultiSelectWithClick]="true"
-            [localeText]="localeText">
-        </ag-grid-angular> -->
-
-
-
-
-        <p-table *ngIf="selectedUrunler" [value]="rowData" dataKey="id" selectionMode="multiple" [(selection)]="selectedRows"
+        <p-table [value]="rowData" dataKey="id" selectionMode="multiple" [(selection)]="selectedRows"
             [metaKeySelection]="false" [tableStyle]="{'min-width': '50rem'}">
             <ng-template pTemplate="header">
                 <tr>
@@ -115,92 +96,104 @@
             </ng-template>
         </p-table>
 
-
-
     </div>
     <div class=" p-1 text-white">
-        <!-- <ag-grid-angular #agGrid style="height:calc(100vh - 380px);" class="ag-theme-quartz" [rowData]="rowDataPersonel"
-            [columnDefs]="colDefsPersonel" (gridReady)="getListPersonel($event)" (selectionChanged)="rowClickPersonel()"
-            [rowSelection]="'multiple'" [rowHeight]="27" [headerHeight]="23" [rowMultiSelectWithClick]="true"
-            [localeText]="localeText">
-        </ag-grid-angular> -->
+        <p-table [value]="rowDataPersonel" dataKey="id" selectionMode="multiple" [(selection)]="selectedPersonelRows"
+            [metaKeySelection]="false">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
+                    <th>Ad</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex">
+                    <td>
+                        <p-tableCheckbox [value]="product" />
+                    </td>
+                    <td>{{ product.ad }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
 
 
-    <table class="yks_table_group ">
-        <tbody>
-
-            <tr style="height: 25px !important;">
-                <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-
-                    <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Birim Maliyet :
-                    </label>
-                </td>
-                <td style="width: 100%;">
-
-                    <label style=" min-width: 60px; 
-                    font-weight: 600; 
-                    font-size: 13px; 
-                    color: #666666;">
-
-                        <span> 17140.23 ₺ </span>
 
 
-                    </label>
-                </td>
 
-            </tr>
-            <tr style="height: 25px !important;">
-                <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+</div>
 
-                    <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">İşçilik :
-                    </label>
-                </td>
-                <td style="width: 100%;">
+<table class="yks_table_group ">
+    <tbody>
 
-                    <label style=" min-width: 60px; 
-                    font-weight: 600; 
-                    font-size: 13px; 
-                    color: #666666;">
+        <tr style="height: 25px !important;">
+            <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
 
-                        <span> 6456.62 ₺ </span>
+                <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Birim Maliyet :
+                </label>
+            </td>
+            <td style="width: 100%;">
 
-
-                    </label>
-                </td>
-
-            </tr>
-
-
-            <tr style="height: 25px !important;">
-                <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-
-                    <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Toplam Maliyet
-                        :
-                    </label>
-                </td>
-                <td style="width: 100%;">
-
-                    <label style=" min-width: 60px; 
+                <label style=" min-width: 60px; 
                 font-weight: 600; 
                 font-size: 13px; 
                 color: #666666;">
 
-                        <span> 23596.62 ₺
-                        </span>
+                    <span> 17140.23 ₺ </span>
 
 
-                    </label>
-                </td>
+                </label>
+            </td>
 
-            </tr>
+        </tr>
+        <tr style="height: 25px !important;">
+            <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+
+                <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">İşçilik :
+                </label>
+            </td>
+            <td style="width: 100%;">
+
+                <label style=" min-width: 60px; 
+                font-weight: 600; 
+                font-size: 13px; 
+                color: #666666;">
+
+                    <span> 6456.62 ₺ </span>
+
+
+                </label>
+            </td>
+
+        </tr>
+
+
+        <tr style="height: 25px !important;">
+            <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+
+                <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Toplam Maliyet
+                    :
+                </label>
+            </td>
+            <td style="width: 100%;">
+
+                <label style=" min-width: 60px; 
+            font-weight: 600; 
+            font-size: 13px; 
+            color: #666666;">
+
+                    <span> 23596.62 ₺
+                    </span>
+
+
+                </label>
+            </td>
+
+        </tr>
 
 
 
 
 
-        </tbody>
-    </table>
-
-
-</div>
+    </tbody>
+</table>

@@ -17,19 +17,20 @@ export class TanimlarComponent {
           label: 'Stok ',
           icon: 'fa fa-inbox',
           submenu: [  ],
-          href: '',
+          href: '/tanimlar/stok',
           expanded: false,
         },
         {
           label: 'Personel ',
           icon: 'fa fa-inbox',
           submenu: [  ],
-          href: '',
+          href: '/tanimlar/personel',
           expanded: false,
         },
         
       ],
     },
+  
 
   ];
 

@@ -11,13 +11,23 @@
 
 :host ::ng-deep {
     p-table {
+        .p-datatable .p-datatable-thead > tr > th {
+
+            border-width: 0 0 1px 0;
+            font-weight: 400 !important;
+            color: #a9a9a9;
+            font-size: 14px;
+
+        }
         .p-datatable .p-datatable-tbody>tr>td {
             text-align: left;
             border: 1px solid #dee2e6;
             border-width: 0 0 1px 0;
             padding: 0.3rem 1rem;
+            font-size: 12px;
         }
-        .p-datatable .p-datatable-thead > tr > th {
+
+        .p-datatable .p-datatable-thead>tr>th {
             padding: 0.3rem 1rem;
 
         }
@@ -81,6 +91,36 @@
         }
 
 
+    }
+
+    p-dropdown {
+        .p-dropdown {
+            display: inline-flex;
+            cursor: pointer;
+            position: relative;
+            -webkit-user-select: none;
+            user-select: none;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            width: 100%;
+            background-color: rgb(247, 247, 247) !important;
+        }
+
+        .p-dropdown-panel .p-dropdown-items {
+            padding: 0.3rem 0;
+            font-size: 13px;
+        }
+
+        .p-dropdown .p-dropdown-label {
+            background: transparent;
+            border: 0 none;
+            padding: 0 2.25rem 0 0.75rem !important;
+            font-size: 13px !important;
+            background-color: rgb(247, 247, 247) !important;
+            border-radius: 0px !important;
+            color: black;
+            font-weight: 600;
+        }
     }
 
 

@@ -38,7 +38,7 @@ export class MaliyetComponent {
           label: 'Buton',
           icon: 'fa fa-inbox',
           submenu: [],
-          href: '/maliyet/buton-maliyet',
+          href: '',
           expanded: false,
         },
         {
