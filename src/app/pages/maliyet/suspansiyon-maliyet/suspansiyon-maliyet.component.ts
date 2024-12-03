@@ -6,8 +6,8 @@ import {
   GridOptions,
   GridReadyEvent,
 } from 'ag-grid-community';
-import { AG_GRID_LOCALE_TR } from 'AG_GRID_LOCALE_TR ';
-import { defaultColDef } from 'default-col-def';
+import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
+import { defaultColDef } from 'src/default-col-def';
 import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 
 @Component({

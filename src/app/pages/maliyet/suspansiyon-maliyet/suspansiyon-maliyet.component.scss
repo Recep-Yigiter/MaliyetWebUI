@@ -31,6 +31,15 @@
             padding: 0.3rem 1rem;
 
         }
+
+        .p-checkbox .p-checkbox-box.p-highlight {
+            border-color: #b8c8e1;
+            background: #012869;
+        }
+
+        .p-checkbox .p-checkbox-box {
+            border-radius: 0px;
+        }
     }
 
     p-autocomplete {

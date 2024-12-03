@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
-import { AG_GRID_LOCALE_TR } from 'AG_GRID_LOCALE_TR ';
-import { defaultColDef } from 'default-col-def';
+import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
+import { defaultColDef } from 'src/default-col-def';
 
 @Component({
   selector: 'app-buton-maliyet',
