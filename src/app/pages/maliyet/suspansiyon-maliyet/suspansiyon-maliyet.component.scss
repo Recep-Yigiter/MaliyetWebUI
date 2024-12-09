@@ -10,7 +10,7 @@
 }
 
 :host ::ng-deep {
-    p-table {
+    p-table{
         .p-datatable .p-datatable-thead > tr > th {
 
             border-width: 0 0 1px 0;
@@ -39,6 +39,34 @@
 
         .p-checkbox .p-checkbox-box {
             border-radius: 0px;
+        }
+
+        
+            .p-datatable .p-datatable-tbody > tr.p-highlight {
+                background: #EFF6FF;
+                color: #1D4ED8;
+                font-weight: 700;
+            }
+           .p-datatable .p-datatable-tbody > tr {
+                background: #ffffff;
+                color: #c1c1c1;
+                transition: box-shadow 0.2s;
+            }
+  
+        
+       
+    }
+
+    p-table#row-check{
+        .p-datatable .p-datatable-tbody > tr.p-highlight {
+            background: #EFF6FF;
+            color: #1D4ED8;
+            font-weight: 700;
+        }
+       .p-datatable .p-datatable-tbody > tr {
+            background: #ffffff;
+            color: #1f1f1f;
+            transition: box-shadow 0.2s;
         }
     }
 
@@ -129,6 +157,12 @@
             border-radius: 0px !important;
             color: black;
             font-weight: 600;
+        }
+
+        .p-dropdown .p-dropdown-label.p-placeholder {
+            color: #aab1b7 !important;
+            font-weight: 400 !important;
+ 
         }
     }
 

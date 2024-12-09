@@ -17,7 +17,7 @@ export class MaliyetComponent {
           label: 'Kabin',
           icon: 'fa fa-inbox',
           submenu: [],
-          href: '',
+          href: '/maliyet/kabin-maliyet',
           expanded: false,
         },
         {

@@ -27,6 +27,13 @@ export class TanimlarComponent {
           href: '/tanimlar/personel',
           expanded: false,
         },
+        {
+          label: 'Urunler ',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/urun',
+          expanded: false,
+        },
         
       ],
     },

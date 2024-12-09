@@ -4,56 +4,69 @@
         <div class="card h-full ">
             <div class="card-body  rounded overflow-hidden ">
                 <div style="padding: 0 10px;">
-                    <maliyet-form [span]="130" [label]="'Karkas Tipi'">
-                        <p-dropdown form-control [options]="suspansiyonCinsi" [(ngModel)]="frm.suspansiyonCinsi" optionLabel="ad"
-                            (ngModelChange)="ngModelChange()"  />
-                    </maliyet-form>
 
-                    <maliyet-form [span]="130" [label]="'Ad'">
+
+                      <maliyet-form [span]="130" [label]="'Ürün'">
                         <p-autoComplete form-control [(ngModel)]="selectedUrunler" [dropdown]="true"
                             placeholder="Ürün giriniz.." (onFocus)="onFocus()" (ngModelChange)="ngModelChange()"
                             [suggestions]="filteredUrunler" (completeMethod)="filterUrunler($event)" optionLabel="ad"
                             field="ad" />
-                    </maliyet-form>
+                    </maliyet-form> 
 
-                    <maliyet-form [span]="130" [label]="'Kapasite'">
-                        <p-dropdown form-control [options]="kapasite" [(ngModel)]="frm.kapasite" optionLabel="ad"
-                            (ngModelChange)="ngModelChange()" placeholder="Kapasite seçiniz.." />
+                    
+                 <p-divider />
+
+                        
+
+                    <maliyet-form [span]="130" [label]="'Karkas Tipi'">
+                        <p-dropdown form-control [options]="karkasTipleri" [(ngModel)]="frm.karkasTipleri" optionLabel="ad"
+                        (ngModelChange)="onKarkasTipiChange(frm.karkasTipleri)" />
                     </maliyet-form>
 
                     <maliyet-form [span]="130" [label]="'Askı Tipi'">
-                        <p-dropdown (ngModelChange)="ngModelChange()" form-control [options]="askiTipleri" [(ngModel)]="frm.askiTipi" optionLabel="ad"
-                            placeholder="Askı tipi seçiniz.." />
+                        <p-dropdown form-control [options]="askiTipListesi" [(ngModel)]="frm.askiTipi" optionLabel="ad"
+                        (ngModelChange)="onAskiTipiChange(frm.askiTipi)" />
                     </maliyet-form>
 
-                    <!-- <maliyet-form [span]="130" [label]="'Ray Arası'">
-                        <p-dropdown form-control [options]="rayArasi" [(ngModel)]="frm.rayArasi" optionLabel="ad"
-                            placeholder="Ray arası seçiniz.." />
-                    </maliyet-form> -->
+                    <maliyet-form *ngIf="frm.karkasTipleri.id==1" [span]="130" [label]="'Kapasite'">
+                        <p-dropdown form-control [options]="kapasiteListesi" [(ngModel)]="frm.kapasite" optionLabel="ad"
+                        (ngModelChange)="onKapasiteChange(frm.kapasite.id)" />
+                    </maliyet-form>
+
+                    <maliyet-form *ngIf="frm.karkasTipleri.id==2" [span]="130" [label]="'Karkas Şekli'">
+                        <p-dropdown form-control [options]="kaskasSekliListesi" [(ngModel)]="frm.karkasSekli" optionLabel="ad"
+                        (ngModelChange)="onKaskasSekliChange(frm.karkasSekli)" />
+                    </maliyet-form>
+
+                
+
+                    
                     <maliyet-form [span]="130" [label]="'Ray Arası'">
                         <input form-control [(ngModel)]="frm.rayArasi" name="kosebent"
                             class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
                     </maliyet-form>
 
-                    <maliyet-form [span]="130" [label]="'Köşebent'">
+                    <maliyet-form *ngIf="frm.karkasTipleri.id==1" [span]="130" [label]="'Köşebent'">
                         <input form-control [(ngModel)]="frm.kosebent" name="kosebent"
                             class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
                     </maliyet-form>
 
-                    <maliyet-form [span]="130" [label]="'Sac Ağırlığı'">
-                        <input form-control [(ngModel)]="frm.sacAgirligi" name="sacAgirligi"
-                            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-                    </maliyet-form>
-
-                    <maliyet-form [span]="130" [label]="'Top. Ağırlık'">
-                        <input form-control [(ngModel)]="frm.toplamAgirlik" name="toplamAgirlik"
-                            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-                    </maliyet-form>
+                     
 
                     <maliyet-form [span]="130" [label]="'Açıklama'">
                         <input form-control [(ngModel)]="frm.aciklama" name="aciklama"
                             class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-                    </maliyet-form>
+                    </maliyet-form> 
+
+                   
+
+                    
+
+
+
+
+
+
                 </div>
 
 
@@ -70,9 +83,10 @@
             </div>
         </div>
     </div>
-    <div class=" p-1 text-white flex flex-col border">
+    <div class=" p-1 text-white flex flex-col border ">
 
-        <p-table [value]="rowData" dataKey="id" selectionMode="multiple" [(selection)]="selectedRows"
+        <p-table  [value]="rowData" dataKey="id" selectionMode="multiple" [(selection)]="selectedRows"  [scrollable]="true" 
+        scrollHeight="400px" 
             [metaKeySelection]="false" [tableStyle]="{'min-width': '50rem'}">
             <ng-template pTemplate="header">
                 <tr>
@@ -81,6 +95,8 @@
                     <th>Miktar</th>
                     <th>Birim</th>
                     <th>Birim Fiyat</th>
+                    <th>Döviz</th>
+                    <th>Toplam Fiyat</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
@@ -89,16 +105,32 @@
                         <p-tableCheckbox [value]="product" />
                     </td>
                     <td>{{ product.ad }}</td>
-                    <td>{{ product.miktar }}</td>
+                     <td>{{ product.miktar }}</td>
+                    <!-- <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input 
+                                    pInputText 
+                                    type="text" 
+                                    [(ngModel)]="product.miktar" 
+                                    required />
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ product.miktar }}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td> -->
                     <td>{{ product.birim }}</td>
                     <td>{{ product.birimFiyat }}</td>
+                    <td>{{ product.dovizCinsi }}</td>
+                    <td>{{product.dovizFiyat }}</td>
                 </tr>
             </ng-template>
         </p-table>
 
     </div>
     <div class=" p-1 text-white">
-        <p-table [value]="rowDataPersonel" dataKey="id" selectionMode="multiple" [(selection)]="selectedPersonelRows"
+        <p-table  id="row-check" [value]="personeller" dataKey="id" selectionMode="multiple" [(selection)]="selectedPersonelRows"
             [metaKeySelection]="false">
             <ng-template pTemplate="header">
                 <tr>
@@ -107,7 +139,7 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-                <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex">
+                <tr >
                     <td>
                         <p-tableCheckbox [value]="product" />
                     </td>
@@ -129,6 +161,48 @@
         <tr style="height: 25px !important;">
             <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
 
+                <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Sac Ağırlık :
+                </label>
+            </td>
+            <td style="width: 100%;">
+
+                <label style=" min-width: 60px; 
+                font-weight: 600; 
+                font-size: 13px; 
+                color: #666666;">
+
+                    <span> {{frm.sacAgirligi}}</span>
+
+
+                </label>
+            </td>
+
+        </tr>
+        <tr style="height: 25px !important;">
+            <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+
+                <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Toplam Ağırlık :
+                </label>
+            </td>
+            <td style="width: 100%;">
+
+                <label style=" min-width: 60px; 
+                font-weight: 600; 
+                font-size: 13px; 
+                color: #666666;">
+
+                    <span> {{frm.toplamAgirlik}}</span>
+
+
+                </label>
+            </td>
+
+        </tr>
+
+
+        <tr style="height: 25px !important;">
+            <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+
                 <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Birim Maliyet :
                 </label>
             </td>
@@ -139,7 +213,8 @@
                 font-size: 13px; 
                 color: #666666;">
 
-                    <span> 17140.23 ₺ </span>
+                    <span  *ngIf="birimMaliyet"> {{birimMaliyet}} </span>
+                    <span  *ngIf="!birimMaliyet"> 0 </span>
 
 
                 </label>
@@ -166,8 +241,6 @@
             </td>
 
         </tr>
-
-
         <tr style="height: 25px !important;">
             <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
 
@@ -182,8 +255,8 @@
             font-size: 13px; 
             color: #666666;">
 
-                    <span> 23596.62 ₺
-                    </span>
+                    <span *ngIf="birimMaliyet">  {{birimMaliyet+(6456.62)}}</span>
+                    <span *ngIf="!birimMaliyet">  0</span>
 
 
                 </label>

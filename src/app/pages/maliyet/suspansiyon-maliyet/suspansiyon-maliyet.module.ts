@@ -13,6 +13,7 @@ import { MaliyetFormComponent } from './core/components/maliyet-form';
 import { TableModule } from 'primeng/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
+import { DividerModule } from 'primeng/divider';
 @NgModule({
   declarations: [
     SuspansiyonMaliyetComponent,
@@ -32,6 +33,7 @@ import { DropdownModule } from 'primeng/dropdown';
     TableModule,
     AutoCompleteModule,
     DropdownModule,
+    DividerModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },
