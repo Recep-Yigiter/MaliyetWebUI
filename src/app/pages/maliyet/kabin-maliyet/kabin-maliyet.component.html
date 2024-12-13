@@ -159,74 +159,72 @@
 
 
 
-<div class="grid grid-cols-[2fr_1fr_4fr] gap-1 ">
+<div class="grid grid-cols-[2fr_2fr_4fr] gap-1 ">
 
 
     <div class=" p-1 text-white flex flex-col border ">
         <kabin-maliyet-form [span]="170" [label]="'Tür'">
-            <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
-                (ngModelChange)="onKapasiteChange(frm.kapasite)" />
+            <p-dropdown form-control [options]="turler" [(ngModel)]="frm.tur" optionLabel="ad"
+                (ngModelChange)="onTurChange(frm.tur)" />
         </kabin-maliyet-form>
         <kabin-maliyet-form [span]="170" [label]="'Model'">
-            <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
-                (ngModelChange)="onKapasiteChange(frm.kapasite)" />
+            <p-dropdown form-control [options]="modeller" [(ngModel)]="frm.model" optionLabel="ad"
+                (ngModelChange)="onModelChange(frm.model)" />
         </kabin-maliyet-form>
+
         <kabin-maliyet-form [span]="170" [label]="'Zemin Kaplama'">
-            <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
-                (ngModelChange)="onKapasiteChange(frm.kapasite)" />
+            <p-dropdown form-control [options]="zeminKaplamalar" [(ngModel)]="frm.zeminKaplama" optionLabel="ad"
+                (ngModelChange)="onZeminKaplamaChange(frm.zeminKaplama)" />
+        </kabin-maliyet-form>
+        <kabin-maliyet-form [span]="170" [label]="'Kabin Kaplama'">
+            <p-dropdown form-control [options]="kabinKaplamalar" [(ngModel)]="frm.kabinKaplama" optionLabel="ad"
+                (ngModelChange)="onKabinKaplamaChange(frm.kabinKaplama)" />
+        </kabin-maliyet-form>
+
+    </div>
+
+    <div class=" p-1 text-white flex flex-col border ">
+        <kabin-maliyet-form [span]="170" [label]="'Aksesuar Kaplama'">
+            <p-dropdown form-control [options]="aksesuarKaplamalar" [(ngModel)]="frm.aksesuarKaplama" optionLabel="ad"
+                (ngModelChange)="onAksesuarKaplamaChange(frm.aksesuarKaplama)" />
         </kabin-maliyet-form>
         <kabin-maliyet-form [span]="170" [label]="'Kapasite'">
             <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
                 (ngModelChange)="onKapasiteChange(frm.kapasite)" />
         </kabin-maliyet-form>
 
-    </div>
-
-    <div class=" p-1 text-white flex flex-col border ">
-        <kabin-maliyet-form [span]="170" [label]="'Kaplama'">
-            <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
-                (ngModelChange)="onKapasiteChange(frm.kapasite)" />
-        </kabin-maliyet-form>
-        <kabin-maliyet-form [span]="170" [label]="'Aksesuar Kaplama'">
-            <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
-                (ngModelChange)="onKapasiteChange(frm.kapasite)" />
-        </kabin-maliyet-form>
-       
-
-        <div form-control  class="bg-red-900 flex items-center justify-center font-bold hover:bg-red-800 hover:cursor-pointer hover:text-green-700 ">Uygula</div>
+        <div (click)="uygula()" form-control
+            class="bg-red-900 flex items-center justify-center font-bold hover:bg-red-800 hover:cursor-pointer hover:text-green-700 ">
+            Uygula</div>
 
     </div>
 
 </div>
 
-<div class="grid grid-cols-[2fr_2fr_1fr] gap-1 ">
+<div class="grid grid-cols-[2fr_3fr_1fr] gap-1 ">
 
-    <div class=" p-1 text-white flex flex-col border ">
-        <p-table id="row-check" [value]="dataKabinMaliyet" dataKey="id" selectionMode="single"
-            [(selection)]="selectedurunRow" [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Ad</th>
-                    <th>Birim</th>
-                    <th>Birim Maliyet</th>
-                    <th>İşçilik</th>
-                    <th>Toplam</th>
-
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-urun let-rowIndex="rowIndex">
-                <tr [pSelectableRow]="urun" [pSelectableRowIndex]="rowIndex" [pEditableRow]="urun">
-                    <td>{{ urun.ad }}</td>
-                    <td>{{ urun.birim }}</td>
-                    <td>{{ urun.birimFiyat }}</td>
-                    <td>{{ urun.dovizCinsi }}</td>
-                    <td>{{ urun.dovizFiyat*urun.miktar }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-    <p-table id="row-check" [value]="rowData" dataKey="id" selectionMode="single" [(selection)]="selectedRows"
+    <p-table id="row-check" [value]="kabinler" dataKey="id" selectionMode="single" [(selection)]="selectedUrunRow"
         [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Ad</th>
+                <th></th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-urun let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="urun" [pSelectableRowIndex]="rowIndex" [pEditableRow]="urun"
+                (click)="onRowClickUrun(urun)">
+                <td>{{ urun.ad }}</td>
+                <td>
+                    İşlemler
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-table id="row-check" [value]="bilesenler" dataKey="id" selectionMode="single" [(selection)]="selectedBilesenRow"
+        [style]="{'min-height':' 400px'}" [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">
         <ng-template pTemplate="header">
             <tr>
                 <th>Ad</th>
@@ -239,27 +237,23 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-            <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" >
+
+            <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" (click)="onRowClickBilesen(product)">
 
                 <td>{{ product.ad }}</td>
-                <!-- <td>{{ product.miktar }}</td> -->
                 <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <!-- <input 
-                                pInputText 
-                                type="text" 
-                                [(ngModel)]="product.miktar" 
-                                required /> -->
 
-                                <input form-control [(ngModel)]="product.miktar" name="miktar"
+
+                            <input form-control [(ngModel)]="product.miktar" name="miktar"
                                 class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{ product.miktar }}
                         </ng-template>
                     </p-cellEditor>
-                </td> 
+                </td>
                 <td>{{ product.birim }}</td>
                 <td>{{ product.birimFiyat }}</td>
                 <td>{{ product.dovizCinsi }}</td>
@@ -270,32 +264,31 @@
         </ng-template>
     </p-table>
 
-    <div class=" p-1 text-white">
-        <p-table id="row-check" [value]="personeller" dataKey="id" selectionMode="multiple"
-            [(selection)]="selectedPersonelRows" [metaKeySelection]="false">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
-                    <th>Ad</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-                <tr>
-                    <td>
-                        <p-tableCheckbox [value]="product" />
-                    </td>
-                    <td>{{ product.ad }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
+    <p-table id="row-check" [value]="personeller" dataKey="id" selectionMode="multiple"
+        [(selection)]="selectedPersonelRows" [metaKeySelection]="false">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
+                <th>Ad</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="product" />
+                </td>
+                <td>{{ product.ad }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
 </div>
 
-<div class="grid grid-cols-[2fr_2fr_1fr] gap-1 ">
+<div class="grid grid-cols-[2fr_3fr_1fr] gap-1 ">
     <div></div>
     <div>
         <div class="button-container mt-2">
-            <div  class="button-grup ">
+            <div class="button-grup ">
                 <div class="img-container">
                     <img src="../../../../../assets/icons/save.png" alt="">
                 </div>
@@ -330,7 +323,7 @@
 
             </div>
 
-            <div class="button-grup">
+            <div (click)="yenile()" class="button-grup">
                 <div class="img-container">
                     <img src="../../../../../assets/icons/refresh.png" alt="">
                 </div>

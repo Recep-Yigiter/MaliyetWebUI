@@ -60,7 +60,7 @@ export class MaliyetComponent {
           label: 'Kasnak',
           icon: 'fa fa-inbox',
           submenu: [],
-          href: '',
+          href: '/maliyet/kasnak-maliyet',
           expanded: false,
         },
         
