@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'buton-maliyet-form-dropdown',
+    selector: 'buton-maliyet-form',
     template: `
         <tr class="yks_table_group"  style="display: grid; grid-template-columns: {{span}}px auto">
             <td *ngIf="labelNone" class="pl-2 " style="
@@ -31,35 +31,21 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
                 align-items:  center;
                 font-style: oblique;">
 
-                
-
-
-             <select [formControl]="formControlNames" [(ngModel)]="field" style="height :21.5px;border-radius: 0;"
-              [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "    class="form-select shadow-none"
-                 aria-label="Default select example">
-                 <option [selected]="selected" [ngValue]="null">Lütfen
-                     seçim yapınız...
-                 </option>
-                 <option *ngFor="let item of dataSource" [ngValue]="item">
-                     {{item.ad}} </option>
-             </select>
-
-            </td>
+            <!-- <input  [(ngModel)]="field" name="{{name}}"   [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "  class="form-control shadow-none  " id="exampleFormControlInput1">  -->
+           
+            <ng-content select="[form-control]"></ng-content>
+        </td>
         </tr>
 
             `,
 
 })
-export class ButonMaliyetFormDropDownComponent implements AfterViewInit {
+export class ButonMaliyetFormComponent implements AfterViewInit {
 
     @Input() label: any;
-    @Input() formControlNames: any;
-    @Input() field: any;
     @Input() span: any;
     @Input() labelNone: any=true;
-    @Input() dataSource: any=true;
-    @Input() selected: any;
-    @Input() status: any=true;
+
 
 
     constructor(private ref: ChangeDetectorRef) {

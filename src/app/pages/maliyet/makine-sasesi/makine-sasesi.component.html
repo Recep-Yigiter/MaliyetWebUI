@@ -1,3 +1,4 @@
+
 <div class="grid grid-cols-[2fr_2fr_1fr] gap-1 ">
 
     <div class=" p-1 text-white">
@@ -6,77 +7,18 @@
                 <div style="padding: 0 10px;">
                     <p-divider />
 
-                    <buton-maliyet-form [span]="130" [label]="'Buton'">
-                        <p-dropdown form-control [options]="butonTipi" [(ngModel)]="frm.butonTipi" optionLabel="ad"
-                        (ngModelChange)="onButonTipiChange(frm.butonTipi)" />
-                    </buton-maliyet-form>
+                    <makine-sasesi-maliyet-form [span]="130" [label]="'Şase Tipi'">
+                        <p-dropdown form-control [options]="saseTipi" [(ngModel)]="frm.saseTipi" optionLabel="ad"
+                        (ngModelChange)="onSaseTipiChange(frm.saseTipi)" />
+                    </makine-sasesi-maliyet-form>
+                    <makine-sasesi-maliyet-form [span]="130" [label]="'Kapasite'">
+                        <p-dropdown form-control [options]="kapasite" [(ngModel)]="frm.kapasite" optionLabel="deger"
+                        (ngModelChange)="onKapasiteChange(frm.kapasite)" />
+                    </makine-sasesi-maliyet-form>
 
-                 
-                    <div *ngIf="frm.butonTipi.id==1">
-                        <buton-maliyet-form  [span]="130" [label]="'Durak Sayısı'">
-                            <p-dropdown form-control [options]="durakSayisi" [(ngModel)]="frm.durakSayisi" optionLabel="deger"
-                            (ngModelChange)="onDurakSayisiChange(frm.durakSayisi)" />
-                        </buton-maliyet-form>
-
-                        <buton-maliyet-form  [span]="130" [label]="'Buton Çeşidi'">
-                            <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
-                            (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
-                        </buton-maliyet-form>
-                    </div>
-                   
-                <div *ngIf="frm.butonTipi.id==2">
-                    <buton-maliyet-form [span]="130" [label]="'Ürün'">
-                        <p-autoComplete form-control [(ngModel)]="selectedUrunler" [dropdown]="true"
-                            placeholder="Ürün giriniz.." (onFocus)="onFocus()" (ngModelChange)="ngModelChange()"
-                            [suggestions]="filteredUrunler" (completeMethod)="filterUrunler($event)" optionLabel="ad"
-                            field="ad" />
-                    </buton-maliyet-form> 
-
+                    <div (click)="getUrun()" form-control class="bg-red-900 flex items-center justify-center">Uygula</div>
 
                 </div>
-
- 
-                 
-
-               <!-- <buton-maliyet-form *ngIf="frm.butonTipi.id==1" [span]="130" [label]="'Durak Sayısı'">
-                    <p-dropdown form-control [options]="durakSayisi" [(ngModel)]="frm.durakSayisi" optionLabel="deger"
-                    (ngModelChange)="onDurakSayisiChange(frm.durakSayisi)" />
-                </buton-maliyet-form>
-
-                <buton-maliyet-form *ngIf="frm.butonTipi.id==1" [span]="130" [label]="'Buton Çeşidi'">
-                    <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
-                    (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
-                </buton-maliyet-form>
-
-
-          
-                <div *ngIf="frm.butonTipi.id==2">
-                    <buton-maliyet-form [span]="130" [label]="'Ürün'">
-                        <p-autoComplete form-control [(ngModel)]="selectedUrunler" [dropdown]="true"
-                            placeholder="Ürün giriniz.." (onFocus)="onFocus()" (ngModelChange)="ngModelChange()"
-                            [suggestions]="filteredUrunler" (completeMethod)="filterUrunler($event)" optionLabel="ad"
-                            field="ad" />
-                    </buton-maliyet-form> 
-
-
-                </div> -->
-
-
-
-
-
-
-
-
-           
-                    <div (click)="getUrun()" form-control  class="bg-red-900 flex items-center justify-center">Uygula</div>
-
-                </div>
-
-               
-
-
-
             </div>
             <div class="card-footer py-1">
                 <small class="text-muted flex justify-between items-center">
@@ -102,7 +44,6 @@
                     <th>Birim Fiyat</th>
                     <th>Döviz</th>
                     <th>Toplam Fiyat</th>
-  
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
@@ -111,31 +52,14 @@
                         <p-tableCheckbox [value]="product" />
                     </td>
                     <td>{{ product.ad }}</td>
-                     <td>{{ product.miktar }}</td>
-                     <!-- <td >
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input 
-                                    pInputText 
-                                    type="text" 
-                                    [(ngModel)]="product.miktar" 
-                                    required />
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{ product.miktar }}
-                            </ng-template>
-                        </p-cellEditor>
-                    </td>  -->
+                    <td>{{ product.miktar }}</td>
                     <td>{{ product.birim }}</td>
                     <td>{{ product.birimFiyat }}</td>
                     <td>{{ product.dovizCinsi }}</td>
                     <td>{{product.dovizFiyat*product.miktar }}</td>
-
-              
                 </tr>
             </ng-template>
         </p-table>
-
     </div>
     <div class=" p-1 text-white">
         <p-table  id="row-check" [value]="personeller" dataKey="id" selectionMode="multiple" [(selection)]="selectedPersonelRows"
@@ -156,24 +80,11 @@
             </ng-template>
         </p-table>
     </div>
-
-
-
-
-
 </div>
-
 <table class="yks_table_group ">
     <tbody>
-
-
-
-
-
- 
         <tr style="height: 25px !important;">
             <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-
                 <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">İşçilik :
                 </label>
             </td>
@@ -183,15 +94,10 @@
                 font-weight: 600; 
                 font-size: 13px; 
                 color: #666666;">
-
                     <span> 12.250,70 ₺ </span>
-
-
                 </label>
             </td>
-
         </tr>
-
         <tr style="height: 25px !important;">
             <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
 
@@ -199,23 +105,15 @@
                 </label>
             </td>
             <td style="width: 100%;">
-
                 <label style=" min-width: 60px; 
                 font-weight: 600; 
                 font-size: 13px; 
                 color: #666666;">
-
-                    <span> {{birimMaliyet}}</span>
-
-
+                  <span> {{birimMaliyet}}</span>
                 </label>
             </td>
 
         </tr>
-
-
-
-
-
     </tbody>
 </table>
+

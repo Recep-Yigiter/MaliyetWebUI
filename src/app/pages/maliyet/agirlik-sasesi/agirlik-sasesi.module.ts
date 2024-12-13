@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButonMaliyetComponent } from './buton-maliyet.component';
-import { RouterModule } from '@angular/router';
-
+import { AgirlikSasesiComponent } from './agirlik-sasesi.component';
+import { AgirlikSasesiMaliyetFormComponent } from './core/components/agirlik-sasesi-maliyet-form';
+import { AgirlikSasesiDesignComponent } from './core/design/design.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
-import { ButonDesignComponent } from './core/design/design.component';
-import { ButonMaliyetFormComponent } from './core/components/buton-maliyet-form';
 import { TableModule } from 'primeng/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
 import { ListboxModule } from 'primeng/listbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { RouterModule } from '@angular/router';
+
+
+
 @NgModule({
   declarations: [
-    ButonMaliyetComponent,
-
-
-    ButonDesignComponent,
-    ButonMaliyetFormComponent
+    AgirlikSasesiComponent,
+    AgirlikSasesiMaliyetFormComponent,
+    AgirlikSasesiDesignComponent
   ],
   imports: [
     CommonModule,
@@ -41,4 +41,4 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     ])
   ]
 })
-export class ButonMaliyetModule { }
+export class AgirlikSasesiModule { }

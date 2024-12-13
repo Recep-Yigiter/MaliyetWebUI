@@ -4,63 +4,22 @@
         <div class="card h-full ">
             <div class="card-body  rounded overflow-hidden ">
                 <div style="padding: 0 10px;">
+
                     <p-divider />
 
-                    <buton-maliyet-form [span]="130" [label]="'Buton'">
+
+
+
+                    <agirlik-sasesi-maliyet-form [span]="130" [label]="'Buton'">
                         <p-dropdown form-control [options]="butonTipi" [(ngModel)]="frm.butonTipi" optionLabel="ad"
-                        (ngModelChange)="onButonTipiChange(frm.butonTipi)" />
-                    </buton-maliyet-form>
+                        (ngModelChange)="onUrunGrubuChange(frm.butonTipi)" />
+                    </agirlik-sasesi-maliyet-form>
 
                  
-                    <div *ngIf="frm.butonTipi.id==1">
-                        <buton-maliyet-form  [span]="130" [label]="'Durak Sayısı'">
-                            <p-dropdown form-control [options]="durakSayisi" [(ngModel)]="frm.durakSayisi" optionLabel="deger"
-                            (ngModelChange)="onDurakSayisiChange(frm.durakSayisi)" />
-                        </buton-maliyet-form>
-
-                        <buton-maliyet-form  [span]="130" [label]="'Buton Çeşidi'">
-                            <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
-                            (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
-                        </buton-maliyet-form>
-                    </div>
-                   
-                <div *ngIf="frm.butonTipi.id==2">
-                    <buton-maliyet-form [span]="130" [label]="'Ürün'">
-                        <p-autoComplete form-control [(ngModel)]="selectedUrunler" [dropdown]="true"
-                            placeholder="Ürün giriniz.." (onFocus)="onFocus()" (ngModelChange)="ngModelChange()"
-                            [suggestions]="filteredUrunler" (completeMethod)="filterUrunler($event)" optionLabel="ad"
-                            field="ad" />
-                    </buton-maliyet-form> 
-
-
-                </div>
-
  
                  
 
-               <!-- <buton-maliyet-form *ngIf="frm.butonTipi.id==1" [span]="130" [label]="'Durak Sayısı'">
-                    <p-dropdown form-control [options]="durakSayisi" [(ngModel)]="frm.durakSayisi" optionLabel="deger"
-                    (ngModelChange)="onDurakSayisiChange(frm.durakSayisi)" />
-                </buton-maliyet-form>
-
-                <buton-maliyet-form *ngIf="frm.butonTipi.id==1" [span]="130" [label]="'Buton Çeşidi'">
-                    <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
-                    (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
-                </buton-maliyet-form>
-
-
-          
-                <div *ngIf="frm.butonTipi.id==2">
-                    <buton-maliyet-form [span]="130" [label]="'Ürün'">
-                        <p-autoComplete form-control [(ngModel)]="selectedUrunler" [dropdown]="true"
-                            placeholder="Ürün giriniz.." (onFocus)="onFocus()" (ngModelChange)="ngModelChange()"
-                            [suggestions]="filteredUrunler" (completeMethod)="filterUrunler($event)" optionLabel="ad"
-                            field="ad" />
-                    </buton-maliyet-form> 
-
-
-                </div> -->
-
+              
 
 
 
@@ -69,7 +28,7 @@
 
 
            
-                    <div (click)="getUrun()" form-control  class="bg-red-900 flex items-center justify-center">Uygula</div>
+                    <div  form-control  class="bg-red-900 flex items-center justify-center">Uygula</div>
 
                 </div>
 
@@ -82,7 +41,7 @@
                 <small class="text-muted flex justify-between items-center">
                     Son Hesapla: 3 gün önce
 
-                    <div (click)="maliyetHesabi()" class="hover:cursor-pointer hover:bg-slate-200 p-1 rounded-sm text-base">
+                    <div class="hover:cursor-pointer hover:bg-slate-200 p-1 rounded-sm text-base">
                         Hesapla</div>
                 </small>
             </div>

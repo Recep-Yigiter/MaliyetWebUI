@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'buton-maliyet-design',
+  selector: 'makine-sasesi-maliyet-design',
   templateUrl: './design.component.html',
   styleUrls: ['./design.component.scss']
 })
-export class ButonDesignComponent {
+export class MakineSasesiDesignComponent {
 
 
 
