@@ -8,6 +8,7 @@ import { KabinMaliyetComponent } from './kabin-maliyet/kabin-maliyet.component';
 import { AgirlikSasesiComponent } from './agirlik-sasesi/agirlik-sasesi.component';
 import { MakineSasesiComponent } from './makine-sasesi/makine-sasesi.component';
 import { KasnakMaliyetComponent } from './kasnak-maliyet/kasnak-maliyet.component';
+import { KapiMaliyetComponent } from './kapi-maliyet/kapi-maliyet.component';
 
 
 
@@ -28,6 +29,7 @@ import { KasnakMaliyetComponent } from './kasnak-maliyet/kasnak-maliyet.componen
              { path: 'buton-maliyet', component: ButonMaliyetComponent, loadChildren: () => import("../maliyet/buton-maliyet/buton-maliyet.module").then(m => m.ButonMaliyetModule) },
              { path: 'suspansiyon-maliyet', component: SuspansiyonMaliyetComponent, loadChildren: () => import("../maliyet/suspansiyon-maliyet/suspansiyon-maliyet.module").then(m => m.SuspansiyonMaliyetModule) },
              { path: 'kasnak-maliyet', component: KasnakMaliyetComponent, loadChildren: () => import("../maliyet/kasnak-maliyet/kasnak-maliyet.module").then(m => m.KasnakMaliyetModule) },
+             { path: 'kapi-maliyet', component: KapiMaliyetComponent, loadChildren: () => import("../maliyet/kapi-maliyet/kapi-maliyet.module").then(m => m.KapiMaliyetModule) },
 
           ]
         },

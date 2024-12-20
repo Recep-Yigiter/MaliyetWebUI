@@ -14,6 +14,7 @@ import { TableModule } from 'primeng/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [
     SuspansiyonMaliyetComponent,
@@ -34,6 +35,7 @@ import { DividerModule } from 'primeng/divider';
     AutoCompleteModule,
     DropdownModule,
     DividerModule,
+    DialogModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

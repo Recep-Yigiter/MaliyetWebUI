@@ -4,6 +4,8 @@ import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AutoComplete } from 'primeng/autocomplete';
 import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
 import { BUTONLAR } from 'src/assets/DATA/buton';
+import { GENELGIDERLER } from 'src/assets/DATA/genel-giderler';
+import { ISCILIK } from 'src/assets/DATA/iscilik';
 import { DATA_PERSONELLER } from 'src/assets/personeller';
 import { BUTON_VARYANTLAR, DOVIZ, STOKLAR, URUNLER } from 'src/assets/urunler';
 import { defaultColDef } from 'src/default-col-def';
@@ -249,15 +251,18 @@ selectedUrunRow:any;
 personeller=DATA_PERSONELLER
 selectedPersonelRows:any;
 
+iscilikGiderler:any=ISCILIK
+genelGiderler:any=GENELGIDERLER
+selectedURUN:any;
 
 ngOnInit() {
-  // this.kabinler=KABINLER
   this.selectedUrunRow=this.kabinler[0]
   if (this.selectedUrunRow) {
     this.bilesenler=this.kabinler[0].urunBilesenler
     this.onRowClickUrun(this.selectedUrunRow)
-  }
+    
 
+  }
 
  }
 
@@ -268,11 +273,9 @@ ngOnInit() {
 
 frm:any={
   butonTipi: { id: 1, ad: 'Hepsi' },
-  model: { id: 1, ad: 'Hepsi' },
-  zeminKaplama: { id: 1, ad: 'Hepsi' },
-  kabinKaplama: { id: 1, ad: 'Hepsi' },
-  aksesuarKaplama: { id: 1, ad: 'Hepsi' },
-  kapasite:{ id: 1, deger: 'Hepsi' }
+  durakSayisi:{ id: 1, ad: 'Hepsi' },
+  butonCesidi: { id: 1, ad: 'Hepsi' },
+  boyOzellik: { id: 1, ad: 'Hepsi' },
 }
 
 
@@ -287,6 +290,7 @@ selectedButonTipi:any;
 butonTipi=[
   { id: 1, ad: 'Hepsi' },
   { id: 2, ad: 'Kabin Butonu' },
+  { id: 3, ad: 'Kat Butonu' },
 ]
 onButonTipiChange(item: any): void {
   this.selectedButonTipi=item;
@@ -320,7 +324,7 @@ selectedButonCesidi:any;
 butonCesidi=[
   { id: 1, ad: 'Hepsi' },
   { id: 2, ad: 'Cam' },
-  { id: 2, ad: 'Mekanik' },
+  { id: 3, ad: 'Mekanik' },
 ]
 onButonCesidiChange(item: any): void {
   this.selectedButonCesidi=item;
@@ -330,9 +334,15 @@ onButonCesidiChange(item: any): void {
 
 
 
-
-
-
+selectedBoyOzellik:any;
+boyOzellik=[
+  { id: 1, ad: 'Hepsi' },
+  { id: 2, ad: 'Tam Boy' },
+  { id: 3, ad: 'Yarım Boy' },
+]
+onBoyOzellikChange(item: any): void {
+  this.selectedBoyOzellik=item;
+};
 
 
 
@@ -343,7 +353,8 @@ uygula(){
   const matchesButonTipi = this.selectedButonTipi? item.butonTipi === this.selectedButonTipi.ad || this.selectedButonTipi.id==1: true;
   const matchesDurakSayisi = this.selectedDurakSayisi? item.durakSayisi === this.selectedDurakSayisi.ad|| this.selectedDurakSayisi.id==1 : true;
   const matchesButonCesidi = this.selectedButonCesidi? item.butonCesidi === this.selectedButonCesidi.ad || this.selectedButonCesidi.id==1 : true;
-  return matchesButonTipi && matchesDurakSayisi && matchesButonCesidi
+  const matchesBoyOzellik = this.selectedBoyOzellik? item.boyOzellik === this.selectedBoyOzellik.ad || this.selectedBoyOzellik.id==1 : true;
+  return matchesButonTipi && matchesDurakSayisi && matchesButonCesidi && matchesBoyOzellik
                   
 });
   this.kabinler=filteredProducts;
@@ -386,9 +397,7 @@ onRowClickUrun(event){
 
 
 }
-onRowClickBilesen(event){
-
-}
+onRowClickBilesen(event){}
 
 
 yenile(){
@@ -402,36 +411,52 @@ yenile(){
 
 
 
+  visible: boolean;
+  urunleriGoster() {
+    const filteredProducts = BUTONLAR.filter(item => {
+      const matchesButonTipi = this.selectedButonTipi? item.butonTipi === this.selectedButonTipi.ad || this.selectedButonTipi.id==1: true;
+      const matchesDurakSayisi = this.selectedDurakSayisi? item.durakSayisi === this.selectedDurakSayisi.ad|| this.selectedDurakSayisi.id==1 : true;
+      const matchesButonCesidi = this.selectedButonCesidi? item.butonCesidi === this.selectedButonCesidi.ad || this.selectedButonCesidi.id==1 : true;
+      const matchesBoyOzellik = this.selectedBoyOzellik? item.boyOzellik === this.selectedBoyOzellik.ad || this.selectedBoyOzellik.id==1 : true;
+      return matchesButonTipi && matchesDurakSayisi && matchesButonCesidi && matchesBoyOzellik
+                      
+    });
+      this.kabinler=filteredProducts;
+      this.selectedUrunRow=filteredProducts[0];
+  this.visible = true;
+
+  }
+
+
+  malzemeToplam: number;
+  Hesapla(event){
+    this.bilesenler=this.selectedURUN?.urunBilesenler;
+
+    this.bilesenler?.forEach((item: any) => {
+      if (item.dovizCinsi=='TL') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
+        item.dovizFiyat= item.birimFiyat*doviz.deger;
+       }
+      else if (item.dovizCinsi=='EURO') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
+        item.dovizFiyat= item.birimFiyat*doviz.deger;
+       }
+      else if (item.dovizCinsi=='USD') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
+        item.dovizFiyat= item.birimFiyat*doviz.deger;
+       }
+    });
+    let total = 0;
+    for (let item of this.bilesenler) {
+        total += item.miktar*item.dovizFiyat;
+    }
+    this.malzemeToplam = total;
+    this.visible = false;
+  }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  onRowClickUrunler(event){}      
 
 
 

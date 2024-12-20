@@ -65,4 +65,34 @@ export const STOKLAR=[
     { id: 64, ad: 'etek sacı (800 KG Kabin için)', birim: 'adet', birimFiyat: 350,dovizCinsi:"TL", },
     { id: 65, ad: 'etek sacı (1000 KG Kabin için)', birim: 'adet', birimFiyat: 400,dovizCinsi:"TL", },
     { id: 66, ad: 'etek sacı (1600 KG Kabin için)', birim: 'adet', birimFiyat: 500,dovizCinsi:"TL", },
+
+
+    { id: 67, ad: 'Kasnak Döküm', birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", },
+    { id: 68, ad: '6210 Rulman', birim: 'adet', birimFiyat: 303,dovizCinsi:"TL", },
+    { id: 69, ad: 'DIN 472-90 Segman', birim: 'adet', birimFiyat: 9,dovizCinsi:"TL", },
+    { id: 70, ad: '1041 Q50 MM MİL', birim: 'adet', birimFiyat: 31,dovizCinsi:"TL", },
+    { id: 71, ad: 'YAN YATAK', birim: 'adet', birimFiyat: 125,dovizCinsi:"TL", },
+
+
+
+    { id: 72, ad: 'Başlık Sacı', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Mekanizma Bağlantı Parçası', birim: 'adet', birimFiyat: 27.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Teleskopik Başlık Kızak Eksantrik', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Teleskopik Eşik Kızak Eksantrik', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Merkezi Dikme', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Teleskopik Dikme', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Merkezi Dikme Kuşak (Eksantrik)', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Teleskopik Dikme Kuşak (Eksantrik)', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Alt Ve Üst Bağlantı (Eksantrik)', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Alt Ve Üst Bağlantı (Eksantrik)', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Teleskopik Eşik Sacı', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Eşik M8 Çakma Somun', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Eşik Alüminyumu', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Merkezi Paslanmaz Sac', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Merkezi Paslanmaz Sac', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Teleskopik Paslanmaz Sac', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Başlık Paslanmaz Sac', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+    { id: 72, ad: 'Başlık Paslanmaz Sac', birim: 'adet', birimFiyat: 30.7,dovizCinsi:"TL", },
+
+
   ]

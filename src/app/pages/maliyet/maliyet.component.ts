@@ -21,25 +21,24 @@ export class MaliyetComponent {
           expanded: false,
         },
         {
-          label: 'Agırlık Saşesi',
+          label: 'Buton',
           icon: 'fa fa-inbox',
           submenu: [],
-          href: '/maliyet/agirlik-sasesi-maliyet',
+          href: '/maliyet/buton-maliyet',
           expanded: false,
         },
-        {
-          label: 'Makine Saşesi',
-          icon: 'fa fa-inbox',
-          submenu: [],
-          href: '/maliyet/makine-sasesi-maliyet',
-          expanded: false,
-        },
-        
         {
           label: 'Kapı',
           icon: 'fa fa-inbox',
           submenu: [],
-          href: '',
+          href: '/maliyet/kapi-maliyet',
+          expanded: false,
+        },
+        {
+          label: 'Kasnak',
+          icon: 'fa fa-inbox',
+          submenu: [],
+          href: '/maliyet/kasnak-maliyet',
           expanded: false,
         },
         {
@@ -50,19 +49,24 @@ export class MaliyetComponent {
           expanded: false,
         },
         {
-          label: 'Buton',
+          label: 'Agırlık Saşesi',
           icon: 'fa fa-inbox',
           submenu: [],
-          href: '/maliyet/buton-maliyet',
+          href: '',
           expanded: false,
         },
         {
-          label: 'Kasnak',
+          label: 'Makine Saşesi',
           icon: 'fa fa-inbox',
           submenu: [],
-          href: '/maliyet/kasnak-maliyet',
+          href: '',
           expanded: false,
         },
+        
+       
+      
+        
+        
         
       ],
     },

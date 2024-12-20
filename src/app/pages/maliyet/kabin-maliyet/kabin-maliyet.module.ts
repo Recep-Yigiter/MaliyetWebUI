@@ -10,8 +10,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
 import { RouterModule } from '@angular/router';
-
-
+import { TabViewModule } from 'primeng/tabview';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,8 @@ import { RouterModule } from '@angular/router';
     AutoCompleteModule,
     DropdownModule,
     DividerModule,
+    TabViewModule,
+    DialogModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

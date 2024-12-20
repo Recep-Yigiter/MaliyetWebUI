@@ -13,6 +13,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
 import { ListboxModule } from 'primeng/listbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [
     ButonMaliyetComponent,
@@ -32,6 +33,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     DividerModule,
     ListboxModule,
     RadioButtonModule,
+    DialogModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

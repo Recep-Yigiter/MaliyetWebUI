@@ -6,6 +6,7 @@ export const BUTONLAR=[
       butonTipi:"Kabin Butonu",
       durakSayisi:"2",
       butonCesidi:"Mekanik",
+      boyOzellik:"Tam Boy",
       urunBilesenler:[
         { id: 1, ad: 'SAC', miktar:6.5, birim: 'KG', birimFiyat: 28,dovizCinsi:"TL", },
         { id: 27, ad: 'Boya',miktar:0.77,birim: 'M^2', birimFiyat: 3,dovizCinsi:"EURO", },
@@ -30,6 +31,7 @@ export const BUTONLAR=[
       butonTipi:"Kat Butonu",
       durakSayisi:null,
       butonCesidi:null,
+      boyOzellik:null,
       urunBilesenler:[
         { id: 40, ad: 'YBCD3X GÖSTERGE',miktar:1,birim: 'adet', birimFiyat:15.82,dovizCinsi:"USD", },
         { id: 41, ad: 'BUTON KARTI KIRMIZI LED',miktar:1,birim: 'adet', birimFiyat:1.5,dovizCinsi:"USD", },
