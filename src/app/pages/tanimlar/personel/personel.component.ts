@@ -20,14 +20,9 @@ export class PersonelComponent {
   selectedPersonels: any;
 
 
-
-
-
-
   colDefs: ColDef[] = [
     { field: 'ad', width: 200 },
     { field: 'maas', width: 70,type: 'rightAligned'},
-
   ];
 
 
@@ -37,7 +32,6 @@ export class PersonelComponent {
     this.gridApi = params.api;
     this.rowData = [
       { ad: 'Recep YİĞİTER', maas: 30000 },
-
     ];
   }
 
@@ -53,12 +47,13 @@ export class PersonelComponent {
     } else {
       this.buttonDisabled = false;
     }
-
     if (selectedRows.length == 0) {
       this.buttonUpdateDisabled = true;
-    } else if (selectedRows.length == 1) {
+    } 
+    else if (selectedRows.length == 1) {
       this.buttonUpdateDisabled = false;
-    } else {
+    } 
+    else {
       this.buttonUpdateDisabled = true;
     }
   }

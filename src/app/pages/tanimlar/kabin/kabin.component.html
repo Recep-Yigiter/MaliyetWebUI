@@ -219,33 +219,36 @@
       </div>
       <div>
        
-      <p-table id="row-check" [value]="iscilikGiderler" sortField="gorev.ad" sortMode="single" dataKey="gorev.ad"
-          rowGroupMode="subheader" groupRowsBy="gorev.ad" [tableStyle]="{'min-width': '50rem'}"
+      <p-table id="row-check" [value]="iscilikGiderler" [tableStyle]="{'min-width': '50rem'}"
           [style]="{'min-height':' 350px'}" [scrollable]="true" scrollHeight="350px">
           <ng-template pTemplate="header">
             <tr>
               <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">
                 İşçilik Giderleri
                 <div class="button-container" style="position: absolute;right: 0;top: 0;">
+
                   <div (click)="personelEkleDialog()" class="button-grup " style="gap: 3px !important;">
                     <div class="img-container">
                       <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/add-file.png" alt="">
                     </div>
                   </div>
+
                   <div class="button-grup " style="gap: 3px !important;">
                     <div class="img-container">
                       <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/delete-file.png" alt="">
                     </div>
                   </div>
+                  
                 </div>
               </th>
             </tr>
             <tr>
+              <th style="font-size: 13px;">Görev</th>
               <th style="font-size: 13px;">Ad</th>
-              <th style="font-size: 13px;">a=Miktar</th>
+              <th style="font-size: 13px;">a=Adet</th>
               <th style="font-size: 13px;">Birim</th>
               <th style="font-size: 13px;">b=Fiyat(TL)</th>
-              <th style="font-size: 13px;">c=axb=Malzeme Tutarı(TL)</th>
+              <th style="font-size: 13px;">c=axb=Tutar(TL)</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="groupheader" let-customer let-rowIndex="rowIndex" let-expanded="expanded">
@@ -265,13 +268,16 @@
               <td colspan="6" style="text-align: right">Total Customers</td>
             </tr>
           </ng-template>
-          <ng-template pTemplate="rowexpansion" let-customer let-rowIndex="rowIndex">
+          <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
             <tr>
+              <td>
+                {{customer.gorev.ad}}
+              </td>
               <td>
                 {{customer.ad}}
               </td>
               <td>
-                {{customer.miktar}}
+                {{1}}
               </td>
               <td>
                 {{customer.birim}}

@@ -83,10 +83,11 @@ export class KabinComponent implements OnInit {
 
 
   visible: boolean;
-yeni(){
-  this.visible=true;
+  yeni(){
 
-}
+    this.visible=true;
+    
+  }
 
 
 bilesenler:any=[];
@@ -196,17 +197,17 @@ kaydet(){
     zeminKaplama:this.frm.zeminKaplama.ad,
     aksesuarKaplama:this.frm.aksesuarKaplama.ad,
     kapasite:this.frm.kapasite.deger,
-    urunBilesenler:this.bilesenler
+    urunBilesenler:this.bilesenler,
+    personeller:this.iscilikGiderler
   }
- this.KabinService.create(kabin,async() =>{
-  this.visible=false;
-  this.rowData =await this.KabinService.GetAll();
- })
+   this.KabinService.create(kabin,async() =>{
+   this.visible=false;
+   this.rowData =await this.KabinService.GetAll();
+   })
+
 }
+
 //#endregion
-
-
-
 
 
 
@@ -235,7 +236,7 @@ stokEkle(){
 
 
 
-//#region
+//#region  yeni Kabin için İşçi giderler ekleme  DİALOG-----------------------
 personellerVisible:any;
 personeller:any;
 selectedPersonelEkle:any;
@@ -243,66 +244,21 @@ selectedPersonelEkle:any;
 
 async personelEkleDialog(){
   this.personeller= await this.PersonelService.GetAll();
-  // this.personellerVisible=true;
-  var test={
-    id: 1001,
-    ad: 'Recep YİĞİTER',
-
-    gorev: {
-        id:1,
-        ad: 'Mühendis',
-    },
-    maas: 42429
-}
-this.iscilikGiderler.push(test)
+   this.personellerVisible=true;
   }
+
   personelEkle(){
-  
-    // this.selectedPersonelEkle.forEach(element => {
-    //   element.miktar=0;
-    //   element.birim="SAAT"
-    //    this.iscilikGiderler.push(element)
-    // });
-    // console.log(this.iscilikGiderler);
-    //  this.personellerVisible=false;
-
-    
+    this.selectedPersonelEkle.forEach(element => {
+      element.miktar=0;
+      element.birim="SAAT";
+      this.iscilikGiderler.push(element)
+    });
+     this.personellerVisible=false;
   }
-
-//   {
-//     id: 2345,
-//     ad: 'Personel 3',
-//     miktar:1,
-//     birim:"SAAT",
-//     gorev: {
-//         id:1,
-//         ad: 'İşçi',
-//         image: 'amyelsner.png'
-//     },
-//     maas: 42429
-// },
-
-
 
 
 //#endregion
 
-customers:any
-groupedCustomers:any;
-groupData() {
-  this.groupedCustomers = this.customers.reduce((groups, customer) => {
-    const group = customer.city;
-    if (!groups[group]) {
-      groups[group] = [];
-    }
-    groups[group].push(customer);
-    return groups;
-  }, {});
-}
 
-// Yeni veri ekleme fonksiyonu
-addNewCustomer() {
-
-}
 
 }
