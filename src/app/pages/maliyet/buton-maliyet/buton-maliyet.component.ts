@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AutoComplete } from 'primeng/autocomplete';
 import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
+import { ButonService } from 'src/app/core/services/repository/buton.service';
+import { StokService } from 'src/app/core/services/repository/stok.service';
 import { BUTONLAR } from 'src/assets/DATA/buton';
 import { GENELGIDERLER } from 'src/assets/DATA/genel-giderler';
 import { ISCILIK } from 'src/assets/DATA/iscilik';
@@ -241,11 +243,14 @@ export class ButonMaliyetComponent {
 
 
 
+constructor(private ButonService:ButonService) {
+
+  
+}
 
 
-kabinler:any=BUTONLAR;
+urunler:any;
 bilesenler:any =[];
-birimMaliyet:any;
 selectedBilesenRow:any;
 selectedUrunRow:any;
 personeller=DATA_PERSONELLER
@@ -255,15 +260,9 @@ iscilikGiderler:any=ISCILIK
 genelGiderler:any=GENELGIDERLER
 selectedURUN:any;
 
-ngOnInit() {
-  this.selectedUrunRow=this.kabinler[0]
-  if (this.selectedUrunRow) {
-    this.bilesenler=this.kabinler[0].urunBilesenler
-    this.onRowClickUrun(this.selectedUrunRow)
-    
-
-  }
-
+async ngOnInit() {
+  // this.urunler=await this.ButonService.GetAll();
+  
  }
 
 
@@ -273,7 +272,7 @@ ngOnInit() {
 
 frm:any={
   butonTipi: { id: 1, ad: 'Hepsi' },
-  durakSayisi:{ id: 1, ad: 'Hepsi' },
+  durakSayisi:{ id: 2, ad: '2' },
   butonCesidi: { id: 1, ad: 'Hepsi' },
   boyOzellik: { id: 1, ad: 'Hepsi' },
 }
@@ -347,81 +346,28 @@ onBoyOzellikChange(item: any): void {
 
 
 
-uygula(){
-  this.birimMaliyet=null;
-  const filteredProducts = BUTONLAR.filter(item => {
-  const matchesButonTipi = this.selectedButonTipi? item.butonTipi === this.selectedButonTipi.ad || this.selectedButonTipi.id==1: true;
-  const matchesDurakSayisi = this.selectedDurakSayisi? item.durakSayisi === this.selectedDurakSayisi.ad|| this.selectedDurakSayisi.id==1 : true;
-  const matchesButonCesidi = this.selectedButonCesidi? item.butonCesidi === this.selectedButonCesidi.ad || this.selectedButonCesidi.id==1 : true;
-  const matchesBoyOzellik = this.selectedBoyOzellik? item.boyOzellik === this.selectedBoyOzellik.ad || this.selectedBoyOzellik.id==1 : true;
-  return matchesButonTipi && matchesDurakSayisi && matchesButonCesidi && matchesBoyOzellik
-                  
-});
-  this.kabinler=filteredProducts;
-  this.selectedUrunRow=filteredProducts[0];
-  this.bilesenler=this.selectedUrunRow?.urunBilesenler;
-  if (this.selectedUrunRow) {
-    this.onRowClickUrun(this.selectedUrunRow)
-  }
-
-}
-
-onRowClickUrun(event){
-  this.bilesenler=event?.urunBilesenler
-
-  this.bilesenler?.forEach((item: any) => {
-
-    if (item.dovizCinsi=='TL') {
-      var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-   
-      item.dovizFiyat= item.birimFiyat*doviz.deger;
-     }
-    else if (item.dovizCinsi=='EURO') {
-      var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-      item.dovizFiyat= item.birimFiyat*doviz.deger;
-     
-     }
-    else if (item.dovizCinsi=='USD') {
-      var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-      item.dovizFiyat= item.birimFiyat*doviz.deger;
-  
-     }
-
-  });
-
-  //toplamMaliyet
-  this.bilesenler.forEach(element => {
-    element.total=element.miktar * element.dovizFiyat
-  });
-  this.birimMaliyet=this.bilesenler.reduce((total, row) => total + row.total, 0);
 
 
-}
 onRowClickBilesen(event){}
 
 
-yenile(){
-  this.bilesenler.forEach(element => {
-    element.total=element.miktar * element.dovizFiyat
-  });
-  this.birimMaliyet=this.bilesenler.reduce((total, row) => total + row.total, 0);
-}
+
 
 
 
 
 
   visible: boolean;
-  urunleriGoster() {
-    const filteredProducts = BUTONLAR.filter(item => {
+ async urunleriGoster() {
+    const filteredProducts = (await this.ButonService.GetAll()).filter(item => {
       const matchesButonTipi = this.selectedButonTipi? item.butonTipi === this.selectedButonTipi.ad || this.selectedButonTipi.id==1: true;
-      const matchesDurakSayisi = this.selectedDurakSayisi? item.durakSayisi === this.selectedDurakSayisi.ad|| this.selectedDurakSayisi.id==1 : true;
+      // const matchesDurakSayisi = this.selectedDurakSayisi? item.durakSayisi === this.selectedDurakSayisi.ad|| this.selectedDurakSayisi.id==1 : true;
       const matchesButonCesidi = this.selectedButonCesidi? item.butonCesidi === this.selectedButonCesidi.ad || this.selectedButonCesidi.id==1 : true;
       const matchesBoyOzellik = this.selectedBoyOzellik? item.boyOzellik === this.selectedBoyOzellik.ad || this.selectedBoyOzellik.id==1 : true;
-      return matchesButonTipi && matchesDurakSayisi && matchesButonCesidi && matchesBoyOzellik
+      return matchesButonTipi && matchesButonCesidi && matchesBoyOzellik
                       
     });
-      this.kabinler=filteredProducts;
+      this.urunler=filteredProducts;
       this.selectedUrunRow=filteredProducts[0];
   this.visible = true;
 
@@ -433,24 +379,24 @@ yenile(){
     this.bilesenler=this.selectedURUN?.urunBilesenler;
 
     this.bilesenler?.forEach((item: any) => {
-      if (item.dovizCinsi=='TL') {
-        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-        item.dovizFiyat= item.birimFiyat*doviz.deger;
+      if (item.stok.dovizCinsi=='TL') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+        item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
        }
-      else if (item.dovizCinsi=='EURO') {
-        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-        item.dovizFiyat= item.birimFiyat*doviz.deger;
+      else if (item.stok.dovizCinsi=='EURO') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+        item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
        }
-      else if (item.dovizCinsi=='USD') {
-        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-        item.dovizFiyat= item.birimFiyat*doviz.deger;
+      else if (item.stok.dovizCinsi=='USD') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+        item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
        }
     });
     let total = 0;
     for (let item of this.bilesenler) {
-        total += item.miktar*item.dovizFiyat;
+        total += item.miktar*item.stok.dovizFiyat;
     }
-    this.malzemeToplam = total;
+    this.malzemeToplam = total + ((Number(this.frm.durakSayisi.ad)-2)*45.31);
     this.visible = false;
   }
 

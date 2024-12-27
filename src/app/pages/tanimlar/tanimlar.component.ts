@@ -34,6 +34,13 @@ export class TanimlarComponent {
           href: '/tanimlar/urun',
           expanded: false,
         },
+        {
+          label: 'Kabinler ',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/kabin',
+          expanded: false,
+        },
         
       ],
     },

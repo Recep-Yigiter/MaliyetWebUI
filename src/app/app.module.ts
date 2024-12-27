@@ -16,8 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ReactiveFormsModule,
     PagesModule,
-
-
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -25,7 +23,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
 
   ],
-  providers: [],
+  providers: [
+     { provide: "baseUrl", useValue: "http://localhost:5000/api", multi: true },
+     ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

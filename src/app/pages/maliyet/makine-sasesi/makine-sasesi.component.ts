@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { GENELGIDERLER } from 'src/assets/DATA/genel-giderler';
+import { ISCILIK } from 'src/assets/DATA/iscilik';
+import { MAKINE_SASESI } from 'src/assets/DATA/makine-sasesi';
 import { DATA_PERSONELLER } from 'src/assets/personeller';
 import { DOVIZ, MAKINE_SASESI_VARYANTLAR, STOKLAR, URUNLER } from 'src/assets/urunler';
 
@@ -30,14 +33,14 @@ export class MakineSasesiComponent {
     { id: 5, ad: "MR Dişlisiz" },
   ]
   kapasite:any=[
-    { id: 1,deger:320 },
-    { id: 2,deger:450 },
-    { id: 3,deger:630 },
-    { id: 4,deger:800 },
-    { id: 5,deger:1000 },
-    { id: 6,deger:1600 },
-    { id: 7,deger:2000 },
-    { id: 8,deger:3000 },
+    { id: 1,ad:"320" },
+    { id: 2,ad:"450" },
+    { id: 3,ad:"630" },
+    { id: 4,ad:"800" },
+    { id: 5,ad:"1000" },
+    { id: 6,ad:"1600" },
+    { id: 7,ad:"2000" },
+    { id: 8,ad:"3000" },
 
   ]
   onSaseTipiChange(item: any): void {
@@ -124,6 +127,65 @@ filteredVaryantlar(varyants:any,frm:any) {
   });
  
 }
+
+
+
+
+
+
+
+
+
+kabinler:any=MAKINE_SASESI;
+iscilikGiderler:any=ISCILIK
+genelGiderler:any=GENELGIDERLER
+selectedURUN:any;
+bilesenler:any =[];
+selectedBilesenRow:any;
+selectedUrunRow:any;
+onRowClickUrunler(event){}      
+
+
+  visible: boolean;
+  urunleriGoster() {
+    this.birimMaliyet=null;
+    const filteredProducts = MAKINE_SASESI.filter(item => {
+    const matchesButonTipi = this.selectedSaseTipi? item.saseTipi === this.selectedSaseTipi.ad || this.selectedSaseTipi.id==1: true;
+    const matchesDurakSayisi = this.selectedKapasite? item.kapasite === this.selectedKapasite.ad|| this.selectedKapasite.id==1 : true;
+   
+    return matchesButonTipi && matchesDurakSayisi 
+                    
+  });
+    this.kabinler=filteredProducts;
+  this.visible = true;
+
+  }
+  malzemeToplam: number;
+  Hesapla(event){
+    this.bilesenler=this.selectedURUN?.urunBilesenler;
+
+    this.bilesenler?.forEach((item: any) => {
+      if (item.dovizCinsi=='TL') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
+        item.dovizFiyat= item.birimFiyat*doviz.deger;
+       }
+      else if (item.dovizCinsi=='EURO') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
+        item.dovizFiyat= item.birimFiyat*doviz.deger;
+       }
+      else if (item.dovizCinsi=='USD') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
+        item.dovizFiyat= item.birimFiyat*doviz.deger;
+       }
+    });
+    let total = 0;
+    for (let item of this.bilesenler) {
+        total += item.miktar*item.dovizFiyat;
+    }
+    this.malzemeToplam = total;
+    this.visible = false;
+  }
+
 
 
 

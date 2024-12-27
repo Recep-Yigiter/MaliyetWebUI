@@ -16,39 +16,40 @@ import { SUSPANSIYONLAR } from 'src/assets/DATA/suspansiyonlar';
   styleUrls: ['./suspansiyon-maliyet.component.scss'],
 })
 export class SuspansiyonMaliyetComponent {
-//   selectedRows: any[];
-//   selectedPersonelRows: any[];
-//   filteredUrunler: any[] | undefined;
-//   selectedUrunler: any;
-//   takviyeAdet = 12;
-//   takviyeKg = 2;
-//   plakaKg = 10;
-//   agirlikSacOrani = 105.5;
-//   muhafazaOrani = 235;
-//   suspansiyonSacOrani = 86.2;
-//   milKg = 5;
-//   civata150Adet = 10;
-//   kosebent1 = 17.5;
-//   kosebent2 = 20;
-//   civata50Adet = 6;
-//   dikmeKg = 25;
-//   kasnakPlaka = 20;
-//   dublexDikme = 40;
-//   bayrakKg = 10;
-//   flexi = 2;
-//   mekanikKitlemeKg = 8;
-//   kasnakAdet = 1;
-//   birimMaliyet:any=0;
-//   selectedKarkasTipi: any;
-//   selectedAskiTipi: any;
-//   selectedKapasite:any;
-//   selectedKaskasSekli: any;
-//   askiTipListesi: any[] = [];
-//   kapasiteListesi: any[] = [];
-//   kaskasSekliListesi: any[] = [];
-//   urunler: any[] = DATA_URUNLER;
-//   personeller:any[]=DATA_PERSONELLER;
-//   rowData:any = DATA_STOKLAR;
+
+// selectedRows: any[];
+// selectedPersonelRows: any[];
+// filteredUrunler: any[] | undefined;
+// selectedUrunler: any;
+// takviyeAdet = 12;
+// takviyeKg = 2;
+// plakaKg = 10;
+// agirlikSacOrani = 105.5;
+// muhafazaOrani = 235;
+// suspansiyonSacOrani = 86.2;
+// milKg = 5;
+// civata150Adet = 10;
+// kosebent1 = 17.5;
+// kosebent2 = 20;
+// civata50Adet = 6;
+// dikmeKg = 25;
+// kasnakPlaka = 20;
+// dublexDikme = 40;
+// bayrakKg = 10;
+// flexi = 2;
+// mekanikKitlemeKg = 8;
+// kasnakAdet = 1;
+// birimMaliyet:any=0;
+// selectedKarkasTipi: any;
+// selectedAskiTipi: any;
+// selectedKapasite:any;
+// selectedKaskasSekli: any;
+// askiTipListesi: any[] = [];
+// kapasiteListesi: any[] = [];
+// kaskasSekliListesi: any[] = [];
+// urunler: any[] = DATA_URUNLER;
+// personeller:any[]=DATA_PERSONELLER;
+// rowData:any = DATA_STOKLAR;
 // kabinler:any=SUSPANSIYONLAR;
 // bilesenler:any =[];
 // selectedBilesenRow:any;
@@ -523,7 +524,7 @@ export class SuspansiyonMaliyetComponent {
   //   );
   // });
  
-  // }
+// }
 
 
 
@@ -592,9 +593,9 @@ selectedKarkasTipi:any
   karkasSekli =  [
     { id: 1, ad: 'Hepsi' },
     { id: 2, ad: 'Tek Sıra Ağırlık' },
-    { id: 3, ad: 'Çift Sıra Ağırlık ' },
-    { id: 4, ad: 'Tek Dublex Ağırlık ' },
-    { id: 5, ad: 'Çift Sıra Dublex ' },
+    { id: 3, ad: 'Çift Sıra Ağırlık' },
+    { id: 4, ad: 'Tek Sıra Dublex Ağırlık' },
+    { id: 5, ad: 'Çift Sıra Dublex Ağırlık ' },
     ]
 
   onKarkasSekliChange(id): void {

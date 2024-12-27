@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class MaliyetComponent {
   menu = [
     {
-      label: 'Hesap',
+      label: '',
       expanded: false,
       icon: '',
       href: '',
@@ -49,17 +49,10 @@ export class MaliyetComponent {
           expanded: false,
         },
         {
-          label: 'Agırlık Saşesi',
-          icon: 'fa fa-inbox',
-          submenu: [],
-          href: '',
-          expanded: false,
-        },
-        {
           label: 'Makine Saşesi',
           icon: 'fa fa-inbox',
           submenu: [],
-          href: '',
+          href: '/maliyet/makine-sasesi-maliyet',
           expanded: false,
         },
         

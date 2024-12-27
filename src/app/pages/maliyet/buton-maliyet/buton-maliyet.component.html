@@ -476,7 +476,7 @@
                     font-size: 13px; 
                     color: #666666;">
 
-                            <span> {{birimMaliyet}}</span>
+                            <span> {{malzemeToplam}}</span>
 
 
                         </label>
@@ -497,7 +497,7 @@
                     font-size: 13px; 
                     color: #666666;">
 
-                            <span> {{birimMaliyet}}</span>
+                            <span> </span>
 
 
                         </label>
@@ -514,8 +514,98 @@
         
     </div>
     <div class=" p-1 text-white flex flex-col border ">
-        
-        
+        <table class="yks_table_group ">
+            <tbody>
+                <tr style="height: 25px !important;">
+                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+
+                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Peşin Fiyat:
+                        </label>
+                    </td>
+                    <td style="width: 100%;">
+
+                        <label style=" min-width: 60px; 
+                    font-weight: 600; 
+                    font-size: 13px; 
+                    color: #666666;">
+
+                            <span> 0 ₺ </span>
+
+
+                        </label>
+                    </td>
+
+                </tr>
+                <tr style="height: 25px !important;">
+                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+
+                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">60 Gün:
+                        </label>
+                    </td>
+                    <td style="width: 100%;">
+
+                        <label style=" min-width: 60px; 
+                    font-weight: 600; 
+                    font-size: 13px; 
+                    color: #666666;">
+
+                            <span> 0 ₺ </span>
+
+
+                        </label>
+                    </td>
+
+                </tr>
+
+                <tr style="height: 25px !important;">
+                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+
+                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">
+                            90 gün :
+                        </label>
+                    </td>
+                    <td style="width: 100%;">
+
+                        <label style=" min-width: 60px; 
+                    font-weight: 600; 
+                    font-size: 13px; 
+                    color: #666666;">
+
+                            <span>  0 ₺</span>
+
+
+                        </label>
+                    </td>
+
+                </tr>
+                <tr style="height: 25px !important;">
+                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+
+                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">
+                            120 Gün:
+                        </label>
+                    </td>
+                    <td style="width: 100%;">
+
+                        <label style=" min-width: 60px; 
+                    font-weight: 600; 
+                    font-size: 13px; 
+                    color: #666666;">
+
+                            <span>  0 ₺</span>
+
+
+                        </label>
+                    </td>
+
+                </tr>
+
+
+
+
+
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -586,7 +676,7 @@
             <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
                 <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
                     <td>{{ rowIndex+1 }} </td>
-                    <td>{{ product.ad }}</td>
+                    <td>{{ product.stok.ad }}</td>
                     <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
@@ -599,10 +689,10 @@
                             </ng-template>
                         </p-cellEditor>
                     </td>
-                    <td>{{ product.birim }}</td>
-                    <td>{{ product.birimFiyat }}</td>
-                    <td>{{ product.dovizCinsi }}</td>
-                    <td>{{ product.dovizFiyat*product.miktar }}</td>
+                    <td>{{ product.stok.birim }}</td>
+                    <td>{{ product.stok.birimFiyat }}</td>
+                    <td>{{ product.stok.dovizCinsi }}</td>
+                    <td>{{ product.stok.dovizFiyat*product.miktar }}</td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="footer">
@@ -819,7 +909,7 @@
     <ng-template pTemplate="header">
         <span class="text-xl font-bold">ÜRÜNLER</span>
     </ng-template>
-    <p-table id="row-check" [value]="kabinler" dataKey="id" selectionMode="single" [(selection)]="selectedURUN"
+    <p-table id="row-check" [value]="urunler" dataKey="id" selectionMode="single" [(selection)]="selectedURUN"
         [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">
         <ng-template pTemplate="header">
             <tr>

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { StokComponent } from './stok/stok.component';
 import { PersonelComponent } from './personel/personel.component';
 import { UrunComponent } from './urun/urun.component';
+import { KabinComponent } from './kabin/kabin.component';
 
 
 
@@ -22,6 +23,7 @@ import { UrunComponent } from './urun/urun.component';
              { path: 'stok', component: StokComponent, loadChildren: () => import("../tanimlar/stok/stok.module").then(m => m.StokModule) },
              { path: 'personel', component: PersonelComponent, loadChildren: () => import("../tanimlar/personel/personel.module").then(m => m.PersonelModule) },
              { path: 'urun', component: UrunComponent, loadChildren: () => import("../tanimlar/urun/urun.module").then(m => m.UrunModule) },
+             { path: 'kabin', component: KabinComponent, loadChildren: () => import("../tanimlar/kabin/kabin.module").then(m => m.KabinModule) },
 
           ]
         },
