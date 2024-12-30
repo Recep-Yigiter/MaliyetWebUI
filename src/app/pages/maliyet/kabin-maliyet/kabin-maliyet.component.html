@@ -461,7 +461,7 @@
                     <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <input form-control [(ngModel)]="product.miktar" name="miktar"
+                                <input   form-control [(ngModel)]="product.miktar" name="miktar"
                                     class="form-control shadow-none form-control-nullable"
                                     id="exampleFormControlInput1">
                             </ng-template>
@@ -540,20 +540,19 @@
                 <tr>
                     
                     <th style="font-size: 13px;">Ad</th>
-                    <th style="font-size: 13px;">a=Miktar</th>
-                    <th style="font-size: 13px;">Birim</th>
-                    <th style="font-size: 13px;">b=Fiyat(TL)</th>
-                    <th style="font-size: 13px;">c=axb=Malzeme Tutarı(TL)</th>
+                    <th style="font-size: 13px;"></th>
+                    <th style="font-size: 13px;"></th>
+                    <th style="font-size: 13px;"></th>
+                    <th style="font-size: 13px;"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="groupheader" let-customer let-rowIndex="rowIndex" let-expanded="expanded">
                 <tr>
                     <td colspan="6">
                         <button [pRowToggler]="customer" class="p-button-text p-button-rounded p-button-plain mr-2 " style="width: 30px ; height: 30px;">
-                            <!-- <i class="fa-solid fa-caret-up"></i> -->
                             <i class="fa-solid fa-caret-down"></i>
                         </button>
-                        <span class="font-bold ml-2">{{customer.gorev.ad}}</span>
+                        <span class="font-bold ml-2">{{customer.personel.gorev.ad}}</span>
                     </td>
                 </tr>
             </ng-template>
@@ -565,19 +564,13 @@
             <ng-template pTemplate="rowexpansion" let-customer let-rowIndex="rowIndex">
                 <tr >
                     <td>
-                        {{customer.ad}}
+                        {{customer.personel.ad}}
                     </td>
                    
-                    <td>
-                        {{customer.miktar}}
-                    </td>
-                    <td>
-                        {{customer.birim}}
-                    </td>
-                    <td>
-                        {{customer.fiyat}}
-                    </td>
-                    <td>{{ customer.birimFiyat*customer.miktar }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="footer">
@@ -649,7 +642,7 @@
                     <th style="font-size: 13px;">Birim</th>
                     <th style="font-size: 13px;">b=Fiyat(TL)</th>
                     <th style="font-size: 13px;text-align: center;">Döviz</th>
-                    <th style="font-size: 13px;">c=axb=Malzeme Tutarı(TL)</th>
+                    <th style="font-size: 13px;">c=axb=Tutar(TL)</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">

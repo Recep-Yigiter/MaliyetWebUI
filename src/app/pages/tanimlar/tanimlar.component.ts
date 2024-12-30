@@ -42,6 +42,42 @@ export class TanimlarComponent {
           expanded: false,
         },
         
+        {
+          label: 'Butonlar ',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/buton',
+          expanded: false,
+        },
+        {
+          label: 'Kapılar ',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/kapi',
+          expanded: false,
+        },
+        {
+          label: 'Kasnaklar ',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/kasnak',
+          expanded: false,
+        },
+        {
+          label: 'Makine Şasesi ',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/makine-sasesi',
+          expanded: false,
+        },
+        {
+          label: 'Süspansiyonlar ',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/suspansiyon',
+          expanded: false,
+        },
+        
       ],
     },
   

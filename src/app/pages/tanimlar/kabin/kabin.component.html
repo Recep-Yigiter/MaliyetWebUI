@@ -259,7 +259,7 @@
                   
                   <i class="fa-solid fa-caret-down"></i>
                 </button>
-                <span class="font-bold ml-2">{{customer.gorev.ad}}</span>
+                <span class="font-bold ml-2">{{customer.personel.gorev.ad}}</span>
               </td>
             </tr>
           </ng-template>
@@ -271,19 +271,19 @@
           <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
             <tr>
               <td>
-                {{customer.gorev.ad}}
+                {{customer.personel.gorev.ad}}
               </td>
               <td>
-                {{customer.ad}}
+                {{customer.personel.ad}}
               </td>
               <td>
                 {{1}}
               </td>
               <td>
-                {{customer.birim}}
+                {{customer.personel.birim}}
               </td>
               <td>
-                {{customer.fiyat}}
+                {{customer.personel.fiyat}}
               </td>
               <td>{{ customer.birimFiyat*customer.miktar }}</td>
             </tr>

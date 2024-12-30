@@ -253,10 +253,9 @@ urunler:any;
 bilesenler:any =[];
 selectedBilesenRow:any;
 selectedUrunRow:any;
-personeller=DATA_PERSONELLER
 selectedPersonelRows:any;
 
-iscilikGiderler:any=ISCILIK
+iscilikGiderler:any=[]
 genelGiderler:any=GENELGIDERLER
 selectedURUN:any;
 
@@ -377,7 +376,7 @@ onRowClickBilesen(event){}
   malzemeToplam: number;
   Hesapla(event){
     this.bilesenler=this.selectedURUN?.urunBilesenler;
-
+    this.iscilikGiderler=this.selectedURUN?.iscilikGiderler
     this.bilesenler?.forEach((item: any) => {
       if (item.stok.dovizCinsi=='TL') {
         var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]

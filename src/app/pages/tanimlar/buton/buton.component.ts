@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
+import { ButonService } from 'src/app/core/services/repository/buton.service';
 import { KabinService } from 'src/app/core/services/repository/kabin.service';
 import { PersonelService } from 'src/app/core/services/repository/personel.service';
 import { StokService } from 'src/app/core/services/repository/stok.service';
@@ -9,11 +10,11 @@ import { DATA_URUNLER } from 'src/assets/urunler';
 import { defaultColDef } from 'src/default-col-def';
 
 @Component({
-  selector: 'app-kabin',
-  templateUrl: './kabin.component.html',
-  styleUrls: ['./kabin.component.scss']
+  selector: 'app-buton',
+  templateUrl: './buton.component.html',
+  styleUrls: ['./buton.component.scss']
 })
-export class KabinComponent implements OnInit {
+export class ButonComponent implements OnInit {
   rowData: any[];
   public rowSelection: 'single' | 'multiple' = 'multiple';
   private gridApi!: GridApi<any>;
@@ -27,7 +28,7 @@ export class KabinComponent implements OnInit {
 
 
 
-  constructor(private KabinService:KabinService,private StokService:StokService,private PersonelService:PersonelService) {
+  constructor(private ButonService:ButonService,private StokService:StokService,private PersonelService:PersonelService) {
     
     
   }
@@ -39,17 +40,16 @@ export class KabinComponent implements OnInit {
 
   colDefs: ColDef[] = [
     { field: 'ad', width: 300 },
-    { field: 'tur', width: 120 },
-    { field: 'model', width: 70 },
-    { field: 'kapasite', width: 70 },
-    { field: 'kabinKaplama', width: 70 },
-    { field: 'aksesuarKaplama', width: 70 },
-    { field: 'zeminKaplama', width: 70 },
+    { field: 'butonTipi', width: 120 },
+    { field: 'durakSayisi', width: 70 },
+    { field: 'butonCesidi', width: 70 },
+    { field: 'butonOzellik', width: 70 },
+
   ];
 
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
-    this.rowData =await this.KabinService.GetAll();
+    this.rowData =await this.ButonService.GetAll();
    
     
   }
@@ -102,115 +102,118 @@ genelGiderler:any=[];
 
 //#region yeni Kabin oluşturmak için açılan  DİALOG---------------------
 kaydet(){
+//  var test= {
+//     ad: "string",
+//     birim: "string",
+//     butonTipi: "string",
+//     durakSayisi: "string",
+//     butonCesidi: "string",
+//     butonOzellik: "string",
+//     urunBilesenler: [
+//       {
+//         miktar: 0,
+//         olusturmaTarihi: "2024-12-30T12:00:03.151Z",
+//         stok: {
+//           id: 1,
+//           ad: "string",
+//           birim: "string",
+//           birimFiyat: 0,
+//           dovizCinsi: "string"
+//         }
+//       }
+//     ],
+//     iscilikGiderler: []
+//   }
 
-
-  var kabin={
+  var buton={
     ad:this.frm.ad,
-    birim:this.frm.birim.ad,
-    tur:this.frm.tur.ad,
-    model:this.frm.model.ad,
-    kabinKaplama:this.frm.kabinKaplama.ad,
-    zeminKaplama:this.frm.zeminKaplama.ad,
-    aksesuarKaplama:this.frm.aksesuarKaplama.ad,
-    kapasite:this.frm.kapasite.deger,
+    birim:"ADET",
+    butonTipi:this.frm.butonTipi.ad,
+    durakSayisi:this.frm.durakSayisi.ad,
+    butonCesidi:this.frm.butonCesidi.ad,
+    butonOzellik:this.frm.boyOzellik.ad,
     urunBilesenler:this.bilesenler,
     iscilikGiderler:this.iscilikGiderler
   }
 
-   this.KabinService.create(kabin,async() =>{
+  console.log(buton);
+   this.ButonService.create(buton,async() =>{
    this.visible=false;
-   this.rowData =await this.KabinService.GetAll();
+   this.rowData =await this.ButonService.GetAll();
    })
 
 }
 
+
 frm:any={
-  ad:"",
-  birim:{ id: 1, ad: 'ADET' },
-  tur:  { id: 1, ad: 'Normal Kabin' },
-  model:  { id: 1, ad: 'ESB' },
-  zeminKaplama:  { id: 1, ad: 'PVC' },
-  kabinKaplama:   { id: 1, ad: 'ESB' },
-  aksesuarKaplama:   { id: 1, ad: 'ESB' },
-  kapasite:{ id: 1, deger: '320' }
+  butonTipi: { id: 1, ad: 'Kabin Butonu' },
+  durakSayisi:{ id: 1, ad: '2' },
+  butonCesidi:{ id: 1, ad: 'Cam' },
+  boyOzellik: { id: 1, ad: 'Tam Boy' },
 }
 
 
 
 
-selectedTur:any;
-turler=[
-  { id: 1, ad: 'Normal Kabin' },
+
+
+
+
+
+selectedButonTipi:any;
+butonTipi=[
+  { id: 1, ad: 'Kabin Butonu' },
+  { id: 2, ad: 'Kat Butonu' },
 ]
-onTurChange(item: any): void {
-  this.selectedTur=item;
+onButonTipiChange(item: any): void {
+  this.selectedButonTipi=item;
 };
 
 
-selectedModel:any;
-modeller=[
-  { id: 1, ad: 'ESB' },
+selectedDurakSayisi:any;
+durakSayisi=[
+  { id: 1, ad: '2' },
+  { id: 2, ad: '3' },
+  { id: 3, ad: '4' },
+  { id: 4, ad: '5' },
+  { id: 5, ad: '6' },
+  { id: 6, ad: '7' },
+  { id: 7, ad: '8' },
+  { id: 8, ad: '9' },
+  { id: 9, ad: '10' },
+  { id: 10, ad: '11' },
+  { id: 11, ad: '12' },
+  { id: 12, ad: '13' },
+  { id: 13, ad: '14' },
 ]
-onModelChange(item: any): void {
-  this.selectedModel=item;
+onDurakSayisiChange(item: any): void {
+  this.selectedDurakSayisi=item;
 };
 
 
 
-selectedZeminKaplama:any;
-zeminKaplamalar=[
-  { id: 1, ad: 'PVC' },
+selectedButonCesidi:any;
+butonCesidi=[
+  { id: 1, ad: 'Cam' },
+  { id: 2, ad: 'Mekanik' },
 ]
-onZeminKaplamaChange(item: any): void {
-  this.selectedZeminKaplama=item;
+onButonCesidiChange(item: any): void {
+  this.selectedButonCesidi=item;
 };
 
 
-selectedKabinKaplama:any;
-kabinKaplamalar=[
-  { id: 1, ad: 'ESB' },
+
+
+
+selectedBoyOzellik:any;
+boyOzellik=[
+  { id: 1, ad: 'Tam Boy' },
+  { id: 2, ad: 'Yarım Boy' },
 ]
-onKabinKaplamaChange(item: any): void {
-  this.selectedKabinKaplama=item;
+onBoyOzellikChange(item: any): void {
+  this.selectedBoyOzellik=item;
 };
 
-selectedAksesuarKaplama:any;
-aksesuarKaplamalar=[
-  { id: 1, ad: 'ESB' },
-]
-onAksesuarKaplamaChange(item: any): void {
-  this.selectedAksesuarKaplama=item;
-};
-
-
-selectedKapasite:any;
-kapasiteler = [
-  { id: 1, deger: '320' },
-  { id: 2, deger: '400' },
-  { id: 3, deger: '480' },
-  { id: 4, deger: '630' },
-  { id: 5, deger: '800' },
-  { id: 6, deger: '1000' },
-  { id: 7, deger: '1250' },
-  { id: 8, deger: '1600' },
-];
-onKapasiteChange(kapasite: any): void {
-  this.selectedKapasite=kapasite;
-};
-
-
-selectedBirim:any;
-birimler = [
-  { id: 1, ad: 'ADET' },
-  { id: 2, ad: 'KG' },
-  { id: 3, ad: 'M' },
-  { id: 4, ad: 'M^2' },
-  { id: 5, ad: 'TAKIM' },
-
-];
-onBirimChange(item){
-  this.selectedBirim=item;
-}
 
 
 //#endregion

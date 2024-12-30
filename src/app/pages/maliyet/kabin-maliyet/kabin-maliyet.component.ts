@@ -13,13 +13,13 @@ import { KabinService } from 'src/app/core/services/repository/kabin.service';
 })
 export class KabinMaliyetComponent implements OnInit{
 
-
+mesaiSaati=9;
 
 
 
 kabinler:any=KABINLER;
 bilesenler:any =[];
-iscilikGiderler:any=ISCILIK
+iscilikGiderler:any=[]
 genelGiderler:any=GENELGIDERLER
 birimMaliyet:any;
 selectedBilesenRow:any;
@@ -27,9 +27,7 @@ selectedUrunRow:any;
 selectedURUN:any;
 personeller=DATA_PERSONELLER
 selectedPersonelRows:any;
-/**
- *
- */
+
 constructor(private KabinService:KabinService) {
  
   
@@ -195,7 +193,7 @@ yenile(){
   malzemeToplam: number;
   Hesapla(event){
     this.bilesenler=this.selectedURUN?.urunBilesenler;
-
+this.iscilikGiderler=this.selectedURUN?.iscilikGiderler
     this.bilesenler?.forEach((item: any) => {
           if (item.stok.dovizCinsi=='TL') {
             var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
