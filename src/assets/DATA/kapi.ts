@@ -36,7 +36,55 @@ export const KAPILAR=[
   ]
 
  
-
+  export const KAPI=[
+    {
+      id:1,
+      ad:"90x200 TLS Kapı",
+      birim:"Adet",
+      yon:"Sağ",
+      kapiYuksekligi:"200",
+      kapiGenisligi:"90",
+      kapiTipi:"Otomatik",
+      uygunluk:"en81-20",
+      kaplama:"Satine",
+      kapiGruplari:[
+       {
+         id:1,
+         ad:"90'lık TLS Kasa",
+         tur:"Kasa",
+         urunBilesenler:[
+          { id: 1, miktar:345,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 2, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 3, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 4, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 6, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 7, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 8, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+         ]
+       },{
+         id:1,
+         ad:"90'lık TLS Panel",
+         tur:"Panel",
+         urunBilesenler:[
+          { id: 1, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 2, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 4, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 6, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+         ]
+       },{
+         id:1,
+         ad:"90'lık TLS Mekanizması",
+         tur:"Mekanizma",
+         urunBilesenler:[
+          { id: 7, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+          { id: 8, miktar:1,stok:{ad: 'A',birim: 'adet', birimFiyat: 43,dovizCinsi:"TL", }},
+         ]
+       }
+   
+    ],
+    iscilikGiderler:[]
+    }
+  ]
 
   
 

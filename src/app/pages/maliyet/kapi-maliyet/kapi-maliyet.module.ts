@@ -15,32 +15,29 @@ import { RouterModule } from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
 
 
-
 @NgModule({
   declarations: [
     KapiMaliyetComponent,
-          KapiDesignComponent,
-            KapiMaliyetFormComponent
+    KapiDesignComponent,
+    KapiMaliyetFormComponent
   ],
   imports: [
-      CommonModule,
-      FormsModule,
-      AgGridAngular,
-      AgGridModule,
-      TableModule,
-      AutoCompleteModule,
-      DropdownModule,
-      DividerModule,
-      ListboxModule,
-      RadioButtonModule,
-      DialogModule,
-      ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
-      RouterModule.forChild([
-        // { path: 'create', component: CreateButonMaliyetComponent },
-        // { path: 'list', component: ListButonMaliyetComponent },
-      
-      
-      ])
+    CommonModule,
+    FormsModule,
+    AgGridAngular,
+    AgGridModule,
+    TableModule,
+    AutoCompleteModule,
+    DropdownModule,
+    DividerModule,
+    ListboxModule,
+    RadioButtonModule,
+    DialogModule,
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
+    RouterModule.forChild([
+      // { path: 'create', component: CreateButonMaliyetComponent },
+      // { path: 'list', component: ListButonMaliyetComponent },
+    ])
   ]
 })
 export class KapiMaliyetModule { }

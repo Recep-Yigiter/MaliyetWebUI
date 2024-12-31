@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { KapiService } from 'src/app/core/services/repository/kapi.service';
 import { DOVIZ } from 'src/assets/DATA/doviz';
 import { GENELGIDERLER } from 'src/assets/DATA/genel-giderler';
 import { ISCILIK } from 'src/assets/DATA/iscilik';
-import { KAPILAR } from 'src/assets/DATA/kapi';
+import { KAPI, KAPILAR } from 'src/assets/DATA/kapi';
 import { KASNAKLAR } from 'src/assets/DATA/kasnaklar';
 import { DATA_PERSONELLER } from 'src/assets/DATA/personeller';
 
@@ -21,79 +22,19 @@ personeller=DATA_PERSONELLER
 selectedPersonelRows:any;
 
 
-iscilikGiderler:any=ISCILIK
+iscilikGiderler:any=[]
 genelGiderler:any=GENELGIDERLER
 selectedURUN:any;
 
 
+constructor(private KapiService:KapiService) {}
 
-
+deneme:any=[]
 ngOnInit() {
-
-  const products = [
-    {
-      id:1,
-      kapiId:"a",
-      ad:"90'lık TLS Kasa",
-      birim:"Adet",
-      tur:"Kasa",
-      yon:"Sağ",
-      kapiyuksekligi:"210",
-      kapiGenisligi:"90",
-      kapiTipi:"en81-20",
-      kaplama:"Satine",
-      urunBilesenler:[
-        { id: 1, ad: 'KASA', miktar:2, birim: 'KG', birimFiyat: 28,dovizCinsi:"TL", },
-       
-      ]
-    },
-    {
-      id:2,
-      kapiId:"a",
-      ad:"90'lık TLS Panel",
-      birim:"Adet",
-      tur:"Panel",
-      yon:"Sağ",
-      kapiyuksekligi:"210",
-      kapiGenisligi:"90",
-      kapiTipi:"en81-20",
-      kaplama:"Satine",
-      urunBilesenler:[
-        { id: 1, ad: 'KASA', miktar:2, birim: 'KG', birimFiyat: 28,dovizCinsi:"TL", },
-    
-      ]
-    },
-]
-
-const groupBy = (array, prop) => {
-    return array.reduce((acc, obj) => {    
-      
-        let key = obj[prop]                
-        if (!acc[key]){                    
-            acc[key] = []      
-        }
-        acc[key].push(obj)                 
-        return acc
-    }, [])
+  this.selectedKapiGrup="Kasa";
+  //this.deneme=KAPI[0].kapiGruplari.filter(c=>c.tur==this.selectedKapiGrup)[0].urunBilesenler
+  //this.iscilikGiderler=KAPI[0].iscilikGiderler;
 }
-
-let groupedProducts = groupBy(products, 'kapiId')
-
-
-
-
-
-
-
-  // this.kabinler=KABINLER
-  this.selectedUrunRow=this.kabinler[0]
-  if (this.selectedUrunRow) {
-    this.bilesenler=this.kabinler[0].urunBilesenler
-    this.onRowClickUrun(this.selectedUrunRow)
-  }
-
-
- }
 
 
 
@@ -173,30 +114,7 @@ onKaplamaChange(kapasite: any): void {
    
      
    
-uygula(){
-   
-  this.birimMaliyet=null;
-  const filteredProducts = KAPILAR.filter(item => {
-  const matchesButonTipi = this.selectedYon? item.yon === this.selectedYon.ad || this.selectedYon.id==1: true;
-  const matchesDurakSayisi = this.selectedKapiYukseklik? item.kapiYuksekligi === this.selectedKapiYukseklik.ad|| this.selectedKapiYukseklik.id==1 : true;
-  const matchesButonCesidi = this.selectedKapiGenisligi? item.kapiGenisligi === this.selectedKapiGenisligi.ad || this.selectedKapiGenisligi.id==1 : true;
-  const matchesKasnakTuru = this.selectedKapiTipi? item.kapiTipi === this.selectedKapiTipi.ad || this.selectedKapiTipi.id==1 : true;
-  const matchesKaplama= this.selectedKaplama? item.kaplama === this.selectedKaplama.ad || this.selectedKaplama.id==1 : true;
-  return matchesButonTipi && matchesDurakSayisi && matchesButonCesidi && matchesKasnakTuru && matchesKaplama          
-   
-});
 
-   
-
-  this.kabinler=filteredProducts;
-  this.selectedUrunRow=filteredProducts[0];
-  this.bilesenler=this.selectedUrunRow?.urunBilesenler;
-  if (this.selectedUrunRow) {
-    this.onRowClickUrun(this.selectedUrunRow)
-  }
-
-
-}
 
 onRowClickUrun(event){
   this.bilesenler=event?.urunBilesenler
@@ -235,73 +153,92 @@ onRowClickBilesen(event){}
 yenile(){
   this.bilesenler.forEach(element => {
     element.total=element.miktar * element.dovizFiyat
-  });
+  })
   this.birimMaliyet=this.bilesenler.reduce((total, row) => total + row.total, 0);
+
 }
 
 
 
 onRowClickUrunler(event){}      
 
+   
 
-
-  visible: boolean;
-  urunleriGoster() {
-    const filteredProducts = KAPILAR.filter(item => {
+visible: boolean;
+ async urunleriGoster() {
+      const filteredProducts = (await this.KapiService.GetAll()).filter(item => {
       const matchesButonTipi = this.selectedYon? item.yon === this.selectedYon.ad || this.selectedYon.id==1: true;
       const matchesDurakSayisi = this.selectedKapiYukseklik? item.kapiYuksekligi === this.selectedKapiYukseklik.ad|| this.selectedKapiYukseklik.id==1 : true;
       const matchesButonCesidi = this.selectedKapiGenisligi? item.kapiGenisligi === this.selectedKapiGenisligi.ad || this.selectedKapiGenisligi.id==1 : true;
       const matchesKasnakTuru = this.selectedKapiTipi? item.kapiTipi === this.selectedKapiTipi.ad || this.selectedKapiTipi.id==1 : true;
       const matchesKaplama= this.selectedKaplama? item.kaplama === this.selectedKaplama.ad || this.selectedKaplama.id==1 : true;
       return matchesButonTipi && matchesDurakSayisi && matchesButonCesidi && matchesKasnakTuru && matchesKaplama          
-       
-    });
+});
     
        
     
-      this.kabinler=filteredProducts;
+  this.kabinler=filteredProducts;
   this.visible = true;
 
   }
   malzemeToplam: number;
   Hesapla(event){
-    this.bilesenler=this.selectedURUN?.urunBilesenler;
+    this.bilesenler=this.selectedURUN?.kapiGruplari[0].urunBilesenler;
+    this.iscilikGiderler=this.selectedURUN?.iscilikGiderler;
 
     this.bilesenler?.forEach((item: any) => {
-      if (item.dovizCinsi=='TL') {
-        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-        item.dovizFiyat= item.birimFiyat*doviz.deger;
-       }
-      else if (item.dovizCinsi=='EURO') {
-        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-        item.dovizFiyat= item.birimFiyat*doviz.deger;
-       }
-      else if (item.dovizCinsi=='USD') {
-        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-        item.dovizFiyat= item.birimFiyat*doviz.deger;
-       }
-    });
+          if (item.stok.dovizCinsi=='TL') {
+            var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+            item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+           }
+          else if (item.stok.dovizCinsi=='EURO') {
+            var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+            item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+          }
+          else if (item.stok.dovizCinsi=='USD') {
+            var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+            item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+          }
+        });
     let total = 0;
     for (let item of this.bilesenler) {
-        total += item.miktar*item.dovizFiyat;
+        total += item.miktar*item.stok.dovizFiyat;
     }
     this.malzemeToplam = total;
     this.visible = false;
+    
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+  selectedKapiGrup: any;
+  menu = [
+    {
+      submenu: [
+        {
+          id:1,
+          label: 'Kasa',
+        },
+        {
+          id:2,
+          label: 'Panel',
+        },
+        { id:3,
+          label: 'Mekanizma',
+        },
+      ],
+    },
+  
+  
+  ];
+  
+  
+  kapiTuru:any="Kasa"
+  toggleNode(node: any) {
+    this.kapiTuru=node.label;
+    console.log(this.selectedURUN?.kapiGruplari[0].filter(c=>c.tur==this.selectedKapiGrup));
+    this.bilesenler=this.selectedURUN?.kapiGruplari[0].filter(c=>c.tur==this.selectedKapiGrup)[0].urunBilesenler
+    this.iscilikGiderler=KAPI[0].iscilikGiderler;
+  }
 
 
 

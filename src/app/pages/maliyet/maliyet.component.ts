@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./maliyet.component.scss']
 })
 export class MaliyetComponent {
+  
   menu = [
     {
       label: '',
