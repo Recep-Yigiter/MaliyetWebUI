@@ -9,6 +9,7 @@ import { AgirlikSasesiComponent } from './agirlik-sasesi/agirlik-sasesi.componen
 import { MakineSasesiComponent } from './makine-sasesi/makine-sasesi.component';
 import { KasnakMaliyetComponent } from './kasnak-maliyet/kasnak-maliyet.component';
 import { KapiMaliyetComponent } from './kapi-maliyet/kapi-maliyet.component';
+import { TableModule } from 'primeng/table';
 
 
 
@@ -18,6 +19,7 @@ import { KapiMaliyetComponent } from './kapi-maliyet/kapi-maliyet.component';
   ],
   imports: [
     CommonModule,
+    TableModule,
     RouterModule.forChild(
       [
         {

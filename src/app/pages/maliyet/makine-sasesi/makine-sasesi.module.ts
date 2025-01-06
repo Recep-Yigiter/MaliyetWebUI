@@ -13,12 +13,25 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { RouterModule } from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
 
+import { MakineSasesiDesignComponent } from './core/design/design.component';
+import { MakineSasesiGenelGiderlerTableComponent } from './core/tables/genel-giderler-table';
+import { MakineSasesiIscilikGiderlerTableComponent } from './core/tables/iscilik-giderler-table';
+import { MakineSasesiMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
+import { MakineSasesiMaliyetTableComponent } from './core/tables/maliyet-table';
+import { MakineSasesiFiyatTableComponent } from './core/tables/fiyat-table';
+
 
 
 @NgModule({
   declarations: [
     MakineSasesiComponent,
-    MakineSasesiMaliyetFormComponent
+    MakineSasesiMaliyetFormComponent,
+    MakineSasesiDesignComponent,
+        MakineSasesiGenelGiderlerTableComponent,
+        MakineSasesiIscilikGiderlerTableComponent,
+        MakineSasesiMalzemeGiderlerTableComponent,
+        MakineSasesiMaliyetTableComponent,
+        MakineSasesiFiyatTableComponent
   ],
   imports: [
     CommonModule,

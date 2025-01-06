@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-maliyet',
@@ -68,8 +69,23 @@ export class MaliyetComponent {
 
   ];
 
+  /**
+   *
+   */
+  constructor(private router:Router) {
+    
+  }
 
   toggleNode(node: any) {
     node.expanded = !node.expanded;
+  }
+
+
+  selectedTab: string = 'kabin';  // Varsayılan olarak "kabin" sekmesi seçili
+
+  selectTab(tab: string) {
+    console.log(tab);
+    this.selectedTab = tab;  // Tıklanan sekmeyi seç
+    this.router.navigate([`maliyet/${tab}-maliyet`])
   }
 }

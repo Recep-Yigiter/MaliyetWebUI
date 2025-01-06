@@ -3,6 +3,7 @@ import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
 import { ButonService } from 'src/app/core/services/repository/buton.service';
 import { KabinService } from 'src/app/core/services/repository/kabin.service';
+import { KapiGrupService } from 'src/app/core/services/repository/kapi-grup.service';
 import { KapiService } from 'src/app/core/services/repository/kapi.service';
 import { PersonelService } from 'src/app/core/services/repository/personel.service';
 import { StokService } from 'src/app/core/services/repository/stok.service';
@@ -29,7 +30,7 @@ export class KapiComponent implements OnInit {
 
 
 
-  constructor(private KapiService:KapiService,private StokService:StokService,private PersonelService:PersonelService) {
+  constructor(private KapiService:KapiService,private KapiGrupService:KapiGrupService,private StokService:StokService,private PersonelService:PersonelService) {
     
     
   }
@@ -119,7 +120,6 @@ kaydet(){
     iscilikGiderler:this.iscilikGiderler
   }
 
-  console.log(buton);
    this.KapiService.create(buton,async() =>{
    this.visible=false;
    this.rowData =await this.KapiService.GetAll();
@@ -218,7 +218,13 @@ stokEkle(){
       miktar:element.miktar,
       stok:element
     }
-    this.bilesenler.push(test)
+    if (this.kapiBilesenVisible) {
+      this.kapiBilesenler.push(test)
+    }
+    else{
+      this.bilesenler.push(test)
+    }
+    
   });
   this.stoklarVisible=false;
 }
@@ -251,6 +257,81 @@ async personelEkleDialog(){
 
 
 //#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+//kapi bileşenleri
+
+kapiBilesenVisible:any;
+
+kapiBilesenEkle(){
+  this.kapiBilesenVisible=true;
+}
+
+frmKapiBilesen:any={
+  ad:"",
+  tur:{ id: 1, ad: 'Kasa' },
+
+}
+
+
+
+
+
+selectedTur:any;
+tur=[
+  { id: 1, ad: 'Kasa' },
+  { id: 2, ad: 'Panel' },
+  { id: 3, ad: 'Mekanizma' },
+]
+onTurChange(item: any): void {
+  this.selectedTur=item;
+};
+
+
+
+kapiBilesenler:any=[]
+selectedKapiBilesenRow:any;
+async stokEkleKapiBilesenDialog(){
+this.stoklar= await this.StokService.GetAll();
+this.stoklarVisible=true;
+}
+stokEkleKapiBilesen(){
+
+  this.selectedStokEkle.forEach(element => {
+    element.miktar=0
+    var test={
+      id:0,
+      miktar:element.miktar,
+      stok:element
+    }
+    this.kapiBilesenler.push(test)
+  });
+  this.stoklarVisible=false;
+}
+
+
+kaydetKapiBilesen(){
+  var kapiGrup={
+    ad:this.frmKapiBilesen.ad,
+    tur:this.frmKapiBilesen.tur.ad,
+    urunBilesenler:this.kapiBilesenler,
+
+  }
+
+   this.KapiGrupService.create(kapiGrup,async() =>{
+   this.stoklarVisible=false;
+   })
+}
 
 
 

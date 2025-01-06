@@ -15,16 +15,25 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
 import { DividerModule } from 'primeng/divider';
 import { DialogModule } from 'primeng/dialog';
+import { SuspansiyonGenelGiderlerTableComponent } from './core/tables/genel-giderler-table';
+import { SuspansiyonIscilikGiderlerTableComponent } from './core/tables/iscilik-giderler-table';
+import { SuspansiyonMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
+import { SuspansiyonMaliyetTableComponent } from './core/tables/maliyet-table';
+import { SuspansiyonFiyatTableComponent } from './core/tables/fiyat-table';
 @NgModule({
   declarations: [
     SuspansiyonMaliyetComponent,
     SuspansiyonDesignComponent,
-    
     SuspansiyonMaliyetFormInputSelectComponent,
     SuspansiyonMaliyetFormLabelComponent,
     SuspansiyonMaliyetFormDropDownComponent,
     SuspansiyonMaliyetFormDateComponent,
-    MaliyetFormComponent
+    MaliyetFormComponent,
+    SuspansiyonGenelGiderlerTableComponent,
+    SuspansiyonIscilikGiderlerTableComponent,
+    SuspansiyonMalzemeGiderlerTableComponent,
+    SuspansiyonMaliyetTableComponent,
+    SuspansiyonFiyatTableComponent
   ],
   imports: [
     CommonModule,

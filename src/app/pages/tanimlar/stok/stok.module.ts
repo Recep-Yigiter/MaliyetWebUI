@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { StokTanimlarDesignComponent } from './core/design/design.component';
 import { StokFormComponent } from './core/components/stok-form';
 import { DividerModule } from 'primeng/divider';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { DividerModule } from 'primeng/divider';
     FormsModule,
     AgGridAngular,
     DividerModule,
+    DialogModule,
+    DropdownModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

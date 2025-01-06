@@ -1,8 +1,8 @@
-<div id="wrapper" class="flex flex-col h-full overflow-hidden">
+<div id="wrapper" style="display: flex; flex-direction: column; height: 100%; overflow: hidden;" >
 
-    <header class="flex items-center w-full h-10 bg-slate-600 ">
-        <div class=" flex-grow flex items-center ">
-            <div class=" flex items-center px-2 ">
+    <header  style="display: flex; align-items: center; width: 100%; height: 40px; background-color: #4B5563;">
+        <div  style="flex-grow: 1; display: flex; align-items: center;">
+            <div  style="display: flex; align-items: center;padding-left: 8px;">
                 <div class="grid-icon group cursor-pointer" routerLink="/">
                     <div class="grid-item group-hover:bg-slate-300"></div>
                     <div class="grid-item group-hover:bg-slate-300"></div>
@@ -14,22 +14,25 @@
                     <div class="grid-item group-hover:bg-slate-300"></div>
                     <div class="grid-item group-hover:bg-slate-300"></div>
                 </div>
-                <span class="text-xl px-2 text-white">Yükseliş Asansör</span>
+                <span  style="font-size: 20px; color: white; padding-left: 20px;">Yükseliş Asansör</span>
             </div>
-            <div class="w-2/3 px-5 flex justify-around">
-                <div class="relative w-full">
-                    <input class="w-full  pl-11 p-[0.3rem] bg-slate-500 opacity-85  outline-none"
-                        style="padding-left: 48px !important;" type="text" />
-                    <span class="absolute top-0 left-0 w-11 h-full 
-                                 flex items-center px-2.5 text-xl bg-slate-500 opacity-85 hover:cursor-pointer hover:bg-slate-400">
-                        <i class="fa-solid fa-magnifying-glass"></i></span>
+            <div  style="display: flex; justify-content: space-around; padding-left: 20px;width: 66.666%;">
+                <div  style="position: relative; width: 100%;">
+                    <input 
+                        style="padding-left: 48px !important; padding: 0.3rem; width: 100%; background-color: #6B7280; outline: none;" type="text" />
+                   
+                   
+                        <span   style="position: absolute; top: 2px; left: 0;height: 32px; width: 44px; display: flex; align-items: center; padding-left: 10px; background-color: #6B7280; opacity: 0.85;">
+                        
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
                 </div>
 
             </div>
 
         </div>
 
-        <div class="flex flex-col px-2">
+        <div  style="display: flex; flex-direction: column; padding-left: 8px;">
 
         </div>
 
@@ -39,20 +42,20 @@
 
                 <li>
                     <a style="cursor: pointer;">
-                        <i class="fa-regular fa-user text-2xl text-white p-2 hover:bg-slate-500"></i>
+                        <i class="fa-regular fa-user " style="font-size:24px ;padding: 8px;color: white;"></i>
                     </a>
 
                 </li>
                 <li>
                     <a (click)="show()" style="cursor: pointer;">
-                        <i class="fa-solid fa-gear text-2xl text-white p-2 hover:bg-slate-500"></i>
+                        <i class="fa-solid fa-gear   " style="font-size:24px ;padding: 8px;color: white;"></i>
                     </a>
                     <ul [ngClass]="{ 'show': isDropdownOpen }">
-                        <li class="hover:bg-slate-500 p-1 px-2">
-                            <a class=" text-white">Yönetim</a>
+                        <li  style="padding: 4px; padding-left: 8px;">
+                            <a style="color: white;">Yönetim</a>
                         </li>
-                        <li class="hover:bg-slate-500 p-1 px-2" (click)="cikis()">
-                            <a class=" text-white">Çıkış</a>
+                        <li  (click)="cikis()" style="padding: 4px; padding-left: 8px;">
+                            <a  style="color: white;">Çıkış</a>
 
                         </li>
                     </ul>
@@ -60,36 +63,32 @@
             </ul>
         </div>
     </header>
-    <div id="page-wrapper" class="gray-bg w-full p-0 " style="height: calc(100vh - 40px) !important;">
-        <div class="wrapper wrapper-content w-full flex p-0 m-0" style="height: 100%">
-            <div class="w-20 h-full bg-slate-50 z-[2]" style="border-right: 1px solid rgba(0, 0, 0, 0.06);">
-                <div class=" flex items-center flex-col">
+
+
+
+    <div id="page-wrapper"  style="height: calc(100vh - 40px) !important; padding: 0; width: 100%;">
+        <div  style="height: 100%; width: 100%; padding: 0; margin: 0; display: flex; ;">
+            <div  style="border-right: 1px solid rgba(0, 0, 0, 0.06); width: 80px; height: 100%; background-color: #F1F5F9; z-index: 2;">
+                <div  style="display: flex; align-items: center;flex-direction: column;padding-top: 10px;">
 
 
                     <ng-container *ngFor="let item of moduls">
                         <a [class.disabled]="item.disabled" routerLink="{{item.href}}"
-                            class="flex flex-col w-full py-1 items-center cursor-pointer hover:bg-slate-200 group text-center">
-                            <i class="{{item.icon}} " [ngClass]="item.class"></i>
-                            <span class="text-slate-600  font-bold">{{item.modul}}</span>
+                            class="  hover:bg-slate-200 " style="display: flex; align-items: center;flex-direction: column; width: 100%; padding-bottom: 4px;cursor: pointer; text-align: center;">
+                            <i style="font-size: 24px;color: #4B5563;" class="{{item.icon}} " [ngClass]="item.class" ></i>
+                            <span style="color: #4B5563; font-weight: bold;" >{{item.modul}}</span>
                         </a>
                     </ng-container>
-
-
-
-
-
-
-
                 </div>
 
             </div>
-            <div class="flex flex-col w-full">
+            <div  style="display: flex; flex-direction: column;width: 100%;">
 
 
 
-                <div class="border-b-gray-50 arka-plan">
+                <div class=" arka-plan" style="border-bottom: 1px solid #F9FAFB;">
 
-                    <ol class="breadcrumb h-8 flex items-center border-b-2 bg-transparent">
+                    <ol class="breadcrumb " style="height: 32px; display: flex;align-items: center; border-bottom-width:2px ; background-color: transparent;">
 
 
 

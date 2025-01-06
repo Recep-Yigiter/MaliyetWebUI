@@ -12,12 +12,22 @@ import { DividerModule } from 'primeng/divider';
 import { RouterModule } from '@angular/router';
 import { TabViewModule } from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
+import { KabinGenelGiderlerTableComponent } from './core/tables/genel-giderler-table';
+import { KabinIscilikGiderlerTableComponent } from './core/tables/iscilik-giderler-table';
+import { KabinMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
+import { KabinMaliyetTableComponent } from './core/tables/maliyet-table';
+import { KabinFiyatTableComponent } from './core/tables/fiyat-table';
 
 @NgModule({
   declarations: [
     KabinMaliyetComponent,
     KabinMaliyetFormComponent,
-    KabinDesignComponent
+    KabinDesignComponent,
+    KabinGenelGiderlerTableComponent,
+    KabinIscilikGiderlerTableComponent,
+    KabinMalzemeGiderlerTableComponent,
+    KabinMaliyetTableComponent,
+    KabinFiyatTableComponent
   ],
   imports: [
     CommonModule,

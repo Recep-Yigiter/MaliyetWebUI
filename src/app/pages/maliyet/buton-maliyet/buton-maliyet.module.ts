@@ -14,13 +14,23 @@ import { DividerModule } from 'primeng/divider';
 import { ListboxModule } from 'primeng/listbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DialogModule } from 'primeng/dialog';
+import { ButonGenelGiderlerTableComponent } from './core/tables/genel-giderler-table';
+import { ButonIscilikGiderlerTableComponent } from './core/tables/iscilik-giderler-table';
+import { ButonMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
+import { ButonMaliyetTableComponent } from './core/tables/maliyet-table';
+import { ButonFiyatTableComponent } from './core/tables/fiyat-table';
 @NgModule({
   declarations: [
     ButonMaliyetComponent,
 
 
     ButonDesignComponent,
-    ButonMaliyetFormComponent
+    ButonMaliyetFormComponent,
+        ButonGenelGiderlerTableComponent,
+        ButonIscilikGiderlerTableComponent,
+        ButonMalzemeGiderlerTableComponent,
+        ButonMaliyetTableComponent,
+        ButonFiyatTableComponent
   ],
   imports: [
     CommonModule,

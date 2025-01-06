@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
       modul: 'Maliyet',
       icon: 'fa-solid fa-receipt',
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
-      href: 'maliyet',
+      href: 'maliyet/kabin-maliyet',
       disabled: false,
     },
     {

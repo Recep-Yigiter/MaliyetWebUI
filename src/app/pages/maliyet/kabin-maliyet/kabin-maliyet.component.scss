@@ -4,7 +4,11 @@
 
 @import "src/assets/scss/caption";
 @import "src/assets/scss/section";
-
+.nav-tabs > li > a {
+    color: #A7B1C2;
+    font-weight: 600;
+    padding: 4px 20px 4px 25px;
+}
 .form-select {
     border-radius: 0;
 }

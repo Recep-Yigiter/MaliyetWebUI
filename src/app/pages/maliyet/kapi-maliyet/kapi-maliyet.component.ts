@@ -182,35 +182,102 @@ visible: boolean;
 
   }
   malzemeToplam: number;
+  kasaMalzemeToplam:any;
+  panelMalzemeToplam:any;
+  mekanizmaMalzemeToplam:any;
   Hesapla(event){
     this.bilesenler=this.selectedURUN?.kapiGruplari[0].urunBilesenler;
     this.iscilikGiderler=this.selectedURUN?.iscilikGiderler;
 
-    this.bilesenler?.forEach((item: any) => {
-          if (item.stok.dovizCinsi=='TL') {
-            var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
-            item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
-           }
-          else if (item.stok.dovizCinsi=='EURO') {
-            var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
-            item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
-          }
-          else if (item.stok.dovizCinsi=='USD') {
-            var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
-            item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
-          }
-        });
-    let total = 0;
-    for (let item of this.bilesenler) {
-        total += item.miktar*item.stok.dovizFiyat;
+
+  var test1=  this.selectedURUN?.kapiGruplari.filter(c=>c.tur=="Kasa")[0]
+  var test2=  this.selectedURUN?.kapiGruplari.filter(c=>c.tur=="Panel")[0]
+  var test3=  this.selectedURUN?.kapiGruplari.filter(c=>c.tur=="Mekanizma")[0]
+
+    
+   console.log(test1);
+   console.log(test2);
+   console.log(test3);
+    let kasaToplam=0
+    let panelToplam=0
+    let mekanizmaToplam=0
+    if (test1) {
+     test1.urunBilesenler?.forEach((item: any) => {
+        if (item.stok.dovizCinsi=='TL') {
+          var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+          item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+        }
+        else if (item.stok.dovizCinsi=='EURO') {
+          var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+          item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+        }
+        else if (item.stok.dovizCinsi=='USD') {
+          var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+          item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+        }
+      });
+      for (let item of test1.urunBilesenler) {
+        kasaToplam += item.miktar*item.stok.dovizFiyat;
+       }
     }
-    this.malzemeToplam = total;
+    
+     if (test2) {
+      test2.urunBilesenler?.forEach((item: any) => {
+        if (item.stok.dovizCinsi=='TL') {
+          var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+          item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+        }
+        else if (item.stok.dovizCinsi=='EURO') {
+          var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+          item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+        }
+        else if (item.stok.dovizCinsi=='USD') {
+          var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+          item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+        }
+      });
+      for (let item of test2.urunBilesenler) {
+        panelToplam += item.miktar*item.stok.dovizFiyat;
+       }
+     }
+    
+     if (test3) {
+      test3.urunBilesenler?.forEach((item: any) => {
+        if (item.stok.dovizCinsi=='TL') {
+          var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+          item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+        }
+        else if (item.stok.dovizCinsi=='EURO') {
+          var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+          item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+        }
+        else if (item.stok.dovizCinsi=='USD') {
+          var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+          item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+        }
+      });
+      for (let item of test3?.urunBilesenler) {
+        mekanizmaToplam += item.miktar*item.stok.dovizFiyat;
+       }
+     }
+  
+     this.kasaMalzemeToplam=kasaToplam
+     this.panelMalzemeToplam=panelToplam
+     this.mekanizmaMalzemeToplam=mekanizmaToplam
+  
+      
+   
     this.visible = false;
     
+    if (this.selectedURUN) {
+      this.radioSelect=false;
+    }
   }
 
+   
 
   selectedKapiGrup: any;
+  radioSelect:boolean=true;
   menu = [
     {
       submenu: [
@@ -232,12 +299,10 @@ visible: boolean;
   ];
   
   
-  kapiTuru:any="Kasa"
-  toggleNode(node: any) {
-    this.kapiTuru=node.label;
-    console.log(this.selectedURUN?.kapiGruplari[0].filter(c=>c.tur==this.selectedKapiGrup));
-    this.bilesenler=this.selectedURUN?.kapiGruplari[0].filter(c=>c.tur==this.selectedKapiGrup)[0].urunBilesenler
-    this.iscilikGiderler=KAPI[0].iscilikGiderler;
+  toggleNode() {
+      this.bilesenler=this.selectedURUN?.kapiGruplari.filter(c=>c.tur==this.selectedKapiGrup)[0]?.urunBilesenler
+      this.iscilikGiderler=this.selectedURUN?.iscilikGiderler;
+
   }
 
 

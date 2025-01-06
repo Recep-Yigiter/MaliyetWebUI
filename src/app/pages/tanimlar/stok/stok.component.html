@@ -8,7 +8,7 @@
     <div design-buttons>
       <div class="button-container">
   
-        <div  class="button-grup ">
+        <div  (click)="EkleDialog()" class="button-grup ">
           <div class="img-container">
             <img src="../../../../../assets/icons/add-file.png" alt="">
           </div>
@@ -111,3 +111,69 @@
   
   
   </stok-tanimlar-design>
+
+
+
+
+
+
+    
+  
+  <!-- Kabin Ekleme  -->
+  
+  <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '30vw' }">
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold">KABIN</span>
+    </ng-template>
+  
+
+
+    <div class="grid grid-cols-[1fr] gap-1 ">
+      
+  
+      <div class="grid  gap-1">
+        
+        <div class=" p-1 text-white flex flex-col  ">
+          <stok-form [span]="170" [label]="'Ad'">
+            <input form-control [(ngModel)]="frm.ad" name="ad"
+                class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+          </stok-form>
+
+          <stok-form [span]="170" [label]="'Birim'">
+            <p-dropdown form-control [options]="birim" [(ngModel)]="frm.birim" optionLabel="ad"
+                (ngModelChange)="onBirimChange(frm.birim)" appendTo="body"  
+                [panelStyle]="{ 'z-index': '9999' }" />
+        </stok-form>
+
+        <stok-form [span]="170" [label]="'Stok Grubu'">
+            <p-dropdown form-control [options]="stokGrubu" [(ngModel)]="frm.stokGrubu" optionLabel="ad"
+                (ngModelChange)="onStokGrubuChange(frm.stokGrubu)" appendTo="body"  
+                [panelStyle]="{ 'z-index': '9999' }"/>
+        </stok-form>
+        <stok-form [span]="170" [label]="'Birim Fiyat'">
+          <input type="number" form-control [(ngModel)]="frm.birimFiyat" name="ad"
+              class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </stok-form>
+        <stok-form [span]="170" [label]="'Birim'">
+          <p-dropdown form-control [options]="dovizCinsi" [(ngModel)]="frm.dovizCinsi" optionLabel="ad"
+              (ngModelChange)="onDovizCinsiChange(frm.dovizCinsi)" appendTo="body"  
+              [panelStyle]="{ 'z-index': '9999' }" />
+      </stok-form>
+
+        </div>
+
+      </div>
+  
+  
+
+    </div>
+
+
+  
+  
+    <ng-template pTemplate="footer" let-urun>
+      <div (click)="kaydet()"
+        class="bg-green-900 flex items-center justify-center font-bold hover:bg-green-800 hover:cursor-pointer text-white ">
+        KAYDET</div>
+    </ng-template>
+  </p-dialog>

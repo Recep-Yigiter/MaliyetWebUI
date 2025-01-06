@@ -1,389 +1,4 @@
-<!-- <div class="grid grid-cols-[2fr_2fr_1fr] gap-1 ">
-
-    <div class=" p-1 text-white">
-        <div class="card h-full ">
-            <div class="card-body  rounded overflow-hidden ">
-                <div style="padding: 0 10px;">
-                    <p-divider />
-
-                    <buton-maliyet-form [span]="130" [label]="'Buton'">
-                        <p-dropdown form-control [options]="butonTipi" [(ngModel)]="frm.butonTipi" optionLabel="ad"
-                        (ngModelChange)="onButonTipiChange(frm.butonTipi)" />
-                    </buton-maliyet-form>
-
-                 
-                    <div *ngIf="frm.butonTipi.id==1">
-                        <buton-maliyet-form  [span]="130" [label]="'Durak Sayısı'">
-                            <p-dropdown form-control [options]="durakSayisi" [(ngModel)]="frm.durakSayisi" optionLabel="deger"
-                            (ngModelChange)="onDurakSayisiChange(frm.durakSayisi)" />
-                        </buton-maliyet-form>
-
-                        <buton-maliyet-form  [span]="130" [label]="'Buton Çeşidi'">
-                            <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
-                            (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
-                        </buton-maliyet-form>
-                    </div>
-                   
-                <div *ngIf="frm.butonTipi.id==2">
-                    <buton-maliyet-form [span]="130" [label]="'Ürün'">
-                        <p-autoComplete form-control [(ngModel)]="selectedUrunler" [dropdown]="true"
-                            placeholder="Ürün giriniz.." (onFocus)="onFocus()" (ngModelChange)="ngModelChange()"
-                            [suggestions]="filteredUrunler" (completeMethod)="filterUrunler($event)" optionLabel="ad"
-                            field="ad" />
-                    </buton-maliyet-form> 
-
-
-                </div>
-
-                    <div (click)="getUrun()" form-control  class="bg-red-900 flex items-center justify-center">Uygula</div>
-
-                </div>
-
-               
-
-
-
-            </div>
-            <div class="card-footer py-1">
-                <small class="text-muted flex justify-between items-center">
-                    Son Hesapla: 3 gün önce
-
-                    <div (click)="maliyetHesabi()" class="hover:cursor-pointer hover:bg-slate-200 p-1 rounded-sm text-base">
-                        Hesapla</div>
-                </small>
-            </div>
-        </div>
-    </div>
-    <div class=" p-1 text-white flex flex-col border ">
-
-        <p-table  [value]="rowData" dataKey="id" selectionMode="multiple" [(selection)]="selectedRows"  [scrollable]="true" 
-        scrollHeight="400px" 
-            [metaKeySelection]="false" [tableStyle]="{'min-width': '50rem'}">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
-                    <th>Ad</th>
-                    <th>Miktar</th>
-                    <th>Birim</th>
-                    <th>Birim Fiyat</th>
-                    <th>Döviz</th>
-                    <th>Toplam Fiyat</th>
-  
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-                <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
-                    <td>
-                        <p-tableCheckbox [value]="product" />
-                    </td>
-                    <td>{{ product.ad }}</td>
-                     <td>{{ product.miktar }}</td>
-                    <td>{{ product.birim }}</td>
-                    <td>{{ product.birimFiyat }}</td>
-                    <td>{{ product.dovizCinsi }}</td>
-                    <td>{{product.dovizFiyat*product.miktar }}</td>
-
-              
-                </tr>
-            </ng-template>
-        </p-table>
-
-    </div>
-    <div class=" p-1 text-white">
-        <p-table  id="row-check" [value]="personeller" dataKey="id" selectionMode="multiple" [(selection)]="selectedPersonelRows"
-            [metaKeySelection]="false">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
-                    <th>Ad</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-                <tr >
-                    <td>
-                        <p-tableCheckbox [value]="product" />
-                    </td>
-                    <td>{{ product.ad }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</div>
-
-<table class="yks_table_group ">
-    <tbody>
-        <tr style="height: 25px !important;">
-            <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-                <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">İşçilik :
-                </label>
-            </td>
-            <td style="width: 100%;">
-                <label style=" min-width: 60px; 
-                font-weight: 600; 
-                font-size: 13px; 
-                color: #666666;">
-                    <span> 12.250,70 ₺ </span>
-                </label>
-            </td>
-
-        </tr>
-        <tr style="height: 25px !important;">
-            <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-                <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Birim Maliyet :
-                </label>
-            </td>
-            <td style="width: 100%;">
-                <label style=" min-width: 60px; 
-                font-weight: 600; 
-                font-size: 13px; 
-                color: #666666;">
-                    <span> {{birimMaliyet}}</span>
-                </label>
-            </td>
-
-        </tr>
-    </tbody>
-</table> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="grid grid-cols-[2fr_2fr_4fr] gap-1 ">
-
-
-    <div class=" p-1 text-white flex flex-col border ">
-        <buton-maliyet-form [span]="170" [label]="'Buton tipi'">
-            <p-dropdown form-control [options]="butonTipi" [(ngModel)]="frm.butonTipi" optionLabel="ad"
-                (ngModelChange)="onButonTipiChange(frm.butonTipi)" />
-        </buton-maliyet-form>
-        <buton-maliyet-form [span]="170" [label]="'Buton Çeşidi'">
-            <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
-                (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
-        </buton-maliyet-form>
-        <buton-maliyet-form [span]="170" [label]="'Durak Sayısı'">
-            <p-dropdown form-control [options]="durakSayisi" [(ngModel)]="frm.durakSayisi" optionLabel="ad"
-                (ngModelChange)="onDurakSayisiChange(frm.durakSayisi)" />
-        </buton-maliyet-form>
-
-        <buton-maliyet-form [span]="170" [label]="'Boy Özellik'">
-            <p-dropdown form-control [options]="boyOzellik" [(ngModel)]="frm.boyOzellik" optionLabel="ad"
-                (ngModelChange)="onBoyOzellikChange(frm.boyOzellik)" />
-        </buton-maliyet-form>
-        <div (click)="uygula()" form-control
-        class="bg-red-900 flex items-center justify-center font-bold hover:bg-red-800 hover:cursor-pointer hover:text-green-700 ">
-        Uygula</div>
-
-    </div>
-
-    <div class=" p-1 text-white flex flex-col border ">
-       
-    </div>
-
-</div>
-
-<div class="grid grid-cols-[2fr_3fr_1fr] gap-1 ">
-
-    <p-table id="row-check" [value]="kabinler" dataKey="id" selectionMode="single" [(selection)]="selectedUrunRow"
-        [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Ad</th>
-                <th></th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-urun let-rowIndex="rowIndex">
-            <tr [pSelectableRow]="urun" [pSelectableRowIndex]="rowIndex" [pEditableRow]="urun"
-                (click)="onRowClickUrun(urun)">
-                <td>{{ urun.ad }}</td>
-                <td>
-                    İşlemler
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-
-    <p-table id="row-check" [value]="bilesenler" dataKey="id" selectionMode="single" [(selection)]="selectedBilesenRow"
-        [style]="{'min-height':' 400px'}" [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Ad</th>
-                <th>Miktar</th>
-                <th>Birim</th>
-                <th>Fiyat</th>
-                <th>Döviz</th>
-                <th>Toplam</th>
-
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-
-            <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" (click)="onRowClickBilesen(product)">
-
-                <td>{{ product.ad }}</td>
-                <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-
-
-                            <input form-control [(ngModel)]="product.miktar" name="miktar"
-                                class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{ product.miktar }}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td>{{ product.birim }}</td>
-                <td>{{ product.birimFiyat }}</td>
-                <td>{{ product.dovizCinsi }}</td>
-                <td>{{ product.dovizFiyat*product.miktar }}</td>
-            </tr>
-        </ng-template>
-    </p-table>
-
-    <p-table id="row-check" [value]="personeller" dataKey="id" selectionMode="multiple"
-        [(selection)]="selectedPersonelRows" [metaKeySelection]="false">
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
-                <th>Ad</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-            <tr>
-                <td>
-                    <p-tableCheckbox [value]="product" />
-                </td>
-                <td>{{ product.ad }}</td>
-            </tr>
-        </ng-template>
-    </p-table>
-
-</div>
-
-<div class="grid grid-cols-[2fr_3fr_1fr] gap-1 ">
-    <div>
-        <table class="yks_table_group ">
-            <tbody>
-                <tr style="height: 25px !important;">
-                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-    
-                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">İşçilik :
-                        </label>
-                    </td>
-                    <td style="width: 100%;">
-    
-                        <label style=" min-width: 60px; 
-                        font-weight: 600; 
-                        font-size: 13px; 
-                        color: #666666;">
-    
-                            <span> 12.250,70 ₺ </span>
-    
-    
-                        </label>
-                    </td>
-    
-                </tr>
-    
-                <tr style="height: 25px !important;">
-                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-    
-                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Birim
-                            Maliyet :
-                        </label>
-                    </td>
-                    <td style="width: 100%;">
-    
-                        <label style=" min-width: 60px; 
-                        font-weight: 600; 
-                        font-size: 13px; 
-                        color: #666666;">
-    
-                            <span> {{birimMaliyet}}</span>
-    
-    
-                        </label>
-                    </td>
-    
-                </tr>
-    
-    
-    
-    
-    
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <div class="button-container mt-2">
-            <div class="button-grup ">
-                <div class="img-container">
-                    <img src="../../../../../assets/icons/save.png" alt="">
-                </div>
-                <span class="d-none d-sm-inline button-label">Kaydet</span>
-            </div>
-            <div class="button-grup ">
-                <div class="img-container">
-                    <img src="../../../../../assets/icons/save-all.png" alt="">
-                </div>
-                <span class="d-none d-sm-inline button-label">Farklı Kaydet</span>
-            </div>
-            <div class="button-grup ">
-                <div class="img-container">
-                    <img src="../../../../../assets/icons/add-file.png" alt="">
-                </div>
-                <span class="d-none d-sm-inline button-label">Ekle</span>
-            </div>
-
-            <div class="button-grup">
-                <div class="img-container">
-                    <img src="../../../../../assets/icons/delete-file.png" alt="">
-                </div>
-                <span class="d-none d-sm-inline button-label">Sil</span>
-
-            </div>
-
-            <div class="button-grup">
-                <div class="img-container">
-                    <img src="../../../../../assets/icons/edit-file.png" alt="">
-                </div>
-                <span class="d-none d-sm-inline button-label">Düzelt</span>
-
-            </div>
-
-            <div (click)="yenile()" class="button-grup">
-                <div class="img-container">
-                    <img src="../../../../../assets/icons/refresh.png" alt="">
-                </div>
-                <span class="d-none d-sm-inline button-label">Yenile</span>
-
-            </div>
-
-
-        </div>
-
-    </div>
-</div>
-
-<div>
- 
-</div> -->
-
-
+<!-- 
 
 
 
@@ -928,7 +543,85 @@
             class="bg-red-900 flex items-center justify-center font-bold hover:bg-red-800 hover:cursor-pointer hover:text-green-700 ">
             Hesapla</div>
     </ng-template>
-</p-dialog>
+</p-dialog> -->
 
+
+<div class="grid grid-cols-[2fr_2fr_2fr_3fr] gap-1 " style="display: grid; grid-template-columns:2fr 2fr 2fr 3fr ; gap: 4px;">
+
+
+    <div  style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
+
+        <buton-maliyet-form [span]="170" [label]="'Buton tipi'">
+            <p-dropdown form-control [options]="butonTipi" [(ngModel)]="frm.butonTipi" optionLabel="ad"
+                (ngModelChange)="onButonTipiChange(frm.butonTipi)" />
+        </buton-maliyet-form>
+        <buton-maliyet-form [span]="170" [label]="'Buton Çeşidi'">
+            <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
+                (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
+        </buton-maliyet-form>
+        <buton-maliyet-form [span]="170" [label]="'Durak Sayısı'">
+            <p-dropdown form-control [options]="durakSayisi" [(ngModel)]="frm.durakSayisi" optionLabel="ad"
+                (ngModelChange)="onDurakSayisiChange(frm.durakSayisi)" />
+        </buton-maliyet-form>
+
+        <buton-maliyet-form [span]="170" [label]="'Boy Özellik'">
+            <p-dropdown form-control [options]="boyOzellik" [(ngModel)]="frm.boyOzellik" optionLabel="ad"
+                (ngModelChange)="onBoyOzellikChange(frm.boyOzellik)" />
+        </buton-maliyet-form>
+        <div (click)="urunleriGoster()" form-control style="display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer ; background-color: #7F1D1D;">
+            Ürünleri Göster
+        </div>
+    </div>
+
+    
+    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
+        <buton-maliyet-table [malzemeToplam]="malzemeToplam"></buton-maliyet-table>
+    </div>
+    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
+        <buton-fiyat-table></buton-fiyat-table>
+    </div>
+</div>
+
+<div  style="display: grid; grid-template-columns:1fr 1fr; gap: 12px;">
+    <div>
+        <buton-malzeme-giderler-table [malzemeGiderler]="bilesenler" [selectedMalzemeGiderler]="selectedBilesenRow"
+            [malzemeToplam]="malzemeToplam"></buton-malzeme-giderler-table>
+    </div>
+    <div>
+        <buton-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler"></buton-iscilik-giderler-table>
+        <buton-genel-giderler-table [genelGiderler]="genelGiderler"
+            [selectedGenelGiderler]="selectedBilesenRow"></buton-genel-giderler-table>
+
+    </div>
+</div>
+
+<p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }">
+    <ng-template pTemplate="header">
+        <span  style="font-size: 20px; font-weight: bold;">ÜRÜNLER</span>
+    </ng-template>
+    <p-table id="row-check" [value]="urunler" dataKey="id" selectionMode="single" [(selection)]="selectedURUN"
+        [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Ad</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-urun let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="urun" [pSelectableRowIndex]="rowIndex" [pEditableRow]="urun"
+                (click)="onRowClickUrunler(urun)">
+                <td>{{ urun.ad }}</td>
+                <td>
+                    İşlemler
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <ng-template pTemplate="footer" let-urun>
+        <div (click)="Hesapla(selectedURUN)" style="background-color: #7F1D1D; display: flex; align-items: center; justify-content: center; font-weight: bold;cursor: pointer;"
+            >
+            Hesapla</div>
+    </ng-template>
+</p-dialog>
 
 

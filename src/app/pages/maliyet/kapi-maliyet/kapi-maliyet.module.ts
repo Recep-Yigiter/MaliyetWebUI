@@ -13,13 +13,23 @@ import { ListboxModule } from 'primeng/listbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RouterModule } from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
-
+import {MatRadioModule} from '@angular/material/radio';
+import { KapiGenelGiderlerTableComponent } from './core/tables/genel-giderler-table';
+import { KapiIscilikGiderlerTableComponent } from './core/tables/iscilik-giderler-table';
+import { KapiMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
+import { KapiMaliyetTableComponent } from './core/tables/maliyet-table';
+import { KapiFiyatTableComponent } from './core/tables/fiyat-table';
 
 @NgModule({
   declarations: [
     KapiMaliyetComponent,
     KapiDesignComponent,
-    KapiMaliyetFormComponent
+    KapiMaliyetFormComponent,
+    KapiGenelGiderlerTableComponent,
+    KapiIscilikGiderlerTableComponent,
+    KapiMalzemeGiderlerTableComponent,
+    KapiMaliyetTableComponent,
+    KapiFiyatTableComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +43,7 @@ import { DialogModule } from 'primeng/dialog';
     ListboxModule,
     RadioButtonModule,
     DialogModule,
+    MatRadioModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

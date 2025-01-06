@@ -13,6 +13,11 @@ import { ListboxModule } from 'primeng/listbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RouterModule } from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
+import { KasnakGenelGiderlerTableComponent } from './core/tables/genel-giderler-table';
+import { KasnakIscilikGiderlerTableComponent } from './core/tables/iscilik-giderler-table';
+import { KasnakMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
+import { KasnakMaliyetTableComponent } from './core/tables/maliyet-table';
+import { KasnakFiyatTableComponent } from './core/tables/fiyat-table';
 
 
 
@@ -20,7 +25,12 @@ import { DialogModule } from 'primeng/dialog';
   declarations: [
     KasnakMaliyetComponent,
       KasnakDesignComponent,
-        KasnakMaliyetFormComponent
+        KasnakMaliyetFormComponent,
+       KasnakGenelGiderlerTableComponent,
+       KasnakIscilikGiderlerTableComponent,
+       KasnakMalzemeGiderlerTableComponent,
+       KasnakMaliyetTableComponent,
+       KasnakFiyatTableComponent     
   ],
   imports: [
     CommonModule,

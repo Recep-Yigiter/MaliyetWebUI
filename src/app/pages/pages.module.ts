@@ -11,18 +11,19 @@ import { TanimlarComponent } from './tanimlar/tanimlar.component';
 @NgModule({
   declarations: [
     PagesComponent,
-    SatisFiyatiComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
+     
       {
         path: '',
-        component: MaliyetComponent,
+       
         
         children: [
           {
             path: 'maliyet',
+            component: MaliyetComponent,
             loadChildren: () =>
               import(
                 '../pages/maliyet/maliyet.module'
@@ -33,11 +34,12 @@ import { TanimlarComponent } from './tanimlar/tanimlar.component';
       },
       {
         path: '',
-        component: TanimlarComponent,
+        
         
         children: [
           {
             path: 'tanimlar',
+            component: TanimlarComponent,
             loadChildren: () =>
               import(
                 '../pages/tanimlar/tanimlar.module'
@@ -48,11 +50,12 @@ import { TanimlarComponent } from './tanimlar/tanimlar.component';
       },
       {
         path: '',
-        component: SatisFiyatiComponent,
+       
         
         children: [
           {
             path: 'satis-fiyati',
+            component: SatisFiyatiComponent,
             loadChildren: () =>
               import(
                 '../pages/satis-fiyati/satis-fiyati.module'
