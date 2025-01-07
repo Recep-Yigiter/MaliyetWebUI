@@ -67,7 +67,7 @@ import { Component, Input } from '@angular/core';
             <ng-template pTemplate="groupheader" let-customer let-rowIndex="rowIndex" let-expanded="expanded">
                 <tr>
                     <td colspan="6">
-                        <button [pRowToggler]="customer" class="p-button-text p-button-rounded p-button-plain mr-2 " style="width: 30px ; height: 30px;">
+                        <button [pRowToggler]="customer" class="p-button-text p-button-rounded p-button-plain mr-2 " style="width: 30px ; height: 30px;border: none;">
                             <i class="fa-solid fa-caret-down"></i>
                         </button>
                         <span class="font-bold ml-2">{{customer.personel.gorev.ad}}</span>
@@ -94,7 +94,7 @@ import { Component, Input } from '@angular/core';
             <ng-template pTemplate="footer">
                 <tr>
                     <td colspan="4" class="text-right" style="font-size: 13px;">Toplam</td>
-                    <td style="font-size: 13px;">{{0 | currency: 'USD'}}</td>
+                    <td style="font-size: 13px;">{{iscilikToplam | currency: 'USD'}}</td>
                 </tr>
             </ng-template>
         </p-table>
@@ -103,5 +103,6 @@ import { Component, Input } from '@angular/core';
 })
 export class KabinIscilikGiderlerTableComponent {
     @Input() iscilikGiderler: any;
+    @Input() iscilikToplam: any;
     @Input() selectedGenelGiderler: any;
 }

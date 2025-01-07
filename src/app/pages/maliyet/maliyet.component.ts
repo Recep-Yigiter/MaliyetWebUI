@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './maliyet.component.html',
   styleUrls: ['./maliyet.component.scss']
 })
-export class MaliyetComponent {
+export class MaliyetComponent implements OnInit {
   
   menu = [
     {
@@ -69,11 +69,13 @@ export class MaliyetComponent {
 
   ];
 
-  /**
-   *
-   */
+
   constructor(private router:Router) {
     
+  }
+  ngOnInit(): void {
+    this.selectedTab=  localStorage.getItem('maliyet');
+    this.router.navigate([`maliyet/${this.selectedTab}-maliyet`])
   }
 
   toggleNode(node: any) {
@@ -84,7 +86,7 @@ export class MaliyetComponent {
   selectedTab: string = 'kabin';  // Varsayılan olarak "kabin" sekmesi seçili
 
   selectTab(tab: string) {
-    console.log(tab);
+   localStorage.setItem('maliyet',tab)
     this.selectedTab = tab;  // Tıklanan sekmeyi seç
     this.router.navigate([`maliyet/${tab}-maliyet`])
   }

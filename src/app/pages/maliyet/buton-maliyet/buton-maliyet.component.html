@@ -546,7 +546,7 @@
 </p-dialog> -->
 
 
-<div class="grid grid-cols-[2fr_2fr_2fr_3fr] gap-1 " style="display: grid; grid-template-columns:2fr 2fr 2fr 3fr ; gap: 4px;">
+<div  style="display: grid; grid-template-columns:3fr 1fr 2fr 2fr ; gap: 4px;">
 
 
     <div  style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
@@ -573,11 +573,30 @@
         </div>
     </div>
 
-    
     <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
-        <buton-maliyet-table [malzemeToplam]="malzemeToplam"></buton-maliyet-table>
+        
+        <buton-maliyet-form  [span]="196" [label]="'Ortalama Çalışan Maaşı'">
+            <input [disabled]="true" form-control [(ngModel)]="frm.ortalamaPersonelMaasi" 
+            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </buton-maliyet-form> 
+       
+        <buton-maliyet-form [span]="196" [label]="'Tahmini Çalışan Sayısı'">
+            <input [disabled]="false" form-control [(ngModel)]="frm.tahminiCalisanSayisi" 
+            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </buton-maliyet-form> 
+
+        <buton-maliyet-form [span]="196" [label]="'Günlük Buton Üretimi'">
+            <input [disabled]="false" form-control [(ngModel)]="frm.gunlukUretimSayisi" 
+                   class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </buton-maliyet-form> 
+        
     </div>
-    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
+    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;  background-color: rgb(231 231 231);
+    box-shadow: 5px 3px 30px #858585;">
+        <buton-maliyet-table [malzemeToplam]="malzemeToplam" [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam" [genelGiderToplam]="genelGiderToplam" [toplamMaliyet]="toplamMaliyet"></buton-maliyet-table>
+    </div>
+    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);
+    box-shadow: 5px 3px 30px #858585;">
         <buton-fiyat-table></buton-fiyat-table>
     </div>
 </div>

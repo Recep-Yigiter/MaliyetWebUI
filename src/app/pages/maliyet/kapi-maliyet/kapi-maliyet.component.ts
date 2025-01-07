@@ -41,7 +41,10 @@ ngOnInit() {
 
 
 
-frm:any={
+frm:any={  
+  gunlukUretimSayisi:5,
+  tahminiCalisanSayisi:10,
+  ortalamaPersonelMaasi:0,
   yon: { id: 1, ad: 'Hepsi' },
   kapiYuksekligi: { id: 1, ad: 'Hepsi' },
   kapiGenisligi: { id: 1, ad: 'Hepsi' },
@@ -195,9 +198,6 @@ visible: boolean;
   var test3=  this.selectedURUN?.kapiGruplari.filter(c=>c.tur=="Mekanizma")[0]
 
     
-   console.log(test1);
-   console.log(test2);
-   console.log(test3);
     let kasaToplam=0
     let panelToplam=0
     let mekanizmaToplam=0
@@ -272,7 +272,30 @@ visible: boolean;
     if (this.selectedURUN) {
       this.radioSelect=false;
     }
+
+
+    this.iscilikHesapla()
   }
+
+
+  iscilikToplam:any;
+  iscilikHesapla(){
+    let total = 0;
+    this.selectedURUN?.iscilikGiderler.forEach(element => {
+       total += element.personel.maas;
+    });
+
+    this.frm.ortalamaPersonelMaasi=total/this.selectedURUN?.iscilikGiderler.length
+    this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.tahminiCalisanSayisi/28)/this.frm.gunlukUretimSayisi;
+    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
+
+
+  }
+
+
+  genelGiderToplam:any;
+  toplamMaliyet:any;
+ 
 
    
 

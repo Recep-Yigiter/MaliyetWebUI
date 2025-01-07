@@ -1,4 +1,4 @@
-<div class="grid grid-cols-[2fr_2fr_2fr_3fr] gap-1 " style="display: grid; grid-template-columns:2fr 2fr 2fr 3fr ; gap: 4px;">
+<div style="display: grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr ; gap: 4px;">
 
 
     <div  style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
@@ -35,21 +35,52 @@
             Ürünleri Göster
         </div>
     </div>
+
     <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
-        <kabin-maliyet-table [malzemeToplam]="malzemeToplam"></kabin-maliyet-table>
+        
+        <kabin-maliyet-form  [span]="196" [label]="'Ortalama Çalışan Maaşı'">
+            <input [disabled]="true" form-control [(ngModel)]="frm.ortalamaPersonelMaasi" 
+            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </kabin-maliyet-form> 
+       
+        <kabin-maliyet-form [span]="196" [label]="'Tahmini Çalışan Sayısı'">
+            <input [disabled]="false" form-control [(ngModel)]="frm.tahminiCalisanSayisi" 
+            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </kabin-maliyet-form> 
+
+        <kabin-maliyet-form [span]="196" [label]="'Günlük Kabin Üretimi'">
+            <input [disabled]="false" form-control [(ngModel)]="frm.gunlukUretimSayisi" 
+                   class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </kabin-maliyet-form> 
+        
     </div>
-    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
+
+    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);
+    box-shadow: 5px 3px 30px #858585;">
+
+        <kabin-maliyet-table [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam" [genelGiderToplam]="genelGiderToplam" [toplamMaliyet]="toplamMaliyet"></kabin-maliyet-table>
+    
+    </div>
+
+    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);
+    box-shadow: 5px 3px 30px #858585;">
         <kabin-fiyat-table></kabin-fiyat-table>
     </div>
+
+
 </div>
 
 <div  style="display: grid; grid-template-columns:1fr 1fr; gap: 12px;">
     <div>
-        <kabin-malzeme-giderler-table [malzemeGiderler]="bilesenler" [selectedMalzemeGiderler]="selectedBilesenRow"
-            [malzemeToplam]="malzemeToplam"></kabin-malzeme-giderler-table>
+       
+        <kabin-malzeme-giderler-table
+         [malzemeGiderler]="bilesenler"
+         [selectedMalzemeGiderler]="selectedBilesenRow"
+         [malzemeToplam]="malzemeToplam"></kabin-malzeme-giderler-table>
+
     </div>
     <div>
-        <kabin-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler"></kabin-iscilik-giderler-table>
+        <kabin-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler" [iscilikToplam]="iscilikToplam"></kabin-iscilik-giderler-table>
         <kabin-genel-giderler-table [genelGiderler]="genelGiderler"
             [selectedGenelGiderler]="selectedBilesenRow"></kabin-genel-giderler-table>
 

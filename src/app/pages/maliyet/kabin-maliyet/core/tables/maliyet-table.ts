@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'kabin-maliyet-table',
   template: `
         <table class="yks_table_group ">
             <tbody>
+
                 <tr style="height: 25px !important;">
                     <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
 
@@ -18,7 +19,8 @@ import { Component, Input } from '@angular/core';
                     font-size: 13px; 
                     color: #666666;">
 
-                            <span> 12.250,70 ₺ </span>
+                            <span *ngIf="iscilikToplam"> {{iscilikToplam}} ₺ </span>
+                            <span *ngIf="!iscilikToplam"> 0 ₺ </span>
 
 
                         </label>
@@ -39,7 +41,8 @@ import { Component, Input } from '@angular/core';
                     font-size: 13px; 
                     color: #666666;">
 
-                            <span> 12.250,70 ₺ </span>
+                            <span *ngIf="genelGiderToplam"> {{genelGiderToplam}} ₺ </span>
+                            <span *ngIf="!genelGiderToplam"> 0 ₺ </span>
 
 
                         </label>
@@ -61,8 +64,8 @@ import { Component, Input } from '@angular/core';
                     font-size: 13px; 
                     color: #666666;">
 
-                            <span> {{malzemeToplam}}</span>
-
+                            <span *ngIf="malzemeToplam"> {{malzemeToplam}} ₺ </span>
+                            <span *ngIf="!malzemeToplam"> 0 ₺ </span>
 
                         </label>
                     </td>
@@ -82,9 +85,9 @@ import { Component, Input } from '@angular/core';
                     font-size: 13px; 
                     color: #666666;">
 
-                            <span> </span>
-
-
+                       
+                            <span *ngIf="toplamMaliyet"> {{toplamMaliyet}} ₺ </span>
+                            <span *ngIf="!toplamMaliyet"> 0 ₺ </span>
                         </label>
                     </td>
 
@@ -101,4 +104,9 @@ import { Component, Input } from '@angular/core';
 })
 export class KabinMaliyetTableComponent {
     @Input() malzemeToplam: any;
+    @Input() iscilikToplam: any;
+    @Input() toplamMaliyet: any;
+    @Input() genelGiderToplam: any;
+
+
 }

@@ -1,4 +1,4 @@
-<div class="flex w-full " style="height: calc(100vh - 85px)">
+<!-- <div class="flex w-full " style="height: calc(100vh - 85px)">
     <div id="sidebar-menu" class="ibox overflow-auto min-w-52 md:min-w-64 md:max-w-80 " style="border-right: 1px solid rgba(0, 0, 0, 0.06);">
         <div class="ibox-content mailbox-content p-1">
             <div class="file-manager ">
@@ -88,6 +88,27 @@
     </div>
 
     <div class="w-full">
+        <router-outlet></router-outlet>
+
+    </div>
+</div> -->
+
+
+<ul class="nav nav-tabs">
+
+    <ng-container *ngFor="let item of menu">
+        <ng-container *ngFor="let item of item.submenu">
+            <li [class.active]="selectedTab === item.tabItem" (click)="selectTab(item)">
+                <a class="tab-item">{{item.label}}</a>
+            </li>
+        </ng-container>
+    </ng-container>
+   
+  </ul>
+<div  style="height: calc(100vh - 85px); display: flex; width: 100%;">
+
+
+    <div  style="width: 100%;">
         <router-outlet></router-outlet>
 
     </div>

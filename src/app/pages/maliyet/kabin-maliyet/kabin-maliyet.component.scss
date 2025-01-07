@@ -14,6 +14,9 @@
 }
 
 :host ::ng-deep {
+.deneme{
+    background-color: red;
+}
     p-table{
         .p-datatable .p-datatable-thead > tr > th {
 

@@ -11,6 +11,7 @@ import { Component, Input } from '@angular/core';
                     <th style="width: 50px;font-size: 13px;" rowspan="3">Sıra No</th>
                     <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">
                         Malzeme Giderleri
+                        
                         <div class="button-container" style="position: absolute;right: 0;top: 0;">
                             <div class="button-grup " style="gap: 3px !important;">
                                 <div class="img-container">

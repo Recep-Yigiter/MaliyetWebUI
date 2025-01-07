@@ -13,7 +13,6 @@ import { KabinService } from 'src/app/core/services/repository/kabin.service';
 })
 export class KabinMaliyetComponent implements OnInit{
 
-mesaiSaati=9;
 
 
 
@@ -34,18 +33,21 @@ constructor(private KabinService:KabinService) {
 }
 
 ngOnInit() {
-  //  this.selectedUrunRow=this.kabinler[0]
-  //  if (this.selectedUrunRow) {
-  //    this.bilesenler=this.kabinler[0].urunBilesenler
-  //  }
+
+ }
+
+ receivedData: string = '';
+ receiveData(data){
+  console.log(data);
+  this.receivedData = data; 
  }
 
 
-
-
-
-
+ 
 frm:any={
+  gunlukUretimSayisi:5,
+  tahminiCalisanSayisi:10,
+  ortalamaPersonelMaasi:0,
   tur: { id: 1, ad: 'Hepsi' },
   model: { id: 1, ad: 'Hepsi' },
   zeminKaplama: { id: 1, ad: 'Hepsi' },
@@ -170,13 +172,13 @@ yenile(){
 
   visible: boolean;
  async urunleriGoster() {
-    const filteredProducts =  (await this.KabinService.GetAll()).filter(item => {
-    const matchesTur = this.selectedTur? item.tur === this.selectedTur.ad || this.selectedTur.id==1: true;
-    const matchesModel = this.selectedModel? item.model === this.selectedModel.ad|| this.selectedModel.id==1 : true;
-    const matchesZeminKaplama = this.selectedZeminKaplama? item.zeminKaplama === this.selectedZeminKaplama.ad || this.selectedZeminKaplama.id==1 : true;
-    const matchesKabinKaplama = this.selectedKabinKaplama? item.kabinKaplama === this.selectedKabinKaplama.ad || this.selectedKabinKaplama.id==1 : true;
-    const matchesAksesuarKaplama = this.selectedAksesuarKaplama? item.aksesuarKaplama === this.selectedAksesuarKaplama.ad || this.selectedAksesuarKaplama.id==1: true;
-    const matchesKapasite = this.selectedKapasite? item.kapasite === this.selectedKapasite.deger || this.selectedKapasite.id==1 : true;
+   const filteredProducts =  (await this.KabinService.GetAll()).filter(item => {
+   const matchesTur = this.selectedTur? item.tur === this.selectedTur.ad || this.selectedTur.id==1: true;
+   const matchesModel = this.selectedModel? item.model === this.selectedModel.ad|| this.selectedModel.id==1 : true;
+   const matchesZeminKaplama = this.selectedZeminKaplama? item.zeminKaplama === this.selectedZeminKaplama.ad || this.selectedZeminKaplama.id==1 : true;
+   const matchesKabinKaplama = this.selectedKabinKaplama? item.kabinKaplama === this.selectedKabinKaplama.ad || this.selectedKabinKaplama.id==1 : true;
+   const matchesAksesuarKaplama = this.selectedAksesuarKaplama? item.aksesuarKaplama === this.selectedAksesuarKaplama.ad || this.selectedAksesuarKaplama.id==1: true;
+   const matchesKapasite = this.selectedKapasite? item.kapasite === this.selectedKapasite.deger || this.selectedKapasite.id==1 : true;
    return matchesTur 
        && matchesModel
        && matchesZeminKaplama
@@ -193,7 +195,7 @@ yenile(){
   malzemeToplam: number;
   Hesapla(event){
     this.bilesenler=this.selectedURUN?.urunBilesenler;
-this.iscilikGiderler=this.selectedURUN?.iscilikGiderler
+    this.iscilikGiderler=this.selectedURUN?.iscilikGiderler
     this.bilesenler?.forEach((item: any) => {
           if (item.stok.dovizCinsi=='TL') {
             var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
@@ -214,9 +216,28 @@ this.iscilikGiderler=this.selectedURUN?.iscilikGiderler
     }
     this.malzemeToplam = total;
     this.visible = false;
+
+    this.iscilikHesapla()
   }
 
 
+  iscilikToplam:any;
+  iscilikHesapla(){
+    let total = 0;
+    this.selectedURUN?.iscilikGiderler.forEach(element => {
+       total += element.personel.maas;
+    });
+
+    this.frm.ortalamaPersonelMaasi=total/this.selectedURUN?.iscilikGiderler.length
+    this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.tahminiCalisanSayisi/28)/this.frm.gunlukUretimSayisi;
+    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
+
+
+  }
+
+
+  genelGiderToplam:any;
+  toplamMaliyet:any;
  
 
 }

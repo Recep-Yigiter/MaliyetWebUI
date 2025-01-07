@@ -20,17 +20,17 @@ selectedBilesenRow:any;
 selectedUrunRow:any;
 personeller=DATA_PERSONELLER
 selectedPersonelRows:any;
-iscilikGiderler:any=ISCILIK
+iscilikGiderler:any=[]
 genelGiderler:any=GENELGIDERLER
 selectedURUN:any;
 
 ngOnInit() {
   // this.kabinler=KABINLER
-  this.selectedUrunRow=this.kabinler[0]
-  if (this.selectedUrunRow) {
-    this.bilesenler=this.kabinler[0].urunBilesenler
-    this.onRowClickUrun(this.selectedUrunRow)
-  }
+  // this.selectedUrunRow=this.kabinler[0]
+  // if (this.selectedUrunRow) {
+  //   this.bilesenler=this.kabinler[0].urunBilesenler
+  //   this.onRowClickUrun(this.selectedUrunRow)
+  // }
 
 
  }

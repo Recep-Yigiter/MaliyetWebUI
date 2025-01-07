@@ -17,7 +17,7 @@ import { KabinIscilikGiderlerTableComponent } from './core/tables/iscilik-giderl
 import { KabinMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
 import { KabinMaliyetTableComponent } from './core/tables/maliyet-table';
 import { KabinFiyatTableComponent } from './core/tables/fiyat-table';
-
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     KabinMaliyetComponent,
@@ -40,6 +40,7 @@ import { KabinFiyatTableComponent } from './core/tables/fiyat-table';
     DividerModule,
     TabViewModule,
     DialogModule,
+    ButtonModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

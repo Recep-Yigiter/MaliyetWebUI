@@ -270,6 +270,9 @@ async ngOnInit() {
 
 
 frm:any={
+  gunlukUretimSayisi:5,
+  tahminiCalisanSayisi:10,
+  ortalamaPersonelMaasi:0,
   butonTipi: { id: 1, ad: 'Hepsi' },
   durakSayisi:{ id: 2, ad: '2' },
   butonCesidi: { id: 1, ad: 'Hepsi' },
@@ -372,7 +375,7 @@ onRowClickBilesen(event){}
 
   }
 
-
+ onRowClickUrunler(event){}  
   malzemeToplam: number;
   Hesapla(event){
     this.bilesenler=this.selectedURUN?.urunBilesenler;
@@ -397,12 +400,28 @@ onRowClickBilesen(event){}
     }
     this.malzemeToplam = total + ((Number(this.frm.durakSayisi.ad)-2)*45.31);
     this.visible = false;
+    this.iscilikHesapla()
   }
 
 
+  iscilikToplam:any;
+  iscilikHesapla(){
+    let total = 0;
+    this.selectedURUN?.iscilikGiderler.forEach(element => {
+       total += element.personel.maas;
+    });
 
-  onRowClickUrunler(event){}      
+    this.frm.ortalamaPersonelMaasi=total/this.selectedURUN?.iscilikGiderler.length
+    this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.tahminiCalisanSayisi/28)/this.frm.gunlukUretimSayisi;
+    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
 
+console.log(this.selectedURUN);
+  }
+
+
+  genelGiderToplam:any;
+  toplamMaliyet:any;
+ 
 
 
 

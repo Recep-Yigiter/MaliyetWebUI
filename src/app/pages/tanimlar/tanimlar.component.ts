@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tanimlar',
@@ -14,28 +15,32 @@ export class TanimlarComponent {
       href: '',
       submenu: [
         {
-          label: 'Stok ',
+          label: 'Stok',
+          tabItem:'stok',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/stok',
           expanded: false,
         },
         {
-          label: 'Personel ',
+          label: 'Personel',
+          tabItem:'personel',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/personel',
           expanded: false,
         },
         {
-          label: 'Urunler ',
+          label: 'Urunler',
+          tabItem:'urun',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/urun',
           expanded: false,
         },
         {
-          label: 'Kabinler ',
+          label: 'Kabinler',
+          tabItem:'kabin',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/kabin',
@@ -43,35 +48,40 @@ export class TanimlarComponent {
         },
         
         {
-          label: 'Butonlar ',
+          label: 'Butonlar',
+          tabItem:'buton',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/buton',
           expanded: false,
         },
         {
-          label: 'Kapılar ',
+          label: 'Kapılar',
+          tabItem:'kapi',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/kapi',
           expanded: false,
         },
         {
-          label: 'Kasnaklar ',
+          label: 'Kasnaklar',
+          tabItem:'kasnak',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/kasnak',
           expanded: false,
         },
         {
-          label: 'Makine Şasesi ',
+          label: 'Makine Şasesi',
+          tabItem:'makineSasesi',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/makine-sasesi',
           expanded: false,
         },
         {
-          label: 'Süspansiyonlar ',
+          label: 'Süspansiyonlar',
+          tabItem:'suspansiyon',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/suspansiyon',
@@ -85,7 +95,26 @@ export class TanimlarComponent {
   ];
 
 
+
+  constructor(private router:Router) {
+    
+  }
+  ngOnInit(): void {
+    this.selectedTab=  localStorage.getItem('tanimlar');
+    this.router.navigate([`tanimlar/${this.selectedTab}`])
+  }
+
   toggleNode(node: any) {
     node.expanded = !node.expanded;
+  }
+
+
+  selectedTab: string = 'kabin';  // Varsayılan olarak "kabin" sekmesi seçili
+
+  selectTab(tab: any) {
+   localStorage.setItem('tanimlar',tab.tabItem)
+    this.selectedTab = tab.tabItem;  // Tıklanan sekmeyi seç;
+    console.log(this.selectedTab)
+    this.router.navigate([`tanimlar/${tab.tabItem}`])
   }
 }
