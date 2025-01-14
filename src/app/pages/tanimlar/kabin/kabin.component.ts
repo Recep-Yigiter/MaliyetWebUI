@@ -30,7 +30,7 @@ export class KabinComponent implements OnInit {
     
   }
   ngOnInit(): void {
-  
+
   }
 
 

@@ -93,7 +93,7 @@ import { PersonelService } from 'src/app/core/services/repository/personel.servi
                                 [style]="{'min-height':' 448px'}"
                                 [scrollable]="true" 
                                 selectionMode="single" 
-                                [(selection)]="selectedIscilikGiderler"
+                                [(selection)]="selectedIscilikGiderler" 
                                 scrollHeight="448px">
         <ng-template pTemplate="header">
                 <tr>

@@ -198,7 +198,6 @@ onRowClickUrunler(event){}
   vade3Fiyat:any;
 
   Hesapla(){
-console.log(this.selectedURUN);
     this.bilesenler?.forEach((item: any) => {
       if (item.stok.dovizCinsi=='TL') {
         var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
@@ -265,7 +264,6 @@ console.log(this.selectedURUN);
       this.iscilikToplam=0
     }
     this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
-console.log(this.malzemeToplam);
     this.pesinFiyat=this.toplamMaliyet + this.toplamMaliyet*this.frm.kar/100;
     this.vade1Fiyat=this.pesinFiyat + this.pesinFiyat*this.frm.vadeFarki/100;
     this.vade2Fiyat=this.vade1Fiyat + this.vade1Fiyat*this.frm.vadeFarki/100;
@@ -276,17 +274,21 @@ console.log(this.malzemeToplam);
 
   iscilikVisible:any;
   selectedPersonelEkle:any;
-  newCustomer:any;
   personelEkle(){
-    this.selectedPersonelEkle.forEach(element => {
-      var test={
+    this.selectedPersonelEkle.forEach((element) => {
+      var newValue={
         id: "bb4913c6-3205-480d-9122-7b24d160c4db",
         isDeleted: false,
         olusturmaTarihi: "2002-12-12T00:00:00",
         personel:element
       }
-      this.iscilikGiderler = [...this.iscilikGiderler, test];
-      this.newCustomer = element;
+      const customerExists = this.iscilikGiderler.some(customer => customer.personel.id === newValue.personel.id);
+
+      if (customerExists) {
+        alert('Bu müşteri zaten mevcut!');
+        return;
+      }
+      this.iscilikGiderler = [...this.iscilikGiderler, newValue];
     });
     this.iscilikVisible=false;
 

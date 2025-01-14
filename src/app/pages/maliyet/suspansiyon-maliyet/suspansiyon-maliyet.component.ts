@@ -225,7 +225,7 @@ yenile(){
     this.frm.ortalamaPersonelMaasi=total/this.selectedURUN?.iscilikGiderler.length
     this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.tahminiCalisanSayisi/28)/this.frm.gunlukUretimSayisi;
     this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
-console.log(this.iscilikToplam);
+
   }
 
 
