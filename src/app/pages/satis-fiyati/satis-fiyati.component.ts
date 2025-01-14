@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-satis-fiyati',
@@ -6,50 +7,92 @@ import { Component } from '@angular/core';
   styleUrls: ['./satis-fiyati.component.scss']
 })
 export class SatisFiyatiComponent {
+
   menu = [
     {
-      label: 'Satış Fiyatları',
+      label: 'Kartlar',
       expanded: false,
       icon: '',
       href: '',
       submenu: [
+       
         {
-          label: 'Buton Satış ',
+          label: 'Kabinler',
+          tabItem:'kabin',
           icon: 'fa fa-inbox',
-          submenu: [
-          {
-            label: 'TAM BOY BUTON (SAT. PAS. BUTON)',
-            icon: 'fa fa-inbox',
-            submenu: [],
-            href: '',
-            expanded: false,
-          },
-          {
-            label: 'SAT. PAS. DOT GÖST.KAT BUTONU',
-            icon: 'fa fa-inbox',
-            submenu: [],
-            href: '',
-            expanded: false,
-          },
-          {
-            label: 'Opsiyonlar',
-            icon: 'fa fa-inbox',
-            submenu: [],
-            href: '',
-            expanded: false,
-          },
-        ],
-          href: '',
+          submenu: [  ],
+          href: '/satis-fiyati/kabin',
           expanded: false,
         },
         
+        // {
+        //   label: 'Butonlar',
+        //   tabItem:'buton',
+        //   icon: 'fa fa-inbox',
+        //   submenu: [  ],
+        //   href: '/satis-fiyati/buton',
+        //   expanded: false,
+        // },
+        {
+          label: 'Kapılar',
+          tabItem:'kapi',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/satis-fiyati/kapi',
+          expanded: false,
+        },
+        // {
+        //   label: 'Kasnaklar',
+        //   tabItem:'kasnak',
+        //   icon: 'fa fa-inbox',
+        //   submenu: [  ],
+        //   href: '/satis-fiyati/kasnak',
+        //   expanded: false,
+        // },
+        // {
+        //   label: 'Makine Şasesi',
+        //   tabItem:'makineSasesi',
+        //   icon: 'fa fa-inbox',
+        //   submenu: [  ],
+        //   href: '/satis-fiyati/makine-sasesi',
+        //   expanded: false,
+        // },
+        // {
+        //   label: 'Süspansiyonlar',
+        //   tabItem:'suspansiyon',
+        //   icon: 'fa fa-inbox',
+        //   submenu: [  ],
+        //   href: '/satis-fiyati/suspansiyon',
+        //   expanded: false,
+        // },
+        
       ],
     },
+  
 
   ];
 
 
+
+  constructor(private router:Router) {
+    
+  }
+  ngOnInit(): void {
+    this.selectedTab=  localStorage.getItem('satis-fiyati');
+    this.router.navigate([`satis-fiyati/${this.selectedTab}`])
+  }
+
   toggleNode(node: any) {
     node.expanded = !node.expanded;
+  }
+
+
+  selectedTab: string = 'kabin';  // Varsayılan olarak "kabin" sekmesi seçili
+
+  selectTab(tab: any) {
+    console.log(tab);
+    localStorage.setItem('satis-fiyati',tab.tabItem)
+    this.selectedTab = tab.tabItem;  // Tıklanan sekmeyi seç;
+    this.router.navigate([`satis-fiyati/${tab.tabItem}`])
   }
 }

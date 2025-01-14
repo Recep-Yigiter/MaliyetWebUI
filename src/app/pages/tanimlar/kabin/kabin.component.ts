@@ -4,8 +4,6 @@ import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
 import { KabinService } from 'src/app/core/services/repository/kabin.service';
 import { PersonelService } from 'src/app/core/services/repository/personel.service';
 import { StokService } from 'src/app/core/services/repository/stok.service';
-import { ISCILIK } from 'src/assets/DATA/iscilik';
-import { DATA_URUNLER } from 'src/assets/urunler';
 import { defaultColDef } from 'src/default-col-def';
 
 @Component({
@@ -49,7 +47,7 @@ export class KabinComponent implements OnInit {
 
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
-    this.rowData =await this.KabinService.GetAll();
+    this.rowData =(await this.KabinService.GetAll()).items;
    
     
   }
@@ -117,9 +115,12 @@ kaydet(){
     iscilikGiderler:this.iscilikGiderler
   }
 
+
+
+
    this.KabinService.create(kabin,async() =>{
    this.visible=false;
-   this.rowData =await this.KabinService.GetAll();
+   this.rowData =(await this.KabinService.GetAll()).items;
    })
 
 }
@@ -222,7 +223,7 @@ stoklar:any;
 stoklarVisible:boolean;
 selectedStokEkle:any;
 async stokEkleDialog(){
-this.stoklar= await this.StokService.GetAll();
+this.stoklar= (await this.StokService.GetAll()).items;
 this.stoklarVisible=true;
 }
 stokEkle(){
@@ -230,9 +231,17 @@ stokEkle(){
   this.selectedStokEkle.forEach(element => {
     element.miktar=0
     var test={
-      id:0,
-      miktar:element.miktar,
-      stok:element
+            stokId: element.id,
+            stokAdi:element.ad,
+            birim:element.birim,
+            butonId: null,
+            kabinId:null,
+            kasnakId: null,
+            kapiGrupId:null,
+            makineSasesiId: null,
+            suspansiyonId: null,
+            miktar:element.miktar?element.miktar:0
+      
     }
     this.bilesenler.push(test)
   });

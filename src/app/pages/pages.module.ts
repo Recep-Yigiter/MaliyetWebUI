@@ -21,48 +21,18 @@ import { TanimlarComponent } from './tanimlar/tanimlar.component';
        
         
         children: [
-          {
-            path: 'maliyet',
-            component: MaliyetComponent,
-            loadChildren: () =>
-              import(
-                '../pages/maliyet/maliyet.module'
-              ).then((m) => m.MaliyetModule),
-           
-          },
+          {path: 'maliyet',component: MaliyetComponent,loadChildren: () =>import(  '../pages/maliyet/maliyet.module').then((m) => m.MaliyetModule), },
         ],
       },
       {
         path: '',
-        
-        
         children: [
-          {
-            path: 'tanimlar',
-            component: TanimlarComponent,
-            loadChildren: () =>
-              import(
-                '../pages/tanimlar/tanimlar.module'
-              ).then((m) => m.TanimlarModule),
-           
-          },
+          {path: 'tanimlar',component: TanimlarComponent,loadChildren: () =>import(  '../pages/tanimlar/tanimlar.module').then((m) => m.TanimlarModule),},
         ],
       },
       {
         path: '',
-       
-        
-        children: [
-          {
-            path: 'satis-fiyati',
-            component: SatisFiyatiComponent,
-            loadChildren: () =>
-              import(
-                '../pages/satis-fiyati/satis-fiyati.module'
-              ).then((m) => m.SatisFiyatiModule),
-           
-          },
-        ],
+        children: [{path: 'satis-fiyati',component: SatisFiyatiComponent,loadChildren: () =>import('../pages/satis-fiyati/satis-fiyati.module').then((m) => m.SatisFiyatiModule),},],
       },
       
 

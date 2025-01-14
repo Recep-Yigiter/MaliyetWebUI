@@ -25,7 +25,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
   ],
   providers: [
-     { provide: "baseUrl", useValue: "http://localhost:5000/api", multi: true },
+     { provide: "baseUrl", useValue: "https://localhost:7054/api", multi: true },
      { provide: LocationStrategy, useClass: HashLocationStrategy, },
      ],
 

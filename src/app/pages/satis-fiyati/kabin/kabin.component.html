@@ -1,0 +1,94 @@
+<kabin-fiyat-design>
+
+
+
+
+
+
+
+  <div full-page>
+    <ag-grid-angular #agGrid style="height:calc(100vh - 380px);" class="ag-theme-quartz" [rowData]="rowData"
+      [defaultColDef]="defaultColDef" [columnDefs]="colDefs" 
+      (gridReady)="getList($event)" (selectionChanged)="rowClick()" [rowSelection]="rowSelection" [rowHeight]="22"
+      [headerHeight]="23" [localeText]="localeText">
+    </ag-grid-angular>
+
+
+    <div style="display: flex; gap: 12px;">
+
+      <div>
+        <kabin-fiyat-form  [span]="196" [label]="'Kar (%)'">
+          <input [disabled]="true" form-control [(ngModel)]="frm.kar"  style="height: 27px;width: 80px;"
+          class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+      </kabin-fiyat-form> 
+        <kabin-fiyat-form  [span]="196" [label]="'Vade Farkı (%)'">
+          <input [disabled]="true" form-control [(ngModel)]="frm.vadeFarki"  style="height: 27px;width: 80px;"
+          class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+      </kabin-fiyat-form> 
+      </div>
+   
+     <table id="myTable" class="yks_table_group " style="width:300px;">
+       <thead style="border-bottom: 1px solid #a3a3a3;">
+         <th></th>
+         <th style="font-size: 11px;color: black; width: 160px;text-align: left;">Maliyet</th>
+       </thead>
+       <tbody>
+         <tr style="border-bottom: 1px solid #b4b4b4;">
+             <td style="font-size: 12px;font-weight: 500;color: gray;text-align: left;padding-left:10px;">İşçilik</td>
+             <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;" >{{0 | currency:' ₺':'symbol':'1.2-2'}} </td>
+         </tr>
+         <tr style="border-bottom: 1px solid #b4b4b4;">
+             <td style="font-size: 12px;font-weight: 500;color: gray;text-align: left;padding-left:10px;">Genel Giderler</td>
+             <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;" >{{0 | currency:' ₺':'symbol':'1.2-2'}} </td>
+         </tr>
+         <tr style="border-bottom: 1px solid #b4b4b4;">
+             <td style="font-size: 12px;font-weight: 500;color: gray;text-align: left;padding-left:10px;">Malzeme Giderler</td>
+             <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;" >{{0 | currency:' ₺':'symbol':'1.2-2'}} </td>
+         </tr>
+         <tr style="border-bottom: 1px solid #b4b4b4;">
+             <td style="font-size: 12px;font-weight: 500;color: gray;text-align: left;padding-left:10px;">TOPLAM</td>
+             <td style="font-size: 12px;color: black;text-align: left;padding-left:10px;font-weight:bold;">{{0 | currency:' ₺':'symbol':'1.2-2'}} </td>
+         </tr>
+       </tbody>
+     </table>
+
+     <table id="myTable" class="yks_table_group " style="width:300px;">
+       <thead style="border-bottom: 1px solid #a3a3a3;">
+         <th></th>
+         <th style="font-size: 11px;color: black; width: 160px;text-align: left;">Fiyat</th>
+       </thead>
+       <tbody>
+         <tr style="border-bottom: 1px solid #b4b4b4;">
+             <td style="font-size: 12px;font-weight: 500;color: gray;text-align: left;padding-left:10px;">Peşin</td>
+             <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;" >{{0 | currency:' ₺':'symbol':'1.2-2'}} </td>
+         </tr>
+         <tr style="border-bottom: 1px solid #b4b4b4;">
+             <td style="font-size: 12px;font-weight: 500;color: gray;text-align: left;padding-left:10px;">60 Gün</td>
+             <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;" >{{0 | currency:' ₺':'symbol':'1.2-2'}} </td>
+         </tr>
+         <tr style="border-bottom: 1px solid #b4b4b4;">
+             <td style="font-size: 12px;font-weight: 500;color: gray;text-align: left;padding-left:10px;">90 Gün</td>
+             <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;" >{{0 | currency:' ₺':'symbol':'1.2-2'}} </td>
+         </tr>
+         <tr style="border-bottom: 1px solid #b4b4b4;">
+             <td style="font-size: 12px;font-weight: 500;color: gray;text-align: left;padding-left:10px;">120 Gün</td>
+             <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;">{{0 | currency:' ₺':'symbol':'1.2-2'}} </td>
+         </tr>
+       </tbody>
+     </table>
+
+
+   </div>
+  </div>
+
+
+</kabin-fiyat-design>
+
+
+
+
+
+
+
+
+

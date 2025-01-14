@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { DATA_PERSONELLER } from 'src/assets/personeller';
-import { STOKLAR, URUNLER } from 'src/assets/urunler';
+
 
 @Component({
   selector: 'app-agirlik-sasesi',
@@ -8,11 +7,11 @@ import { STOKLAR, URUNLER } from 'src/assets/urunler';
   styleUrls: ['./agirlik-sasesi.component.scss']
 })
 export class AgirlikSasesiComponent {
-  rowData:any =STOKLAR;
+  rowData:any =[];
   selectedRows:any;
-  personeller=DATA_PERSONELLER
+  personeller=[]
   selectedPersonelRows:any;
-  urunler:any=URUNLER
+  urunler:any=[]
   selectedUrunGrubu:any;
   birimMaliyet:any;
   frm: any = {

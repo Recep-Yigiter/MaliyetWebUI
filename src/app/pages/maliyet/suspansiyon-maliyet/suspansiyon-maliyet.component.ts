@@ -1,14 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
 
-import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
-import { DATA_PERSONELLER } from 'src/assets/personeller';
-import { DATA_STOKLAR, DOVIZ } from 'src/assets/stoklar';
-import { DATA_URUNLER, STOKLAR, SUSPANSIYON_VARYANTLAR, URUNLER } from 'src/assets/urunler';
-import { MaliyetFilterService } from '../kabin-maliyet/core/filter.service';
-import { ISCILIK } from 'src/assets/DATA/iscilik';
-import { GENELGIDERLER } from 'src/assets/DATA/genel-giderler';
-import { SUSPANSIYONLAR } from 'src/assets/DATA/suspansiyonlar';
+import { SuspansiyonService } from 'src/app/core/services/repository/suspansiyon.service';
+import { DOVIZ } from 'src/assets/DATA/doviz';
 
 @Component({
   selector: 'app-suspansiyon-maliyet',
@@ -19,19 +12,25 @@ export class SuspansiyonMaliyetComponent {
 
 
 
-kabinler:any=SUSPANSIYONLAR;
+kabinler:any=[];
 bilesenler:any =[];
 birimMaliyet:any;
 selectedBilesenRow:any;
 selectedUrunRow:any;
-personeller=DATA_PERSONELLER
+personeller=[]
 selectedPersonelRows:any;
 
 iscilikGiderler:any=[]
-genelGiderler:any=GENELGIDERLER
+genelGiderler:any=[]
 selectedURUN:any;
 
-
+/**
+ *
+ */
+constructor(private SuspansiyonService:SuspansiyonService) {
+  
+  
+}
 ngOnInit() {
 
 
@@ -40,7 +39,10 @@ ngOnInit() {
 
 
 
-frm: any = {
+frm: any = { 
+   gunlukUretimSayisi:5,
+  tahminiCalisanSayisi:10,
+  ortalamaPersonelMaasi:0,
   karkasTipi:{ id: 1, ad: 'Hepsi' },
   askiTipi:{ id: 1, ad: 'Hepsi' },
   karkasSekli:{ id: 1, ad: 'Hepsi' },
@@ -105,7 +107,7 @@ selectedKarkasTipi:any
 
 uygula(){
   this.birimMaliyet=null;
-  const filteredProducts = SUSPANSIYONLAR.filter(item => {
+  const filteredProducts = this.kabinler.filter(item => {
   const matchesButonTipi = this.selectedKarkasTipi? item.karkasTipi === this.selectedKarkasTipi.ad || this.selectedKarkasTipi.id==1: true;
   const matchesDurakSayisi = this.selectedAskiTipi? item.askiTipi === this.selectedAskiTipi.ad|| this.selectedAskiTipi.id==1 : true;
   const matchesButonCesidi = this.selectedKapasite? item.kapasite === this.selectedKapasite.ad || this.selectedKapasite.id==1 : true;
@@ -164,11 +166,12 @@ yenile(){
 
 
 
+  onRowClickUrunler(event){}      
 
 
   visible: boolean;
-  urunleriGoster() {
-    const filteredProducts = SUSPANSIYONLAR.filter(item => {
+ async urunleriGoster() {
+    const filteredProducts = (await this.SuspansiyonService.GetAll()).filter(item => {
       const matchesButonTipi = this.selectedKarkasTipi? item.karkasTipi === this.selectedKarkasTipi.ad || this.selectedKarkasTipi.id==1: true;
       const matchesDurakSayisi = this.selectedAskiTipi? item.askiTipi === this.selectedAskiTipi.ad|| this.selectedAskiTipi.id==1 : true;
       const matchesButonCesidi = this.selectedKapasite? item.kapasite === this.selectedKapasite.ad || this.selectedKapasite.id==1 : true;
@@ -185,35 +188,53 @@ yenile(){
 
   malzemeToplam: number;
   Hesapla(event){
-    this.bilesenler=this.selectedURUN?.urunBilesenler;
-
-    this.bilesenler?.forEach((item: any) => {
-      if (item.dovizCinsi=='TL') {
-        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-        item.dovizFiyat= item.birimFiyat*doviz.deger;
-       }
-      else if (item.dovizCinsi=='EURO') {
-        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-        item.dovizFiyat= item.birimFiyat*doviz.deger;
-       }
-      else if (item.dovizCinsi=='USD') {
-        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-        item.dovizFiyat= item.birimFiyat*doviz.deger;
-       }
-    });
-    let total = 0;
-    for (let item of this.bilesenler) {
-        total += item.miktar*item.dovizFiyat;
-    }
+        this.bilesenler=this.selectedURUN?.urunBilesenler;
+        this.iscilikGiderler=this.selectedURUN?.iscilikGiderler
+        this.bilesenler?.forEach((item: any) => {
+          if (item.stok.dovizCinsi=='TL') {
+            var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+            item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+           }
+          else if (item.stok.dovizCinsi=='EURO') {
+            var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+            item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+           }
+          else if (item.stok.dovizCinsi=='USD') {
+            var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+            item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+           }
+        });
+        let total = 0;
+        for (let item of this.bilesenler) {
+            total += item.miktar*item.stok.dovizFiyat;
+        }
     this.malzemeToplam = total;
     this.visible = false;
 
-    console.log(this.malzemeToplam);
+    this.iscilikHesapla()
   }
 
 
+  iscilikToplam:any;
+  iscilikHesapla(){
+    let total = 0;
+    this.selectedURUN?.iscilikGiderler.forEach(element => {
+       total += element.personel.maas;
+    });
 
-  onRowClickUrunler(event){}      
+    this.frm.ortalamaPersonelMaasi=total/this.selectedURUN?.iscilikGiderler.length
+    this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.tahminiCalisanSayisi/28)/this.frm.gunlukUretimSayisi;
+    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
+console.log(this.iscilikToplam);
+  }
+
+
+  genelGiderToplam:any;
+  toplamMaliyet:any;
+ 
+
+
+
 
 
 

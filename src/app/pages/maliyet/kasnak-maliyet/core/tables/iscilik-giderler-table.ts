@@ -67,7 +67,7 @@ import { Component, Input } from '@angular/core';
             <ng-template pTemplate="groupheader" let-customer let-rowIndex="rowIndex" let-expanded="expanded">
                 <tr>
                     <td colspan="6">
-                        <button [pRowToggler]="customer" class="p-button-text p-button-rounded p-button-plain mr-2 " style="width: 30px ; height: 30px;border: none;">
+                    <button [pRowToggler]="customer" class="p-button-text p-button-rounded p-button-plain mr-2 " style="width: 30px ; height: 30px;border: none;background-color: transparent;">
                             <i class="fa-solid fa-caret-down"></i>
                         </button>
                         <span class="font-bold ml-2">{{customer.personel.gorev.ad}}</span>

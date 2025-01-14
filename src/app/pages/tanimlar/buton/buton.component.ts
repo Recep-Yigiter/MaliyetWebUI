@@ -5,8 +5,6 @@ import { ButonService } from 'src/app/core/services/repository/buton.service';
 import { KabinService } from 'src/app/core/services/repository/kabin.service';
 import { PersonelService } from 'src/app/core/services/repository/personel.service';
 import { StokService } from 'src/app/core/services/repository/stok.service';
-import { ISCILIK } from 'src/assets/DATA/iscilik';
-import { DATA_URUNLER } from 'src/assets/urunler';
 import { defaultColDef } from 'src/default-col-def';
 
 @Component({
@@ -49,7 +47,7 @@ export class ButonComponent implements OnInit {
 
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
-    this.rowData =await this.ButonService.GetAll();
+    this.rowData =(await this.ButonService.GetAll()).items;
    
     
   }

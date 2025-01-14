@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
-import { DATA_URUNLER } from 'src/assets/urunler';
 import { defaultColDef } from 'src/default-col-def';
 
 @Component({
@@ -28,7 +27,7 @@ export class UrunComponent {
 
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
-    this.rowData =DATA_URUNLER;
+    this.rowData =[];
   }
 
   rowClick() {

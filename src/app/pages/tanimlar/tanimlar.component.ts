@@ -73,7 +73,7 @@ export class TanimlarComponent {
         },
         {
           label: 'Makine Şasesi',
-          tabItem:'makineSasesi',
+          tabItem:'makine-sasesi',
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/makine-sasesi',
@@ -112,9 +112,8 @@ export class TanimlarComponent {
   selectedTab: string = 'kabin';  // Varsayılan olarak "kabin" sekmesi seçili
 
   selectTab(tab: any) {
-   localStorage.setItem('tanimlar',tab.tabItem)
+    localStorage.setItem('tanimlar',tab.tabItem)
     this.selectedTab = tab.tabItem;  // Tıklanan sekmeyi seç;
-    console.log(this.selectedTab)
     this.router.navigate([`tanimlar/${tab.tabItem}`])
   }
 }

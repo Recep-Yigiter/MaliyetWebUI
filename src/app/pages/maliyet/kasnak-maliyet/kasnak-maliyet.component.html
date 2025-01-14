@@ -559,10 +559,27 @@
         </div>
     </div>
 
+    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
+        
+        <kasnak-maliyet-form  [span]="196" [label]="'Ortalama Çalışan Maaşı'">
+            <input [disabled]="true" form-control [(ngModel)]="frm.ortalamaPersonelMaasi" 
+            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </kasnak-maliyet-form> 
+       
+        <kasnak-maliyet-form [span]="196" [label]="'Tahmini Çalışan Sayısı'">
+            <input [disabled]="false" form-control [(ngModel)]="frm.tahminiCalisanSayisi" 
+            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </kasnak-maliyet-form> 
 
+        <kasnak-maliyet-form [span]="196" [label]="'Günlük kasnak Üretimi'">
+            <input [disabled]="false" form-control [(ngModel)]="frm.gunlukUretimSayisi" 
+                   class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </kasnak-maliyet-form> 
+        
+    </div>
     <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);
     box-shadow: 5px 3px 30px #858585;">
-        <kasnak-maliyet-table [malzemeToplam]="malzemeToplam"></kasnak-maliyet-table>
+        <kasnak-maliyet-table [malzemeToplam]="malzemeToplam" [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam" [genelGiderToplam]="genelGiderToplam" [toplamMaliyet]="toplamMaliyet"></kasnak-maliyet-table>
     </div>
     <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);
     box-shadow: 5px 3px 30px #858585;">

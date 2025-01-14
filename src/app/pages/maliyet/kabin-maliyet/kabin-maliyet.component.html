@@ -1,8 +1,8 @@
 <div style="display: grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr ; gap: 4px;">
-
-
-    <div  style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
-
+    <div style="display: flex;
+            flex-direction: column;
+            border: 1px solid rgb(230, 230, 230);
+            color: white; padding: 4px;">
         <kabin-maliyet-form [span]="170" [label]="'Tür'">
             <p-dropdown form-control [options]="turler" [(ngModel)]="frm.tur" optionLabel="ad"
                 (ngModelChange)="onTurChange(frm.tur)" />
@@ -11,18 +11,18 @@
             <p-dropdown form-control [options]="modeller" [(ngModel)]="frm.model" optionLabel="ad"
                 (ngModelChange)="onModelChange(frm.model)" />
         </kabin-maliyet-form>
-
         <kabin-maliyet-form [span]="170" [label]="'Zemin Kaplama'">
             <p-dropdown form-control [options]="zeminKaplamalar" [(ngModel)]="frm.zeminKaplama" optionLabel="ad"
                 (ngModelChange)="onZeminKaplamaChange(frm.zeminKaplama)" />
         </kabin-maliyet-form>
+    </div>
+
+    <div
+        style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
         <kabin-maliyet-form [span]="170" [label]="'Kabin Kaplama'">
             <p-dropdown form-control [options]="kabinKaplamalar" [(ngModel)]="frm.kabinKaplama" optionLabel="ad"
                 (ngModelChange)="onKabinKaplamaChange(frm.kabinKaplama)" />
         </kabin-maliyet-form>
-    </div>
-
-    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
         <kabin-maliyet-form [span]="170" [label]="'Aksesuar Kaplama'">
             <p-dropdown form-control [options]="aksesuarKaplamalar" [(ngModel)]="frm.aksesuarKaplama" optionLabel="ad"
                 (ngModelChange)="onAksesuarKaplamaChange(frm.aksesuarKaplama)" />
@@ -31,65 +31,136 @@
             <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
                 (ngModelChange)="onKapasiteChange(frm.kapasite)" />
         </kabin-maliyet-form>
-        <div (click)="urunleriGoster()" form-control style="display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer ; background-color: #7F1D1D;">
+        <div (click)="urunleriGoster()" form-control style="display: flex;margin-top: 10px;
+             align-items: center;
+             justify-content: center; 
+             font-weight: bold; 
+             cursor: pointer; 
+             background-color: #cacaca;
+             color: #201a1a;">
             Ürünleri Göster
         </div>
     </div>
-
-    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
-        
-        <kabin-maliyet-form  [span]="196" [label]="'Ortalama Çalışan Maaşı'">
-            <input [disabled]="true" form-control [(ngModel)]="frm.ortalamaPersonelMaasi" 
-            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-        </kabin-maliyet-form> 
-       
-        <kabin-maliyet-form [span]="196" [label]="'Tahmini Çalışan Sayısı'">
-            <input [disabled]="false" form-control [(ngModel)]="frm.tahminiCalisanSayisi" 
-            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-        </kabin-maliyet-form> 
-
-        <kabin-maliyet-form [span]="196" [label]="'Günlük Kabin Üretimi'">
-            <input [disabled]="false" form-control [(ngModel)]="frm.gunlukUretimSayisi" 
-                   class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-        </kabin-maliyet-form> 
-        
-    </div>
-
-    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);
-    box-shadow: 5px 3px 30px #858585;">
-
-        <kabin-maliyet-table [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam" [genelGiderToplam]="genelGiderToplam" [toplamMaliyet]="toplamMaliyet"></kabin-maliyet-table>
-    
-    </div>
-
-    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);
-    box-shadow: 5px 3px 30px #858585;">
-        <kabin-fiyat-table></kabin-fiyat-table>
-    </div>
-
-
 </div>
 
-<div  style="display: grid; grid-template-columns:1fr 1fr; gap: 12px;">
+<div style="display: grid; grid-template-columns:1fr 1fr; gap: 12px;">
     <div>
-       
-        <kabin-malzeme-giderler-table
-         [malzemeGiderler]="bilesenler"
-         [selectedMalzemeGiderler]="selectedBilesenRow"
-         [malzemeToplam]="malzemeToplam"></kabin-malzeme-giderler-table>
+        <div style="height: 485px;">
+            <p-accordion [activeIndex]="0">
+                <p-accordionTab header="Malzeme Giderleri">
+                    <kabin-malzeme-giderler-table [malzemeGiderler]="bilesenler"
+                        [selectedMalzemeGiderler]="selectedBilesenRow"
+                        [malzemeToplam]="malzemeToplam"></kabin-malzeme-giderler-table>
+                </p-accordionTab>
+            </p-accordion>
+        </div>
+        <div style="display: grid; grid-template-columns:2fr 2fr 2fr 3fr  ; gap: 4px;">
+            <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231); ">
+                <div class="card-container">
+                    <div class="card">
+                        <div *ngIf="!selectedURUN" class="label" style="border-bottom-left-radius: 0;
+                                                                        font-size: 16px;
+                                                                        border-bottom-right-radius: 0;
+                                                                        height: 20px;">
+                         Ürün Seçimi Yapılmadı!
+                        </div>
+                        <div *ngIf="selectedURUN" class="label" style="border-bottom-left-radius: 0; font-size: 16px;
+             border-bottom-right-radius: 0; height: 20px;">
 
+                            {{selectedURUN?.ad}}
+
+                        </div>
+
+                        <div class="label" style="display: flex;
+                                           align-items: center;
+                                           justify-content: center;
+                                           font-size: 14px;
+                                           font-weight: bold;color: gray;
+                                           border-top-left-radius: 0;
+                                           border-top-right-radius: 0;">
+
+                        </div>
+
+                        <div style="display: flex; gap:10px;">
+
+                            <div>
+                                <kabin-maliyet-form [span]="196" [label]="'Ortalama Çalışan Maaşı'">
+                                    <input [disabled]="false" form-control [(ngModel)]="frm.ortalamaPersonelMaasi"
+                                        style="height: 27px;" class="form-control shadow-none form-control-nullable"
+                                        id="exampleFormControlInput1">
+                                </kabin-maliyet-form>
+
+                                <kabin-maliyet-form [span]="196" [label]="'Personel Sayısı'">
+                                    <input [disabled]="false" form-control [(ngModel)]="frm.personelSayisi"
+                                        style="height: 27px;" class="form-control shadow-none form-control-nullable"
+                                        id="exampleFormControlInput1">
+                                </kabin-maliyet-form>
+
+                                <kabin-maliyet-form [span]="196" [label]="'Günlük Kabin Üretimi'">
+                                    <input [disabled]="false" form-control [(ngModel)]="frm.gunlukUretimSayisi"
+                                        style="height: 27px;" class="form-control shadow-none form-control-nullable"
+                                        id="exampleFormControlInput1">
+                                </kabin-maliyet-form>
+                                <kabin-maliyet-form [span]="196" [label]="'Kar (%)'">
+                                    <input [disabled]="false" form-control [(ngModel)]="frm.kar" style="height: 27px;;"
+                                        class="form-control shadow-none form-control-nullable"
+                                        id="exampleFormControlInput1">
+                                </kabin-maliyet-form>
+                                <kabin-maliyet-form [span]="196" [label]="'Vade Farkı (%)'">
+                                    <input [disabled]="false" form-control [(ngModel)]="frm.vadeFarki"
+                                        style="height: 27px;" class="form-control shadow-none form-control-nullable"
+                                        id="exampleFormControlInput1">
+                                </kabin-maliyet-form>
+                                <div style=" height: 50px;display: flex;justify-content: end;align-items: center;">
+                                    <div (click)="Hesapla()" [ngClass]="hesaplaButtonDisabled?'disabled-div':''"
+                                        style="background-color: #7F1D1D;display: flex;align-items: center;padding: 5px 10px;cursor: pointer;font-size: 14px; font-weight: bold;">
+                                        Maliyet Hesapla
+                                    </div>
+                                </div>
+                            </div>
+
+                            <kabin-maliyet-table [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam"
+                                [genelGiderToplam]="genelGiderToplam"
+                                [toplamMaliyet]="toplamMaliyet"></kabin-maliyet-table>
+
+                            <kabin-fiyat-table [pesinFiyat]="pesinFiyat"
+                            [vade1Fiyat]="vade1Fiyat"
+                            [vade2Fiyat]="vade2Fiyat"
+                            [vade3Fiyat]="vade3Fiyat"></kabin-fiyat-table>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
     </div>
     <div>
-        <kabin-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler" [iscilikToplam]="iscilikToplam"></kabin-iscilik-giderler-table>
-        <kabin-genel-giderler-table [genelGiderler]="genelGiderler"
-            [selectedGenelGiderler]="selectedBilesenRow"></kabin-genel-giderler-table>
+        <p-accordion [activeIndex]="0">
+            <p-accordionTab header="İşçilik Giderleri">
+                <kabin-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler" (childFunc)="ChildFunc($event)" (personelChildFunc)="personelEkleDialog($event)"
+                    [iscilikToplam]="iscilikToplam"></kabin-iscilik-giderler-table> 
+
+                    
+            </p-accordionTab>
+            <p-accordionTab header="Genel Giderler">
+                <kabin-genel-giderler-table [genelGiderler]="genelGiderler"
+                    [selectedGenelGiderler]="selectedBilesenRow"></kabin-genel-giderler-table>
+            </p-accordionTab>
+        </p-accordion>
 
     </div>
 </div>
+
 
 <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }">
     <ng-template pTemplate="header">
-        <span  style="font-size: 20px; font-weight: bold;">ÜRÜNLER</span>
+        <span style="font-size: 20px; font-weight: bold;">Kabinler</span>
     </ng-template>
     <p-table id="row-check" [value]="kabinler" dataKey="id" selectionMode="single" [(selection)]="selectedURUN"
         [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">
@@ -110,8 +181,93 @@
         </ng-template>
     </p-table>
     <ng-template pTemplate="footer" let-urun>
-        <div (click)="Hesapla(selectedURUN)" style="background-color: #7F1D1D; display: flex; align-items: center; justify-content: center; font-weight: bold;cursor: pointer;"
-            >
-            Hesapla</div>
+        <div style="display: flex; justify-content: end;">
+            <div (click)="urunSec(selectedURUN)"
+            style="background-color: #008079;color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;cursor: pointer; padding: 4px 8px;">
+            Urun Seç</div>
+        </div>
     </ng-template>
 </p-dialog>
+
+
+
+
+<!--İşçilik Giderleri Ekleme -->
+
+<p-dialog header="Header" [(visible)]="iscilikVisible" [modal]="true" [style]="{ width: '50vw' }">
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold"></span>
+    </ng-template>
+  
+    <p-table id="row-check" [value]="personeller" dataKey="id" selectionMode="multiple" [tableStyle]="{'min-width': '50rem'}"
+      [style]="{'min-height':' 350px'}" [scrollable]="true" scrollHeight="350px" [(selection)]="selectedPersonelEkle">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">
+            Stoklar
+            <div class="button-container" style="position: absolute;right: 0;top: 0;">
+  
+              <div class="button-grup " style="gap: 3px !important;">
+                <div class="img-container">
+                  <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/add-file.png" alt="">
+                </div>
+  
+              </div>
+  
+              <div class="button-grup " style="gap: 3px !important;">
+                <div class="img-container">
+                  <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/delete-file.png" alt="">
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+  
+          <th style="font-size: 13px;">Ad</th>
+          <th style="font-size: 13px;">Birim</th>
+          <th style="font-size: 13px;">b=Fiyat(TL)</th>
+  
+        </tr>
+      </ng-template>
+  
+  
+      <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex">
+        <tr [pSelectableRow]="customer" [pSelectableRowIndex]="rowIndex" [pEditableRow]="customer">
+  
+          <td>
+            {{customer.ad}}
+          </td>
+          <td>
+            {{customer.birim}}
+          </td>
+          <td>
+            {{customer.birimFiyat}}
+          </td>
+  
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <tr>
+          <td colspan="2" class="text-right" style="font-size: 13px;">Toplam</td>
+          <td style="font-size: 13px;">{{0 | currency: 'USD'}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  
+  
+  
+    <ng-template pTemplate="footer" let-urun>
+      <!-- <div (click)="kaydet()"
+        class="bg-green-900 flex items-center justify-center font-bold hover:bg-green-800 hover:cursor-pointer text-white ">
+        EKLE</div> -->
+  
+      <!-- color: #2F6A47; -->
+      <div class="flex justify-end" style="display: flex;justify-content: end;">
+        <div (click)="personelEkle()"
+          style="width: 60px;  background-color: #1C4D2E; color:white; display:flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; padding: 0 8px;">
+          Ekle
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>

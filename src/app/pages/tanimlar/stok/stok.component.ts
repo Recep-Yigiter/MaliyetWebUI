@@ -32,7 +32,7 @@ export class StokComponent {
 
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
-    this.rowData = await this.StokService.GetAll();;
+    this.rowData =( await this.StokService.GetAll()).items;;
   }
 
   rowClick() {

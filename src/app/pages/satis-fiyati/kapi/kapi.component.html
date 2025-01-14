@@ -1,0 +1,57 @@
+<div class="card-container">
+  <ng-container *ngFor="let item of grouped | keyvalue;let i=index">
+    <div class="card">
+      <div class="label" style="border-bottom-left-radius: 0; font-size: 16px;
+    border-bottom-right-radius: 0; height: 20px;">
+        {{item.key}}
+      </div>
+     
+      <div class="label"
+        style="display: flex;align-items: center;justify-content: center;font-size: 14px;font-weight: bold;color: gray;
+        border-top-left-radius: 0;
+    border-top-right-radius: 0;">
+  <ul class="nav nav-tabs" style="gap: 15px;">
+    <li class="active" >
+      <a class="tab-item " style="padding: 10px 10px 10px 10px; color: rgb(141, 0, 0); font-weight: bold;font-size: 11px;">ESB</a>
+    </li>
+    <li >
+      <a class="tab-item" style="padding: 10px 10px 10px 10px; color: rgb(141, 0, 0); font-weight: bold;font-size: 11px;">SATINE</a>
+    </li>
+    <li >
+      <a class="tab-item" style="padding: 10px 10px 10px 10px; color: rgb(141, 0, 0); font-weight: bold;font-size: 11px;">NOKTA</a>
+    </li>
+    <li >
+      <a class="tab-item" style="padding: 10px 10px 10px 10px; color: rgb(141, 0, 0); font-weight: bold;font-size: 11px;">DECOPLATE</a>
+    </li>
+    <li >
+      <a class="tab-item" style="padding: 10px 10px 10px 10px; color: rgb(141, 0, 0); font-weight: bold;font-size: 11px;">DECOSTEEL</a>
+    </li>
+    <li >
+      <a class="tab-item" style="padding: 10px 10px 10px 10px; color: rgb(141, 0, 0); font-weight: bold;font-size: 11px;">AYNA PASLANMAZ</a>
+    </li>
+    
+    
+  </ul>
+      </div>
+
+      <table id="myTable" class="yks_table_group " style="width: 100%;">
+        <thead style="border-bottom: 1px solid #a3a3a3;">
+          <th></th>
+          <th style="font-size: 11px;">KASA</th>
+          <th style="font-size: 11px;">PANEL</th>
+          <th style="font-size: 11px;">MEKANIZMA</th>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of item.value ">
+            <tr style="border-bottom: 1px solid #160e0e;">
+              <td style="font-size: 12px;font-weight: bold;">{{item.vade}}</td>
+              <td style="font-size: 12px;">{{0 }} ₺ </td>
+              <td style="font-size: 12px;">{{0}} ₺ </td>
+              <td style="font-size: 12px;" >{{0}} ₺ </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+</div>

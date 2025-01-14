@@ -35,60 +35,59 @@ export class AppComponent implements OnInit {
     
   }
   onRouteChange() {
-    console.log('Route changed!');
+    this.selectedTab=  localStorage.getItem('menu');
+    this.router.navigate([`tanimlar/${this.selectedTab}`])
   }
 
   
 
   moduls = [
-    // {
-    //   modul: 'Malz. Yönetimi',
-    //   icon: 'fa-solid fa-receipt',
-    //   class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
-    //   href: 'tanimlar',
-    //   disabled: false,
-    // },
     {
       modul: 'Maliyet',
       icon: 'fa-solid fa-receipt',
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
       href: 'maliyet/kabin-maliyet',
       disabled: false,
+      localStorage:'maliyet'
     },
     {
       modul: 'Satış Fiyatı',
       icon: 'fa-solid fa-receipt',
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
-      href: 'satis-fiyati',
-      disabled: true,
+      href: 'satis-fiyati/kabin',
+      disabled: false,
+      localStorage:'satisFiyati'
     },
     
     {
       modul: 'Tanımlar',
       icon: 'fa-solid fa-receipt',
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
-      href: 'tanimlar',
+      href: '/tanimlar/stok',
       disabled: false,
+      localStorage:'stok'
     },
     
    
   ];
 
-  cikis() {
-    localStorage.removeItem('tokenData');
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
-  }
 
   show() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+  selectedTab:any
+  routerChange(item){
 
+  var local=  localStorage.getItem('tanimlar')
+
+    localStorage.setItem('menu',item)
+    this.selectedTab = item;  
+    this.router.navigate([item])
+  }
   isDropdownOpen = false;
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    // Eğer tıklama dropdown dışında bir yerde olduysa menüyü kapat
     const clickedInside =
       event.target instanceof HTMLElement &&
       event.target.closest('.portHeadLightMenu');

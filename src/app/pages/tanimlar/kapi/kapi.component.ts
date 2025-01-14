@@ -1,14 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
-import { ButonService } from 'src/app/core/services/repository/buton.service';
-import { KabinService } from 'src/app/core/services/repository/kabin.service';
 import { KapiGrupService } from 'src/app/core/services/repository/kapi-grup.service';
 import { KapiService } from 'src/app/core/services/repository/kapi.service';
 import { PersonelService } from 'src/app/core/services/repository/personel.service';
 import { StokService } from 'src/app/core/services/repository/stok.service';
-import { ISCILIK } from 'src/assets/DATA/iscilik';
-import { DATA_URUNLER } from 'src/assets/urunler';
 import { defaultColDef } from 'src/default-col-def';
 
 @Component({
@@ -41,7 +37,7 @@ export class KapiComponent implements OnInit {
 
 
   colDefs: ColDef[] = [
-    { field: 'ad', width: 300 },
+   { field: 'ad', width: 300 },
    { field: 'yon', width: 70 },
    { field: 'kapiYuksekligi', width: 70 },
    { field: 'kapiGenisligi', width: 70 },
@@ -53,7 +49,7 @@ export class KapiComponent implements OnInit {
 
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
-    this.rowData =await this.KapiService.GetAll();
+    this.rowData =(await this.KapiService.GetAll()).items;
 
   }
 

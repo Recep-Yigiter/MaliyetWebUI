@@ -4,21 +4,17 @@ import { Component, Input } from '@angular/core';
   selector: 'kabin-malzeme-giderler-table',
   template: `
 
-<p-table id="row-check" [value]="malzemeGiderler" [style]="{'min-height':' 700px'}" [scrollable]="true"
-            scrollHeight="700px" selectionMode="single" [(selection)]="selectedMalzemeGiderler">
+<p-table id="row-check" [value]="malzemeGiderler" [style]="{'min-height':' 450px'}" [scrollable]="true"
+            scrollHeight="450px" selectionMode="single" [(selection)]="selectedMalzemeGiderler">
             <ng-template pTemplate="header">
                 <tr>
-                    <th style="width: 50px;font-size: 13px;" rowspan="3">Sıra No</th>
+                    <!-- <th style="width: 50px;font-size: 13px;" rowspan="3">Sıra No</th> -->
+                    <th style="width: 50px;font-size: 13px;" rowspan="3"></th>
                     <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">
-                        Malzeme Giderleri
-                        <div class="button-container" style="position: absolute;right: 0;top: 0;">
-                            <div class="button-grup " style="gap: 3px !important;">
-                                <div class="img-container">
-                                    <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/save.png"
-                                        alt="">
-                                </div>
-
-                            </div>
+                   <div style='height:25px;padding:0.3rem 1rem;'></div> 
+               
+                        <div class="button-container" style="position: absolute;left: 0;top: 0;">
+                            
                             <div class="button-grup " style="gap: 3px !important;">
                                 <div class="img-container">
                                     <img style="width: 25px; height: 25px;"
@@ -45,13 +41,7 @@ import { Component, Input } from '@angular/core';
 
 
 
-                            <div class="button-grup " style="gap: 3px !important;">
-                                <div class="img-container">
-                                    <img style="width: 25px; height: 25px;"
-                                        src="../../../../../assets/icons/refresh.png" alt="">
-                                </div>
-
-                            </div>
+                           
 
                         </div>
                     </th>
@@ -68,7 +58,8 @@ import { Component, Input } from '@angular/core';
             </ng-template>
             <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
                 <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
-                    <td>{{ rowIndex+1 }} </td>
+                    <!-- <td>{{ rowIndex+1 }} </td> -->
+                    <td> <button (click)="deleteItem(rowIndex)" style="color: rgb(99, 0, 0); font-style:italic;font-weight:bold;border:1px solid gray;">KALDIR</button> </td>
                     <td>{{ product.stok.ad }}</td>
                     <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
                         <p-cellEditor>
@@ -83,9 +74,9 @@ import { Component, Input } from '@angular/core';
                         </p-cellEditor>
                     </td>
                     <td>{{ product.stok.birim }}</td>
-                    <td>{{ product.stok.birimFiyat }}</td>
+                    <td>{{ product.stok.birimFiyat | currency:' ₺':'symbol':'1.2-2'}}</td>
                     <td>{{ product.stok.dovizCinsi }}</td>
-                    <td>{{ product.stok.dovizFiyat*product.miktar }}</td>
+                    <td>{{ product.stok.dovizFiyat*product.miktar | currency:' ₺':'symbol':'1.2-2'}}</td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="footer">
@@ -102,4 +93,10 @@ export class KabinMalzemeGiderlerTableComponent {
     @Input() malzemeGiderler: any;
     @Input() selectedMalzemeGiderler: any;
     @Input() malzemeToplam: any;
+
+
+    deleteItem(index: number): void {
+        this.malzemeGiderler.splice(index, 1);
+        
+      }
 }

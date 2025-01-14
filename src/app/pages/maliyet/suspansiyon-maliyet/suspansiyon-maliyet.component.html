@@ -1,5 +1,5 @@
 
-  <div class="grid grid-cols-[2fr_2fr_2fr_3fr] gap-1 " style="display: grid; grid-template-columns:2fr 2fr 2fr 3fr ; gap: 4px;">
+  <div class="grid grid-cols-[2fr_2fr_2fr_3fr] gap-1 " style="display: grid; grid-template-columns:2fr 2fr 1fr 2fr 2fr ; gap: 4px;">
     <div  style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
 
         <maliyet-form [span]="130" [label]="'Karkas Tipi'">
@@ -36,9 +36,26 @@
             Ürünleri Göster
         </div>
     </div>
+    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
+        
+        <maliyet-form  [span]="196" [label]="'Ortalama Çalışan Maaşı'">
+            <input [disabled]="true" form-control [(ngModel)]="frm.ortalamaPersonelMaasi" 
+            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </maliyet-form> 
+       
+        <maliyet-form [span]="196" [label]="'Tahmini Çalışan Sayısı'">
+            <input [disabled]="false" form-control [(ngModel)]="frm.tahminiCalisanSayisi" 
+            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </maliyet-form> 
 
+        <maliyet-form [span]="196" [label]="'Günlük Buton Üretimi'">
+            <input [disabled]="false" form-control [(ngModel)]="frm.gunlukUretimSayisi" 
+                   class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+        </maliyet-form> 
+        
+    </div>
     <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;  background-color: rgb(231 231 231);box-shadow: 5px 3px 30px #858585;">
-        <suspansiyon-maliyet-table [malzemeToplam]="malzemeToplam"></suspansiyon-maliyet-table>
+        <suspansiyon-maliyet-table [malzemeToplam]="malzemeToplam" [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam" [genelGiderToplam]="genelGiderToplam" [toplamMaliyet]="toplamMaliyet"></suspansiyon-maliyet-table>
     </div>
     <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);box-shadow: 5px 3px 30px #858585;">
         <suspansiyon-fiyat-table></suspansiyon-fiyat-table>

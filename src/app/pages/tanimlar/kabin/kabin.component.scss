@@ -1,13 +1,22 @@
+// @import "src/assets/scss/caption";
+// @import "src/assets/scss/section";
+
+
 @import "src/assets/scss/caption";
 @import "src/assets/scss/section";
-
-
-
+.nav-tabs > li > a {
+    color: #A7B1C2;
+    font-weight: 600;
+    padding: 4px 20px 4px 25px;
+}
 .form-select {
     border-radius: 0;
 }
 
 :host ::ng-deep {
+.deneme{
+    background-color: red;
+}
     p-table{
         .p-datatable .p-datatable-thead > tr > th {
 
@@ -67,7 +76,15 @@
             transition: box-shadow 0.2s;
         }
     }
-
+    .p-datatable .p-datatable-tfoot > tr > td {
+        text-align: left;
+        padding: .1rem 1rem;
+        border: 1px solid #dee2e6;
+        border-width: 0 0 1px 0;
+        font-weight: 700;
+        color: #343a40;
+        background: #f8f9fa;
+    }
     p-autocomplete {
         width: 100%;
 
@@ -135,8 +152,8 @@
             position: relative;
             -webkit-user-select: none;
             user-select: none;
-            padding-top: 0.4rem;
-            padding-bottom: 0.4rem;
+            padding-top: 0.1rem;
+            padding-bottom: 0.1rem;
             width: 100%;
             background-color: rgb(247, 247, 247) !important;
         }
@@ -164,5 +181,8 @@
         }
     }
 
-
+    .disabled-div {
+        pointer-events: none;
+        opacity: 0.5; /* Görsel olarak daha belirgin hale getirmek için */
+      }
 }

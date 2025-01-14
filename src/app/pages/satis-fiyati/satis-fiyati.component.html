@@ -1,94 +1,48 @@
-<div class="flex w-full " style="height: calc(100vh - 85px)">
-    <div id="sidebar-menu" class="ibox overflow-auto min-w-52 md:min-w-64 md:max-w-80 " style="border-right: 1px solid rgba(0, 0, 0, 0.06);">
-        <div class="ibox-content mailbox-content p-1">
-            <div class="file-manager ">
-
-                <div class="space-25"></div>
-             
-
-
-                <ng-container *ngFor="let item of menu ">
-
-                    <div class="space-25"></div>
-                    <h5>{{item.label}} </h5>
-
-                    <ul class="folder-list m-b-md" style="padding: 0">
-                        <ng-container *ngFor="let sub of item.submenu; let i = index">
-                            <ng-container *ngIf="sub.submenu.length==0 ; else elseSub">
-
-                                <ng-container *ngIf="sub.href==''; else elseSub3">
-                                    <li class="hover:bg-slate-200 px-2"><a
-                                            class='w-[224px] whitespace-nowrap overflow-hidden text-ellipsis'> <i
-                                                class="{{sub.icon}}"></i>
-                                            {{sub.label}}
-                                        </a></li>
-                                </ng-container>
-                                <ng-template #elseSub3>
-                                    <li class="hover:bg-slate-200 px-2"><a
-                                            class='w-[224px] whitespace-nowrap overflow-hidden text-ellipsis'
-                                            routerLink="{{sub.href}}"> <i class="{{sub.icon}}"></i>
-                                            {{sub.label}}
-                                        </a></li>
-                                </ng-template>
+<!-- <ul class="nav nav-tabs">
+    <li [class.active]="selectedTab === 'kabin'" (click)="selectTab('kabin')">
+      <a class="tab-item">Kabin</a>
+    </li>
+    <li [class.active]="selectedTab === 'buton'" (click)="selectTab('buton')" style="position: relative;">
+      <a class="tab-item">Buton</a>
+    </li>
+    <li [class.active]="selectedTab === 'kapi'" (click)="selectTab('kapi')">
+      <a class="tab-item">Kapı</a>
+    </li>
+    <li [class.active]="selectedTab === 'kasnak'" (click)="selectTab('kasnak')">
+      <a class="tab-item">Kasnak</a>
+    </li>
+    <li [class.active]="selectedTab === 'suspansiyon'" (click)="selectTab('suspansiyon')">
+      <a class="tab-item">Süspansiyon</a>
+    </li>
+    <li [class.active]="selectedTab === 'makine-sasesi'" (click)="selectTab('makine-sasesi')">
+      <a class="tab-item">Makine Şasesi</a>
+    </li>
+  </ul>
+<div  style="height: calc(100vh - 85px); display: flex; width: 100%;">
 
 
-
-                            </ng-container>
-                            <ng-template #elseSub>
-
-                                <li>
-                                   
-                                    <div (click)="toggleNode(sub)"
-                                        class="flex items-center justify-between hover:bg-slate-200 px-2 cursor-pointer">
-                                        <a class='w-[224px] whitespace-nowrap overflow-hidden text-ellipsis'> <i
-                                                class="{{sub.icon}}"></i> {{sub.label}}</a>
-                                                <i *ngIf="sub.expanded" class="fa-solid fa-sort-down"></i>
-                                                <i *ngIf="!sub.expanded"class="fa-solid fa-caret-right"></i>
-
-                                    </div>
-                                    <ul *ngIf="sub.expanded && sub.submenu.length>0">
-                                        <ng-container *ngFor="let child of sub.submenu">
-
-                                            <ng-container *ngIf="child.href==''; else elseSub3">
-                                                <li class="pl-4 "><a
-                                                        class='w-[224px] whitespace-nowrap overflow-hidden text-ellipsis'>
-                                                        <i class="fa fa-file "></i>
-                                                        {{child.label}} </a>
-                                                </li>
-                                            </ng-container>
-
-                                            <ng-template #elseSub3>
-                                                <li class="pl-4 "><a routerLink="{{child.href}}"
-                                                        class='w-[224px] whitespace-nowrap overflow-hidden text-ellipsis'>
-                                                        <i class="fa fa-file "></i>
-                                                        {{child.label}} </a>
-                                                </li>
-                                            </ng-template>
-
-                                        </ng-container>
-
-                                    </ul>
-                                </li>
-
-
-                            </ng-template>
-                        </ng-container>
-
-                    </ul>
-
-
-
-
-
-                </ng-container>
-
-
-            </div>
-        </div>
-    </div>
-
-    <div class="w-full">
+    <div  style="width: 100%;">
         <router-outlet></router-outlet>
 
     </div>
+</div> -->
+
+<ul class="nav nav-tabs">
+
+  <ng-container *ngFor="let item of menu">
+      <ng-container *ngFor="let item of item.submenu">
+          <li [class.active]="selectedTab === item.tabItem" (click)="selectTab(item)">
+              <a class="tab-item">{{item.label}}</a>
+          </li>
+      </ng-container>
+  </ng-container>
+ 
+</ul>
+<div  style="height: calc(100vh - 85px); display: flex; width: 100%;">
+
+
+  <div  style="width: 100%;">
+      <router-outlet></router-outlet>
+
+  </div>
 </div>
