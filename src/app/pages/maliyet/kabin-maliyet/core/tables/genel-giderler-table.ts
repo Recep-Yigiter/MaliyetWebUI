@@ -55,7 +55,6 @@ scrollHeight="417px" selectionMode="single" [(selection)]="selectedGenelGiderler
 </ng-template>
 <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
     <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
-        <!-- <td>{{rowIndex+1}} </td> -->
         <td>{{ product.ad }}</td>
         <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
             <p-cellEditor>
@@ -70,22 +69,23 @@ scrollHeight="417px" selectionMode="single" [(selection)]="selectedGenelGiderler
             </p-cellEditor>
         </td>
         <td>{{ product.birim }}</td>
-        <td>{{ product.birimFiyat }}</td>
+        <td>{{ product.tutar* (product.etkiOrani/100)| currency:' ₺':'symbol':'1.2-2'}}</td>
         <td>{{ product.dovizCinsi }}</td>
-        <td>{{ product.birimFiyat*product.miktar | currency:' ₺':'symbol':'1.2-2'}}</td>
+        <td>{{ product.tutar*product.miktar* (product.etkiOrani/100)  | currency:' ₺':'symbol':'1.2-2'}}</td>
     </tr>
 </ng-template>
-<!-- <ng-template pTemplate="footer">
+<ng-template pTemplate="footer">
     <tr>
-        <td colspan="6" class="text-right" style="font-size: 13px;">Toplam</td>
-        <td style="font-size: 13px;">{{0 | currency: 'USD'}}</td>
+        <td colspan="5" class="text-right" style="font-size: 13px;">Toplam</td>
+        <td style="font-size: 13px;">{{genelGiderToplam | currency: 'USD'}}</td>
     </tr>
-</ng-template> -->
+</ng-template> 
 </p-table>
   `,
 
 })
 export class KabinGenelGiderlerTableComponent {
     @Input() genelGiderler: any;
+    @Input() genelGiderToplam: any;
     @Input() selectedGenelGiderler: any;
 }

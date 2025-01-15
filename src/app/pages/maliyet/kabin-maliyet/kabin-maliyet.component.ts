@@ -3,6 +3,7 @@ import { DOVIZ } from 'src/assets/DATA/doviz';
 import { KabinService } from 'src/app/core/services/repository/kabin.service';
 import { HttpClient } from '@angular/common/http';
 import { PersonelService } from 'src/app/core/services/repository/personel.service';
+import { GenelGiderService } from 'src/app/core/services/repository/genel-gider.service';
 
 @Component({
   selector: 'app-kabin-maliyet',
@@ -25,12 +26,21 @@ selectedURUN:any;
 personeller=[]
 selectedPersonelRows:any;
 
-constructor(private KabinService:KabinService,private http:HttpClient,private PersonelService:PersonelService) {
+constructor(private KabinService:KabinService,private GenelGiderService:GenelGiderService) {
  
   
 }
 
-async ngOnInit() {}
+async ngOnInit() {
+  
+this.genelGiderler= ((await this.GenelGiderService.GetAll()).items).filter(c=>c.tur=='Kabin'&& c.fabrika=="Kabin Fabrikası");
+this.genelGiderler.forEach(element => {
+  element.miktar=1;
+  element.dovizCinsi="TL";
+  element.birim="ADET";
+  element.tutar=element.tutar/28
+});
+}
 
 
 
@@ -165,20 +175,20 @@ onRowClickUrunler(event){}
     this.bilesenler=this.selectedURUN?.urunBilesenler;
     this.iscilikGiderler=this.selectedURUN?.iscilikGiderler;
     let totalMaas = 0;
-    this.selectedURUN?.iscilikGiderler.forEach(element => {
+    this.iscilikGiderler.forEach(element => {
       totalMaas += element.personel.maas;
     });
   
-    if (this.selectedURUN?.iscilikGiderler.length!=0) {
-      this.frm.ortalamaPersonelMaasi=totalMaas/this.selectedURUN?.iscilikGiderler.length;
-      this.frm.personelSayisi=this.selectedURUN?.iscilikGiderler.length;
+    if (this.iscilikGiderler.length!=0) {
+      this.frm.ortalamaPersonelMaasi=totalMaas/this.iscilikGiderler.length;
+      this.frm.personelSayisi=this.iscilikGiderler.length;
     }
     else{
       this.frm.ortalamaPersonelMaasi=0;
       this.frm.personelSayisi=0;
     }
    
-    this.Hesapla()
+    // this.Hesapla()
     this.visible = false;
 
     if (this.selectedURUN) {
@@ -198,6 +208,63 @@ onRowClickUrunler(event){}
   vade3Fiyat:any;
 
   Hesapla(){
+
+  this.malzemeGiderHesap();
+  this.iscilikGiderHesap();
+  this.genelGiderHesap();
+
+  this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam+(this.genelGiderToplam/this.frm.personelSayisi);
+
+  this.fiyatHesap();
+
+    
+
+  }
+
+
+  iscilikToplam:any;
+  IscilikDeleteFunc(event) {
+    this.iscilikGiderler = event;
+  }
+
+
+
+  iscilikVisible:any;
+  selectedPersonelEkle:any;
+  personelEkle(){
+    this.selectedPersonelEkle.forEach((element) => {
+      var newValue={
+        id: "bb4913c6-3205-480d-9122-7b24d160c4db",
+        isDeleted: false,
+        olusturmaTarihi: "2002-12-12T00:00:00",
+        personel:element
+      }
+      const customerExists = this.iscilikGiderler.some(customer => customer.personel.id === newValue.personel.id);
+
+      if (customerExists) {
+        alert(`Bu ${element.ad} zaten mevcut! `);
+        return;
+      }
+      this.iscilikGiderler = [...this.iscilikGiderler, newValue];
+    });
+    this.iscilikVisible=false;
+  }
+async personelEkleDialog(event){
+this.selectedPersonelEkle=[]
+ this.personeller= event;
+ this.iscilikVisible=true;
+}
+
+
+
+
+
+
+
+
+
+
+malzemeGiderHesap(){
     this.bilesenler?.forEach((item: any) => {
       if (item.stok.dovizCinsi=='TL') {
         var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
@@ -216,91 +283,18 @@ onRowClickUrunler(event){}
   for (let item of this.bilesenler) {
       total += item.miktar*item.stok.dovizFiyat;
   }
-  this.malzemeToplam = total;
-
-
-
-
-  if (this.selectedURUN?.iscilikGiderler.length!=0) {
-    this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.personelSayisi/28)/this.frm.gunlukUretimSayisi;
-    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
-  }
-  else{
-    this.frm.ortalamaPersonelMaasi=0;
-    this.frm.personelSayisi=0;
-
-  }
-
-    this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.personelSayisi/28)/this.frm.gunlukUretimSayisi;
-    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
-
-    this.pesinFiyat=this.toplamMaliyet + this.toplamMaliyet*this.frm.kar/100;
-    this.vade1Fiyat=this.pesinFiyat + this.pesinFiyat*this.frm.vadeFarki/100;
-    this.vade2Fiyat=this.vade1Fiyat + this.vade1Fiyat*this.frm.vadeFarki/100;
-    this.vade3Fiyat=this.vade2Fiyat + this.vade2Fiyat*this.frm.vadeFarki/100;
-
-  }
-
-
-  iscilikToplam:any;
 
  
+  this.malzemeToplam = total;
+}
 
-  ChildFunc(event) {
-    this.iscilikGiderler = event;
+iscilikGiderHesap(){
     var totalMaas=0
     this.iscilikGiderler.forEach(element => {
       totalMaas += element.personel.maas;
     });
     
     if (this.iscilikGiderler.length!=0) {
-      this.frm.ortalamaPersonelMaasi=totalMaas/this.iscilikGiderler.length;
-      this.frm.personelSayisi=this.iscilikGiderler.length;
-      this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.personelSayisi/28)/this.frm.gunlukUretimSayisi;
-    }
-    else{
-      this.frm.ortalamaPersonelMaasi=0;
-      this.frm.personelSayisi=0;
-      this.iscilikToplam=0
-    }
-    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
-    this.pesinFiyat=this.toplamMaliyet + this.toplamMaliyet*this.frm.kar/100;
-    this.vade1Fiyat=this.pesinFiyat + this.pesinFiyat*this.frm.vadeFarki/100;
-    this.vade2Fiyat=this.vade1Fiyat + this.vade1Fiyat*this.frm.vadeFarki/100;
-    this.vade3Fiyat=this.vade2Fiyat + this.vade2Fiyat*this.frm.vadeFarki/100;
-  }
-
-
-
-  iscilikVisible:any;
-  selectedPersonelEkle:any;
-  personelEkle(){
-    this.selectedPersonelEkle.forEach((element) => {
-      var newValue={
-        id: "bb4913c6-3205-480d-9122-7b24d160c4db",
-        isDeleted: false,
-        olusturmaTarihi: "2002-12-12T00:00:00",
-        personel:element
-      }
-      const customerExists = this.iscilikGiderler.some(customer => customer.personel.id === newValue.personel.id);
-
-      if (customerExists) {
-        alert('Bu müşteri zaten mevcut!');
-        return;
-      }
-      this.iscilikGiderler = [...this.iscilikGiderler, newValue];
-    });
-    this.iscilikVisible=false;
-
-
-    var totalMaas=0
-    this.iscilikGiderler.forEach(element => {
-      totalMaas += element.personel.maas;
-    });
-
-    if (this.iscilikGiderler.length!=0) {
-      this.frm.ortalamaPersonelMaasi=totalMaas/this.iscilikGiderler.length;
-      this.frm.personelSayisi=this.iscilikGiderler.length;
       this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.personelSayisi/28)/this.frm.gunlukUretimSayisi;
     }
     else{
@@ -309,18 +303,44 @@ onRowClickUrunler(event){}
       this.iscilikToplam=0
     }
 
-    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
-
-    this.pesinFiyat=this.toplamMaliyet + this.toplamMaliyet*this.frm.kar/100;
-    this.vade1Fiyat=this.pesinFiyat + this.pesinFiyat*this.frm.vadeFarki/100;
-    this.vade2Fiyat=this.vade1Fiyat + this.vade1Fiyat*this.frm.vadeFarki/100;
-    this.vade3Fiyat=this.vade2Fiyat + this.vade2Fiyat*this.frm.vadeFarki/100;
-  }
-async personelEkleDialog(event){
-this.selectedPersonelEkle=[]
- this.personeller= event;
- this.iscilikVisible=true;
+    
 }
+
+genelGiderHesap(){
+
+  var total=0
+  this.genelGiderler.forEach(element => {
+    total += (element.tutar*element.etkiOrani/100);
+   
+  });
+  this.genelGiderToplam=total
+
+  
+}
+
+fiyatHesap(){
+  this.pesinFiyat=this.toplamMaliyet + this.toplamMaliyet*this.frm.kar/100;
+  this.vade1Fiyat=this.pesinFiyat + this.pesinFiyat*this.frm.vadeFarki/100;
+  this.vade2Fiyat=this.vade1Fiyat + this.vade1Fiyat*this.frm.vadeFarki/100;
+  this.vade3Fiyat=this.vade2Fiyat + this.vade2Fiyat*this.frm.vadeFarki/100;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

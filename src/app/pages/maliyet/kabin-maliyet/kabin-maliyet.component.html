@@ -120,7 +120,7 @@
                             </div>
 
                             <kabin-maliyet-table [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam"
-                                [genelGiderToplam]="genelGiderToplam"
+                                [genelGiderToplam]="genelGiderToplam/frm.personelSayisi"
                                 [toplamMaliyet]="toplamMaliyet"></kabin-maliyet-table>
 
                             <kabin-fiyat-table [pesinFiyat]="pesinFiyat"
@@ -143,13 +143,13 @@
     <div>
         <p-accordion [activeIndex]="0">
             <p-accordionTab header="İşçilik Giderleri">
-                <kabin-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler" (childFunc)="ChildFunc($event)" (personelChildFunc)="personelEkleDialog($event)"
+                <kabin-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler" (childFunc)="IscilikDeleteFunc($event)" (personelChildFunc)="personelEkleDialog($event)"
                     [iscilikToplam]="iscilikToplam"></kabin-iscilik-giderler-table> 
 
                     
             </p-accordionTab>
-            <p-accordionTab header="Genel Giderler">
-                <kabin-genel-giderler-table [genelGiderler]="genelGiderler"
+            <p-accordionTab header="Genel Giderler (Gün Bazında)">
+                <kabin-genel-giderler-table [genelGiderler]="genelGiderler" [genelGiderToplam]="genelGiderToplam"
                     [selectedGenelGiderler]="selectedBilesenRow"></kabin-genel-giderler-table>
             </p-accordionTab>
         </p-accordion>

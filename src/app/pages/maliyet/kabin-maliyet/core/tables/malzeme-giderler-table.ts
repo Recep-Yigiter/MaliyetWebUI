@@ -60,8 +60,8 @@ import { Component, Input } from '@angular/core';
                 <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
                     <!-- <td>{{ rowIndex+1 }} </td> -->
                     <td> <button (click)="deleteItem(rowIndex)" style="color: rgb(99, 0, 0); font-style:italic;font-weight:bold;border:1px solid gray;">KALDIR</button> </td>
-                    <td>{{ product.stok.ad }}</td>
-                    <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
+                    <td style="font-size: 12px;font-weight: bold;color: gray;text-align: left;padding-left:10px;">{{ product.stok.ad }}</td>
+                    <td style="font-size: 12px;color: gray;text-align: right;padding-left:10px;" [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <input   form-control [(ngModel)]="product.miktar" name="miktar"
@@ -73,10 +73,10 @@ import { Component, Input } from '@angular/core';
                             </ng-template>
                         </p-cellEditor>
                     </td>
-                    <td>{{ product.stok.birim }}</td>
-                    <td>{{ product.stok.birimFiyat | currency:' ₺':'symbol':'1.2-2'}}</td>
-                    <td>{{ product.stok.dovizCinsi }}</td>
-                    <td>{{ product.stok.dovizFiyat*product.miktar | currency:' ₺':'symbol':'1.2-2'}}</td>
+                    <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;">{{ product.stok.birim }}</td>
+                    <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;">{{ product.stok.birimFiyat | currency:' ₺':'symbol':'1.2-2'}}</td>
+                    <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;">{{ product.stok.dovizCinsi }}</td>
+                    <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;">{{ product.stok.dovizFiyat*product.miktar | currency:' ₺':'symbol':'1.2-2'}}</td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="footer">
