@@ -8,9 +8,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {  HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DesignComponent } from 'src/shared/core/design/design.component';
+import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
+import { GorevSelectModalComponents } from 'src/shared/dialogs/gorev-selected-modal';
+import { AgGridAngular } from 'ag-grid-angular';
+import { PersonelSelectModalComponents } from 'src/shared/dialogs/personel-selected-modal';
+import { KapiGrupSelectModalComponents } from 'src/shared/dialogs/kapi-grup-selected-modal';
 @NgModule({
   declarations: [
     AppComponent,
+    DesignComponent,
+    StokSelectModalComponents,
+    PersonelSelectModalComponents,
+    GorevSelectModalComponents,
+    KapiGrupSelectModalComponents
   ],
   imports: [
     BrowserModule,
@@ -22,13 +33,13 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    AgGridAngular
 
   ],
   providers: [
-     { provide: "baseUrl", useValue: "https://localhost:7054/api", multi: true },
+     { provide: "baseUrl", useValue: "http://192.168.4.111:8082/api", multi: true },
      { provide: LocationStrategy, useClass: HashLocationStrategy, },
      ],
-
   bootstrap: [AppComponent]
 })
 export class AppModule { }

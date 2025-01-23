@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
 
 @Component({
-  selector: 'kabin-malzeme-giderler-table',
-  template: `
+    selector: 'kabin-malzeme-giderler-table',
+    template: `
 
 <p-table id="row-check" [value]="malzemeGiderler" [style]="{'min-height':' 450px'}" [scrollable]="true"
             scrollHeight="450px" selectionMode="single" [(selection)]="selectedMalzemeGiderler">
@@ -15,7 +17,7 @@ import { Component, Input } from '@angular/core';
                
                         <div class="button-container" style="position: absolute;left: 0;top: 0;">
                             
-                            <div class="button-grup " style="gap: 3px !important;">
+                            <div (click)="stokEkle()" class="button-grup " style="gap: 3px !important;">
                                 <div class="img-container">
                                     <img style="width: 25px; height: 25px;"
                                         src="../../../../../assets/icons/add-file.png" alt="">
@@ -38,11 +40,6 @@ import { Component, Input } from '@angular/core';
                                 </div>
 
                             </div>
-
-
-
-                           
-
                         </div>
                     </th>
                 </tr>
@@ -58,7 +55,7 @@ import { Component, Input } from '@angular/core';
             </ng-template>
             <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
                 <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
-                    <!-- <td>{{ rowIndex+1 }} </td> -->
+                  
                     <td> <button (click)="deleteItem(rowIndex)" style="color: rgb(99, 0, 0); font-style:italic;font-weight:bold;border:1px solid gray;">KALDIR</button> </td>
                     <td style="font-size: 12px;font-weight: bold;color: gray;text-align: left;padding-left:10px;">{{ product.stok.ad }}</td>
                     <td style="font-size: 12px;color: gray;text-align: right;padding-left:10px;" [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
@@ -93,10 +90,56 @@ export class KabinMalzemeGiderlerTableComponent {
     @Input() malzemeGiderler: any;
     @Input() selectedMalzemeGiderler: any;
     @Input() malzemeToplam: any;
+    @Output() public childFuncStokEkle: EventEmitter<any> = new EventEmitter();
+    /**
+     *
+     */
+    constructor(private NgbModal: NgbModal) {
 
+
+    }
 
     deleteItem(index: number): void {
         this.malzemeGiderler.splice(index, 1);
-        
-      }
+
+    }
+
+
+
+    stokEkle() {
+        const modalRef = this.NgbModal.open(StokSelectModalComponents, {
+            size: 'lg',
+            backdrop: 'static',
+        });
+        modalRef.componentInstance.confirmationBoxTitle = 'Stok Listesi';
+        modalRef.result.then((stoks) => {
+            if (stoks != false) {
+
+                stoks.forEach(element => {
+                    var newValue = {
+
+                        stok: element,
+                        miktar: element.miktar ? element.miktar : 0
+                    }
+                    const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stok.id);
+
+                    if (customerExists) {
+                        alert(`Bu ${element.ad} zaten mevcut! `);
+                        return;
+                    }
+                    this.malzemeGiderler = [...this.malzemeGiderler, newValue];
+
+                    this.childFuncStokEkle.emit(this.malzemeGiderler)
+                });
+
+
+
+            }
+        });
+    }
+
+
+
+
+
 }

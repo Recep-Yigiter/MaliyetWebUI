@@ -1,0 +1,206 @@
+
+
+
+
+
+
+
+<div class="modal-header "style="    padding: 0rem 0rem;">
+    <h4 class="modal-title"></h4>
+    <h4 class="modal-title"> </h4>
+    <button type="button" class="btn-close" style="border: none; height: 30px; width: 30px;" aria-label="Close" (click)="activeModal.close(false)">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  
+  
+  
+  <div class="">
+    <div class="container-fluid">
+        <div class="panel header" data-resize-name="header">
+            <div class="content">
+                <div class="actions" style="padding: 2px 0px 2px 0px; display: flex;">
+                    <div class="action-items" style="width: 100%; display: flex; align-items: center;">
+  
+                        <div class="action-left">
+                            <div class="btn-group ml-1 mr-1">
+  
+                                <div class="button-container">
+  
+                                    <div class="button-grup disabled">
+                                        <div class="img-container">
+                                            <img src="../../../../../assets/icons/add-file.png" alt="">
+                                        </div>
+                                        <span class="d-none d-sm-inline button-label">Yeni</span>
+  
+                                    </div>
+  
+                                    <div (click)="Kaydet()" class="button-grup ">
+                                        <div class="img-container">
+                                            <img src="../../../../../assets/icons/save.png" alt="">
+                                        </div>
+                                        <span class="d-none d-sm-inline button-label">Kaydet</span>
+  
+                                    </div>
+  
+                                    <div class="button-grup disabled">
+                                        <div class="img-container">
+                                            <img src="../../../../../assets/icons/delete-file.png" alt="">
+                                        </div>
+                                        <span class="d-none d-sm-inline button-label">Sil</span>
+  
+                                    </div>
+  
+                                    <div (click)="cikis()" class="button-grup">
+                                        <div class="img-container">
+                                            <img src="../../../../../assets/icons/close.png" alt="">
+                                        </div>
+                                        <span class="d-none d-sm-inline button-label">Çıkış</span>
+  
+                                    </div>
+  
+  
+  
+  
+                                </div>
+  
+  
+                            </div>
+                        </div>
+                    </div>
+  
+                </div>
+            </div>
+        </div>
+  
+  
+  
+        <div >
+  
+            <div >
+  
+                <div style="display: grid; grid-template-columns:1fr 1fr; gap: 4px;">
+                    <div style="display: flex;
+                            flex-direction: column;
+                            border: 1px solid rgb(230, 230, 230);
+                            color: white; padding: 4px;">
+                        <kapi-form [span]="170" [label]="'Ad'">
+                            <input form-control [(ngModel)]="frm.ad" name="ad"
+                                class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+                          </kapi-form>
+                     
+                        <kapi-form [span]="170" [label]="'Kapı Genişliği'">
+                          <p-dropdown form-control [options]="kapiGenisligi" [(ngModel)]="frm.kapiGenisligi" optionLabel="ad"
+                              (ngModelChange)="onKapiGenisligiChange(frm.kapiGenisligi)" />
+                      </kapi-form>
+                        <kapi-form [span]="170" [label]="'Kapı Yüksekliği'">
+                            <p-dropdown form-control [options]="kapiYuksekligi" [(ngModel)]="frm.kapiYuksekligi" optionLabel="ad"
+                                (ngModelChange)="onKapiYuksekligiChange(frm.kapiYuksekligi)" />
+                        </kapi-form>
+                    </div>
+                
+                    <div style="display: flex;
+                            flex-direction: column;
+                            border: 1px solid rgb(230, 230, 230);
+                            color: white; padding: 4px;">
+                       
+                       <kapi-form [span]="170" [label]="'Yön'">
+                        <p-dropdown form-control [options]="yon" [(ngModel)]="frm.yon" optionLabel="ad"
+                            (ngModelChange)="onYonChange(frm.yon)" />
+                      </kapi-form>
+                        <kapi-form [span]="170" [label]="'Kapı Tipi'">
+                            <p-dropdown form-control [options]="kapiTipi" [(ngModel)]="frm.kapiTipi" optionLabel="ad"
+                                (ngModelChange)="onKapiTipiChange(frm.kapiTipi)" />
+                        </kapi-form>
+                        <kapi-form [span]="170" [label]="'Kaplama'">
+                            <p-dropdown form-control [options]="kaplama" [(ngModel)]="frm.kaplama" optionLabel="ad"
+                                (ngModelChange)="onKaplamaChange(frm.kaplama)" />
+                        </kapi-form>
+                    </div>
+                
+                    
+                  </div>
+                
+                  <div style="display: grid; grid-template-columns:1fr ; gap: 12px;">
+                    <div>
+                      <div style="height: 485px;">
+                        <p-accordion [activeIndex]="0">
+                          <p-accordionTab header="Kapi Grupları">
+                
+                            <p-table id="row-check" [value]="kapiGruplari" [style]="{'min-height':' 400px'}" [scrollable]="true"
+                              scrollHeight="400px" selectionMode="single" [(selection)]="selectedMalzemeGiderRow" >
+                
+                              <ng-template pTemplate="header">
+                                <tr>
+
+                                  <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">
+                                    <div style='height:25px;padding:0.3rem 1rem;'></div>
+                                    <div class="button-container" style="position: absolute;left: 0;top: 0;">
+                                      <div (click)="kapiGrupEkle()" class="button-grup " style="gap: 3px !important;">
+                                        <div class="img-container">
+                                          <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/add-file.png" alt="">
+                                        </div>
+                
+                                      </div>
+                
+                                      
+                
+                                      <div class="button-grup " style="gap: 3px !important;">
+                                        <div class="img-container">
+                                            <img style="width: 25px; height: 25px;"
+                                                src="../../../../../assets/icons/edit-file.png" alt="">
+                                        </div>
+              
+                                    </div>
+                
+                                    </div>
+                                  </th>
+                                </tr>
+                                <tr>
+                                  <th></th>
+                                  <th style="font-size: 13px;">Malzeme Adı</th>
+                                  <th style="font-size: 13px;">a=Miktar</th>
+                                  <th style="font-size: 13px;">Birim</th>
+                                  <th></th>
+                                </tr>
+                              </ng-template>
+                
+                              <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                                <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
+                            
+                                  <td> <button (click)="deleteKapiGrupItem(rowIndex)" style="color: rgb(99, 0, 0); font-style:italic;font-weight:bold;border:1px solid gray;">KALDIR</button> </td>
+                                  <td>{{ product.ad }}</td>
+                                  <td >
+                                    {{product.miktar }}
+                                  </td>
+                                  <td>{{ product.birim }}</td>
+                                  
+                                </tr>
+                              </ng-template>
+                
+                              <ng-template pTemplate="footer">
+                                <tr>
+                                  <td colspan="4" class="text-right" style="font-size: 13px;">Toplam</td>
+                                  <td style="font-size: 13px;">{{malzemeGiderToplam | currency: '₺'}}</td>
+                                </tr>
+                              </ng-template>
+                            </p-table> 
+                
+  
+  
+  
+  
+                          </p-accordionTab>
+                        </p-accordion>
+                      </div>
+                
+                    </div>
+
+                  </div>
+  
+            </div>
+  
+  
+        </div>
+    </div>
+  </div>

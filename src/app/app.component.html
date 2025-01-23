@@ -73,7 +73,7 @@
 
 
                     <ng-container *ngFor="let item of moduls">
-                        <a [class.disabled]="item.disabled" routerLink="{{item.href}}" (click)="routerChange(item.href)"
+                        <a [class.disabled]="item.disabled" routerLink="{{item.href}}" (click)="routerChange(item)"
                             class="  hover:bg-slate-200 " style="display: flex; align-items: center;flex-direction: column; width: 100%; padding-bottom: 4px;cursor: pointer; text-align: center;">
                             <i style="font-size: 24px;color: #4B5563;" class="{{item.icon}} " [ngClass]="item.class" ></i>
                             <span style="color: #4B5563; font-weight: bold;" >{{item.modul}}</span>

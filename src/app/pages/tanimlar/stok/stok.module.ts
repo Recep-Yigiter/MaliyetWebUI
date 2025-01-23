@@ -9,13 +9,17 @@ import { StokFormComponent } from './core/components/stok-form';
 import { DividerModule } from 'primeng/divider';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
+import { CreateStokComponent } from './create-stok/create-stok.component';
+import { UpdateStokComponent } from './update-stok/update-stok.component';
 
 
 @NgModule({
   declarations: [
     StokComponent,
     StokTanimlarDesignComponent,
-    StokFormComponent
+    StokFormComponent,
+    CreateStokComponent,
+    UpdateStokComponent
   ],
   imports: [
     CommonModule,

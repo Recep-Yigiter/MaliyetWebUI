@@ -19,6 +19,7 @@ import { ButonIscilikGiderlerTableComponent } from './core/tables/iscilik-giderl
 import { ButonMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
 import { ButonMaliyetTableComponent } from './core/tables/maliyet-table';
 import { ButonFiyatTableComponent } from './core/tables/fiyat-table';
+import { AccordionModule } from 'primeng/accordion';
 @NgModule({
   declarations: [
     ButonMaliyetComponent,
@@ -44,6 +45,7 @@ import { ButonFiyatTableComponent } from './core/tables/fiyat-table';
     ListboxModule,
     RadioButtonModule,
     DialogModule,
+    AccordionModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

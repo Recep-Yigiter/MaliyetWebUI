@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
 import { StokService } from 'src/app/core/services/repository/stok.service';
 import { defaultColDef } from 'src/default-col-def';
+import { CreateStokComponent } from './create-stok/create-stok.component';
+import { DeleteModalComponents } from 'src/shared/dialogs/informations/delete-modal';
+import { UpdateStokComponent } from './update-stok/update-stok.component';
 
 @Component({
   selector: 'app-stok',
@@ -28,13 +32,15 @@ export class StokComponent {
   ];
 
 
-  constructor(private StokService:StokService) { }
+  constructor(private StokService:StokService,private NgbModal:NgbModal) { }
+
+
+  
 
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
     this.rowData =( await this.StokService.GetAll()).items;;
   }
-
   rowClick() {
     const selectedRows = this.gridApi.getSelectedRows()[0];
     this.selectedStoks = selectedRows;
@@ -62,93 +68,67 @@ export class StokComponent {
   }
 
 
-  kaydet(){
-var stok={
-  ad: this.frm.ad,
-  birim: this.frm.birim.ad,
-  birimFiyat: this.frm.birimFiyat,
-  dovizCinsi: this.frm.dovizCinsi.ad,
-  stokGrubu: this.frm.stokGrubu.ad
+
+
+
+
+async yeni(){
+  const modalRef = this.NgbModal.open(CreateStokComponent, {
+    size: 'md',
+    backdrop: 'static',
+  });
+  modalRef.componentInstance.data = 'Stok Kartı';
+  modalRef.result.then(async (item) => {
+    if (item) {
+      this.rowData=(await this.StokService.GetAll()).items
+    }
+  });
 }
 
-this.StokService.create(stok,async()=>{
-      this.visible=false;
-      this.rowData =await this.StokService.GetAll();
-    })
+sil(){
+  if (this.selectedStok) {
+    const modalRef = this.NgbModal.open(DeleteModalComponents, {
+      size: 'sm',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.data = 'Birim Kartı';
+    modalRef.result.then(async(event) => {
+      if (event == true) {
+        this.StokService.delete(this.selectedStok.id, async() => {
+          this.rowData=(await this.StokService.GetAll()).items
+        });
+      
+      }
+    });
   }
+}
 
-
-
-async EkleDialog(){
-this.visible=true;
-this.frm={
-  ad:"",
-  birim: { id: 1, ad: 'ADET' },
-  stokGrubu:{ id: 1, ad: 'Sac' },
-  birimFiyat:0,
-  dovizCinsi:{ id: 1, ad: 'TL' },
- }
+guncelle(){
+  if (this.selectedStok) {
+    const modalRef = this.NgbModal.open(UpdateStokComponent, {
+      size: 'md',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.data = this.selectedStok;
+    modalRef.result.then(async (item) => {
+      if (item) {
+        this.rowData=(await this.StokService.GetAll()).items
+      }
+    });
+  }
+  
 }
 
 
 
-frm:any={
-  ad:"",
-  birim: { id: 1, ad: 'ADET' },
-  stokGrubu:{ id: 1, ad: 'Sac' },
-  birimFiyat:0,
-  dovizCinsi:{ id: 1, ad: 'TL' },
-}
-  
-  
-  
-  
-  
-  
-  
-  
-  
 
   
-  selectedBirim:any;
-  birim=[
-   { id: 1, ad: 'ADET' },
-   { id: 2, ad: 'KG' },
-   { id: 3, ad: 'M' },
-   { id: 4, ad: 'M^2' },
-
-  ]
-  onBirimChange(item: any): void {
-    this.selectedBirim=item;
-  };
-  
-  
-  
-  selectedStokGrubu:any;
-  stokGrubu=[
-    { id: 1, ad: 'Sac' },
-    { id: 2, ad: 'Paslanmaz Sac' },
-    { id: 3, ad: 'Galvanizli Sac' },
-    { id: 4, ad: 'Civata-Somun-Pul' },
-    { id: 5, ad: 'Alüminyum' },
-    { id: 6, ad: 'Diğer' },
-  ]
-  onStokGrubuChange(item: any): void {
-    this.selectedStokGrubu=item;
-  };
   
   
   
   
-  selectedDovizCinsi:any;
-  dovizCinsi=[
-    { id: 1, ad: 'TL' },
-    { id: 2, ad: 'USD' },
-    { id: 3, ad: 'EURO' },
-  ]
-  onDovizCinsiChange(item: any): void {
-    this.selectedDovizCinsi=item;
-  };
+  
+  
   
   
   

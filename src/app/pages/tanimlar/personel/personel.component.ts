@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
+import { PersonelService } from 'src/app/core/services/repository/personel.service';
 import { defaultColDef } from 'src/default-col-def';
+import { CreatePersonelComponent } from './create-personel/create-personel.component';
+import { DeleteModalComponents } from 'src/shared/dialogs/informations/delete-modal';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UpdatePersonelComponent } from './update-personel/update-personel.component';
 
 @Component({
   selector: 'app-personel',
@@ -27,12 +32,10 @@ export class PersonelComponent {
 
 
 
-
+constructor(private PersonelService:PersonelService,private NgbModal:NgbModal) {}
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
-    this.rowData = [
-      { ad: 'Recep YİĞİTER', maas: 30000 },
-    ];
+    this.rowData = (await this.PersonelService.GetAll()).items;
   }
 
   rowClick() {
@@ -62,7 +65,51 @@ export class PersonelComponent {
     this.selectedPersonel = event.data;
   }
 
+async yeni(){
+  const modalRef = this.NgbModal.open(CreatePersonelComponent, {
+    size: 'md',
+    backdrop: 'static',
+  });
+  modalRef.componentInstance.data = 'Personel Kartı';
+  modalRef.result.then(async (item) => {
+    if (item) {
+      this.rowData=(await this.PersonelService.GetAll()).items
+    }
+  });
+}
 
+sil(){
+  if (this.selectedPersonel) {
+    const modalRef = this.NgbModal.open(DeleteModalComponents, {
+      size: 'sm',
+      backdrop: 'static',
+    });
+
+    modalRef.result.then(async(event) => {
+      if (event == true) {
+        this.PersonelService.delete(this.selectedPersonel.id, async() => {
+          this.rowData=(await this.PersonelService.GetAll()).items
+        });
+      }
+    });
+  }
+}
+
+guncelle(){
+  if (this.selectedPersonel) {
+    const modalRef = this.NgbModal.open(UpdatePersonelComponent, {
+      size: 'md',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.data = this.selectedPersonel;
+    modalRef.result.then(async (item) => {
+      if (item) {
+        this.rowData=(await this.PersonelService.GetAll()).items
+      }
+    });
+  }
+  
+}
 
 
 

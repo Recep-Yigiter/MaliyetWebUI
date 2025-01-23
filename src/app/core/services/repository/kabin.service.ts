@@ -52,9 +52,10 @@ export class KabinService {
 
     const observable = await this.apiService.delete({
       controller: "Kabins",
+      action:"Delete",
       queryString: "id=" + `${id}`,
        
-    })
+    },)
     const promiseData = firstValueFrom(observable);
     promiseData.then(successCallBack).catch(errorCallback);
     return await promiseData;

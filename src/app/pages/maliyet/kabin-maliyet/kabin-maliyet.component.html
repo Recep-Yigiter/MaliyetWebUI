@@ -50,7 +50,7 @@
                 <p-accordionTab header="Malzeme Giderleri">
                     <kabin-malzeme-giderler-table [malzemeGiderler]="bilesenler"
                         [selectedMalzemeGiderler]="selectedBilesenRow"
-                        [malzemeToplam]="malzemeToplam"></kabin-malzeme-giderler-table>
+                        [malzemeToplam]="malzemeToplam" (childFuncStokEkle)="childFuncStokEkle($event)"></kabin-malzeme-giderler-table>
                 </p-accordionTab>
             </p-accordion>
         </div>
@@ -65,7 +65,7 @@
                          Ürün Seçimi Yapılmadı!
                         </div>
                         <div *ngIf="selectedURUN" class="label" style="border-bottom-left-radius: 0; font-size: 16px;
-             border-bottom-right-radius: 0; height: 20px;">
+                       border-bottom-right-radius: 0; height: 20px;">
 
                             {{selectedURUN?.ad}}
 
@@ -85,14 +85,14 @@
 
                             <div>
                                 <kabin-maliyet-form [span]="196" [label]="'Ortalama Çalışan Maaşı'">
-                                    <input [disabled]="false" form-control [(ngModel)]="frm.ortalamaPersonelMaasi"
-                                        style="height: 27px;" class="form-control shadow-none form-control-nullable"
+                                    <input [disabled]="true" form-control [(ngModel)]="frm.ortalamaPersonelMaasi"
+                                        style="height: 27px;color: gray;" class="form-control shadow-none form-control-nullable"
                                         id="exampleFormControlInput1">
                                 </kabin-maliyet-form>
 
                                 <kabin-maliyet-form [span]="196" [label]="'Personel Sayısı'">
-                                    <input [disabled]="false" form-control [(ngModel)]="frm.personelSayisi"
-                                        style="height: 27px;" class="form-control shadow-none form-control-nullable"
+                                    <input [disabled]="true" form-control [(ngModel)]="frm.personelSayisi"
+                                        style="height: 27px;color: gray;" class="form-control shadow-none form-control-nullable"
                                         id="exampleFormControlInput1">
                                 </kabin-maliyet-form>
 
@@ -118,7 +118,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <kabin-maliyet-table [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam"
                                 [genelGiderToplam]="genelGiderToplam/frm.personelSayisi"
                                 [toplamMaliyet]="toplamMaliyet"></kabin-maliyet-table>
@@ -194,7 +193,7 @@
 
 <!--İşçilik Giderleri Ekleme -->
 
-<p-dialog header="Header" [(visible)]="iscilikVisible" [modal]="true" [style]="{ width: '50vw' }">
+<!-- <p-dialog header="Header" [(visible)]="iscilikVisible" [modal]="true" [style]="{ width: '50vw' }">
     <ng-template pTemplate="header">
       <span class="text-xl font-bold"></span>
     </ng-template>
@@ -258,11 +257,7 @@
   
   
     <ng-template pTemplate="footer" let-urun>
-      <!-- <div (click)="kaydet()"
-        class="bg-green-900 flex items-center justify-center font-bold hover:bg-green-800 hover:cursor-pointer text-white ">
-        EKLE</div> -->
-  
-      <!-- color: #2F6A47; -->
+
       <div class="flex justify-end" style="display: flex;justify-content: end;">
         <div (click)="personelEkle()"
           style="width: 60px;  background-color: #1C4D2E; color:white; display:flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; padding: 0 8px;">
@@ -270,4 +265,5 @@
         </div>
       </div>
     </ng-template>
-  </p-dialog>
+  </p-dialog> -->
+

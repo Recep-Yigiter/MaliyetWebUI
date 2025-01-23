@@ -10,3 +10,21 @@
 @import "primeng/resources/primeng.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:host ::ng-deep{
+    .p-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9002 !important;
+    }
+
+    .modal {
+        z-index: 0 !important; /* Bootstrap modal için varsayılan z-index */
+      }
+      
+      /* PrimeNG Dropdown z-index değerini artırın */
+      .p-dropdown {
+        z-index: 1060 !important; /* Dropdown'un modal'ın üstünde olmasını sağlamak için */
+      }
+}

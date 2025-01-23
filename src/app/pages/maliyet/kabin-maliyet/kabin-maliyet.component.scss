@@ -14,9 +14,9 @@
 }
 
 :host ::ng-deep {
-.deneme{
-    background-color: red;
-}
+    .deneme{
+     background-color: red;
+    }
     p-table{
         .p-datatable .p-datatable-thead > tr > th {
 
@@ -29,7 +29,7 @@
             text-align: left;
             border: 1px solid #dee2e6;
             border-width: 0 0 1px 0;
-            padding: 0.02rem 1rem;
+            padding: 0.3rem 1rem;
             font-size: 12px;
         }
 

@@ -52,6 +52,7 @@ export class KapiService {
 
     const observable = await this.apiService.delete({
       controller: "Kapis",
+      action:"Delete",
       queryString: "id=" + `${id}`,
        
     })

@@ -52,6 +52,7 @@ export class GenelGiderService {
 
     const observable = await this.apiService.delete({
       controller: "GenelGiders",
+      action:"Delete",
       queryString: "id=" + `${id}`,
        
     })

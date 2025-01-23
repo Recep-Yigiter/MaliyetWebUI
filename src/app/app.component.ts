@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
   }
   onRouteChange() {
     this.selectedTab=  localStorage.getItem('menu');
+    console.log(this.selectedTab);
     this.router.navigate([`tanimlar/${this.selectedTab}`])
   }
 
@@ -46,7 +47,7 @@ export class AppComponent implements OnInit {
       modul: 'Maliyet',
       icon: 'fa-solid fa-receipt',
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
-      href: 'maliyet/kabin-maliyet',
+      href: '/maliyet/kabin-maliyet',
       disabled: false,
       localStorage:'maliyet'
     },
@@ -54,7 +55,7 @@ export class AppComponent implements OnInit {
       modul: 'Satış Fiyatı',
       icon: 'fa-solid fa-receipt',
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
-      href: 'satis-fiyati/kabin',
+      href: '/satis-fiyati/kabin',
       disabled: false,
       localStorage:'satisFiyati'
     },
@@ -77,12 +78,35 @@ export class AppComponent implements OnInit {
   }
   selectedTab:any
   routerChange(item){
+// debugger
 
-  var local=  localStorage.getItem('tanimlar')
+    if (item.href=="/maliyet/kabin-maliyet") {
+      const local1 = JSON.parse(localStorage.getItem('maliyet'));
+      this.router.navigate([local1.href])
+    }
+    else if (item.href=="/tanimlar/stok") {
+      const local2 = JSON.parse(localStorage.getItem('tanimlar'));
+      this.router.navigate([local2.href])
+    }
+    else{
 
-    localStorage.setItem('menu',item)
-    this.selectedTab = item;  
-    this.router.navigate([item])
+    }
+
+
+
+
+
+
+
+    
+   
+
+  //   localStorage.setItem('menu',item)
+  //   this.selectedTab = item;  
+    // this.router.navigate([local])
+    // console.log("item",item);
+    // console.log("local",local);
+
   }
   isDropdownOpen = false;
 

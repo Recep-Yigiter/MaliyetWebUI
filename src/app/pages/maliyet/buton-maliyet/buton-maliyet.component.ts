@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ButonService } from 'src/app/core/services/repository/buton.service';
+import { GenelGiderService } from 'src/app/core/services/repository/genel-gider.service';
 import { DOVIZ } from 'src/assets/DATA/doviz';
 
 @Component({
@@ -8,36 +9,47 @@ import { DOVIZ } from 'src/assets/DATA/doviz';
   templateUrl: './buton-maliyet.component.html',
   styleUrls: ['./buton-maliyet.component.scss'],
 })
-export class ButonMaliyetComponent {
+export class ButonMaliyetComponent implements OnInit{
 
 
-constructor(private ButonService:ButonService) {
 
+
+urunler:any=[];
+bilesenler:any =[];
+iscilikGiderler:any=[]
+genelGiderler:any=[]
+birimMaliyet:any;
+selectedBilesenRow:any;
+selectedUrunRow:any;
+selectedURUN:any;
+personeller=[]
+selectedPersonelRows:any;
+
+constructor(private ButonService:ButonService,private GenelGiderService:GenelGiderService) {
+ 
   
 }
 
-
-urunler:any;
-bilesenler:any =[];
-selectedBilesenRow:any;
-selectedUrunRow:any;
-selectedPersonelRows:any;
-
-iscilikGiderler:any=[]
-genelGiderler:any=[]
-selectedURUN:any;
-
 async ngOnInit() {
-  // this.urunler=await this.ButonService.GetAll();
   
- }
+this.genelGiderler= ((await this.GenelGiderService.GetAll()).items).filter(c=>c.tur=='Kabin'&& c.fabrika=="Kabin Fabrikası");
+this.genelGiderler.forEach(element => {
+  element.miktar=1;
+  element.dovizCinsi="TL";
+  element.birim="ADET";
+  element.tutar=element.tutar/28
+});
 
+
+}
 
 
 
 
 
 frm:any={
+  kar:15,
+  vadeFarki:4.5,
   gunlukUretimSayisi:5,
   tahminiCalisanSayisi:10,
   ortalamaPersonelMaasi:0,
@@ -115,21 +127,12 @@ onBoyOzellikChange(item: any): void {
 
 
 
-
-
-
-onRowClickBilesen(event){}
-
-
-
-
-
-
+ onRowClickUrunler(event){}      
 
 
   visible: boolean;
- async urunleriGoster() {
-    const filteredProducts = (await this.ButonService.GetAll()).filter(item => {
+  async urunleriGoster() {
+    const filteredProducts = ((await this.ButonService.GetAll()).items).filter(item => {
       const matchesButonTipi = this.selectedButonTipi? item.butonTipi === this.selectedButonTipi.ad || this.selectedButonTipi.id==1: true;
       // const matchesDurakSayisi = this.selectedDurakSayisi? item.durakSayisi === this.selectedDurakSayisi.ad|| this.selectedDurakSayisi.id==1 : true;
       const matchesButonCesidi = this.selectedButonCesidi? item.butonCesidi === this.selectedButonCesidi.ad || this.selectedButonCesidi.id==1 : true;
@@ -143,11 +146,83 @@ onRowClickBilesen(event){}
 
   }
 
- onRowClickUrunler(event){}  
-  malzemeToplam: number;
-  Hesapla(event){
+    
+
+
+  genelGiderToplam:any;
+  toplamMaliyet:any;
+
+
+
+
+  urunSec(event){
     this.bilesenler=this.selectedURUN?.urunBilesenler;
-    this.iscilikGiderler=this.selectedURUN?.iscilikGiderler
+    this.iscilikGiderler=this.selectedURUN?.iscilikGiderler;
+    let totalMaas = 0;
+    this.iscilikGiderler.forEach(element => {
+      totalMaas += element.personel.maas;
+    });
+  
+    if (this.iscilikGiderler.length!=0) {
+      this.frm.ortalamaPersonelMaasi=totalMaas/this.iscilikGiderler.length;
+      this.frm.personelSayisi=this.iscilikGiderler.length;
+    }
+    else{
+      this.frm.ortalamaPersonelMaasi=0;
+      this.frm.personelSayisi=0;
+    }
+
+    this.visible = false;
+
+    if (this.selectedURUN) {
+      this.hesaplaButtonDisabled=false;
+    }
+  }
+
+
+
+
+  malzemeToplam: number;
+  hesaplaButtonDisabled=true;
+  pesinFiyat:any;
+  vade1Fiyat:any;
+  vade2Fiyat:any;
+  vade3Fiyat:any;
+
+  Hesapla(){
+
+  this.malzemeGiderHesap();
+  this.iscilikGiderHesap();
+  this.genelGiderHesap();
+
+  this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam+(this.genelGiderToplam/this.frm.personelSayisi);
+
+  this.fiyatHesap();
+
+    
+
+  }
+
+
+  iscilikToplam:any;
+  IscilikDeleteFunc(event) {
+    this.iscilikGiderler = event;
+  }
+
+
+
+  iscilikVisible:any;
+
+
+
+
+
+
+
+
+
+
+malzemeGiderHesap(){
     this.bilesenler?.forEach((item: any) => {
       if (item.stok.dovizCinsi=='TL') {
         var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
@@ -161,37 +236,62 @@ onRowClickBilesen(event){}
         var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
         item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
        }
-    });
-    let total = 0;
-    for (let item of this.bilesenler) {
-        total += item.miktar*item.stok.dovizFiyat;
-    }
-    this.malzemeToplam = total + ((Number(this.frm.durakSayisi.ad)-2)*45.31);
-    this.visible = false;
-    this.iscilikHesapla()
+  });
+  let total = 0;
+  for (let item of this.bilesenler) {
+      total += item.miktar*item.stok.dovizFiyat;
   }
 
-
-  iscilikToplam:any;
-  iscilikHesapla(){
-    let total = 0;
-    this.selectedURUN?.iscilikGiderler.forEach(element => {
-       total += element.personel.maas;
-    });
-
-    this.frm.ortalamaPersonelMaasi=total/this.selectedURUN?.iscilikGiderler.length
-    this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.tahminiCalisanSayisi/28)/this.frm.gunlukUretimSayisi;
-    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
-
-  }
-
-
-  genelGiderToplam:any;
-  toplamMaliyet:any;
  
+  this.malzemeToplam = total;
+}
+
+iscilikGiderHesap(){
+    var totalMaas=0
+    this.iscilikGiderler.forEach(element => {
+      totalMaas += element.personel.maas;
+    });
+    
+    
+     
+
+
+    if (this.iscilikGiderler.length!=0) {
+      this.frm.ortalamaPersonelMaasi=totalMaas/this.iscilikGiderler.length;
+      this.frm.personelSayisi=this.iscilikGiderler.length;
+      this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.personelSayisi/28)/this.frm.gunlukUretimSayisi;
+    }
+    else{
+      this.frm.ortalamaPersonelMaasi=0;
+      this.frm.personelSayisi=0;
+      this.iscilikToplam=0;
+    }
+    
+}
+
+genelGiderHesap(){
+
+  var total=0
+  this.genelGiderler.forEach(element => {
+    total += (element.tutar*element.etkiOrani/100);
+  });
+  this.genelGiderToplam=total
+}
+
+fiyatHesap(){
+  this.pesinFiyat=this.toplamMaliyet + this.toplamMaliyet*this.frm.kar/100;
+  this.vade1Fiyat=this.pesinFiyat + this.pesinFiyat*this.frm.vadeFarki/100;
+  this.vade2Fiyat=this.vade1Fiyat + this.vade1Fiyat*this.frm.vadeFarki/100;
+  this.vade3Fiyat=this.vade2Fiyat + this.vade2Fiyat*this.frm.vadeFarki/100;
+}
 
 
 
+personelEkleDialog(item){
+this.iscilikGiderler=item
+}
 
 
 }
+
+

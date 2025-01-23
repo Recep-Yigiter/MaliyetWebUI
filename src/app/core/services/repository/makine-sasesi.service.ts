@@ -52,6 +52,7 @@ export class MakineSasesiService {
 
     const observable = await this.apiService.delete({
       controller: "MakineSasesis",
+      action:"Delete",
       queryString: "id=" + `${id}`,
        
     })

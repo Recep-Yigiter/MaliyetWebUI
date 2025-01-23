@@ -4,6 +4,9 @@ import { KabinService } from 'src/app/core/services/repository/kabin.service';
 import { HttpClient } from '@angular/common/http';
 import { PersonelService } from 'src/app/core/services/repository/personel.service';
 import { GenelGiderService } from 'src/app/core/services/repository/genel-gider.service';
+import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PersonelSelectModalComponents } from 'src/shared/dialogs/personel-selected-modal';
 
 @Component({
   selector: 'app-kabin-maliyet',
@@ -26,7 +29,7 @@ selectedURUN:any;
 personeller=[]
 selectedPersonelRows:any;
 
-constructor(private KabinService:KabinService,private GenelGiderService:GenelGiderService) {
+constructor(private KabinService:KabinService,private GenelGiderService:GenelGiderService,private NgbModal:NgbModal) {
  
   
 }
@@ -40,6 +43,8 @@ this.genelGiderler.forEach(element => {
   element.birim="ADET";
   element.tutar=element.tutar/28
 });
+
+
 }
 
 
@@ -55,7 +60,7 @@ frm:any={
   model: { id: 1, ad: 'Hepsi' },
   zeminKaplama: { id: 1, ad: 'Hepsi' },
   kabinKaplama: { id: 1, ad: 'Hepsi' },
-  aksesuarKaplama: { id: 1, ad: 'Hepsi' },
+  aksesuarKaplama: { id: 1, ad: 'Hepsi'},
   kapasite:{ id: 1, deger: 'Hepsi' }
 }
 
@@ -138,7 +143,7 @@ onKapasiteChange(kapasite: any): void {
 
 
 
-onRowClickUrunler(event){}      
+ onRowClickUrunler(event){}      
 
 
   visible: boolean;
@@ -151,12 +156,7 @@ onRowClickUrunler(event){}
    const matchesKabinKaplama = this.selectedKabinKaplama? item.kabinKaplama === this.selectedKabinKaplama.ad || this.selectedKabinKaplama.id==1 : true;
    const matchesAksesuarKaplama = this.selectedAksesuarKaplama? item.aksesuarKaplama === this.selectedAksesuarKaplama.ad || this.selectedAksesuarKaplama.id==1: true;
    const matchesKapasite = this.selectedKapasite? item.kapasite === this.selectedKapasite.deger || this.selectedKapasite.id==1 : true;
-   return matchesTur 
-       && matchesModel
-       && matchesZeminKaplama
-       && matchesKabinKaplama
-       && matchesAksesuarKaplama
-       && matchesKapasite;
+   return matchesTur  && matchesModel && matchesZeminKaplama && matchesKabinKaplama && matchesAksesuarKaplama && matchesKapasite;
     });
   this.kabinler=filteredProducts;
   this.visible = true;
@@ -187,11 +187,10 @@ onRowClickUrunler(event){}
       this.frm.ortalamaPersonelMaasi=0;
       this.frm.personelSayisi=0;
     }
-   
-    // this.Hesapla()
+
     this.visible = false;
 
-    if (this.selectedURUN) {
+    if (this.bilesenler.length>0) {
       this.hesaplaButtonDisabled=false;
     }
 
@@ -231,36 +230,12 @@ onRowClickUrunler(event){}
 
   iscilikVisible:any;
   selectedPersonelEkle:any;
-  personelEkle(){
-    this.selectedPersonelEkle.forEach((element) => {
-      var newValue={
-        id: "bb4913c6-3205-480d-9122-7b24d160c4db",
-        isDeleted: false,
-        olusturmaTarihi: "2002-12-12T00:00:00",
-        personel:element
-      }
-      const customerExists = this.iscilikGiderler.some(customer => customer.personel.id === newValue.personel.id);
 
-      if (customerExists) {
-        alert(`Bu ${element.ad} zaten mevcut! `);
-        return;
-      }
-      this.iscilikGiderler = [...this.iscilikGiderler, newValue];
-    });
-    this.iscilikVisible=false;
-  }
 async personelEkleDialog(event){
 this.selectedPersonelEkle=[]
  this.personeller= event;
  this.iscilikVisible=true;
 }
-
-
-
-
-
-
-
 
 
 
@@ -295,14 +270,15 @@ iscilikGiderHesap(){
     });
     
     if (this.iscilikGiderler.length!=0) {
+      this.frm.ortalamaPersonelMaasi=totalMaas/this.iscilikGiderler.length;
+      this.frm.personelSayisi=this.iscilikGiderler.length;
       this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.personelSayisi/28)/this.frm.gunlukUretimSayisi;
     }
     else{
       this.frm.ortalamaPersonelMaasi=0;
       this.frm.personelSayisi=0;
-      this.iscilikToplam=0
+      this.iscilikToplam=0;
     }
-
     
 }
 
@@ -311,11 +287,8 @@ genelGiderHesap(){
   var total=0
   this.genelGiderler.forEach(element => {
     total += (element.tutar*element.etkiOrani/100);
-   
   });
   this.genelGiderToplam=total
-
-  
 }
 
 fiyatHesap(){
@@ -333,6 +306,52 @@ fiyatHesap(){
 
 
 
+
+
+childFuncStokEkle(item){
+  this.bilesenler=item
+}
+
+
+
+
+
+
+
+
+
+  personelEkle() {
+    const modalRef = this.NgbModal.open(PersonelSelectModalComponents, {
+      size: 'lg',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.confirmationBoxTitle = 'Personel Listesi';
+    modalRef.result.then((personel) => {
+      if (personel != false) {
+        var newValue={
+          id: "bb4913c6-3205-480d-9122-7b24d160c4db",
+          isDeleted: false,
+          olusturmaTarihi: "2002-12-12T00:00:00",
+          personel:personel,
+          personelId: personel.id,
+         kabinId:null,
+         butonId:null,
+         kapiId: null,
+         kasnakId: null,
+         makineSasesiId: null,
+         suspansiyonId: null
+        }
+        const customerExists = this.iscilikGiderler.some(customer => customer.personel.id === newValue.personel.id);
+  
+        if (customerExists) {
+          alert(`Bu ${personel.ad} zaten mevcut! `);
+          return;
+        }
+        this.iscilikGiderler = [...this.iscilikGiderler, newValue];
+
+      }
+    });
+  }
 
 
 

@@ -1,11 +1,14 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
-import { ButonService } from 'src/app/core/services/repository/buton.service';
-import { KabinService } from 'src/app/core/services/repository/kabin.service';
 import { PersonelService } from 'src/app/core/services/repository/personel.service';
 import { StokService } from 'src/app/core/services/repository/stok.service';
 import { defaultColDef } from 'src/default-col-def';
+import { CreateButonComponent } from './create-buton/create-buton.component';
+import { DeleteModalComponents } from 'src/shared/dialogs/informations/delete-modal';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateButonComponent } from './update-buton/update-buton.component';
+import { ButonService } from 'src/app/core/services/repository/buton.service';
 
 @Component({
   selector: 'app-buton',
@@ -20,13 +23,13 @@ export class ButonComponent implements OnInit {
   public defaultColDef = defaultColDef;
   buttonDisabled: boolean = true;
   buttonUpdateDisabled: boolean = true;
-  selectedStok: any;
-  selectedStoks: any;
+  selectedButon: any;
+  selectedButons: any;
 
 
 
 
-  constructor(private ButonService:ButonService,private StokService:StokService,private PersonelService:PersonelService) {
+  constructor(private ButonService:ButonService,private StokService:StokService,private PersonelService:PersonelService,private NgbModal:NgbModal) {
     
     
   }
@@ -53,29 +56,20 @@ export class ButonComponent implements OnInit {
   }
 
   rowClick() {
-    const selectedRows = this.gridApi.getSelectedRows()[0];
-    this.selectedStoks = selectedRows;
 
     const selectedRow = this.gridApi.getSelectedRows()[0];
-    this.selectedStok = selectedRow;
+    this.selectedButon = selectedRow;
 
-    if (selectedRows.length == 0) {
-      this.buttonDisabled = true;
-    } else {
+    if (selectedRow) {
       this.buttonDisabled = false;
+    } else {
+      this.buttonDisabled = true;
     }
 
-    if (selectedRows.length == 0) {
-      this.buttonUpdateDisabled = true;
-    } else if (selectedRows.length == 1) {
-      this.buttonUpdateDisabled = false;
-    } else {
-      this.buttonUpdateDisabled = true;
-    }
   }
   rowDblClick(event) {
     const selectedRows = this.gridApi.getSelectedRows()[0];
-    this.selectedStok = event.data;
+    this.selectedButon = event.data;
   }
 
 
@@ -83,7 +77,7 @@ export class ButonComponent implements OnInit {
 
 
   visible: boolean;
-  yeni(){
+  yeniButon(){
     this.frm.ad='';
     this.iscilikGiderler=[];
     this.bilesenler=[];
@@ -98,7 +92,7 @@ iscilikGiderler:any=[];
 genelGiderler:any=[];
 
 
-//#region yeni Kabin oluşturmak için açılan  DİALOG---------------------
+//#region yeni Buton oluşturmak için açılan  DİALOG---------------------
 kaydet(){
 //  var test= {
 //     ad: "string",
@@ -144,7 +138,7 @@ kaydet(){
 
 
 frm:any={
-  butonTipi: { id: 1, ad: 'Kabin Butonu' },
+  butonTipi: { id: 1, ad: 'Buton Butonu' },
   durakSayisi:{ id: 1, ad: '2' },
   butonCesidi:{ id: 1, ad: 'Cam' },
   boyOzellik: { id: 1, ad: 'Tam Boy' },
@@ -160,7 +154,7 @@ frm:any={
 
 selectedButonTipi:any;
 butonTipi=[
-  { id: 1, ad: 'Kabin Butonu' },
+  { id: 1, ad: 'Buton Butonu' },
   { id: 2, ad: 'Kat Butonu' },
 ]
 onButonTipiChange(item: any): void {
@@ -218,7 +212,7 @@ onBoyOzellikChange(item: any): void {
 
 
 
-//#region yeni Kabin için stok ekleme  DİALOG--------------------------------
+//#region yeni Buton için stok ekleme  DİALOG--------------------------------
 stoklar:any;
 stoklarVisible:boolean;
 selectedStokEkle:any;
@@ -243,7 +237,7 @@ stokEkle(){
 
 
 
-//#region  yeni Kabin için İşçi giderler ekleme  DİALOG-----------------------
+//#region  yeni Buton için İşçi giderler ekleme  DİALOG-----------------------
 personellerVisible:any;
 personeller:any;
 selectedPersonelEkle:any;
@@ -268,6 +262,76 @@ async personelEkleDialog(){
 
 
 //#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+async yeni(){
+  const modalRef = this.NgbModal.open(CreateButonComponent, {
+    size: 'xl',
+    backdrop: 'static',
+  });
+  modalRef.result.then(async (item) => {
+    if (item) {
+      this.rowData=(await this.ButonService.GetAll()).items
+    }
+  });
+}
+
+sil(){
+  if (this.selectedButon) {
+    const modalRef = this.NgbModal.open(DeleteModalComponents, {
+      size: 'sm',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.data = 'Birim Kartı';
+    modalRef.result.then(async(event) => {
+      if (event == true) {
+        this.ButonService.delete(this.selectedButon.id, async() => {
+          this.rowData=(await this.ButonService.GetAll()).items
+        });
+      
+      }
+    });
+  }
+}
+
+guncelle(){
+  if (this.selectedButon) {
+    const modalRef = this.NgbModal.open(UpdateButonComponent, {
+      size: 'xl',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.data = this.selectedButon;
+    modalRef.result.then(async (item) => {
+      if (item) {
+        location.reload()
+      }
+    });
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -52,6 +52,7 @@ export class ButonService {
 
     const observable = await this.apiService.delete({
       controller: "Butons",
+      action:"Delete",
       queryString: "id=" + `${id}`,
        
     })

@@ -19,7 +19,6 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
                <label  style="position: absolute; right: 0; font-style: oblique;color: #85919d;  font-weight: 600;
                 font-size: 13px; padding-right: 10px; ">:</label>
             </td>
-
             <td style="
                 display: flex;
                 align-items: center;

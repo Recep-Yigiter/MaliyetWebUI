@@ -52,6 +52,7 @@ export class KasnakService {
 
     const observable = await this.apiService.delete({
       controller: "Kasnaks",
+      action:"Delete",
       queryString: "id=" + `${id}`,
        
     })

@@ -185,7 +185,7 @@ onRowClickUrunler(event){}
   visible: boolean;
  async urunleriGoster() {
     this.birimMaliyet=null;
-    const filteredProducts = (await this.KasnakService.GetAll()).filter(item => {
+    const filteredProducts = ((await this.KasnakService.GetAll()).items).filter(item => {
     const matchesKasnakTipi = this.selectedKasnakCapi? item.kasnakCapi === this.selectedKasnakCapi.ad || this.selectedKasnakCapi.id==1: true;
     const matchesKanalSayisi = this.selectedKanalSayisi? item.kanalSayisi === this.selectedKanalSayisi.ad|| this.selectedKanalSayisi.id==1 : true;
     const matchesKasnakCesidi = this.selectedHalatCapi? item.halatCapi === this.selectedHalatCapi.ad || this.selectedHalatCapi.id==1 : true;

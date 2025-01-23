@@ -3,20 +3,15 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'buton-genel-giderler-table',
   template: `
-  <p-table id="row-check" [value]="genelGiderler" [style]="{'min-height':' 350px'}" dataKey="id" [scrollable]="true"
-scrollHeight="350px" selectionMode="single" [(selection)]="selectedGenelGiderler">
+  <p-table id="row-check" [value]="genelGiderler" [style]="{'min-height':' 417px'}" dataKey="id" [scrollable]="true"
+scrollHeight="417px" selectionMode="single" [(selection)]="selectedGenelGiderler">
 <ng-template pTemplate="header">
     <tr>
-        <th style="width: 50px;font-size: 13px;" rowspan="3">Sıra No</th>
-        <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">Genel Giderleri
-            <div class="button-container" style="position: absolute;right: 0;top: 0;">
-                <div class="button-grup " style="gap: 3px !important;">
-                    <div class="img-container">
-                        <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/save.png"
-                            alt="">
-                    </div>
-
-                </div>
+        <!-- <th style="width: 50px;font-size: 13px;" rowspan="3">Sıra No</th> -->
+        <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">
+        <div style='height:25px;padding:0.3rem 1rem;'></div> 
+            <div class="button-container" style="position: absolute;left: 0;top: 0;">
+               
                 <div class="button-grup " style="gap: 3px !important;">
                     <div class="img-container">
                         <img style="width: 25px; height: 25px;"
@@ -43,14 +38,7 @@ scrollHeight="350px" selectionMode="single" [(selection)]="selectedGenelGiderler
 
 
 
-                <div class="button-grup " style="gap: 3px !important;">
-                    <div class="img-container">
-                        <img style="width: 25px; height: 25px;"
-                            src="../../../../../assets/icons/refresh.png" alt="">
-                    </div>
-
-                </div>
-
+                
 
             </div>
         </th>
@@ -67,7 +55,6 @@ scrollHeight="350px" selectionMode="single" [(selection)]="selectedGenelGiderler
 </ng-template>
 <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
     <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
-        <td>{{rowIndex+1}} </td>
         <td>{{ product.ad }}</td>
         <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
             <p-cellEditor>
@@ -82,22 +69,23 @@ scrollHeight="350px" selectionMode="single" [(selection)]="selectedGenelGiderler
             </p-cellEditor>
         </td>
         <td>{{ product.birim }}</td>
-        <td>{{ product.birimFiyat }}</td>
+        <td>{{ product.tutar* (product.etkiOrani/100)| currency:' ₺':'symbol':'1.2-2'}}</td>
         <td>{{ product.dovizCinsi }}</td>
-        <td>{{ product.birimFiyat*product.miktar }}</td>
+        <td>{{ product.tutar*product.miktar* (product.etkiOrani/100)  | currency:' ₺':'symbol':'1.2-2'}}</td>
     </tr>
 </ng-template>
 <ng-template pTemplate="footer">
     <tr>
-        <td colspan="6" class="text-right" style="font-size: 13px;">Toplam</td>
-        <td style="font-size: 13px;">{{0 | currency: 'USD'}}</td>
+        <td colspan="5" class="text-right" style="font-size: 13px;">Toplam</td>
+        <td style="font-size: 13px;">{{genelGiderToplam | currency: 'USD'}}</td>
     </tr>
-</ng-template>
+</ng-template> 
 </p-table>
   `,
 
 })
 export class ButonGenelGiderlerTableComponent {
     @Input() genelGiderler: any;
+    @Input() genelGiderToplam: any;
     @Input() selectedGenelGiderler: any;
 }

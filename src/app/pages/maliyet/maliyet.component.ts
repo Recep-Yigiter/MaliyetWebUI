@@ -17,13 +17,16 @@ export class MaliyetComponent implements OnInit {
       submenu: [
         {
           label: 'Kabin',
+          tabItem:'kabin',
           icon: 'fa fa-inbox',
           submenu: [],
           href: '/maliyet/kabin-maliyet',
           expanded: false,
+
         },
         {
           label: 'Buton',
+          tabItem:'buton',
           icon: 'fa fa-inbox',
           submenu: [],
           href: '/maliyet/buton-maliyet',
@@ -31,6 +34,7 @@ export class MaliyetComponent implements OnInit {
         },
         {
           label: 'Kapı',
+          tabItem:'kapı',
           icon: 'fa fa-inbox',
           submenu: [],
           href: '/maliyet/kapi-maliyet',
@@ -38,6 +42,7 @@ export class MaliyetComponent implements OnInit {
         },
         {
           label: 'Kasnak',
+          tabItem:'kasnak',
           icon: 'fa fa-inbox',
           submenu: [],
           href: '/maliyet/kasnak-maliyet',
@@ -45,6 +50,7 @@ export class MaliyetComponent implements OnInit {
         },
         {
           label: 'Süspansiyon',
+          tabItem:'suspansiyon',
           icon: 'fa fa-inbox',
           submenu: [],
           href: '/maliyet/suspansiyon-maliyet',
@@ -52,6 +58,7 @@ export class MaliyetComponent implements OnInit {
         },
         {
           label: 'Makine Saşesi',
+          tabItem:'makine-sasesi',
           icon: 'fa fa-inbox',
           submenu: [],
           href: '/maliyet/makine-sasesi-maliyet',
@@ -69,13 +76,12 @@ export class MaliyetComponent implements OnInit {
 
   ];
 
-
-  constructor(private router:Router) {
     
-  }
+
+  constructor(private router:Router) {}
   ngOnInit(): void {
-    this.selectedTab=  localStorage.getItem('maliyet');
-    this.router.navigate([`maliyet/${this.selectedTab}-maliyet`])
+    const local = JSON.parse(localStorage.getItem('maliyet'));
+    this.selectedTab=local.tabItem;
   }
 
   toggleNode(node: any) {
@@ -83,11 +89,11 @@ export class MaliyetComponent implements OnInit {
   }
 
 
-  selectedTab: string = 'kabin';  // Varsayılan olarak "kabin" sekmesi seçili
+  selectedTab: string = 'kabin';
 
-  selectTab(tab: string) {
-   localStorage.setItem('maliyet',tab)
-    this.selectedTab = tab;  // Tıklanan sekmeyi seç
-    this.router.navigate([`maliyet/${tab}-maliyet`])
+  selectTab(tab: any) {
+    var local= localStorage.setItem('maliyet',JSON.stringify(tab))
+    this.selectedTab = tab.tabItem; 
+    this.router.navigate([`${tab.href}`])
   }
 }

@@ -52,6 +52,7 @@ export class SuspansiyonService {
 
     const observable = await this.apiService.delete({
       controller: "Suspansiyons",
+      action:"Delete",
       queryString: "id=" + `${id}`,
        
     })

@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs">
+<!-- <ul class="nav nav-tabs">
     <li [class.active]="selectedTab === 'kabin'" (click)="selectTab('kabin')">
       <a class="tab-item">Kabin</a>
     </li>
@@ -25,4 +25,26 @@
         <router-outlet></router-outlet>
 
     </div>
+</div> -->
+
+
+
+<ul class="nav nav-tabs">
+
+  <ng-container *ngFor="let item of menu">
+      <ng-container *ngFor="let item of item.submenu">
+          <li [class.active]="selectedTab === item.tabItem" (click)="selectTab(item)">
+              <a class="tab-item">{{item.label}}</a>
+          </li>
+      </ng-container>
+  </ng-container>
+ 
+</ul>
+<div  style="height: calc(100vh - 85px); display: flex; width: 100%;">
+
+
+  <div  style="width: 100%;">
+      <router-outlet></router-outlet>
+
+  </div>
 </div>

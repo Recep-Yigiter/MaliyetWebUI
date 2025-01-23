@@ -5,12 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgGridAngular } from 'ag-grid-angular';
 import { DividerModule } from 'primeng/divider';
 import { RouterModule } from '@angular/router';
-import { KabinDesignComponent } from './design/design.component';
-import { KabinFormComponent } from './components/urun-form';
+import { KabinDesignComponent } from './core/design/design.component';
+import { KabinFormComponent } from './core/components/urun-form';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { AccordionModule } from 'primeng/accordion';
+import { CreateKabinComponent } from './create-kabin/create-kabin.component';
+import { UpdateKabinComponent } from './update-kabin/update-kabin.component';
 
 
 
@@ -18,7 +20,9 @@ import { AccordionModule } from 'primeng/accordion';
   declarations: [
     KabinComponent,
     KabinDesignComponent,
-    KabinFormComponent
+    KabinFormComponent,
+    CreateKabinComponent,
+    UpdateKabinComponent
   ],
   imports: [
     CommonModule,

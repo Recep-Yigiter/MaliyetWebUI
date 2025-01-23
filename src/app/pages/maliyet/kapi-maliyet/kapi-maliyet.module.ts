@@ -19,6 +19,7 @@ import { KapiIscilikGiderlerTableComponent } from './core/tables/iscilik-giderle
 import { KapiMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
 import { KapiMaliyetTableComponent } from './core/tables/maliyet-table';
 import { KapiFiyatTableComponent } from './core/tables/fiyat-table';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { KapiFiyatTableComponent } from './core/tables/fiyat-table';
     RadioButtonModule,
     DialogModule,
     MatRadioModule,
+    AccordionModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

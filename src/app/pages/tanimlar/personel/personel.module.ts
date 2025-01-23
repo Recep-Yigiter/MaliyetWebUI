@@ -7,6 +7,10 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { DividerModule } from 'primeng/divider';
 import { RouterModule } from '@angular/router';
 import { PersonelFormComponent } from './core/components/personel-form';
+import { CreatePersonelComponent } from './create-personel/create-personel.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { UpdatePersonelComponent } from './update-personel/update-personel.component';
+import { StokSelectFormComponent } from './core/components/personel-select-form';
 
 
 
@@ -14,13 +18,17 @@ import { PersonelFormComponent } from './core/components/personel-form';
   declarations: [
     PersonelComponent,
     PersonelTanimlarDesignComponent,
-    PersonelFormComponent
+    PersonelFormComponent,
+    CreatePersonelComponent,
+    UpdatePersonelComponent,
+    StokSelectFormComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     AgGridAngular,
     DividerModule,
+    DropdownModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

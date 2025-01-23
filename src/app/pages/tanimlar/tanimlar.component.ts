@@ -30,14 +30,7 @@ export class TanimlarComponent {
           href: '/tanimlar/personel',
           expanded: false,
         },
-        {
-          label: 'Urunler',
-          tabItem:'urun',
-          icon: 'fa fa-inbox',
-          submenu: [  ],
-          href: '/tanimlar/urun',
-          expanded: false,
-        },
+        
         {
           label: 'Kabinler',
           tabItem:'kabin',
@@ -100,8 +93,10 @@ export class TanimlarComponent {
     
   }
   ngOnInit(): void {
-    this.selectedTab=  localStorage.getItem('tanimlar');
-    this.router.navigate([`tanimlar/${this.selectedTab}`])
+     const local = JSON.parse(localStorage.getItem('tanimlar'));
+     this.selectedTab=local.tabItem;
+
+    // this.router.navigate([`tanimlar/${this.selectedTab}`])
   }
 
   toggleNode(node: any) {
@@ -109,11 +104,12 @@ export class TanimlarComponent {
   }
 
 
-  selectedTab: string = 'kabin';  // Varsayılan olarak "kabin" sekmesi seçili
+  selectedTab: string = 'stok';  // Varsayılan olarak "kabin" sekmesi seçili
 
   selectTab(tab: any) {
-    localStorage.setItem('tanimlar',tab.tabItem)
-    this.selectedTab = tab.tabItem;  // Tıklanan sekmeyi seç;
+    
+    var local= localStorage.setItem('tanimlar',JSON.stringify(tab))
+    this.selectedTab = tab.tabItem; 
     this.router.navigate([`tanimlar/${tab.tabItem}`])
   }
 }

@@ -1,0 +1,48 @@
+@import "src/assets/scss/caption";
+@import "src/assets/scss/section";
+
+
+
+:host ::ng-deep{
+    .modal {
+        z-index: 1000 !important; /* Bootstrap modal için varsayılan z-index */
+      }
+      
+      p-dropdown {
+        .p-dropdown {
+            display: inline-flex;
+            cursor: pointer;
+            position: relative;
+            -webkit-user-select: none;
+            user-select: none;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            width: 100%;
+            background-color: rgb(247, 247, 247) !important;
+        }
+
+        .p-dropdown-panel .p-dropdown-items {
+            padding: 0.3rem 0;
+            font-size: 13px;
+        }
+
+        .p-dropdown .p-dropdown-label {
+            background: transparent;
+            border: 0 none;
+            padding: 0 .25rem 0 0.75rem !important;
+            font-size: 13px !important;
+            background-color: rgb(247, 247, 247) !important;
+            border-radius: 0px !important;
+            color: black;
+            font-weight: 600;
+        }
+        p-dropdownitem li{
+            padding: 0.2rem 1.25rem !important;
+        }
+        .p-dropdown .p-dropdown-label.p-placeholder {
+            color: #aab1b7 !important;
+            font-weight: 400 !important;
+ 
+        }
+    }
+}

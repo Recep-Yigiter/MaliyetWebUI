@@ -9,7 +9,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
                 color: #212529;
                 width: 90%;
                 padding: 0px 6px 0px 8px;
-                min-width: 70px;
+                min-width: 150px;
                 font-weight: 600;
                 font-size: 13px; 
                 display: flex;
@@ -29,7 +29,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
                 font-size: 13px; 
                 display: flex;
                 align-items:  center;
-                font-style: oblique;">
+                font-style: oblique; padding:3px 8px">
 
             <!-- <input  [(ngModel)]="field" name="{{name}}"   [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "  class="form-control shadow-none  " id="exampleFormControlInput1">  -->
            

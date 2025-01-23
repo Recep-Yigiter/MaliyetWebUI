@@ -5287,10 +5287,10 @@ a.close-canvas-menu:hover {
   float: left;
 }
 .modal-backdrop {
-  z-index: 2040 !important;
+   z-index: 1000 !important; 
 }
 .modal {
-  z-index: 2050 !important;
+  /* z-index: 2050 !important; */
 }
 .spiner-example {
   height: 200px;
