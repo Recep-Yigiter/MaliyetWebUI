@@ -8,15 +8,20 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { RouterModule } from '@angular/router';
-import { MakineSasesiFormComponent } from './components/urun-form';
-import { MakineSasesiDesignComponent } from './design/design.component';
+import { MakineSasesiFormComponent } from './core/components/urun-form';
+import { MakineSasesiDesignComponent } from './core/design/design.component';
+import { CreateMakineSasesiComponent } from './create-makine-sasesi/create-makine-sasesi.component';
+import { UpdateMakineSasesiComponent } from './update-makine-sasesi/update-makine-sasesi.component';
+import { AccordionModule } from 'primeng/accordion';
 
 
 @NgModule({
   declarations: [
     MakineSasesiComponent,
     MakineSasesiFormComponent,
-    MakineSasesiDesignComponent
+    MakineSasesiDesignComponent,
+    CreateMakineSasesiComponent,
+    UpdateMakineSasesiComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +31,7 @@ import { MakineSasesiDesignComponent } from './design/design.component';
     DialogModule,
     DropdownModule,
     TableModule,
+    AccordionModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

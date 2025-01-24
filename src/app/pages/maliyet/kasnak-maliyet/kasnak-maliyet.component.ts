@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GenelGiderService } from 'src/app/core/services/repository/genel-gider.service';
 import { KasnakService } from 'src/app/core/services/repository/kasnak.service';
 import { DOVIZ } from 'src/assets/DATA/doviz';
 
@@ -8,39 +9,44 @@ import { DOVIZ } from 'src/assets/DATA/doviz';
   templateUrl: './kasnak-maliyet.component.html',
   styleUrls: ['./kasnak-maliyet.component.scss']
 })
-export class KasnakMaliyetComponent {
+export class KasnakMaliyetComponent implements OnInit{
 
 
-kabinler:any=[];
+
+
+urunler:any=[];
 bilesenler:any =[];
+iscilikGiderler:any=[]
+genelGiderler:any=[]
 birimMaliyet:any;
 selectedBilesenRow:any;
 selectedUrunRow:any;
+selectedURUN:any;
 personeller=[]
 selectedPersonelRows:any;
-iscilikGiderler:any=[]
-genelGiderler:any=[]
-selectedURUN:any;
 
-/**
- *
- */
-constructor(private KasnakService:KasnakService) {
-  
+constructor(private KasnakService:KasnakService,private GenelGiderService:GenelGiderService) {
+ 
   
 }
-ngOnInit() {
+
+async ngOnInit() {
+  
+this.genelGiderler= ((await this.GenelGiderService.GetAll()).items).filter(c=>c.tur=='Kabin'&& c.fabrika=="Kabin Fabrikası");
+this.genelGiderler.forEach(element => {
+  element.miktar=1;
+  element.dovizCinsi="TL";
+  element.birim="ADET";
+  element.tutar=element.tutar/28
+});
 
 
-
- }
-
-
-
-
+}
 
 
 frm:any={
+  kar:15,
+  vadeFarki:4.5,
   gunlukUretimSayisi:5,
   tahminiCalisanSayisi:10,
   ortalamaPersonelMaasi:0,
@@ -118,72 +124,11 @@ onKasnakTuruChange(kapasite: any): void {
 
 
 
+ onRowClickUrunler(event){}      
 
-
-
-
-
-
-onRowClickUrun(event){
-  this.bilesenler=event?.urunBilesenler
-
-  this.bilesenler?.forEach((item: any) => {
-
-    if (item.dovizCinsi=='TL') {
-      var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-   
-      item.dovizFiyat= item.birimFiyat*doviz.deger;
-     }
-    else if (item.dovizCinsi=='EURO') {
-      var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-      item.dovizFiyat= item.birimFiyat*doviz.deger;
-     
-     }
-    else if (item.dovizCinsi=='USD') {
-      var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.dovizCinsi)[0]
-      item.dovizFiyat= item.birimFiyat*doviz.deger;
-  
-     }
-
-  });
-
-  //toplamMaliyet
-  this.bilesenler.forEach(element => {
-    element.total=element.miktar * element.dovizFiyat
-  });
-  this.birimMaliyet=this.bilesenler.reduce((total, row) => total + row.total, 0);
-
-
-}
-onRowClickBilesen(event){
-
-}
-
-
-yenile(){
-  this.bilesenler.forEach(element => {
-    element.total=element.miktar * element.dovizFiyat
-  });
-  this.birimMaliyet=this.bilesenler.reduce((total, row) => total + row.total, 0);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-onRowClickUrunler(event){}
 
   visible: boolean;
- async urunleriGoster() {
+  async urunleriGoster() {
     this.birimMaliyet=null;
     const filteredProducts = ((await this.KasnakService.GetAll()).items).filter(item => {
     const matchesKasnakTipi = this.selectedKasnakCapi? item.kasnakCapi === this.selectedKasnakCapi.ad || this.selectedKasnakCapi.id==1: true;
@@ -191,87 +136,162 @@ onRowClickUrunler(event){}
     const matchesKasnakCesidi = this.selectedHalatCapi? item.halatCapi === this.selectedHalatCapi.ad || this.selectedHalatCapi.id==1 : true;
     const matchesKasnakTuru = this.selectedKasnakTuru? item.kasnakTuru === this.selectedKasnakTuru.ad || this.selectedKasnakTuru.id==1 : true;
     return matchesKasnakTipi && matchesKanalSayisi && matchesKasnakCesidi && matchesKasnakTuru
-                    
-  });
-    this.kabinler=filteredProducts;
+                      
+    });
+      this.urunler=filteredProducts;
+      this.selectedUrunRow=filteredProducts[0];
   this.visible = true;
 
   }
-  malzemeToplam: number;
-  Hesapla(event){
-       this.bilesenler=this.selectedURUN?.urunBilesenler;
-       this.iscilikGiderler=this.selectedURUN?.iscilikGiderler
 
-       this.bilesenler?.forEach((item: any) => {
-         if (item.stok.dovizCinsi=='TL') {
-           var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
-           item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
-          }
-         else if (item.stok.dovizCinsi=='EURO') {
-           var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
-           item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
-          }
-         else if (item.stok.dovizCinsi=='USD') {
-           var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
-           item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
-          }
-       });
-       let total = 0;
-       for (let item of this.bilesenler) {
-           total += item.miktar*item.stok.dovizFiyat;
-       }
-    this.malzemeToplam = total;
-    this.visible = false;
-
-    this.iscilikHesapla()
-  }
-
-
-  iscilikToplam:any;
-  iscilikHesapla(){
-    let total = 0;
-    this.selectedURUN?.iscilikGiderler.forEach(element => {
-       total += element.personel.maas;
-    });
-
-    this.frm.ortalamaPersonelMaasi=total/this.selectedURUN?.iscilikGiderler.length
-    this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.tahminiCalisanSayisi/28)/this.frm.gunlukUretimSayisi;
-    this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam;
-
-
-  }
+    
 
 
   genelGiderToplam:any;
   toplamMaliyet:any;
+
+
+
+
+  urunSec(event){
+    this.bilesenler=this.selectedURUN?.urunBilesenler;
+    this.iscilikGiderler=this.selectedURUN?.iscilikGiderler;
+    let totalMaas = 0;
+    this.iscilikGiderler.forEach(element => {
+      totalMaas += element.personel.maas;
+    });
+  
+    if (this.iscilikGiderler.length!=0) {
+      this.frm.ortalamaPersonelMaasi=totalMaas/this.iscilikGiderler.length;
+      this.frm.personelSayisi=this.iscilikGiderler.length;
+    }
+    else{
+      this.frm.ortalamaPersonelMaasi=0;
+      this.frm.personelSayisi=0;
+    }
+
+    this.visible = false;
+
+    if (this.selectedURUN) {
+      this.hesaplaButtonDisabled=false;
+    }
+  }
+
+
+
+
+  malzemeToplam: number;
+  hesaplaButtonDisabled=true;
+  pesinFiyat:any;
+  vade1Fiyat:any;
+  vade2Fiyat:any;
+  vade3Fiyat:any;
+
+  Hesapla(){
+
+  this.malzemeGiderHesap();
+  this.iscilikGiderHesap();
+  this.genelGiderHesap();
+
+  this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam+(this.genelGiderToplam/this.frm.personelSayisi);
+
+  this.fiyatHesap();
+
+    
+
+  }
+
+
+  iscilikToplam:any;
+  IscilikDeleteFunc(event) {
+    this.iscilikGiderler = event;
+  }
+
+
+
+  iscilikVisible:any;
+
+
+
+
+
+
+
+
+
+
+malzemeGiderHesap(){
+    this.bilesenler?.forEach((item: any) => {
+      if (item.stok.dovizCinsi=='TL') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+        item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+       }
+      else if (item.stok.dovizCinsi=='EURO') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+        item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+       }
+      else if (item.stok.dovizCinsi=='USD') {
+        var doviz:any= DOVIZ.filter(c=>c.dovizCinsi==item.stok.dovizCinsi)[0]
+        item.stok.dovizFiyat= item.stok.birimFiyat*doviz.deger;
+       }
+  });
+  let total = 0;
+  for (let item of this.bilesenler) {
+      total += item.miktar*item.stok.dovizFiyat;
+  }
+
  
+  this.malzemeToplam = total;
+}
+
+iscilikGiderHesap(){
+    var totalMaas=0
+    this.iscilikGiderler.forEach(element => {
+      totalMaas += element.personel.maas;
+    });
+    
+    
+     
+
+
+    if (this.iscilikGiderler.length!=0) {
+      this.frm.ortalamaPersonelMaasi=totalMaas/this.iscilikGiderler.length;
+      this.frm.personelSayisi=this.iscilikGiderler.length;
+      this.iscilikToplam=(this.frm.ortalamaPersonelMaasi*this.frm.personelSayisi/28)/this.frm.gunlukUretimSayisi;
+    }
+    else{
+      this.frm.ortalamaPersonelMaasi=0;
+      this.frm.personelSayisi=0;
+      this.iscilikToplam=0;
+    }
+    
+}
+
+genelGiderHesap(){
+
+  var total=0
+  this.genelGiderler.forEach(element => {
+    total += (element.tutar*element.etkiOrani/100);
+  });
+  this.genelGiderToplam=total
+}
+
+fiyatHesap(){
+  this.pesinFiyat=this.toplamMaliyet + this.toplamMaliyet*this.frm.kar/100;
+  this.vade1Fiyat=this.pesinFiyat + this.pesinFiyat*this.frm.vadeFarki/100;
+  this.vade2Fiyat=this.vade1Fiyat + this.vade1Fiyat*this.frm.vadeFarki/100;
+  this.vade3Fiyat=this.vade2Fiyat + this.vade2Fiyat*this.frm.vadeFarki/100;
+
+  console.log(this.pesinFiyat);
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+personelEkleDialog(item){
+this.iscilikGiderler=item
+}
 
 
 }
+
+

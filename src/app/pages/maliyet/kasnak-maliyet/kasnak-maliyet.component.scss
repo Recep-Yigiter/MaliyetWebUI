@@ -4,12 +4,19 @@
 
 @import "src/assets/scss/caption";
 @import "src/assets/scss/section";
-
+.nav-tabs > li > a {
+    color: #A7B1C2;
+    font-weight: 600;
+    padding: 4px 20px 4px 25px;
+}
 .form-select {
     border-radius: 0;
 }
 
 :host ::ng-deep {
+    .deneme{
+     background-color: red;
+    }
     p-table{
         .p-datatable .p-datatable-thead > tr > th {
 
@@ -17,7 +24,6 @@
             font-weight: 400 !important;
             color: #a9a9a9;
             font-size: 14px;
-
         }
         .p-datatable .p-datatable-tbody>tr>td {
             text-align: left;
@@ -29,7 +35,6 @@
 
         .p-datatable .p-datatable-thead>tr>th {
             padding: 0.3rem 1rem;
-
         }
 
         .p-checkbox .p-checkbox-box.p-highlight {
@@ -69,7 +74,15 @@
             transition: box-shadow 0.2s;
         }
     }
-
+    .p-datatable .p-datatable-tfoot > tr > td {
+        text-align: left;
+        padding: .1rem 1rem;
+        border: 1px solid #dee2e6;
+        border-width: 0 0 1px 0;
+        font-weight: 700;
+        color: #343a40;
+        background: #f8f9fa;
+    }
     p-autocomplete {
         width: 100%;
 
@@ -137,8 +150,8 @@
             position: relative;
             -webkit-user-select: none;
             user-select: none;
-            padding-top: 0.4rem;
-            padding-bottom: 0.4rem;
+            padding-top: 0.1rem;
+            padding-bottom: 0.1rem;
             width: 100%;
             background-color: rgb(247, 247, 247) !important;
         }
@@ -151,7 +164,7 @@
         .p-dropdown .p-dropdown-label {
             background: transparent;
             border: 0 none;
-            padding: 0 2.25rem 0 0.75rem !important;
+            padding: 0 .25rem 0 0.75rem !important;
             font-size: 13px !important;
             background-color: rgb(247, 247, 247) !important;
             border-radius: 0px !important;
@@ -166,5 +179,86 @@
         }
     }
 
+    .disabled-div {
+        pointer-events: none;
+        opacity: 0.5; /* Görsel olarak daha belirgin hale getirmek için */
+      }
 
+
+
+
+
+
+
+
+
+
+
+      
+
+
+
+  .portHeadLightMenu ul {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.portHeadLightMenu>ul {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.portHeadLightMenu ul li {
+    list-style-type: none;
+    position: relative;
+}
+
+
+.portHeadLightMenu ul li ul {
+    display: none;
+    opacity: 0;
+    box-sizing: border-box;
+    position: absolute;
+    min-width: 215px;
+    border-radius: 4px;
+    border-top-right-radius: 0 !important;
+    padding: 10px 0;
+    right: -4px;
+    top: 33px;
+    background-color: rgb(71 85 105 / var(--tw-bg-opacity, 1));
+    box-shadow: 0 0 15px #eee;
+    z-index: 101;
+
+}
+
+
+
+
+
+.portHeadLightMenu ul li ul::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -12px;
+    margin-left: -6px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0px 12px 12px 12px;
+     border-color: transparent transparent  rgb(71 85 105 / var(--tw-bg-opacity, 1)) transparent;
+    z-index: 101;
+}
+
+stop {
+  stop-color:  rgb(71 85 105 / var(--tw-bg-opacity, 1));
+}
+
+
+.show{
+    display:block !important;
+    opacity:1 !important
+  }
 }

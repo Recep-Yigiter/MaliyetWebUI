@@ -19,6 +19,7 @@ import { MakineSasesiIscilikGiderlerTableComponent } from './core/tables/iscilik
 import { MakineSasesiMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
 import { MakineSasesiMaliyetTableComponent } from './core/tables/maliyet-table';
 import { MakineSasesiFiyatTableComponent } from './core/tables/fiyat-table';
+import { AccordionModule } from 'primeng/accordion';
 
 
 
@@ -45,6 +46,7 @@ import { MakineSasesiFiyatTableComponent } from './core/tables/fiyat-table';
     ListboxModule,
     RadioButtonModule,
     DialogModule,
+    AccordionModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     RouterModule.forChild([
       // { path: 'create', component: CreateButonMaliyetComponent },

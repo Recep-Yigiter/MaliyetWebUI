@@ -37,7 +37,7 @@ import { KapiGrupSelectModalComponents } from 'src/shared/dialogs/kapi-grup-sele
 
   ],
   providers: [
-     { provide: "baseUrl", useValue: "http://192.168.4.111:8082/api", multi: true },
+     { provide: "baseUrl", useValue: "https://localhost:7054/api", multi: true },
      { provide: LocationStrategy, useClass: HashLocationStrategy, },
      ],
   bootstrap: [AppComponent]

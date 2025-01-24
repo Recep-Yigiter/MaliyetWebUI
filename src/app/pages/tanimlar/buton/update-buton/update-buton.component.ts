@@ -33,7 +33,6 @@ export class UpdateButonComponent implements OnInit {
 
  async ngOnInit() {
 console.log(this.data);
-  // var test=  await this.KabinService.getById(this.data.id)
   this.frm={
     ad:this.data.ad,
     butonTipi: {ad: this.selectedButonTipi?this.selectedButonTipi:this.data.butonTipi},

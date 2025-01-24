@@ -18,6 +18,7 @@ import { KasnakIscilikGiderlerTableComponent } from './core/tables/iscilik-gider
 import { KasnakMalzemeGiderlerTableComponent } from './core/tables/malzeme-giderler-table';
 import { KasnakMaliyetTableComponent } from './core/tables/maliyet-table';
 import { KasnakFiyatTableComponent } from './core/tables/fiyat-table';
+import { AccordionModule } from 'primeng/accordion';
 
 
 
@@ -44,6 +45,7 @@ import { KasnakFiyatTableComponent } from './core/tables/fiyat-table';
         ListboxModule,
         RadioButtonModule,
         DialogModule,
+        AccordionModule,
         ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
         RouterModule.forChild([
           // { path: 'create', component: CreateButonMaliyetComponent },

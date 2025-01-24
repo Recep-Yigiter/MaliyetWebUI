@@ -8,15 +8,20 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { RouterModule } from '@angular/router';
-import { KasnakFormComponent } from './components/urun-form';
-import { KasnakDesignComponent } from './design/design.component';
+import { KasnakFormComponent } from './core/components/urun-form';
+import { KasnakDesignComponent } from './core/design/design.component';
+import { CreateKasnakComponent } from './create-kasnak/create-kasnak.component';
+import { UpdateKasnakComponent } from './update-kasnak/update-kasnak.component';
+import { AccordionModule } from 'primeng/accordion';
 
 
 @NgModule({
   declarations: [
     KasnakComponent,
     KasnakFormComponent,
-    KasnakDesignComponent
+    KasnakDesignComponent,
+    CreateKasnakComponent,
+    UpdateKasnakComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +31,7 @@ import { KasnakDesignComponent } from './design/design.component';
             DialogModule,
             DropdownModule,
             TableModule,
+            AccordionModule,
             ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
             RouterModule.forChild([
               // { path: 'create', component: CreateButonMaliyetComponent },

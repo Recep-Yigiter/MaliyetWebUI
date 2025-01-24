@@ -3,102 +3,43 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'kasnak-fiyat-table',
   template: `
-        <table class="yks_table_group ">
-            <tbody>
-                <tr style="height: 25px !important;">
-                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
+      <table id="myTable" class="yks_table_group " style="width: 300px;">
+                    <thead style="border-bottom: 1px solid #a3a3a3;">
+                      <th></th>
+                      <th style="font-size: 11px;color: black;">Fiyat</th>
 
-                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">Peşin Fiyat:
-                        </label>
-                    </td>
-                    <td style="width: 100%;">
+                    </thead>
+                    <tbody>
 
-                        <label style=" min-width: 60px; 
-                    font-weight: 600; 
-                    font-size: 13px; 
-                    color: #666666;">
-
-                            <span> 0 ₺ </span>
-
-
-                        </label>
-                    </td>
-
-                </tr>
-                <tr style="height: 25px !important;">
-                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-
-                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">60 Gün:
-                        </label>
-                    </td>
-                    <td style="width: 100%;">
-
-                        <label style=" min-width: 60px; 
-                    font-weight: 600; 
-                    font-size: 13px; 
-                    color: #666666;">
-
-                            <span> 0 ₺ </span>
-
-
-                        </label>
-                    </td>
-
-                </tr>
-
-                <tr style="height: 25px !important;">
-                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-
-                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">
-                            90 gün :
-                        </label>
-                    </td>
-                    <td style="width: 100%;">
-
-                        <label style=" min-width: 60px; 
-                    font-weight: 600; 
-                    font-size: 13px; 
-                    color: #666666;">
-
-                            <span>  0 ₺</span>
-
-
-                        </label>
-                    </td>
-
-                </tr>
-                <tr style="height: 25px !important;">
-                    <td class="yks_td_label" style="border-left: #000000; text-align: end; text-align: end;">
-
-                        <label style=" min-width: 160px; font-weight: 600; font-size: 13px; color: #7a0000;">
-                            120 Gün:
-                        </label>
-                    </td>
-                    <td style="width: 100%;">
-
-                        <label style=" min-width: 60px; 
-                    font-weight: 600; 
-                    font-size: 13px; 
-                    color: #666666;">
-
-                            <span>  0 ₺</span>
-
-
-                        </label>
-                    </td>
-
-                </tr>
-
-
-
-
-
-            </tbody>
-        </table>
+                    <ng-container >
+                    <tr style="border-bottom: 1px solid #b4b4b4;">
+                          <td style="font-size: 12px;font-weight: bold;color: gray;">Peşin</td>
+                          <td style="font-size: 12px;color: gray;">{{pesinFiyat?' ₺'+pesinFiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #b4b4b4;">
+                          <td style="font-size: 12px;font-weight: bold;color: gray;">60 Gün</td>
+                          <td style="font-size: 12px;color: gray;">{{vade1Fiyat?' ₺'+vade1Fiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #b4b4b4;">
+                          <td style="font-size: 12px;font-weight: bold;color: gray;">90 Gün</td>
+                          <td style="font-size: 12px;color: gray;">{{vade2Fiyat?' ₺'+vade2Fiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #b4b4b4;">
+                          <td style="font-size: 12px;font-weight: bold;color: gray;">120 Gün</td>
+                          <td style="font-size: 12px;color: gray;">{{vade3Fiyat?' ₺'+vade3Fiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
+                     </tr> 
+  
+           </ng-container>
+       </tbody>
+  </table>
   `,
 
 })
 export class KasnakFiyatTableComponent {
     @Input() genelGiderler: any;
     @Input() selectedGenelGiderler: any;
+    @Input() pesinFiyat: any;
+    @Input() vade1Fiyat: any;
+    @Input() vade2Fiyat: any;
+    @Input() vade3Fiyat: any;
 }
