@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                             <kabin-maliyet-table [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam"
-                                [genelGiderToplam]="genelGiderToplam/frm.personelSayisi"
+                                [genelGiderToplam]="genelGiderToplam/frm.gunlukUretimSayisi"
                                 [toplamMaliyet]="toplamMaliyet"></kabin-maliyet-table>
 
                             <kabin-fiyat-table [pesinFiyat]="pesinFiyat"
@@ -148,8 +148,9 @@
                     
             </p-accordionTab>
             <p-accordionTab header="Genel Giderler (Gün Bazında)">
-                <kabin-genel-giderler-table [genelGiderler]="genelGiderler" [genelGiderToplam]="genelGiderToplam"
-                    [selectedGenelGiderler]="selectedBilesenRow"></kabin-genel-giderler-table>
+               <kabin-genel-giderler-table [genelGiderler]="gruplanmisVeri['Kabin Fabrikası']" [genelGiderToplam]="genelGiderToplam"
+                    [selectedGenelGiderler]="selectedBilesenRow"></kabin-genel-giderler-table> 
+
             </p-accordionTab>
         </p-accordion>
 

@@ -23,24 +23,21 @@ declare var $: any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
- 
+
   user: any;
   constructor(
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit() {
 
 
-    
-  }
-  onRouteChange() {
-    this.selectedTab=  localStorage.getItem('menu');
-    console.log(this.selectedTab);
-    this.router.navigate([`tanimlar/${this.selectedTab}`])
+
   }
 
-  
+  activeModule() {
+
+  }
 
   moduls = [
     {
@@ -49,46 +46,38 @@ export class AppComponent implements OnInit {
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
       href: '/maliyet/kabin-maliyet',
       disabled: false,
-      localStorage:'maliyet'
-    },
-    {
-      modul: 'Satış Fiyatı',
-      icon: 'fa-solid fa-receipt',
-      class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
-      href: '/satis-fiyati/kabin',
-      disabled: false,
-      localStorage:'satisFiyati'
+      localStorage: 'maliyet'
     },
     
+
     {
       modul: 'Tanımlar',
       icon: 'fa-solid fa-receipt',
       class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
       href: '/tanimlar/stok',
       disabled: false,
-      localStorage:'stok'
+      localStorage: 'stok'
     },
-    
-   
+
+
   ];
 
 
   show() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
-  selectedTab:any
-  routerChange(item){
-// debugger
+  selectedTab: any
+  routerChange(item) {
 
-    if (item.href=="/maliyet/kabin-maliyet") {
+    if (item.href == "/maliyet/kabin-maliyet") {
       const local1 = JSON.parse(localStorage.getItem('maliyet'));
       this.router.navigate([local1.href])
     }
-    else if (item.href=="/tanimlar/stok") {
+    else if (item.href == "/tanimlar/stok") {
       const local2 = JSON.parse(localStorage.getItem('tanimlar'));
       this.router.navigate([local2.href])
     }
-    else{
+    else {
 
     }
 
@@ -98,11 +87,11 @@ export class AppComponent implements OnInit {
 
 
 
-    
-   
 
-  //   localStorage.setItem('menu',item)
-  //   this.selectedTab = item;  
+
+
+    //   localStorage.setItem('menu',item)
+    //   this.selectedTab = item;  
     // this.router.navigate([local])
     // console.log("item",item);
     // console.log("local",local);

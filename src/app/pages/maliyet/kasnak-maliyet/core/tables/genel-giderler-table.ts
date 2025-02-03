@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'kasnak-genel-giderler-table',
-  template: `
+    selector: 'kasnak-genel-giderler-table',
+    template: `
   <p-table id="row-check" [value]="genelGiderler" [style]="{'min-height':' 417px'}" dataKey="id" [scrollable]="true"
 scrollHeight="417px" selectionMode="single" [(selection)]="selectedGenelGiderler">
 <ng-template pTemplate="header">
@@ -44,6 +44,14 @@ scrollHeight="417px" selectionMode="single" [(selection)]="selectedGenelGiderler
         </th>
     </tr>
     <tr>
+    <th>Gider Adı</th>
+    <th style="font-size: 13px;">a=Miktar</th>
+    <th style="font-size: 13px;">Birim</th>
+    <th style="font-size: 13px;">b=Fiyat(TL)</th>
+    <th style="font-size: 13px;text-align: center;">Döviz</th>
+    <th style="font-size: 13px;">c=axb=Tutar(TL)</th>
+    </tr>
+    <!-- <tr>
        
         <th style="font-size: 13px;">Malzeme Adı</th>
         <th style="font-size: 13px;">a=Miktar</th>
@@ -51,10 +59,10 @@ scrollHeight="417px" selectionMode="single" [(selection)]="selectedGenelGiderler
         <th style="font-size: 13px;">b=Fiyat(TL)</th>
         <th style="font-size: 13px;text-align: center;">Döviz</th>
         <th style="font-size: 13px;">c=axb=Tutar(TL)</th>
-    </tr>
+    </tr> -->
 </ng-template>
 <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-    <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
+    <!-- <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
         <td>{{ product.ad }}</td>
         <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
             <p-cellEditor>
@@ -72,12 +80,35 @@ scrollHeight="417px" selectionMode="single" [(selection)]="selectedGenelGiderler
         <td>{{ product.tutar* (product.etkiOrani/100)| currency:' ₺':'symbol':'1.2-2'}}</td>
         <td>{{ product.dovizCinsi }}</td>
         <td>{{ product.tutar*product.miktar* (product.etkiOrani/100)  | currency:' ₺':'symbol':'1.2-2'}}</td>
+    </tr> -->
+
+    <tr >                   
+      <td>{{ product.ad }}</td>
+      <td>1</td>
+      <td>Adet</td>
+      
+      <td *ngFor="let type of ['kasnak']">
+        <ng-container *ngIf="product.katsayilar[type]">
+          {{ product.katsayilar[type]/28 | currency:' ₺':'symbol':'1.2-2'}}
+        </ng-container>
+        <ng-container *ngIf="!product.katsayilar[type]">
+          {{ '-' }}
+        </ng-container>
+      </td>
+      <td>TL</td>
+      <td>{{ product.tutar | currency:' ₺':'symbol':'1.2-2'}}</td>
     </tr>
 </ng-template>
 <ng-template pTemplate="footer">
     <tr>
-        <td colspan="5" class="text-right" style="font-size: 13px;">Toplam</td>
-        <td style="font-size: 13px;">{{genelGiderToplam | currency: 'USD'}}</td>
+        <td></td>
+        <td></td>
+        <td colspan="1" class="text-right" style="font-size: 13px;">Toplam</td>
+        <td style="font-size: 13px;"> {{genelGiderToplam?' ₺'+genelGiderToplam.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}</td>
+        <td></td>
+        <td></td>
+        
+       
     </tr>
 </ng-template> 
 </p-table>

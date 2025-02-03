@@ -1,0 +1,282 @@
+@import "src/assets/scss/caption";
+@import "src/assets/scss/section";
+
+
+
+.form-select {
+    border-radius: 0;
+}
+
+:host ::ng-deep {
+    p-table{
+        .p-datatable .p-datatable-thead > tr > th {
+
+            border-width: 0 0 1px 0;
+            font-weight: 400 !important;
+            color: #a9a9a9;
+            font-size: 14px;
+
+        }
+        .p-datatable .p-datatable-tbody>tr>td {
+            text-align: left;
+            border: 1px solid #dee2e6;
+            border-width: 0 0 1px 0;
+            padding: 0.3rem 1rem;
+            font-size: 12px;
+        }
+
+        .p-datatable .p-datatable-thead>tr>th {
+            padding: 0.3rem 1rem;
+
+        }
+
+        .p-checkbox .p-checkbox-box.p-highlight {
+            border-color: #b8c8e1;
+            background: #012869;
+        }
+
+        .p-checkbox .p-checkbox-box {
+            border-radius: 0px;
+        }
+
+        
+            .p-datatable .p-datatable-tbody > tr.p-highlight {
+                background: #EFF6FF;
+                color: #1D4ED8;
+                font-weight: 700;
+            }
+           .p-datatable .p-datatable-tbody > tr {
+                background: #ffffff;
+                color: #c1c1c1;
+                transition: box-shadow 0.2s;
+            }
+  
+        
+       
+    }
+
+    p-table#row-check{
+        .p-datatable .p-datatable-tbody > tr.p-highlight {
+            background: #EFF6FF;
+            color: #1D4ED8;
+            font-weight: 700;
+        }
+       .p-datatable .p-datatable-tbody > tr {
+            background: #ffffff;
+            color: #1f1f1f;
+            transition: box-shadow 0.2s;
+        }
+    }
+
+    p-autocomplete {
+        width: 100%;
+
+        .p-autocomplete {
+            width: 100%;
+        }
+
+        .p-inputtext {
+            padding: 0 2.25rem 0 0.75rem !important;
+            font-size: 13px !important;
+            background-color: rgb(247, 247, 247) !important;
+            border-radius: 0px !important;
+            border: 1px solid rgb(219, 219, 219) !important;
+            color: black;
+            font-weight: 600;
+        }
+
+        .p-autocomplete-dd .p-autocomplete-input {
+            height: 34.5px;
+            background-color: rgb(247, 247, 247);
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .p-button:enabled {
+            background: rgb(247, 247, 247);
+            color: #ffffff;
+            border: 1px solid rgb(219, 219, 219) !important;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .p-button:enabled:hover {
+            background: rgb(241, 241, 241);
+            color: #ffffff;
+            border: 1px solid rgb(219, 219, 219) !important;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .p-button.p-button-icon-only {
+            height: 34.5px;
+        }
+
+        .p-icon {
+            color: rgb(175, 175, 175);
+        }
+
+        .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item {
+            padding: 0.3rem 1.25rem;
+            font-size: 13px;
+        }
+
+        .p-autocomplete-panel .p-autocomplete-items {
+            padding: 0.3rem 0;
+        }
+
+
+    }
+
+    p-dropdown {
+        .p-dropdown {
+            display: inline-flex;
+            cursor: pointer;
+            position: relative;
+            -webkit-user-select: none;
+            user-select: none;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            width: 100%;
+            background-color: rgb(247, 247, 247) !important;
+        }
+
+        .p-dropdown-panel .p-dropdown-items {
+            padding: 0.3rem 0;
+            font-size: 13px;
+        }
+
+        .p-dropdown .p-dropdown-label {
+            background: transparent;
+            border: 0 none;
+            padding: 0 .25rem 0 0.75rem !important;
+            font-size: 13px !important;
+            background-color: rgb(247, 247, 247) !important;
+            border-radius: 0px !important;
+            color: black;
+            font-weight: 600;
+        }
+        p-dropdownitem li{
+            padding: 0.2rem 1.25rem !important;
+        }
+        .p-dropdown .p-dropdown-label.p-placeholder {
+            color: #aab1b7 !important;
+            font-weight: 400 !important;
+ 
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+p-table{
+    .p-datatable .p-datatable-thead > tr > th {
+
+        border-width: 0 0 1px 0;
+        font-weight: 400 !important;
+        color: #a9a9a9;
+        font-size: 14px;
+
+    }
+    .p-datatable .p-datatable-tbody>tr>td {
+        text-align: left;
+        border: 1px solid #dee2e6;
+        border-width: 0 0 1px 0;
+        padding: 0.3rem 1rem;
+        font-size: 12px;
+    }
+
+    .p-datatable .p-datatable-thead>tr>th {
+        padding: 0.3rem 1rem;
+
+    }
+
+    .p-checkbox .p-checkbox-box.p-highlight {
+        border-color: #b8c8e1;
+        background: #012869;
+    }
+
+    .p-checkbox .p-checkbox-box {
+        border-radius: 0px;
+    }
+
+    
+        .p-datatable .p-datatable-tbody > tr.p-highlight {
+            background: #EFF6FF;
+            color: #1D4ED8;
+            font-weight: 700;
+        }
+       .p-datatable .p-datatable-tbody > tr {
+            background: #ffffff;
+            color: #c1c1c1;
+            transition: box-shadow 0.2s;
+        }
+
+    
+   
+}
+
+
+
+
+
+ thead > tr > th {
+     border-width: 0 0 1px 0;
+     font-weight: 400 !important;
+     color: #a9a9a9;
+     font-size: 14px;
+ }
+
+
+tbody>tr>td {
+    text-align: left;
+    border: 1px solid #dee2e6;
+    padding: 0.3rem 1rem;
+    font-size: 12px;
+}
+
+ thead>tr>th {
+     padding: 0.3rem 1rem;
+ }
+
+ table {
+     width: 100%;
+     border-collapse: collapse;
+   }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    // background-color: #f1f1f1;
+    cursor: default;
+  }
+
+  .selected-row {
+    background: #EFF6FF;
+    color: #1D4ED8;
+  }
+  
+  .selected-row:hover {
+    background-color: #EFF6FF !important;
+  }
+
+
+
+  

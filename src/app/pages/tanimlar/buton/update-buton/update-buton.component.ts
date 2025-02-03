@@ -32,7 +32,6 @@ export class UpdateButonComponent implements OnInit {
   ) {}
 
  async ngOnInit() {
-console.log(this.data);
   this.frm={
     ad:this.data.ad,
     butonTipi: {ad: this.selectedButonTipi?this.selectedButonTipi:this.data.butonTipi},
@@ -42,23 +41,24 @@ console.log(this.data);
   }
 
 
-    this.iscilikGiderler=this.data.iscilikGiderler
-    this.data.urunBilesenler.forEach(element => {
-      var test={
-        stokId: element.stok.id,
-        ad:element.stok.ad,
-        birim:element.stok.birim,
-        butonId: null,
-        kabinId:null,
-        kasnakId: null,
-        kapiGrupId:null,
-        makineSasesiId: null,
-        suspansiyonId: null,
-        miktar:element.miktar?element.miktar:0
-  }
+  this.iscilikGiderler=this.data.iscilikGiderler
+  this.data.urunBilesenler.forEach(element => {
+    var test={
+      stokId: element.stok.id,
+      ad:element.stok.ad,
+      birim:element.stok.birim,
+      butonId: null,
+      kabinId:null,
+      kasnakId: null,
+      kapiGrupId:null,
+      makineSasesiId: null,
+      suspansiyonId: null,
+      miktar:element.miktar?element.miktar:0
 
-      this.malzemeGiderler.push(test)
-    });
+}
+
+    this.malzemeGiderler.push(test)
+  });
 
     // this.malzemeGiderler=this.data.urunBilesenler
     // console.log(this.data.urunBilesenler);
@@ -224,7 +224,6 @@ console.log(this.data);
 
         stoks.forEach(element => {
           var newValue={
-
             stokId: element.id,
             ad:element.ad,
             birim:element.birim,
@@ -237,7 +236,6 @@ console.log(this.data);
             miktar:element.miktar?element.miktar:0
           }
           const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
-        
           if (customerExists) {
             alert(`Bu ${element.ad} zaten mevcut! `);
             return;

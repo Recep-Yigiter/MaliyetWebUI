@@ -15,6 +15,7 @@ import { Component, Input } from '@angular/core';
                     <tr style="border-bottom: 1px solid #b4b4b4;">
                           <td style="font-size: 12px;font-weight: bold;color: gray;">Peşin</td>
                           <td style="font-size: 12px;color: gray;">{{pesinFiyat?' ₺'+pesinFiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
+
                       </tr>
                       <tr style="border-bottom: 1px solid #b4b4b4;">
                           <td style="font-size: 12px;font-weight: bold;color: gray;">60 Gün</td>
@@ -27,7 +28,8 @@ import { Component, Input } from '@angular/core';
                       <tr style="border-bottom: 1px solid #b4b4b4;">
                           <td style="font-size: 12px;font-weight: bold;color: gray;">120 Gün</td>
                           <td style="font-size: 12px;color: gray;">{{vade3Fiyat?' ₺'+vade3Fiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                     </tr> 
+                    </tr> 
+  
   
            </ng-container>
        </tbody>

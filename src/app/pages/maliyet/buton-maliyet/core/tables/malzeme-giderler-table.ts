@@ -5,6 +5,7 @@ import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-moda
 @Component({
     selector: 'buton-malzeme-giderler-table',
     template: `
+
 <p-table id="row-check" [value]="malzemeGiderler" [style]="{'min-height':' 450px'}" [scrollable]="true"
             scrollHeight="450px" selectionMode="single" [(selection)]="selectedMalzemeGiderler">
             <ng-template pTemplate="header">
@@ -39,11 +40,6 @@ import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-moda
                                 </div>
 
                             </div>
-
-
-
-                           
-
                         </div>
                     </th>
                 </tr>
@@ -95,16 +91,20 @@ export class ButonMalzemeGiderlerTableComponent {
     @Input() selectedMalzemeGiderler: any;
     @Input() malzemeToplam: any;
     @Output() public childFuncStokEkle: EventEmitter<any> = new EventEmitter();
+    /**
+     *
+     */
+    constructor(private NgbModal: NgbModal) {
+
+
+    }
+
     deleteItem(index: number): void {
         this.malzemeGiderler.splice(index, 1);
 
     }
 
-    constructor(private NgbModal: NgbModal) {
 
-
-
-    }
 
     stokEkle() {
         const modalRef = this.NgbModal.open(StokSelectModalComponents, {
@@ -137,4 +137,9 @@ export class ButonMalzemeGiderlerTableComponent {
             }
         });
     }
+
+
+
+
+
 }

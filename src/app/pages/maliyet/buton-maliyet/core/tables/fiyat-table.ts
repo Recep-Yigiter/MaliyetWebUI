@@ -14,24 +14,20 @@ import { Component, Input } from '@angular/core';
                     <ng-container >
                     <tr style="border-bottom: 1px solid #b4b4b4;">
                           <td style="font-size: 12px;font-weight: bold;color: gray;">Peşin</td>
-                          <td style="font-size: 12px;color: gray;" *ngIf="pesinFiyat">{{pesinFiyat| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;" *ngIf="!pesinFiyat">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
+                          <td style="font-size: 12px;color: gray;">{{pesinFiyat?' ₺'+pesinFiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
 
                       </tr>
                       <tr style="border-bottom: 1px solid #b4b4b4;">
                           <td style="font-size: 12px;font-weight: bold;color: gray;">60 Gün</td>
-                          <td style="font-size: 12px;color: gray;"*ngIf="vade1Fiyat">{{vade1Fiyat| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;" *ngIf="!vade1Fiyat">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
+                          <td style="font-size: 12px;color: gray;">{{vade1Fiyat?' ₺'+vade1Fiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
                       </tr>
                       <tr style="border-bottom: 1px solid #b4b4b4;">
                           <td style="font-size: 12px;font-weight: bold;color: gray;">90 Gün</td>
-                          <td style="font-size: 12px;color: gray;"*ngIf="vade2Fiyat">{{vade2Fiyat| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;" *ngIf="!vade2Fiyat">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
+                          <td style="font-size: 12px;color: gray;">{{vade2Fiyat?' ₺'+vade2Fiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
                       </tr>
                       <tr style="border-bottom: 1px solid #b4b4b4;">
                           <td style="font-size: 12px;font-weight: bold;color: gray;">120 Gün</td>
-                          <td style="font-size: 12px;color: gray;"*ngIf="vade3Fiyat">{{vade3Fiyat| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;" *ngIf="!vade3Fiyat">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
+                          <td style="font-size: 12px;color: gray;">{{vade3Fiyat?' ₺'+vade3Fiyat.toFixed(2):0| currency:' ₺':'symbol':'1.2-2'}}  </td>
                     </tr> 
   
            </ng-container>

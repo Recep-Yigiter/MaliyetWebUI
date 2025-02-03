@@ -51,8 +51,6 @@ export class KabinComponent implements OnInit {
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
     this.rowData =(await this.KabinService.GetAll()).items;
-   
-    
   }
 
   rowClick() {

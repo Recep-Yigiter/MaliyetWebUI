@@ -11,6 +11,7 @@ import { KapiComponent } from './kapi/kapi.component';
 import { KasnakComponent } from './kasnak/kasnak.component';
 import { MakineSasesiComponent } from '../tanimlar/makine-sasesi/makine-sasesi.component';
 import { SuspansiyonComponent } from './suspansiyon/suspansiyon.component';
+import { GenelGiderComponent } from './genel-gider/genel-gider.component';
 
 
 
@@ -34,6 +35,7 @@ import { SuspansiyonComponent } from './suspansiyon/suspansiyon.component';
              { path: 'kasnak', component: KasnakComponent, loadChildren: () => import("../tanimlar/kasnak/kasnak.module").then(m => m.KasnakModule) },
              { path: 'makine-sasesi', component: MakineSasesiComponent, loadChildren: () => import("../tanimlar/makine-sasesi/makine-sasesi.module").then(m => m.MakineSasesiModule) },
              { path: 'suspansiyon', component: SuspansiyonComponent, loadChildren: () => import("../tanimlar/suspansiyon/suspansiyon.module").then(m => m.SuspansiyonModule) },
+             { path: 'genel-gider', component: GenelGiderComponent, loadChildren: () => import("../tanimlar/genel-gider/genel-gider.module").then(m => m.GenelGiderModule) },
 
           ]
         },

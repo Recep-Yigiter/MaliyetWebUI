@@ -177,10 +177,8 @@ export class UpdateMakineSasesiComponent implements OnInit {
     modalRef.componentInstance.confirmationBoxTitle = 'Stok Listesi';
     modalRef.result.then((stoks) => {
       if (stoks != false) {
-
         stoks.forEach(element => {
           var newValue = {
-
             stokId: element.id,
             ad: element.ad,
             birim: element.birim,
@@ -230,7 +228,7 @@ export class UpdateMakineSasesiComponent implements OnInit {
             kapiId: null,
             kasnakId: null,
             makineSasesiId: null,
-            MakineSasesiId: null
+            suspansiyonId: null
           }
           const customerExists = this.iscilikGiderler.some(customer => customer.personel.id === newValue.personel.id);
 

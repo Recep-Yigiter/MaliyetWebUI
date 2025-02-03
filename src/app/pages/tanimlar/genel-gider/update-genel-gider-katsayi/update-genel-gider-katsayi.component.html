@@ -1,0 +1,127 @@
+
+
+<div class="modal-header "style="    padding: 0rem 0rem;">
+    <h4 class="modal-title"></h4>
+    <h4 class="modal-title"> </h4>
+    <button type="button" class="btn-close" style="border: none; height: 30px; width: 30px;" aria-label="Close" (click)="activeModal.close(false)">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+</div>
+
+
+
+<div class="">
+    <div class="container-fluid">
+        <div class="panel header" data-resize-name="header">
+            <div class="content">
+                <div class="actions" style="padding: 2px 0px 2px 0px; display: flex;">
+                    <div class="action-items" style="width: 100%; display: flex; align-items: center;">
+
+                        <div class="action-left">
+                            <div class="btn-group ml-1 mr-1">
+
+                                <div class="button-container">
+
+                                    <div class="button-grup disabled">
+                                        <div class="img-container">
+                                            <img src="../../../../../assets/icons/add-file.png" alt="">
+                                        </div>
+                                        <span class="d-none d-sm-inline button-label">Yeni</span>
+
+                                    </div>
+
+                                    <div class="button-grup disabled">
+                                        <div class="img-container">
+                                            <img src="../../../../../assets/icons/save.png" alt="">
+                                        </div>
+                                        <span class="d-none d-sm-inline button-label">Kaydet</span>
+
+                                    </div>
+
+                                    <div class="button-grup disabled">
+                                        <div class="img-container">
+                                            <img src="../../../../../assets/icons/delete-file.png" alt="">
+                                        </div>
+                                        <span class="d-none d-sm-inline button-label">Sil</span>
+
+                                    </div>
+
+                                    <div (click)="cikis()" class="button-grup">
+                                        <div class="img-container">
+                                            <img src="../../../../../assets/icons/close.png" alt="">
+                                        </div>
+                                        <span class="d-none d-sm-inline button-label">Çıkış</span>
+
+                                    </div>
+
+
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div >
+
+            <div >
+
+
+
+                <p-table id="row-check" [value]="katsayilarArray" [style]="{'min-height':' 100%'}" [scrollable]="true"
+                scrollHeight="400px" selectionMode="single" [(selection)]="selectedDialogRowEvent" >
+              
+                <ng-template pTemplate="header">
+               
+                  <tr>
+                    <th style="font-size: 13px;">Değer Adı</th>
+                    <th style="font-size: 13px;">Tür</th>
+                    <th style="font-size: 13px;">Değer</th>
+                  </tr>
+                </ng-template>
+              
+                <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                  <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
+                    <td>{{ product.ad }}</td>
+                    <td>{{ product.turUpdate }}</td>
+                    <td [pEditableColumn]="product.deger" pEditableColumnField="deger" style="width: 130px;">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input type="number" form-control [(ngModel)]="product.deger" name="deger" (change)="updateDeger(product)"  style="width: 100%;height: 20px; padding: 0 .25rem 0 0.75rem !important;"
+                            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{product.deger}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+                  </tr>
+                </ng-template>
+              
+              
+              </p-table> 
+              
+            
+            
+            
+            <div style="height: 60px; display: flex ;align-items: center;  " >
+                Uyarı : Giderlerin türlere göre etki oranları % olarak tanımlanmıştır.Değerin toplamı 100'e eşit olmak zorundadır
+            </div>
+            
+
+
+                
+            </div>
+
+
+        </div>
+    </div>
+</div>

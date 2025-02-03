@@ -207,9 +207,11 @@
                                 </div>
                             </div>
 
-                            <makine-sasesi-maliyet-table [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam"
-                                [genelGiderToplam]="genelGiderToplam/frm.personelSayisi"
-                                [toplamMaliyet]="toplamMaliyet"></makine-sasesi-maliyet-table>
+                            <makine-sasesi-maliyet-table
+                             [malzemeToplam]="malzemeToplam"
+                             [iscilikToplam]="iscilikToplam"
+                             [genelGiderToplam]="genelGiderToplam"
+                            [toplamMaliyet]="toplamMaliyet"></makine-sasesi-maliyet-table>
 
                             <makine-sasesi-fiyat-table [pesinFiyat]="pesinFiyat" [vade1Fiyat]="vade1Fiyat"
                                 [vade2Fiyat]="vade2Fiyat" [vade3Fiyat]="vade3Fiyat"></makine-sasesi-fiyat-table>
@@ -236,8 +238,8 @@
 
             </p-accordionTab>
             <p-accordionTab header="Genel Giderler (Gün Bazında)">
-                <makine-sasesi-genel-giderler-table [genelGiderler]="genelGiderler"
-                    [genelGiderToplam]="genelGiderToplam"
+                <makine-sasesi-genel-giderler-table [genelGiderler]="gruplanmisVeri['Kabin Fabrikası']"
+                [genelGiderToplam]="genelGiderToplam"
                     [selectedGenelGiderler]="selectedBilesenRow"></makine-sasesi-genel-giderler-table>
             </p-accordionTab>
         </p-accordion>

@@ -30,6 +30,14 @@ export class TanimlarComponent {
           href: '/tanimlar/personel',
           expanded: false,
         },
+        {
+          label: 'Genel Giderler',
+          tabItem:'genel-gider',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/genel-gider',
+          expanded: false,
+        },
         
         {
           label: 'Kabinler',

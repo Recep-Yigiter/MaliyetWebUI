@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ButonService } from 'src/app/core/services/repository/buton.service';
+import { GenelGiderKatsayiService } from 'src/app/core/services/repository/genel-gider-katsayi.service';
 import { GenelGiderService } from 'src/app/core/services/repository/genel-gider.service';
 import { DOVIZ } from 'src/assets/DATA/doviz';
 
@@ -24,27 +25,58 @@ selectedUrunRow:any;
 selectedURUN:any;
 personeller=[]
 selectedPersonelRows:any;
-
-constructor(private ButonService:ButonService,private GenelGiderService:GenelGiderService) {
+birlesmisVeri:any
+gruplanmisVeri:any={};
+objectKeys:any;
+genelGiderKatsayi:any;
+constructor(private ButonService:ButonService,private GenelGiderService:GenelGiderService,private GenelGiderKatsayiService:GenelGiderKatsayiService) {
  
   
 }
 
 async ngOnInit() {
   
-this.genelGiderler= ((await this.GenelGiderService.GetAll()).items).filter(c=>c.tur=='Kabin'&& c.fabrika=="Kabin Fabrikası");
-this.genelGiderler.forEach(element => {
-  element.miktar=1;
-  element.dovizCinsi="TL";
-  element.birim="ADET";
-  element.tutar=element.tutar/28
-});
+  this.genelGiderler= ((await this.GenelGiderService.GetAll()).items);
+  this.genelGiderKatsayi=(await this.GenelGiderKatsayiService.GetAll()).items
+  this.birlesmisVeri = this.birlestir();
+  this.gruplanmisVeri = this.gruplamaYap();
+  this.objectKeys=Object.keys(this.gruplanmisVeri)
+  
+  
 
 
 }
 
 
+birlestir() {
 
+  return this.genelGiderler.map(gider => {
+    const katsayilar = this.genelGiderKatsayi
+      .filter(katsayi => katsayi.ad === gider.ad && katsayi.fabrika === gider.fabrika)
+      .reduce((acc, katsayi) => {
+        acc[katsayi.tur] =gider.tutar*katsayi.deger/100;
+        return acc;
+      }, {});
+
+    return {
+      ...gider,
+      katsayilar
+    };
+  });
+}
+gruplamaYap() {
+  const gruplanmisVeri = this.birlesmisVeri.reduce((acc, gider) => {
+    if (!acc[gider.fabrika]) {
+      acc[gider.fabrika] = [];
+    }
+    acc[gider.fabrika].push(gider);
+
+    return acc;
+  }, {});
+
+  return gruplanmisVeri;
+
+}
 
 
 frm:any={
@@ -195,7 +227,7 @@ onBoyOzellikChange(item: any): void {
   this.iscilikGiderHesap();
   this.genelGiderHesap();
 
-  this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam+(this.genelGiderToplam/this.frm.personelSayisi);
+  this.toplamMaliyet=this.iscilikToplam+this.malzemeToplam+(this.genelGiderToplam/this.frm.gunlukUretimSayisi);
 
   this.fiyatHesap();
 
@@ -272,10 +304,16 @@ iscilikGiderHesap(){
 genelGiderHesap(){
 
   var total=0
-  this.genelGiderler.forEach(element => {
-    total += (element.tutar*element.etkiOrani/100);
+  // this.genelGiderler.forEach(element => {
+  //   total += (element.tutar*element.etkiOrani/100);
+  // });
+  // this.genelGiderToplam=total
+console.log(this.gruplanmisVeri['Kabin Fabrikası']);
+  this.gruplanmisVeri['Kabin Fabrikası'].forEach(element => {
+    total += element['katsayilar'].buton/28
   });
-  this.genelGiderToplam=total
+
+  this.genelGiderToplam=total;
 }
 
 fiyatHesap(){

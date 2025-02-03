@@ -12,10 +12,9 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
                
                       <tr style="border-bottom: 1px solid #b4b4b4;">
                           <td style="font-size: 12px;font-weight: bold;color: gray;text-align: left;padding-left:10px;">İşçilik</td>
-                          <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;display:flex; justify-content:space-between; align-item:center;" *ngIf="iscilikToplam">
-                            
-                          {{iscilikToplam | currency:' ₺':'symbol':'1.2-2'}}
-                          <div class="portHeadLightMenu"
+                          <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;display:flex; justify-content:space-between; align-item:center;" >
+                             {{iscilikToplam?'₺'+iscilikToplam.toFixed(2):0 | currency:' ₺':'symbol':'1.2-2'}}
+                             <div class="portHeadLightMenu"
                                    style="display: flex;align-items: center;justify-content: center; margin: 0 20px;">
                                    <ul style="display: flex; position: relative;">
                                        <li>
@@ -39,43 +38,14 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
                                            </ul>
                                        </li>
                                    </ul>
-                               </div>
-                             </td>
-                          <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;display:flex; justify-content:space-between; align-item:center;" *ngIf="!iscilikToplam">
-                            {{0 | currency:' ₺':'symbol':'1.2-2'}}
-                             
-                        
-                            <div class="portHeadLightMenu"
-                                   style="display: flex;align-items: center;justify-content: center; margin: 0 20px;">
-                                   <ul style="display: flex; position: relative;">
-                                       <li>
-                                         <i (click)="showIscilikGider()" class="fa-solid fa-clipboard" style="font-size: 17px;cursor:pointer;"></i>
-
-                                           <ul [ngClass]="{ 'show': isDropdownOpenIscilikGider }">
-
-                                           <div style="padding:4px 8px">
-                                            
-                                                  <div style="display:flex; align-item:center;">
-                                                      <div style="padding:2px 6px">
-                                                          <div style="border-bottom:1px solid;padding:2px 6px;color: white;">
-                                                           Ortalama Maaş x Çalışan Sayısı
-                                                          </div>
-                                                          <div style="padding:2px 6px;color: white;">
-                                                               28 (Aylık Mesai) x Üretim Sayısı
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                           </div>
-                                           </ul>
-                                       </li>
-                                   </ul>
-                               </div>
-
-                            </td>
+                             </div>
+                          </td>
+                          
                       </tr>
                       <tr style="border-bottom: 1px solid #b4b4b4;">
                           <td style="font-size: 12px;font-weight: bold;color: gray;text-align: left;padding-left:10px;">Genel Giderler</td>
-                          <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;display:flex; justify-content:space-between; align-item:center;"  *ngIf="genelGiderToplam">{{genelGiderToplam | currency:' ₺':'symbol':'1.2-2'}}
+                          <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;display:flex; justify-content:space-between; align-item:center;"  >
+                          {{genelGiderToplam?'₺'+genelGiderToplam.toFixed(2):0 | currency:' ₺':'symbol':'1.2-2'}}
                           <div class="portHeadLightMenu"
                                    style="display: flex;align-items: center;justify-content: center; margin: 0 20px;">
                                    <ul style="display: flex; position: relative;">
@@ -102,34 +72,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
                                    </ul>
                                </div>
                         </td>
-                          <td style="font-size: 12px;color: gray;text-align: left;padding-left:10px;display:flex; justify-content:space-between; align-item:center;" *ngIf="!genelGiderToplam">
-                            {{0 | currency:' ₺':'symbol':'1.2-2'}}
-                            <div class="portHeadLightMenu"
-                                   style="display: flex;align-items: center;justify-content: center; margin: 0 20px;">
-                                   <ul style="display: flex; position: relative;">
-                                       <li>
-                                         <i (click)="showGenelGider()" class="fa-solid fa-clipboard" style="font-size: 17px;cursor:pointer;"></i>
-
-                                           <ul [ngClass]="{ 'show': isDropdownOpenGenelGider }">
-
-                                           <div style="padding:4px 8px">
-                                            
-                                                  <div style="display:flex; align-item:center;">
-                                                      <div style="padding:2px 6px">
-                                                          <div style="border-bottom:1px solid;padding:2px 6px;color: white;">
-                                                           Toplam Genel Gider (Gün)
-                                                          </div>
-                                                          <div style="padding:2px 6px;color: white;">
-                                                                Üretim Sayısı
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                           </div>
-                                           </ul>
-                                       </li>
-                                   </ul>
-                               </div>
-                             </td>
+                          
 
                       </tr>
                       <tr style="border-bottom: 1px solid #b4b4b4;">

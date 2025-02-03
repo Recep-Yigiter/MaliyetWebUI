@@ -262,3 +262,66 @@ stop {
     opacity:1 !important
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.genel-gider-table{
+    
+
+ thead > tr > th {
+    border-width: 0 0 1px 0;
+    font-weight: 400 !important;
+    color: #a9a9a9;
+    font-size: 14px;
+}
+
+
+tbody>tr>td {
+   text-align: left;
+   border: 1px solid #dee2e6;
+   padding: 0.3rem 1rem;
+   font-size: 12px;
+}
+
+thead>tr>th {
+    padding: 0.3rem 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+ 
+ th, td {
+   padding: 8px;
+   text-align: left;
+   border: 1px solid #ddd;
+ }
+ 
+ th {
+   background-color: #f2f2f2;
+ }
+
+ tr:hover {
+   background-color: #f1f1f1;
+   cursor: pointer;
+ }
+
+ .selected-row {
+   background: #EFF6FF;
+   color: #1D4ED8;
+ }
+ 
+ .selected-row:hover {
+   background-color: #d3e6f9 !important;
+ }
+}

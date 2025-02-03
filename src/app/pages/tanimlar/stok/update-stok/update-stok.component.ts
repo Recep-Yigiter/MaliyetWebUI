@@ -21,10 +21,11 @@ export class UpdateStokComponent implements OnInit {
 
     this.frm={
       ad:this.data.ad,
-      birim: {  ad: this.data.birim },
-      stokGrubu:{ ad:this.data.stokGrubu },
+      birim:  {ad: this.selectedBirim?this.selectedBirim:this.data.birim},
+      stokGrubu:{ad: this.selectedStokGrubu?this.selectedStokGrubu:this.data.stokGrubu},
       birimFiyat:this.data.birimFiyat,
-      dovizCinsi:{ ad: this.data.dovizCinsi },
+      dovizCinsi:{ad: this.selectedDovizCinsi?this.selectedDovizCinsi:this.data.dovizCinsi},
+
     }
   }
 
