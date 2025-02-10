@@ -3,8 +3,8 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector: 'kabin-genel-giderler-table',
     template: `
-  <p-table id="row-check" [value]="genelGiderler" [style]="{'min-height':' 417px'}" dataKey="id" [scrollable]="true"
-scrollHeight="417px" selectionMode="single" [(selection)]="selectedGenelGiderler">
+  <p-table id="row-check" [value]="genelGiderler" [style]="{'min-height':' 400px'}" dataKey="id" [scrollable]="true"
+scrollHeight="400px" selectionMode="single" [(selection)]="selectedGenelGiderler">
 <ng-template pTemplate="header">
     <tr>
         <!-- <th style="width: 50px;font-size: 13px;" rowspan="3">Sıra No</th> -->

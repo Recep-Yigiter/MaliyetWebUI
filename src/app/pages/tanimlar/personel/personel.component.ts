@@ -27,7 +27,16 @@ export class PersonelComponent {
 
   colDefs: ColDef[] = [
     { field: 'ad', width: 200 },
-    { field: 'maas', width: 70,type: 'rightAligned'},
+    { field: 'maas', 
+      width: 70,
+      type: 'rightAligned',
+      valueFormatter: (params) => {
+        return new Intl.NumberFormat('tr-TR', {
+          style: 'currency',
+          currency: 'TRY'
+        }).format(params.value);
+      }
+    },
   ];
 
 

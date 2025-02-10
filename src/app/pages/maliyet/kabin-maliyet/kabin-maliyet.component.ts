@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DOVIZ } from 'src/assets/DATA/doviz';
 import { KabinService } from 'src/app/core/services/repository/kabin.service';
-import { HttpClient } from '@angular/common/http';
-import { PersonelService } from 'src/app/core/services/repository/personel.service';
 import { GenelGiderService } from 'src/app/core/services/repository/genel-gider.service';
-import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PersonelSelectModalComponents } from 'src/shared/dialogs/personel-selected-modal';
 import { GenelGiderKatsayiService } from 'src/app/core/services/repository/genel-gider-katsayi.service';
+import { KABIN_MODELLER } from 'src/assets/DATA/kabin-modeller';
+import { UpdateKabinComponent } from '../../tanimlar/kabin/update-kabin/update-kabin.component';
+import { KabinlerModalComponents } from 'src/shared/dialogs/filter-open-dialogs/kabinler-modal';
+import { NoResultModalComponents } from 'src/shared/dialogs/informations/no-result-dialog';
 
 @Component({
   selector: 'app-kabin-maliyet',
@@ -33,6 +34,7 @@ export class KabinMaliyetComponent implements OnInit {
   gruplanmisVeri: any = {};
   objectKeys: any;
   genelGiderKatsayi: any;
+  modeller: any = KABIN_MODELLER;
   constructor(
     private KabinService: KabinService,
     private GenelGiderService: GenelGiderService,
@@ -40,6 +42,7 @@ export class KabinMaliyetComponent implements OnInit {
     private NgbModal: NgbModal) { }
 
   async ngOnInit() {
+    // this.modeller.push({id:1,ad:"Hepsi"})
 
     this.genelGiderler = ((await this.GenelGiderService.GetAll()).items);
     this.genelGiderKatsayi = (await this.GenelGiderKatsayiService.GetAll()).items
@@ -47,20 +50,6 @@ export class KabinMaliyetComponent implements OnInit {
     this.gruplanmisVeri = this.gruplamaYap();
     this.objectKeys = Object.keys(this.gruplanmisVeri)
 
-
-
-
-
-
-
-
-
-    // this.genelGiderler.forEach(element => {
-    //   element.miktar=1;
-    //   element.dovizCinsi="TL";
-    //   element.birim="ADET";
-    //   element.tutar=element.tutar/28
-    // });
 
 
   }
@@ -95,19 +84,31 @@ export class KabinMaliyetComponent implements OnInit {
 
   }
 
-
   frm: any = {
     kar: 15,
     vadeFarki: 4.5,
     gunlukUretimSayisi: 5,
     personelSayisi: 10,
     ortalamaPersonelMaasi: 0,
-    tur: { id: 1, ad: 'Hepsi' },
-    model: { id: 1, ad: 'Hepsi' },
-    zeminKaplama: { id: 1, ad: 'Hepsi' },
-    kabinKaplama: { id: 1, ad: 'Hepsi' },
-    aksesuarKaplama: { id: 1, ad: 'Hepsi' },
-    kapasite: { id: 1, deger: 'Hepsi' }
+    model: {
+      ad: "BELUGA",
+      ozellikler:
+      {
+        kabinDuvar: "Ral 7040 Boyalı Cam & Satine Paslanmaz",
+        girisDuvar: "Satine Paslanmaz",
+        arkaDuvar: "Füme Ayna",
+        taban: "Silver Waves Granit",
+        aydinlatma: "Kare Spot (Gün Işığı)",
+        tavan: "Decoplate GS-05",
+        kupeste: "Ø38 Parlak Satine Paslanmaz Boru",
+        supurgelik: "Paslanmaz Çelik",
+        opsiyonel: "-",
+      }
+
+    },
+    kapasite: { id: 1, deger: '320' }
+
+
   }
 
 
@@ -118,68 +119,31 @@ export class KabinMaliyetComponent implements OnInit {
 
 
 
-  selectedTur: any;
-  turler = [
-    { id: 1, ad: 'Hepsi' },
-    { id: 2, ad: 'Normal Kabin' },
-  ]
-  onTurChange(item: any): void {
-    this.selectedTur = item;
-  };
-
 
   selectedModel: any;
-  modeller = [
-    { id: 1, ad: 'Hepsi' },
-    { id: 2, ad: 'ESB' },
-  ]
   onModelChange(item: any): void {
     this.selectedModel = item;
   };
 
 
 
-  selectedZeminKaplama: any;
-  zeminKaplamalar = [
-    { id: 1, ad: 'Hepsi' },
-    { id: 2, ad: 'PVC' },
-  ]
-  onZeminKaplamaChange(item: any): void {
-    this.selectedZeminKaplama = item;
-  };
 
 
-  selectedKabinKaplama: any;
-  kabinKaplamalar = [
-    { id: 1, ad: 'Hepsi' },
-    { id: 2, ad: 'ESB' },
-  ]
-  onKabinKaplamaChange(item: any): void {
-    this.selectedKabinKaplama = item;
-  };
 
 
-  selectedAksesuarKaplama: any;
-  aksesuarKaplamalar = [
-    { id: 1, ad: 'Hepsi' },
-    { id: 2, ad: 'ESB' },
-  ]
-  onAksesuarKaplamaChange(item: any): void {
-    this.selectedAksesuarKaplama = item;
-  };
+
 
 
   selectedKapasite: any;
   kapasiteler = [
-    { id: 1, deger: 'Hepsi' },
-    { id: 2, deger: '320' },
-    { id: 3, deger: '400' },
-    { id: 4, deger: '480' },
-    { id: 5, deger: '630' },
-    { id: 6, deger: '800' },
-    { id: 7, deger: '1000' },
-    { id: 8, deger: '1250' },
-    { id: 9, deger: '1600' },
+    { id: 1, deger: '320' },
+    { id: 2, deger: '400' },
+    { id: 3, deger: '480' },
+    { id: 4, deger: '630' },
+    { id: 5, deger: '800' },
+    { id: 6, deger: '1000' },
+    { id: 7, deger: '1250' },
+    { id: 8, deger: '1600' },
   ];
   onKapasiteChange(kapasite: any): void {
     this.selectedKapasite = kapasite;
@@ -189,62 +153,12 @@ export class KabinMaliyetComponent implements OnInit {
 
 
 
-  onRowClickUrunler(event) { }
-
-
-  visible: boolean;
-  async urunleriGoster() {
-    this.selectedURUN = []
-    const filteredProducts = ((await this.KabinService.GetAll()).items).filter(item => {
-      const matchesTur = this.selectedTur ? item.tur === this.selectedTur.ad || this.selectedTur.id == 1 : true;
-      const matchesModel = this.selectedModel ? item.model === this.selectedModel.ad || this.selectedModel.id == 1 : true;
-      const matchesZeminKaplama = this.selectedZeminKaplama ? item.zeminKaplama === this.selectedZeminKaplama.ad || this.selectedZeminKaplama.id == 1 : true;
-      const matchesKabinKaplama = this.selectedKabinKaplama ? item.kabinKaplama === this.selectedKabinKaplama.ad || this.selectedKabinKaplama.id == 1 : true;
-      const matchesAksesuarKaplama = this.selectedAksesuarKaplama ? item.aksesuarKaplama === this.selectedAksesuarKaplama.ad || this.selectedAksesuarKaplama.id == 1 : true;
-      const matchesKapasite = this.selectedKapasite ? item.kapasite === this.selectedKapasite.deger || this.selectedKapasite.id == 1 : true;
-      return matchesTur && matchesModel && matchesZeminKaplama && matchesKabinKaplama && matchesAksesuarKaplama && matchesKapasite;
-    });
-    this.kabinler = filteredProducts;
-    this.visible = true;
-  }
-
+ 
 
 
 
   genelGiderToplam: any;
   toplamMaliyet: any;
-
-
-
-
-  urunSec(event) {
-    this.bilesenler = this.selectedURUN?.urunBilesenler;
-    this.iscilikGiderler = this.selectedURUN?.iscilikGiderler;
-    let totalMaas = 0;
-    this.iscilikGiderler.forEach(element => {
-      totalMaas += element.personel.maas;
-    });
-
-    if (this.iscilikGiderler.length != 0) {
-      this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
-      this.frm.personelSayisi = this.iscilikGiderler.length;
-    }
-    else {
-      this.frm.ortalamaPersonelMaasi = 0;
-      this.frm.personelSayisi = 0;
-    }
-
-    this.visible = false;
-
-    if (this.bilesenler.length > 0) {
-      this.hesaplaButtonDisabled = false;
-    }
-
-  }
-
-
-
-
   malzemeToplam: number;
   hesaplaButtonDisabled = true;
   pesinFiyat: any;
@@ -259,10 +173,7 @@ export class KabinMaliyetComponent implements OnInit {
     this.genelGiderHesap();
 
     this.toplamMaliyet = this.iscilikToplam + this.malzemeToplam + (this.genelGiderToplam / this.frm.gunlukUretimSayisi);
-
     this.fiyatHesap();
-
-
 
   }
 
@@ -274,13 +185,12 @@ export class KabinMaliyetComponent implements OnInit {
 
 
 
-  iscilikVisible: any;
-  selectedPersonelEkle: any;
 
+  selectedPersonelEkle: any;
   async personelEkleDialog(event) {
+  
     this.selectedPersonelEkle = []
-    this.personeller = event;
-    this.iscilikVisible = true;
+    this.iscilikGiderler = event;
   }
 
 
@@ -314,7 +224,6 @@ export class KabinMaliyetComponent implements OnInit {
     this.iscilikGiderler.forEach(element => {
       totalMaas += element.personel.maas;
     });
-
     if (this.iscilikGiderler.length != 0) {
         this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
         this.frm.personelSayisi = this.iscilikGiderler.length;
@@ -349,16 +258,6 @@ export class KabinMaliyetComponent implements OnInit {
     this.vade2Fiyat = this.vade1Fiyat + this.vade1Fiyat * this.frm.vadeFarki / 100;
     this.vade3Fiyat = this.vade2Fiyat + this.vade2Fiyat * this.frm.vadeFarki / 100;
   }
-
-
-
-
-
-
-
-
-
-
 
   childFuncStokEkle(item) {
     this.bilesenler = item
@@ -403,6 +302,69 @@ export class KabinMaliyetComponent implements OnInit {
 
       }
     });
+  }
+
+
+
+async urunfilter(){
+  this.selectedURUN = []
+  const filteredProducts = ((await this.KabinService.GetAll()).items).filter(item => {
+    const matchesModel = this.selectedModel ? item.model === this.selectedModel.ad || this.selectedModel.id == 1 : true;
+    const matchesKapasite = this.selectedKapasite ? item.kapasite === this.selectedKapasite.deger || this.selectedKapasite.id == 1 : true;
+    return  matchesModel && matchesKapasite;
+  });
+  this.kabinler = filteredProducts;
+
+  if (this.kabinler.length==0) {
+    const modalRef = this.NgbModal.open(NoResultModalComponents, {
+      size: 'sm',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.data = 'Birim Kartı';
+    modalRef.result.then(async(event) => { });
+  }
+else{
+  const modalRef = this.NgbModal.open(KabinlerModalComponents, {
+    size: 'lg',
+    backdrop: 'static',
+  });
+  modalRef.componentInstance.confirmationBoxTitle = 'Kabin Listesi';
+  modalRef.componentInstance.datas = this.kabinler;
+  modalRef.result.then((item) => {
+    if (item != false) {
+      this.selectedURUN=item  
+      this.bilesenler = item?.urunBilesenler;
+      this.iscilikGiderler = item?.iscilikGiderler;
+      let totalMaas = 0;
+      this.iscilikGiderler.forEach(element => {
+        totalMaas += element.personel.maas;
+      });
+  
+      if (this.iscilikGiderler.length != 0) {
+        this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
+        this.frm.personelSayisi = this.iscilikGiderler.length;
+      }
+      else {
+        this.frm.ortalamaPersonelMaasi = 0;
+        this.frm.personelSayisi = 0;
+      }
+
+  
+      if (this.bilesenler.length > 0) {
+        this.hesaplaButtonDisabled = false;
+      }
+
+    }
+  });
+  
+}
+
+
+
+
+
+
+
   }
 
 

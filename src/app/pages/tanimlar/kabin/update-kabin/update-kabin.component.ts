@@ -3,6 +3,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IscilikGiderService } from 'src/app/core/services/repository/iscilik-gider.service';
 import { KabinService } from 'src/app/core/services/repository/kabin.service';
 import { UrunBilesenService } from 'src/app/core/services/repository/urun-bilesen.service';
+import { KABIN_MODELLER } from 'src/assets/DATA/kabin-modeller';
 import { PersonelSelectModalComponents } from 'src/shared/dialogs/personel-selected-modal';
 import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
 
@@ -20,7 +21,7 @@ export class UpdateKabinComponent implements OnInit {
   iscilikGiderler:any=[];
   selectedIscilikGiderRow:any;
   iscilikGiderToplam:any;
-
+  modeller: any = KABIN_MODELLER;
   constructor(
     private KabinService: KabinService,
     public activeModal: NgbActiveModal,
@@ -32,19 +33,22 @@ export class UpdateKabinComponent implements OnInit {
 
  async ngOnInit() {
 
-  // var test=  await this.KabinService.getById(this.data.id)
-
+var model=this.modeller.filter(c=>c.ad==this.data.model)[0]
     this.frm={
       ad:this.data.ad,
-      birim:{ad: this.selectedBirim?this.selectedBirim:this.data.birim},
-      tur:{ad: this.selectedTur?this.selectedTur:this.data.tur},
-      model:{ad: this.selectedModel?this.selectedModel:this.data.model},
-      zeminKaplama:{ad:this.selectedZeminKaplama?this.selectedZeminKaplama: this.data.zeminKaplama},
-      kabinKaplama:{ad:this.selectedKabinKaplama?this.selectedKabinKaplama: this.data.kabinKaplama },
-      aksesuarKaplama:{ad:this.selectedAksesuarKaplama?this.selectedAksesuarKaplama: this.data.aksesuarKaplama },
-      kapasite:{deger:this.selectedKapasite?this.selectedKapasite: this.data.kapasite}
+      kapasite:{deger:this.selectedKapasite?this.selectedKapasite: this.data.kapasite},
+      model:model,
+      kabinDuvar: model.ozellikler.kabinDuvar,
+      girisDuvar:  model.ozellikler.girisDuvar,
+      arkaDuvar:  model.ozellikler.arkaDuvar,
+      taban:  model.ozellikler.taban,
+      aydinlatma:  model.ozellikler.aydinlatma,
+      tavan:  model.ozellikler.tavan,
+      kupeste:  model.ozellikler.kupeste,
+      supurgelik:  model.ozellikler.supurgelik,
+      opsiyonel:  model.ozellikler.opsiyonel,
     }
-    
+ 
     this.iscilikGiderler=this.data.iscilikGiderler
     this.data.urunBilesenler.forEach(element => {
       var test={
@@ -64,6 +68,7 @@ export class UpdateKabinComponent implements OnInit {
       this.malzemeGiderler.push(test)
     });
 
+
     // this.malzemeGiderler=this.data.urunBilesenler
     // console.log(this.data.urunBilesenler);
   }
@@ -72,14 +77,28 @@ export class UpdateKabinComponent implements OnInit {
   Kaydet() {
       var createModel={
     id:this.data.id,
-    ad:this.frm.ad,
-    birim:this.frm.birim.ad,
-    tur:this.frm.tur.ad,
-    model:this.frm.model.ad,
-    kabinKaplama:this.frm.kabinKaplama.ad,
-    zeminKaplama:this.frm.zeminKaplama.ad,
-    aksesuarKaplama:this.frm.aksesuarKaplama.ad,
+    // ad:this.frm.ad,
+    // birim:this.frm.birim.ad,
+    // tur:this.frm.tur.ad,
+    // model:this.frm.model.ad,
+    // kabinKaplama:this.frm.kabinKaplama.ad,
+    // zeminKaplama:this.frm.zeminKaplama.ad,
+    // aksesuarKaplama:this.frm.aksesuarKaplama.ad,
+    // kapasite:this.frm.kapasite.deger,,
+    ad: this.frm.ad,
     kapasite:this.frm.kapasite.deger,
+    model:this.frm.model.ad,
+    kabinDuvar: this.frm.model.ozellikler.kabinDuvar,
+    girisDuvar:  this.frm.model.ozellikler.girisDuvar,
+    arkaDuvar:  this.frm.model.ozellikler.arkaDuvar,
+    taban:  this.frm.model.ozellikler.taban,
+    aydinlatma:  this.frm.model.ozellikler.aydinlatma,
+    tavan:  this.frm.model.ozellikler.tavan,
+    kupeste:  this.frm.model.ozellikler.kupeste,
+    supurgelik:  this.frm.model.ozellikler.supurgelik,
+    opsiyonel:  this.frm.model.ozellikler.opsiyonel,
+
+
     urunBilesenler:[],
     iscilikGiderler:[]
       }
@@ -137,54 +156,25 @@ export class UpdateKabinComponent implements OnInit {
 
 
 
-  frm:any={ }
+
+  frm: any = {
+
+  }
   
   
   
-  
-  selectedTur:any;
-  turler=[
-    { ad: 'Normal Kabin' },
-  ]
-  onTurChange(item: any): void {
-    this.selectedTur=item;
-  };
+
   
   
   selectedModel:any;
-  modeller=[
-    { ad: 'ESB' },
-  ]
+  // modeller=[
+  //   { ad: 'ESB' },
+  // ]
   onModelChange(item: any): void {
     this.selectedModel=item;
   };
   
-  
-  
-  selectedZeminKaplama:any;
-  zeminKaplamalar=[
-    { ad: 'PVC' },
-  ]
-  onZeminKaplamaChange(item: any): void {
-    this.selectedZeminKaplama=item;
-  };
-  
-  
-  selectedKabinKaplama:any;
-  kabinKaplamalar=[
-    { ad: 'ESB' },
-  ]
-  onKabinKaplamaChange(item: any): void {
-    this.selectedKabinKaplama=item;
-  };
-  
-  selectedAksesuarKaplama:any;
-  aksesuarKaplamalar=[
-    { ad: 'ESB' },
-  ]
-  onAksesuarKaplamaChange(item: any): void {
-    this.selectedAksesuarKaplama=item;
-  };
+ 
   
   
   selectedKapasite:any;
@@ -203,19 +193,7 @@ export class UpdateKabinComponent implements OnInit {
   };
   
   
-  selectedBirim:any;
-  birimler = [
-    { ad: 'ADET' },
-    { ad: 'KG' },
-    { ad: 'M' },
-    { ad: 'M^2' },
-    { ad: 'TAKIM' },
-  
-  ];
-  onBirimChange(item){
-    this.selectedBirim=item;
-  }
-    
+
 
 
 

@@ -65,6 +65,14 @@ export class TanimlarComponent {
           expanded: false,
         },
         {
+          label: 'Kapı Grupları',
+          tabItem:'kapi-grup',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/kapi-grup',
+          expanded: false,
+        },
+        {
           label: 'Kasnaklar',
           tabItem:'kasnak',
           icon: 'fa fa-inbox',
@@ -78,6 +86,14 @@ export class TanimlarComponent {
           icon: 'fa fa-inbox',
           submenu: [  ],
           href: '/tanimlar/makine-sasesi',
+          expanded: false,
+        },
+        {
+          label: 'Agırlık Şasesi',
+          tabItem:'agirlik-sasesi',
+          icon: 'fa fa-inbox',
+          submenu: [  ],
+          href: '/tanimlar/agirlik-sasesi',
           expanded: false,
         },
         {

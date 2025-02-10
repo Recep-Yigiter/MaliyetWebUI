@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KapiComponent } from './kapi.component';
+import { KapiGrupComponent } from './kapi-grup.component';
 
-describe('KapiComponent', () => {
-  let component: KapiComponent;
-  let fixture: ComponentFixture<KapiComponent>;
+describe('KapiGrupComponent', () => {
+  let component: KapiGrupComponent;
+  let fixture: ComponentFixture<KapiGrupComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [KapiComponent]
+      declarations: [KapiGrupComponent]
     });
-    fixture = TestBed.createComponent(KapiComponent);
+    fixture = TestBed.createComponent(KapiGrupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

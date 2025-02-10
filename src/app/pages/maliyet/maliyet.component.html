@@ -1,43 +1,15 @@
-<!-- <ul class="nav nav-tabs">
-    <li [class.active]="selectedTab === 'kabin'" (click)="selectTab('kabin')">
-      <a class="tab-item">Kabin</a>
-    </li>
-    <li [class.active]="selectedTab === 'buton'" (click)="selectTab('buton')" style="position: relative;">
-      <a class="tab-item">Buton</a>
-    </li>
-    <li [class.active]="selectedTab === 'kapi'" (click)="selectTab('kapi')">
-      <a class="tab-item">Kapı</a>
-    </li>
-    <li [class.active]="selectedTab === 'kasnak'" (click)="selectTab('kasnak')">
-      <a class="tab-item">Kasnak</a>
-    </li>
-    <li [class.active]="selectedTab === 'suspansiyon'" (click)="selectTab('suspansiyon')">
-      <a class="tab-item">Süspansiyon</a>
-    </li>
-    <li [class.active]="selectedTab === 'makine-sasesi'" (click)="selectTab('makine-sasesi')">
-      <a class="tab-item">Makine Şasesi</a>
-    </li>
+
+  <ul class="nav nav-tabs">
+    <ng-container *ngFor="let item of menu">
+        <ng-container *ngFor="let item of item.submenu">
+            <li [class.active]="selectedTab === item.tabItem" (click)="selectTab(item)">
+                <a class="tab-item">{{item.label}}</a>
+            </li>
+        </ng-container>
+    </ng-container>
   </ul>
-<div  style="height: calc(100vh - 80px); display: flex; width: 100%; overflow: auto;">
 
 
-    <div  style="width: 100%;">
-        <router-outlet></router-outlet>
-
-    </div>
-</div> -->
-
-
-
-<ul class="nav nav-tabs">
-  <ng-container *ngFor="let item of menu">
-      <ng-container *ngFor="let item of item.submenu">
-          <li [class.active]="selectedTab === item.tabItem" (click)="selectTab(item)">
-              <a class="tab-item">{{item.label}}</a>
-          </li>
-      </ng-container>
-  </ng-container>
-</ul>
 <div  style="height:calc(100vh - 80px); display: flex; width: 100%;overflow: auto;">
   <div style="width: 100%;">
       <router-outlet></router-outlet>

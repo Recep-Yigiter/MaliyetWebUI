@@ -1,6 +1,5 @@
 
 <ul class="nav nav-tabs">
-
     <ng-container *ngFor="let item of menu">
         <ng-container *ngFor="let item of item.submenu">
             <li [class.active]="selectedTab === item.tabItem" (click)="selectTab(item)" >
@@ -8,13 +7,10 @@
             </li>
         </ng-container>
     </ng-container>
-   
-  </ul>
+</ul>
+
 <div  style="height: calc(100vh - 85px); display: flex; width: 100%;">
-
-
     <div  style="width: 100%;">
         <router-outlet></router-outlet>
-
     </div>
 </div>

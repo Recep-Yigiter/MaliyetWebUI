@@ -40,12 +40,17 @@ export class KabinComponent implements OnInit {
 
   colDefs: ColDef[] = [
     { field: 'ad', width: 300 },
-    { field: 'tur', width: 120 },
-    { field: 'model', width: 70 },
-    { field: 'kapasite', width: 70 },
-    { field: 'kabinKaplama', width: 70 },
-    { field: 'aksesuarKaplama', width: 70 },
-    { field: 'zeminKaplama', width: 70 },
+    { field: 'model', width: 150 },
+    { field: 'kapasite', width: 150 },
+    { field: 'kabinDuvar', width: 150 },
+    { field: 'girisDuvar', width: 150 },
+    { field: 'arkaDuvar', width: 150 },
+    { field: 'taban', width: 150 },
+    { field: 'aydinlatma', width: 150 },
+    { field: 'kupeste', width: 150 },
+    { field: 'supurgelik', width: 150 },
+    { field: 'opsiyonel', width: 150 },
+
   ];
 
   async getList(params: GridReadyEvent<any>) {
@@ -74,7 +79,7 @@ export class KabinComponent implements OnInit {
 
 async yeni(){
   const modalRef = this.NgbModal.open(CreateKabinComponent, {
-    size: 'xl',
+    size: 'lg',
     backdrop: 'static',
   });
   modalRef.result.then(async (item) => {

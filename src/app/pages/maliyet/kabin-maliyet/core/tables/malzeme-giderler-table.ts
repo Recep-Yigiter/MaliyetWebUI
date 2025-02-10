@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateKabinComponent } from 'src/app/pages/tanimlar/kabin/update-kabin/update-kabin.component';
+import { UpdateStokComponent } from 'src/app/pages/tanimlar/stok/update-stok/update-stok.component';
 import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
 
 @Component({
     selector: 'kabin-malzeme-giderler-table',
     template: `
 
-<p-table id="row-check" [value]="malzemeGiderler" [style]="{'min-height':' 450px'}" [scrollable]="true"
-            scrollHeight="450px" selectionMode="single" [(selection)]="selectedMalzemeGiderler">
+<p-table id="row-check" [value]="malzemeGiderler" [style]="{'min-height':' 400px'}" [scrollable]="true"
+            scrollHeight="400px" selectionMode="single" [(selection)]="selectedMalzemeGiderler">
             <ng-template pTemplate="header">
                 <tr>
                     <!-- <th style="width: 50px;font-size: 13px;" rowspan="3">Sıra No</th> -->
@@ -33,7 +35,7 @@ import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-moda
 
                             </div>
 
-                            <div class="button-grup " style="gap: 3px !important;">
+                            <div (click)="guncelle()" class="button-grup " style="gap: 3px !important;">
                                 <div class="img-container">
                                     <img style="width: 25px; height: 25px;"
                                         src="../../../../../assets/icons/edit-file.png" alt="">
@@ -121,8 +123,7 @@ export class KabinMalzemeGiderlerTableComponent {
                         stok: element,
                         miktar: element.miktar ? element.miktar : 0
                     }
-                    const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stok.id);
-
+                    const customerExists = this.malzemeGiderler.some(customer => customer.stok.id === newValue.stok.id);
                     if (customerExists) {
                         alert(`Bu ${element.ad} zaten mevcut! `);
                         return;
@@ -139,7 +140,21 @@ export class KabinMalzemeGiderlerTableComponent {
     }
 
 
+    guncelle() {
+        if (this.selectedMalzemeGiderler) {
+            const modalRef = this.NgbModal.open(UpdateStokComponent, {
+                size: 'md',
+                backdrop: 'static',
+            });
+            modalRef.componentInstance.data = this.selectedMalzemeGiderler.stok;
+            modalRef.result.then(async (item) => {
+                if (item) {
+                    location.reload()
+                }
+            });
+        }
 
+    }
 
 
 }

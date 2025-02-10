@@ -41,10 +41,10 @@ export class SuspansiyonComponent implements OnInit {
 
   colDefs: ColDef[] = [
     { field: 'ad', width: 300 },
-    { field: 'karkasTipi', width: 120 },
     { field: 'kapasite', width: 70 },
     { field: 'askiTipi', width: 70 },
     { field: 'karkasSekli', width: 120 },
+    { field: 'rayArasi', width: 120 },
 
   ];
 

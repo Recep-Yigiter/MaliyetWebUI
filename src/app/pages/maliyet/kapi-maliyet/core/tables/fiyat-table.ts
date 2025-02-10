@@ -4,60 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'kapi-fiyat-table',
   template: `
      
-        <!-- <table id="myTable" class="yks_table_group " style="width: 300px;">
-                    <thead style="border-bottom: 1px solid #a3a3a3;">
-                      <th></th>
-                      <th style="font-size: 11px;color: black;">KASA</th>
-                      <th style="font-size: 11px;color: black;">PANEL</th>
-                      <th style="font-size: 11px;color: black;">MEKANIZMA</th>
-                    </thead>
-                    <tbody>
-
-                    <ng-container *ngIf="!fiyatList">
-                    <tr style="border-bottom: 1px solid #160e0e;">
-                          <td style="font-size: 12px;font-weight: bold;color: gray;">Peşin</td>
-                          <td style="font-size: 12px;color: gray;">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;" >{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                      </tr>
-                      <tr style="border-bottom: 1px solid #160e0e;">
-                          <td style="font-size: 12px;font-weight: bold;color: gray;">60 Gün</td>
-                          <td style="font-size: 12px;color: gray;">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;" >{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                      </tr>
-                      <tr style="border-bottom: 1px solid #160e0e;">
-                          <td style="font-size: 12px;font-weight: bold;color: gray;">90 Gün</td>
-                          <td style="font-size: 12px;color: gray;">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;" >{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                      </tr>
-                      <tr style="border-bottom: 1px solid #160e0e;">
-                          <td style="font-size: 12px;font-weight: bold;color: gray;">120 Gün</td>
-                          <td style="font-size: 12px;color: gray;">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;">{{0| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                          <td style="font-size: 12px;color: gray;" >{{0| currency:' ₺':'symbol':'1.2-2'}} </td>
-                      </tr>  
-
-  
-                    </ng-container>
-
-
-                    <ng-container *ngIf="fiyatList">
-                       <ng-container *ngFor="let item of fiyatList">
-                         <tr style="border-bottom: 1px solid #160e0e;">
-                             <td style="font-size: 12px;font-weight: bold;color: gray;">{{item.vade}}</td>
-                             <td style="font-size: 12px;color: gray;">{{item.kasaFiyat| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                             <td style="font-size: 12px;color: gray;">{{item.panelFiyat| currency:' ₺':'symbol':'1.2-2'}}  </td>
-                             <td style="font-size: 12px;color: gray;" >{{item.mekanizmaFiyat| currency:' ₺':'symbol':'1.2-2'}} </td>
-                         </tr> 
-                         </ng-container>
-                    </ng-container>
-                     
-  
-                    </tbody>
-                  </table> -->
-  
+   
 
                   <table id="myTable" class="yks_table_group " style="width: 300px;">
                     <thead style="border-bottom: 1px solid #a3a3a3;">

@@ -47,15 +47,15 @@ export class KapiService {
     return await promiseData;
   }
   async delete(id: string, successCallBack?: () => void, errorCallback?: (errorMessage: HttpErrorResponse) => void) {
-     
+    // https://localhost:7054/api/Stoks/Delete/delete?id=1c91ccfc-a2e5-4930-84d1-1c794036eff9
 
 
     const observable = await this.apiService.delete({
-      controller: "Kapis",
+      controller: "Stoks",
       action:"Delete",
       queryString: "id=" + `${id}`,
        
-    })
+    },)
     const promiseData = firstValueFrom(observable);
     promiseData.then(successCallBack).catch(errorCallback);
     return await promiseData;

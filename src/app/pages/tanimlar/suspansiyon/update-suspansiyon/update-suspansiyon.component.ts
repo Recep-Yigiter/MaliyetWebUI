@@ -37,13 +37,12 @@ export class UpdateSuspansiyonComponent  implements OnInit {
   
       ad:this.data.ad,
       birim:"ADET",
-      karkasTipi:{ad: this.selectedKarkasTipi?this.selectedKarkasTipi:this.data.karkasTipi},
       kapasite:{ad: this.selectedKapasite?this.selectedKapasite:this.data.kapasite},
       askiTipi:{ad: this.selectedAskiTipi?this.selectedAskiTipi:this.data.askiTipi},
       karkasSekli:{ad: this.selectedKarkasSekli?this.selectedKarkasSekli:this.data.karkasSekli},
+      rayArasi:this.data.rayArasi,
       urunBilesenler:this.malzemeGiderler,
       iscilikGiderler:this.iscilikGiderler
-
 
     }
   
@@ -73,10 +72,10 @@ export class UpdateSuspansiyonComponent  implements OnInit {
     id:this.data.id,
     ad:this.frm.ad,
     birim:"ADET",
-    karkasTipi:this.frm.karkasTipi.ad,
     kapasite:this.frm.kapasite.ad,
     askiTipi:this.frm.askiTipi.ad,
     karkasSekli:this.frm.karkasSekli.ad,
+    rayArasi:String(this.frm.rayArasi)+" mm",
     urunBilesenler:[],
     iscilikGiderler:[]
   }

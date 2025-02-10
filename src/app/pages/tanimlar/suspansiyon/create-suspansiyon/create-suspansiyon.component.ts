@@ -39,14 +39,13 @@ export class CreateSuspansiyonComponent implements OnInit {
   var createModel={
     ad:this.frm.ad,
     birim:"ADET",
-    karkasTipi:this.frm.karkasTipi.ad,
     kapasite:this.frm.kapasite.ad,
     askiTipi:this.frm.askiTipi.ad,
     karkasSekli:this.frm.karkasSekli.ad,
+    rayArasi:String(this.frm.rayArasi)+" mm",
     urunBilesenler:this.malzemeGiderler,
     iscilikGiderler:this.iscilikGiderler
   }
-
 
 
 

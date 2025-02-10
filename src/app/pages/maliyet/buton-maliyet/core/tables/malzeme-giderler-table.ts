@@ -94,14 +94,10 @@ export class ButonMalzemeGiderlerTableComponent {
     /**
      *
      */
-    constructor(private NgbModal: NgbModal) {
-
-
-    }
+    constructor(private NgbModal: NgbModal) { }
 
     deleteItem(index: number): void {
         this.malzemeGiderler.splice(index, 1);
-
     }
 
 
@@ -114,32 +110,20 @@ export class ButonMalzemeGiderlerTableComponent {
         modalRef.componentInstance.confirmationBoxTitle = 'Stok Listesi';
         modalRef.result.then((stoks) => {
             if (stoks != false) {
-
                 stoks.forEach(element => {
                     var newValue = {
-
                         stok: element,
                         miktar: element.miktar ? element.miktar : 0
                     }
-                    const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stok.id);
-
+                    const customerExists = this.malzemeGiderler.some(customer => customer.stok.id === newValue.stok.id);
                     if (customerExists) {
                         alert(`Bu ${element.ad} zaten mevcut! `);
                         return;
                     }
                     this.malzemeGiderler = [...this.malzemeGiderler, newValue];
-
                     this.childFuncStokEkle.emit(this.malzemeGiderler)
                 });
-
-
-
             }
         });
     }
-
-
-
-
-
 }

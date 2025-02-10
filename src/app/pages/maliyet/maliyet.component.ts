@@ -64,6 +64,14 @@ export class MaliyetComponent implements OnInit {
           href: '/maliyet/makine-sasesi-maliyet',
           expanded: false,
         },
+        {
+          label: 'Agırlık Saşesi',
+          tabItem:'agirlik-sasesi',
+          icon: 'fa fa-inbox',
+          submenu: [],
+          href: '/maliyet/agirlik-sasesi-maliyet',
+          expanded: false,
+        },
         
        
       

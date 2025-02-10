@@ -1,110 +1,6 @@
 
 
 
-<!-- 
- <div class="grid grid-cols-[2fr_2fr_2fr_3fr] gap-1 " style="display: grid; grid-template-columns:2fr 2fr 2fr 3fr ; gap: 4px;">
-
-
-    <div  style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
-
-        <kasnak-maliyet-form [span]="170" [label]="'Tür'">
-            <p-dropdown form-control [options]="kasnakTuru" [(ngModel)]="frm.kasnakTuru" optionLabel="ad"
-                (ngModelChange)="onKasnakTuruChange(frm.kasnakTuru)" />
-        </kasnak-maliyet-form>
-        <kasnak-maliyet-form [span]="170" [label]="'Kasnak Çapı'">
-            <p-dropdown form-control [options]="kasnakCapi" [(ngModel)]="frm.kasnakCapi" optionLabel="ad"
-                (ngModelChange)="onKasnakCapiChange(frm.kasnakCapi)" />
-        </kasnak-maliyet-form>
-        <kasnak-maliyet-form [span]="170" [label]="'Kanal Sayısı'">
-            <p-dropdown form-control [options]="kanalSayisi" [(ngModel)]="frm.kanalSayisi" optionLabel="ad"
-                (ngModelChange)="onKanalSayisiChange(frm.kanalSayisi)" />
-        </kasnak-maliyet-form>
-        <kasnak-maliyet-form [span]="170" [label]="'Halat Sayısı'">
-            <p-dropdown form-control [options]="halatCapi" [(ngModel)]="frm.halatCapi" optionLabel="ad"
-                (ngModelChange)="onHalatCapiChange(frm.halatCapi)" />
-        </kasnak-maliyet-form>
-        <div (click)="urunleriGoster()" form-control style="display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer ; background-color: #7F1D1D;">
-            Ürünleri Göster
-        </div>
-    </div>
-
-    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
-        
-        <kasnak-maliyet-form  [span]="196" [label]="'Ortalama Çalışan Maaşı'">
-            <input [disabled]="true" form-control [(ngModel)]="frm.ortalamaPersonelMaasi" 
-            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-        </kasnak-maliyet-form> 
-       
-        <kasnak-maliyet-form [span]="196" [label]="'Tahmini Çalışan Sayısı'">
-            <input [disabled]="false" form-control [(ngModel)]="frm.tahminiCalisanSayisi" 
-            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-        </kasnak-maliyet-form> 
-
-        <kasnak-maliyet-form [span]="196" [label]="'Günlük kasnak Üretimi'">
-            <input [disabled]="false" form-control [(ngModel)]="frm.gunlukUretimSayisi" 
-                   class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
-        </kasnak-maliyet-form> 
-        
-    </div>
-    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);
-    box-shadow: 5px 3px 30px #858585;">
-        <kasnak-maliyet-table [malzemeToplam]="malzemeToplam" [malzemeToplam]="malzemeToplam" [iscilikToplam]="iscilikToplam" [genelGiderToplam]="genelGiderToplam" [toplamMaliyet]="toplamMaliyet"></kasnak-maliyet-table>
-    </div>
-    <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231);
-    box-shadow: 5px 3px 30px #858585;">
-        <kasnak-fiyat-table></kasnak-fiyat-table>
-    </div>
-</div>
-
-<div  style="display: grid; grid-template-columns:1fr 1fr; gap: 12px;">
-    <div>
-        <kasnak-malzeme-giderler-table [malzemeGiderler]="bilesenler" [selectedMalzemeGiderler]="selectedBilesenRow"
-            [malzemeToplam]="malzemeToplam"></kasnak-malzeme-giderler-table>
-    </div>
-    <div>
-        <kasnak-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler"></kasnak-iscilik-giderler-table>
-        <kasnak-genel-giderler-table [genelGiderler]="genelGiderler"
-            [selectedGenelGiderler]="selectedBilesenRow"></kasnak-genel-giderler-table> 
-
-    </div>
-</div>
-
-<p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }">
-    <ng-template pTemplate="header">
-        <span  style="font-size: 20px; font-weight: bold;">ÜRÜNLER</span>
-    </ng-template>
-    <p-table id="row-check" [value]="kabinler" dataKey="id" selectionMode="single" [(selection)]="selectedURUN"
-        [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Ad</th>
-                <th></th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-urun let-rowIndex="rowIndex">
-            <tr [pSelectableRow]="urun" [pSelectableRowIndex]="rowIndex" [pEditableRow]="urun"
-                (click)="onRowClickUrunler(urun)">
-                <td>{{ urun.ad }}</td>
-                <td>
-                    İşlemler
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-    <ng-template pTemplate="footer" let-urun>
-        <div (click)="Hesapla(selectedURUN)" style="background-color: #7F1D1D; display: flex; align-items: center; justify-content: center; font-weight: bold;cursor: pointer;"
-            >
-            Hesapla</div>
-    </ng-template>
-</p-dialog> -->
-
-
-
-
-
-
-
-
 
 <div style="display: grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr ; gap: 4px;">
     <div style="display: flex;
@@ -264,7 +160,7 @@
 
 <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }">
     <ng-template pTemplate="header">
-        <span style="font-size: 20px; font-weight: bold;">Kabinler</span>
+        <span style="font-size: 20px; font-weight: bold;">Kasnaklar</span>
     </ng-template>
     <p-table id="row-check" [value]="urunler" dataKey="id" selectionMode="single" [(selection)]="selectedURUN"
         [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">

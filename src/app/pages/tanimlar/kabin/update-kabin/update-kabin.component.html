@@ -79,52 +79,93 @@
 
             <div >
 
-                <div style="display: grid; grid-template-columns:1fr 1fr; gap: 4px;">
-                    <div style="display: flex;
-                            flex-direction: column;
-                            border: 1px solid rgb(230, 230, 230);
-                            color: white; padding: 4px;">
-                      <kabin-form [span]="170" [label]="'Ad'">
-                        <input form-control [(ngModel)]="frm.ad" name="ad" class="form-control shadow-none form-control-nullable" style="height: 26px;"
-                          id="exampleFormControlInput1">
-                      </kabin-form>
-                
-                      <kabin-form [span]="170" [label]="'Tür'">
-                        <p-dropdown form-control [options]="turler" [(ngModel)]="frm.tur" optionLabel="ad"
-                          (ngModelChange)="onTurChange(frm.tur)" />
-                      </kabin-form>
-                      <kabin-form [span]="170" [label]="'Model'">
-                        <p-dropdown form-control [options]="modeller" [(ngModel)]="frm.model" optionLabel="ad"
-                          (ngModelChange)="onModelChange(frm.model)" />
-                      </kabin-form>
-                
-                      <kabin-form [span]="170" [label]="'Zemin Kaplama'">
-                        <p-dropdown form-control [options]="zeminKaplamalar" [(ngModel)]="frm.zeminKaplama" optionLabel="ad"
-                          (ngModelChange)="onZeminKaplamaChange(frm.zeminKaplama)" />
-                      </kabin-form>
-                    </div>
-                
-                    <div
-                      style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
-                      <kabin-form [span]="170" [label]="'Birim'">
-                        <p-dropdown form-control [options]="birimler" [(ngModel)]="frm.birim" optionLabel="ad"
-                          (ngModelChange)="onBirimChange(frm.birim)" />
-                      </kabin-form>
-                      <kabin-form [span]="170" [label]="'Aksesuar Kaplama'">
-                        <p-dropdown form-control [options]="aksesuarKaplamalar" [(ngModel)]="frm.aksesuarKaplama" optionLabel="ad"
-                          (ngModelChange)="onAksesuarKaplamaChange(frm.aksesuarKaplama)" />
-                      </kabin-form>
-                      <kabin-form [span]="170" [label]="'Kapasite'">
-                        <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
-                          (ngModelChange)="onKapasiteChange(frm.kapasite)" />
-                      </kabin-form>
-                      <kabin-form [span]="170" [label]="'Kabin Kaplama'">
-                        <p-dropdown form-control [options]="kabinKaplamalar" [(ngModel)]="frm.kabinKaplama" optionLabel="ad"
-                          (ngModelChange)="onKabinKaplamaChange(frm.kabinKaplama)" />
-                      </kabin-form>
-                
-                    </div>
-                  </div>
+              <div style="display: grid; grid-template-columns:1fr 1fr; gap: 4px;">
+                <div style="display: flex;
+                                flex-direction: column;
+                                border: 1px solid rgb(230, 230, 230);
+                                color: white; padding: 4px;">
+                  <kabin-form [span]="170" [label]="'Ad'">
+                    <input form-control [(ngModel)]="frm.ad" name="ad" class="form-control shadow-none form-control-nullable"
+                      style="height: 26px;" id="exampleFormControlInput1">
+                  </kabin-form>
+      
+                  <kabin-form [span]="170" [label]="'Model'">
+                    <p-dropdown form-control [options]="modeller" [(ngModel)]="frm.model" optionLabel="ad"
+                      (ngModelChange)="onModelChange(frm.model)" />
+                  </kabin-form>
+                  <kabin-form [span]="170" [label]="'Kapasite'">
+                    <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
+                      (ngModelChange)="onKapasiteChange(frm.kapasite)" />
+                  </kabin-form>
+      
+                  <kabin-form [span]="170" [label]="'Kabin Duvarları'">
+                    <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.kabinDuvar" name="ad"
+                      class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                      id="exampleFormControlInput1">
+                  </kabin-form>
+                  <kabin-form [span]="170" [label]="'Giriş Duvarları'">
+                    <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.girisDuvar" name="ad"
+                      class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                      id="exampleFormControlInput1">
+                  </kabin-form>
+      
+      
+      
+      
+      
+                </div>
+      
+                <div
+                  style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
+      
+                  <kabin-form [span]="170" [label]="'Taban'">
+                    <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.taban" name="ad"
+                      class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                      id="exampleFormControlInput1">
+                  </kabin-form>
+                  <kabin-form [span]="170" [label]="'Aydinlatma'">
+                    <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.aydinlatma" name="ad"
+                      class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                      id="exampleFormControlInput1">
+                  </kabin-form>
+                  <kabin-form [span]="170" [label]="'Küpeşte'">
+                    <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.kupeste" name="ad"
+                      class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                      id="exampleFormControlInput1">
+                  </kabin-form>
+                  <kabin-form [span]="170" [label]="'Süpürgelik'">
+                    <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.supurgelik" name="ad"
+                      class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                      id="exampleFormControlInput1">
+                  </kabin-form>
+                  <kabin-form [span]="170" [label]="'Opsiyonel'">
+                    <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.opsiyonel" name="ad"
+                      class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                      id="exampleFormControlInput1">
+                  </kabin-form>
+      
+      
+      
+                  <!-- <kabin-form [span]="170" [label]="'Birim'">
+                    <p-dropdown form-control [options]="birimler" [(ngModel)]="frm.birim" optionLabel="ad"
+                      (ngModelChange)="onBirimChange(frm.birim)" />
+                  </kabin-form>
+                  <kabin-form [span]="170" [label]="'Aksesuar Kaplama'">
+                    <p-dropdown form-control [options]="aksesuarKaplamalar" [(ngModel)]="frm.aksesuarKaplama" optionLabel="ad"
+                      (ngModelChange)="onAksesuarKaplamaChange(frm.aksesuarKaplama)" />
+                  </kabin-form>
+                  
+                  <kabin-form [span]="170" [label]="'Zemin Kaplama'">
+                    <p-dropdown form-control [options]="zeminKaplamalar" [(ngModel)]="frm.zeminKaplama" optionLabel="ad"
+                      (ngModelChange)="onZeminKaplamaChange(frm.zeminKaplama)" />
+                  </kabin-form>
+                  <kabin-form [span]="170" [label]="'Kabin Kaplama'">
+                    <p-dropdown form-control [options]="kabinKaplamalar" [(ngModel)]="frm.kabinKaplama" optionLabel="ad"
+                      (ngModelChange)="onKabinKaplamaChange(frm.kabinKaplama)" />
+                  </kabin-form> -->
+      
+                </div>
+              </div>
                 
                   <div style="display: grid; grid-template-columns:1fr 1fr; gap: 12px;">
                     <div>

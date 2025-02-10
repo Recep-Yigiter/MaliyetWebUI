@@ -28,7 +28,14 @@ export class StokComponent {
     { field: 'ad', width: 300 },
     { field: 'stokGrubu', width: 130 },
     { field: 'birim', width: 70 },
-    { field: 'birimFiyat', width: 70 },
+    { field: 'birimFiyat', width: 70 ,
+      valueFormatter: (params) => {
+        return new Intl.NumberFormat('tr-TR', {
+          style: 'currency',
+          currency: 'TRY'
+        }).format(params.value);
+      }
+    },
   ];
 
 
@@ -104,6 +111,7 @@ sil(){
 }
 
 guncelle(){
+ 
   if (this.selectedStok) {
     const modalRef = this.NgbModal.open(UpdateStokComponent, {
       size: 'md',

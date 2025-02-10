@@ -82,9 +82,9 @@
                             <input form-control [(ngModel)]="frm.ad" name="ad" style="height: 26px;"
                                 class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
                         </suspansiyon-form>
-                        <suspansiyon-form [span]="130" [label]="'Karkas Tipi'">
-                            <p-dropdown form-control [options]="karkasTipi" [(ngModel)]="frm.karkasTipi"
-                                optionLabel="ad" (ngModelChange)="onKarkasTipiChange(frm.karkasTipi)" />
+                        <suspansiyon-form [span]="130" [label]="'Kapasite'">
+                            <p-dropdown form-control [options]="kapasite" [(ngModel)]="frm.kapasite" optionLabel="ad"
+                                (ngModelChange)="onKapasiteChange(frm.kapasite)" />
                         </suspansiyon-form>
 
                         <suspansiyon-form [span]="130" [label]="'Askı Tipi'">
@@ -100,10 +100,7 @@
                             border: 1px solid rgb(230, 230, 230);
                             color: white; padding: 4px;">
 
-                        <suspansiyon-form [span]="130" [label]="'Kapasite'">
-                            <p-dropdown form-control [options]="kapasite" [(ngModel)]="frm.kapasite" optionLabel="ad"
-                                (ngModelChange)="onKapasiteChange(frm.kapasite)" />
-                        </suspansiyon-form>
+                      
                         <suspansiyon-form [span]="130" [label]="'Karkas Şekli'">
                             <p-dropdown form-control [options]="karkasSekli" [(ngModel)]="frm.karkasSekli"
                                 optionLabel="ad" (ngModelChange)="onKarkasSekliChange(frm.karkasSekli)" />

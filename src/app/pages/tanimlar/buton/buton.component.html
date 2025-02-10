@@ -64,7 +64,7 @@
   
   
     <div full-page>
-      <ag-grid-angular #agGrid style="height:calc(100vh - 180px);" class="ag-theme-quartz" [rowData]="rowData"
+      <ag-grid-angular #agGrid style="height:calc(-130px + 100vh);" class="ag-theme-quartz" [rowData]="rowData"
         [defaultColDef]="defaultColDef" [columnDefs]="colDefs" (rowDoubleClicked)="rowDblClick($event)"
         (gridReady)="getList($event)" (selectionChanged)="rowClick()" [rowSelection]="rowSelection" [rowHeight]="22"
         [headerHeight]="23" [localeText]="localeText">

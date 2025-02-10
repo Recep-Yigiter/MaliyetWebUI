@@ -186,3 +186,21 @@
         opacity: 0.5; /* Görsel olarak daha belirgin hale getirmek için */
       }
 }
+
+
+
+.nav-tabs > li > a {
+    color: #A7B1C2;
+   font-weight: 600;
+   padding: 4px 20px 4px 25px;
+}
+
+.active a{
+    color: rgb(71 85 105 / var(--tw-bg-opacity, 1)) !important;
+}
+.active a:hover{
+    color: rgb(71 85 105 / var(--tw-bg-opacity, 1)) !important;
+}
+.active{
+   box-shadow: inset 0 0 20px rgba(230, 0, 0, 0.1);
+}

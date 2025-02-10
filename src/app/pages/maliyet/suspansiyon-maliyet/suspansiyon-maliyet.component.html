@@ -8,10 +8,7 @@
             flex-direction: column;
             border: 1px solid rgb(230, 230, 230);
             color: white; padding: 4px;">
-        <suspansiyon-maliyet-form [span]="130" [label]="'Karkas Tipi'">
-            <p-dropdown form-control [options]="karkasTipi" [(ngModel)]="frm.karkasTipi" optionLabel="ad"
-            (ngModelChange)="onKarkasTipiChange(frm.karkasTipi)" />
-        </suspansiyon-maliyet-form>
+       
 
         <suspansiyon-maliyet-form [span]="130" [label]="'Askı Tipi'">
             <p-dropdown form-control [options]="askiTipi" [(ngModel)]="frm.askiTipi" optionLabel="ad"
@@ -168,7 +165,7 @@
 
 <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }">
     <ng-template pTemplate="header">
-        <span style="font-size: 20px; font-weight: bold;">Kabinler</span>
+        <span style="font-size: 20px; font-weight: bold;">Süspansiyonlar</span>
     </ng-template>
     <p-table id="row-check" [value]="urunler" dataKey="id" selectionMode="single" [(selection)]="selectedURUN"
         [scrollable]="true" scrollHeight="400px" [metaKeySelection]="true">

@@ -12,6 +12,8 @@ import { KasnakComponent } from './kasnak/kasnak.component';
 import { MakineSasesiComponent } from '../tanimlar/makine-sasesi/makine-sasesi.component';
 import { SuspansiyonComponent } from './suspansiyon/suspansiyon.component';
 import { GenelGiderComponent } from './genel-gider/genel-gider.component';
+import { AgirlikSasesiComponent } from './agirlik-sasesi/agirlik-sasesi.component';
+import { KapiGrupComponent } from './kapi-grup/kapi-grup.component';
 
 
 
@@ -32,8 +34,10 @@ import { GenelGiderComponent } from './genel-gider/genel-gider.component';
              { path: 'kabin', component: KabinComponent, loadChildren: () => import("../tanimlar/kabin/kabin.module").then(m => m.KabinModule) },
              { path: 'buton', component: ButonComponent, loadChildren: () => import("../tanimlar/buton/buton.module").then(m => m.ButonModule) },
              { path: 'kapi', component: KapiComponent, loadChildren: () => import("../tanimlar/kapi/kapi.module").then(m => m.KapiModule) },
+             { path: 'kapi-grup', component: KapiGrupComponent, loadChildren: () => import("../tanimlar/kapi-grup/kapi-grup.module").then(m => m.KapiGrupModule) },
              { path: 'kasnak', component: KasnakComponent, loadChildren: () => import("../tanimlar/kasnak/kasnak.module").then(m => m.KasnakModule) },
              { path: 'makine-sasesi', component: MakineSasesiComponent, loadChildren: () => import("../tanimlar/makine-sasesi/makine-sasesi.module").then(m => m.MakineSasesiModule) },
+             { path: 'agirlik-sasesi', component: AgirlikSasesiComponent, loadChildren: () => import("../tanimlar/agirlik-sasesi/agirlik-sasesi.module").then(m => m.AgirlikSasesiModule) },
              { path: 'suspansiyon', component: SuspansiyonComponent, loadChildren: () => import("../tanimlar/suspansiyon/suspansiyon.module").then(m => m.SuspansiyonModule) },
              { path: 'genel-gider', component: GenelGiderComponent, loadChildren: () => import("../tanimlar/genel-gider/genel-gider.module").then(m => m.GenelGiderModule) },
 

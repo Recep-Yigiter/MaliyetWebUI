@@ -101,23 +101,12 @@ frm: any = {
  gunlukUretimSayisi:5,
  tahminiCalisanSayisi:10,
  ortalamaPersonelMaasi:0,
- karkasTipi:{ id: 1, ad: 'Hepsi' },
  askiTipi:{ id: 1, ad: 'Hepsi' },
  karkasSekli:{ id: 1, ad: 'Hepsi' },
  kapasite:{ id: 1, ad: 'Hepsi' },
  rayArasi:0
 };
 
-selectedKarkasTipi:any
- karkasTipi = [
-   { id: 1, ad: 'Hepsi' },
-   { id: 2, ad: 'Kabin Karkası' },
-   { id: 3, ad: 'Ağırlık Karkası' },
-
- ];
- onKarkasTipiChange(karkas: any): void {
-   this.selectedKarkasTipi = karkas;
- };
 
 
  selectedAskiTipi:any
@@ -167,11 +156,10 @@ selectedKarkasTipi:any
   async urunleriGoster() {
     this.birimMaliyet=null;
     const filteredProducts = ((await this.SuspansiyonService.GetAll()).items).filter(item => {
-      const matchesButonTipi = this.selectedKarkasTipi? item.karkasTipi === this.selectedKarkasTipi.ad || this.selectedKarkasTipi.id==1: true;
       const matchesDurakSayisi = this.selectedAskiTipi? item.askiTipi === this.selectedAskiTipi.ad|| this.selectedAskiTipi.id==1 : true;
       const matchesButonCesidi = this.selectedKapasite? item.kapasite === this.selectedKapasite.ad || this.selectedKapasite.id==1 : true;
       const matchesBoyOzellik = this.selectedKarkasSekli? item.karkasSekli === this.selectedKarkasSekli.ad || this.selectedKarkasSekli.id==1 : true;
-      return matchesButonTipi && matchesDurakSayisi && matchesButonCesidi && matchesBoyOzellik
+      return matchesDurakSayisi && matchesButonCesidi && matchesBoyOzellik
                       
     });
       this.urunler=filteredProducts;

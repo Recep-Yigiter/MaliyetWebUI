@@ -14,6 +14,11 @@ import { GorevSelectModalComponents } from 'src/shared/dialogs/gorev-selected-mo
 import { AgGridAngular } from 'ag-grid-angular';
 import { PersonelSelectModalComponents } from 'src/shared/dialogs/personel-selected-modal';
 import { KapiGrupSelectModalComponents } from 'src/shared/dialogs/kapi-grup-selected-modal';
+import { KabinlerModalComponents } from 'src/shared/dialogs/filter-open-dialogs/kabinler-modal';
+import { NoResultModalComponents } from 'src/shared/dialogs/informations/no-result-dialog';
+import { AgirlikSaselerModalComponents } from 'src/shared/dialogs/filter-open-dialogs/agirlik-saseler-modal';
+import { ButonlarModalComponents } from 'src/shared/dialogs/filter-open-dialogs/butonlar-modal';
+import { KapilarModalComponents } from 'src/shared/dialogs/filter-open-dialogs/kapilar-modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +26,12 @@ import { KapiGrupSelectModalComponents } from 'src/shared/dialogs/kapi-grup-sele
     StokSelectModalComponents,
     PersonelSelectModalComponents,
     GorevSelectModalComponents,
-    KapiGrupSelectModalComponents
+    KapiGrupSelectModalComponents,
+    KabinlerModalComponents,
+    NoResultModalComponents,
+    AgirlikSaselerModalComponents,
+    ButonlarModalComponents,
+    KapilarModalComponents
   ],
   imports: [
     BrowserModule,
