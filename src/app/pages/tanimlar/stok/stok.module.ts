@@ -11,6 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { CreateStokComponent } from './create-stok/create-stok.component';
 import { UpdateStokComponent } from './update-stok/update-stok.component';
+import { CurrencyInputDirective } from 'src/shared/core/components/currency-input.directive';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { UpdateStokComponent } from './update-stok/update-stok.component';
     StokTanimlarDesignComponent,
     StokFormComponent,
     CreateStokComponent,
-    UpdateStokComponent
+    UpdateStokComponent,
+    
   ],
   imports: [
     CommonModule,

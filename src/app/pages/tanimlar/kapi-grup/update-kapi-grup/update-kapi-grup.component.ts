@@ -50,7 +50,8 @@ export class UpdateKapiGrupComponent implements OnInit {
         kapiGrupId:null,
         makineSasesiId: null,
         suspansiyonId: null,
-        miktar:element.miktar?element.miktar:0
+        miktar:element.miktar?element.miktar:0,
+        aciklama: element.aciklama,
   
   }
   
@@ -60,7 +61,7 @@ export class UpdateKapiGrupComponent implements OnInit {
 
 
   Kaydet() {
-console.log(this.malzemeGiderler);
+
 
     
     var createModel={
@@ -94,8 +95,6 @@ console.log(this.malzemeGiderler);
    items: this.iscilikGiderler
    }
 
-console.log(modelUrunBilesen);
-console.log(modelIscilikGider);
 
    this.KapiGrupService.update(
      createModel,
@@ -190,7 +189,8 @@ stokEkle() {
           kapiGrupId:null,
           makineSasesiId: null,
           suspansiyonId: null,
-          miktar:element.miktar?element.miktar:0
+          miktar:element.miktar?element.miktar:0,
+          aciklama: element.aciklama,
         }
         const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
       

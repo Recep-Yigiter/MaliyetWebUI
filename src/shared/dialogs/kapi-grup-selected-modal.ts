@@ -39,7 +39,7 @@ import { KapiGrupService } from 'src/app/core/services/repository/kapi-grup.serv
             [defaultColDef]="defaultColDef"
           
             (gridReady)="getList($event)"
-            (rowClicked)="onSelectionChanged()"
+            (selectionChanged)="onSelectionChanged()"
             [rowSelection]="rowSelection" 
             [rowHeight]="22" 
             [headerHeight]="23">

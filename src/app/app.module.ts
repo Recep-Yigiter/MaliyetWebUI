@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {  HttpClientModule } from '@angular/common/http';
+import {  HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { DesignComponent } from 'src/shared/core/design/design.component';
 import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
 import { GorevSelectModalComponents } from 'src/shared/dialogs/gorev-selected-modal';
@@ -19,6 +19,20 @@ import { NoResultModalComponents } from 'src/shared/dialogs/informations/no-resu
 import { AgirlikSaselerModalComponents } from 'src/shared/dialogs/filter-open-dialogs/agirlik-saseler-modal';
 import { ButonlarModalComponents } from 'src/shared/dialogs/filter-open-dialogs/butonlar-modal';
 import { KapilarModalComponents } from 'src/shared/dialogs/filter-open-dialogs/kapilar-modal';
+import { ButonKartListModalComponents } from 'src/shared/dialogs/other-dialogs/buton-kart-list-modal';
+import { ButtonModule } from 'primeng/button';
+
+
+import { TagModule } from 'primeng/tag'; // TagModule'ü import et
+import { DataViewModule } from 'primeng/dataview';
+import { TableModule } from 'primeng/table';
+import { CurrencyInputDirective } from 'src/shared/core/components/currency-input.directive';
+import { RouterModule } from '@angular/router';
+import { ConfirmModalComponents } from 'src/shared/dialogs/informations/confirm-modal';
+import { DeleteModalComponents } from 'src/shared/dialogs/informations/delete-modal';
+import { ErrorMessageModalComponents } from 'src/shared/dialogs/informations/error-message-modal';
+import { HtppErrorHandlerInterceptor } from './core/http-error-handler.interceptor';
+import { RequestInterceptor } from './core/request.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +45,12 @@ import { KapilarModalComponents } from 'src/shared/dialogs/filter-open-dialogs/k
     NoResultModalComponents,
     AgirlikSaselerModalComponents,
     ButonlarModalComponents,
-    KapilarModalComponents
+    KapilarModalComponents,
+    ButonKartListModalComponents,
+    CurrencyInputDirective,
+    ConfirmModalComponents,
+    DeleteModalComponents,
+    ErrorMessageModalComponents
   ],
   imports: [
     BrowserModule,
@@ -43,12 +62,18 @@ import { KapilarModalComponents } from 'src/shared/dialogs/filter-open-dialogs/k
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AgGridAngular
-
+    AgGridAngular,
+    ButtonModule,
+    TagModule,
+    DataViewModule,
+    TableModule,
   ],
   providers: [
-     { provide: "baseUrl", useValue: "https://localhost:7054/api", multi: true },
+     { provide: "baseUrl", useValue: "http://192.168.4.111:8082/api", multi: true },
+     { provide: HTTP_INTERCEPTORS, useClass: HtppErrorHandlerInterceptor, multi: true },
+     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
      { provide: LocationStrategy, useClass: HashLocationStrategy, },
+   //{ provide: LocationStrategy, useClass: PathLocationStrategy }
      ],
   bootstrap: [AppComponent]
 })

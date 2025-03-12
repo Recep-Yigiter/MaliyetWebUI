@@ -36,15 +36,24 @@ export class ButonComponent implements OnInit {
   ngOnInit(): void {
   
   }
-
+  ad
+  kontrolPaneli
+  sivaAltiUstu
+  kaplama
+  butonTipi
+  ekran
+  sistem
 
 
   colDefs: ColDef[] = [
-    { field: 'ad', width: 300 },
-    { field: 'butonTipi', width: 120 },
-    { field: 'durakSayisi', width: 70 },
-    { field: 'butonCesidi', width: 70 },
-    { field: 'butonOzellik', width: 70 },
+    { field: 'ad', width: 200 },
+    { field: 'model', width: 150 },
+    { field: 'kontrolPaneli', width: 150 },
+    { field: 'sivaAltiUstu', width: 150 },
+    { field: 'kaplama', width: 200 },
+    { field: 'butonTipi', width: 200 },
+    { field: 'ekran', width: 150 },
+    { field: 'sistem', width: 150 },
 
   ];
 
@@ -76,14 +85,6 @@ export class ButonComponent implements OnInit {
 
 
 
-  visible: boolean;
-  yeniButon(){
-    this.frm.ad='';
-    this.iscilikGiderler=[];
-    this.bilesenler=[];
-    this.visible=true;
-  }
-
 
 bilesenler:any=[];
 selectedBilesenRow:any;
@@ -92,127 +93,12 @@ iscilikGiderler:any=[];
 genelGiderler:any=[];
 
 
-//#region yeni Buton oluşturmak için açılan  DİALOG---------------------
-kaydet(){
-//  var test= {
-//     ad: "string",
-//     birim: "string",
-//     butonTipi: "string",
-//     durakSayisi: "string",
-//     butonCesidi: "string",
-//     butonOzellik: "string",
-//     urunBilesenler: [
-//       {
-//         miktar: 0,
-//         olusturmaTarihi: "2024-12-30T12:00:03.151Z",
-//         stok: {
-//           id: 1,
-//           ad: "string",
-//           birim: "string",
-//           birimFiyat: 0,
-//           dovizCinsi: "string"
-//         }
-//       }
-//     ],
-//     iscilikGiderler: []
-//   }
-
-  var buton={
-    ad:this.frm.ad,
-    birim:"ADET",
-    butonTipi:this.frm.butonTipi.ad,
-    durakSayisi:this.frm.durakSayisi.ad,
-    butonCesidi:this.frm.butonCesidi.ad,
-    butonOzellik:this.frm.boyOzellik.ad,
-    urunBilesenler:this.bilesenler,
-    iscilikGiderler:this.iscilikGiderler
-  }
-
-  console.log(buton);
-   this.ButonService.create(buton,async() =>{
-   this.visible=false;
-   this.rowData =await this.ButonService.GetAll();
-   })
-
-}
-
-
-frm:any={
-  butonTipi: { id: 1, ad: 'Buton Butonu' },
-  durakSayisi:{ id: 1, ad: '2' },
-  butonCesidi:{ id: 1, ad: 'Cam' },
-  boyOzellik: { id: 1, ad: 'Tam Boy' },
-}
 
 
 
 
 
 
-
-
-
-selectedButonTipi:any;
-butonTipi=[
-  { id: 1, ad: 'Buton Butonu' },
-  { id: 2, ad: 'Kat Butonu' },
-]
-onButonTipiChange(item: any): void {
-  this.selectedButonTipi=item;
-};
-
-
-selectedDurakSayisi:any;
-durakSayisi=[
-  { id: 1, ad: '2' },
-  { id: 2, ad: '3' },
-  { id: 3, ad: '4' },
-  { id: 4, ad: '5' },
-  { id: 5, ad: '6' },
-  { id: 6, ad: '7' },
-  { id: 7, ad: '8' },
-  { id: 8, ad: '9' },
-  { id: 9, ad: '10' },
-  { id: 10, ad: '11' },
-  { id: 11, ad: '12' },
-  { id: 12, ad: '13' },
-  { id: 13, ad: '14' },
-]
-onDurakSayisiChange(item: any): void {
-  this.selectedDurakSayisi=item;
-};
-
-
-
-selectedButonCesidi:any;
-butonCesidi=[
-  { id: 1, ad: 'Cam' },
-  { id: 2, ad: 'Mekanik' },
-]
-onButonCesidiChange(item: any): void {
-  this.selectedButonCesidi=item;
-};
-
-
-
-
-
-selectedBoyOzellik:any;
-boyOzellik=[
-  { id: 1, ad: 'Tam Boy' },
-  { id: 2, ad: 'Yarım Boy' },
-]
-onBoyOzellikChange(item: any): void {
-  this.selectedBoyOzellik=item;
-};
-
-
-
-//#endregion
-
-
-
-//#region yeni Buton için stok ekleme  DİALOG--------------------------------
 stoklar:any;
 stoklarVisible:boolean;
 selectedStokEkle:any;
@@ -233,11 +119,7 @@ stokEkle(){
   });
   this.stoklarVisible=false;
 }
-//#endregion
 
-
-
-//#region  yeni Buton için İşçi giderler ekleme  DİALOG-----------------------
 personellerVisible:any;
 personeller:any;
 selectedPersonelEkle:any;
@@ -261,7 +143,6 @@ async personelEkleDialog(){
   }
 
 
-//#endregion
 
 
 
@@ -289,7 +170,7 @@ async yeni(){
 sil(){
   if (this.selectedButon) {
     const modalRef = this.NgbModal.open(DeleteModalComponents, {
-      size: 'sm',
+      size: 'md',
       backdrop: 'static',
     });
     modalRef.componentInstance.data = 'Birim Kartı';
@@ -313,7 +194,7 @@ guncelle(){
     modalRef.componentInstance.data = this.selectedButon;
     modalRef.result.then(async (item) => {
       if (item) {
-        location.reload()
+        this.rowData =(await this.ButonService.GetAll()).items;
       }
     });
   }

@@ -99,7 +99,7 @@ async yeni(){
 sil(){
   if (this.selectedAgirlikSasesi) {
     const modalRef = this.NgbModal.open(DeleteModalComponents, {
-      size: 'sm',
+      size: 'md',
       backdrop: 'static',
     });
     modalRef.componentInstance.data = 'Birim Kartı';
@@ -123,7 +123,7 @@ guncelle(){
     modalRef.componentInstance.data = this.selectedAgirlikSasesi;
     modalRef.result.then(async (item) => {
       if (item) {
-        location.reload()
+        this.rowData =(await this.AgirlikSasesiService.GetAll()).items;
       }
     });
   }

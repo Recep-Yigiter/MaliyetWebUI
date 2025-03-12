@@ -7,6 +7,7 @@ import { GenelGiderService } from 'src/app/core/services/repository/genel-gider.
 import { DOVIZ } from 'src/assets/DATA/doviz';
 import { ButonlarModalComponents } from 'src/shared/dialogs/filter-open-dialogs/butonlar-modal';
 import { NoResultModalComponents } from 'src/shared/dialogs/informations/no-result-dialog';
+import { ButonKartListModalComponents } from 'src/shared/dialogs/other-dialogs/buton-kart-list-modal';
 
 @Component({
   selector: 'app-buton-maliyet',
@@ -32,27 +33,20 @@ export class ButonMaliyetComponent implements OnInit {
   gruplanmisVeri: any = {};
   objectKeys: any;
   genelGiderKatsayi: any;
-  constructor(private ButonService: ButonService, private GenelGiderService: GenelGiderService, private GenelGiderKatsayiService: GenelGiderKatsayiService,private NgbModal:NgbModal) {
-
-
+  constructor(
+    private ButonService: ButonService,
+    private GenelGiderService: GenelGiderService,
+    private GenelGiderKatsayiService: GenelGiderKatsayiService,
+    private NgbModal: NgbModal) {
   }
-
   async ngOnInit() {
-
     this.genelGiderler = ((await this.GenelGiderService.GetAll()).items);
     this.genelGiderKatsayi = (await this.GenelGiderKatsayiService.GetAll()).items
     this.birlesmisVeri = this.birlestir();
     this.gruplanmisVeri = this.gruplamaYap();
     this.objectKeys = Object.keys(this.gruplanmisVeri)
-
-
-
-
   }
-
-
   birlestir() {
-
     return this.genelGiderler.map(gider => {
       const katsayilar = this.genelGiderKatsayi
         .filter(katsayi => katsayi.ad === gider.ad && katsayi.fabrika === gider.fabrika)
@@ -80,28 +74,33 @@ export class ButonMaliyetComponent implements OnInit {
     return gruplanmisVeri;
 
   }
-
-
   frm: any = {
     kar: 15,
     vadeFarki: 4.5,
     gunlukUretimSayisi: 5,
     tahminiCalisanSayisi: 10,
     ortalamaPersonelMaasi: 0,
-    butonTipi: { id: 1, ad: 'Hepsi' },
-    durakSayisi: { id: 2, ad: '2' },
-    butonCesidi: { id: 1, ad: 'Hepsi' },
-    boyOzellik: { id: 1, ad: 'Hepsi' },
+    ad: "",
+    model: {
+      ad: "YLP 01",
+      img: '../../../../../assets/img/buton-models/.PNG',
+      kontrolPaneli: "Kat Kontrol Paneli",
+      ozellikler:
+      {
+        sivaAltiUstu: "Sıva Üstü Kat Butonu",
+        kaplama: "Paslanmaz Çelik Kaplama",
+        butonTipi: "Mekanik Tekli Buton",
+        ekran: "Dot Matrix Ekran",
+        sistem: "Simplex Sistem",
+      }
+    },
+    kontrolPaneli: '',
+    sivaAltiUstu: "",
+    kaplama: "",
+    butonTipi: "",
+    ekran: "",
+    sistem: "",
   }
-
-
-
-
-
-
-
-
-
   selectedButonTipi: any;
   butonTipi = [
     { id: 1, ad: 'Hepsi' },
@@ -111,8 +110,6 @@ export class ButonMaliyetComponent implements OnInit {
   onButonTipiChange(item: any): void {
     this.selectedButonTipi = item;
   };
-
-
   selectedDurakSayisi: any;
   durakSayisi = [
     { id: 1, ad: 'Hepsi' },
@@ -133,9 +130,6 @@ export class ButonMaliyetComponent implements OnInit {
   onDurakSayisiChange(item: any): void {
     this.selectedDurakSayisi = item;
   };
-
-
-
   selectedButonCesidi: any;
   butonCesidi = [
     { id: 1, ad: 'Hepsi' },
@@ -145,11 +139,6 @@ export class ButonMaliyetComponent implements OnInit {
   onButonCesidiChange(item: any): void {
     this.selectedButonCesidi = item;
   };
-
-
-
-
-
   selectedBoyOzellik: any;
   boyOzellik = [
     { id: 1, ad: 'Hepsi' },
@@ -159,17 +148,7 @@ export class ButonMaliyetComponent implements OnInit {
   onBoyOzellikChange(item: any): void {
     this.selectedBoyOzellik = item;
   };
-
-
-
   onRowClickUrunler(event) { }
-
-
-
-
-
-
-
   genelGiderToplam: any;
   toplamMaliyet: any;
   malzemeToplam: number;
@@ -180,32 +159,17 @@ export class ButonMaliyetComponent implements OnInit {
   vade3Fiyat: any;
 
   Hesapla() {
-
     this.malzemeGiderHesap();
     this.iscilikGiderHesap();
     this.genelGiderHesap();
-
     this.toplamMaliyet = this.iscilikToplam + this.malzemeToplam + (this.genelGiderToplam / this.frm.gunlukUretimSayisi);
-
     this.fiyatHesap();
-
-
-
   }
-
-
   iscilikToplam: any;
   IscilikDeleteFunc(event) {
     this.iscilikGiderler = event;
   }
-
-
-
   iscilikVisible: any;
-
-
-
-
   malzemeGiderHesap() {
     this.bilesenler?.forEach((item: any) => {
       if (item.stok.dovizCinsi == 'TL') {
@@ -227,7 +191,6 @@ export class ButonMaliyetComponent implements OnInit {
     }
     this.malzemeToplam = total;
   }
-
   iscilikGiderHesap() {
     var totalMaas = 0
     this.iscilikGiderler.forEach(element => {
@@ -246,88 +209,77 @@ export class ButonMaliyetComponent implements OnInit {
     }
 
   }
-
   genelGiderHesap() {
-
     var total = 0
-    // this.genelGiderler.forEach(element => {
-    //   total += (element.tutar*element.etkiOrani/100);
-    // });
-    // this.genelGiderToplam=total
     this.gruplanmisVeri['Kabin Fabrikası'].forEach(element => {
       total += element['katsayilar'].buton / 28
     });
-
     this.genelGiderToplam = total;
   }
-
   fiyatHesap() {
     this.pesinFiyat = this.toplamMaliyet + this.toplamMaliyet * this.frm.kar / 100;
     this.vade1Fiyat = this.pesinFiyat + this.pesinFiyat * this.frm.vadeFarki / 100;
     this.vade2Fiyat = this.vade1Fiyat + this.vade1Fiyat * this.frm.vadeFarki / 100;
     this.vade3Fiyat = this.vade2Fiyat + this.vade2Fiyat * this.frm.vadeFarki / 100;
   }
-
-
-
   personelEkleDialog(item) {
     this.iscilikGiderler = item
   }
-async urunfilter(){
-  const filteredProducts = ((await this.ButonService.GetAll()).items).filter(item => {
-    const matchesButonTipi = this.selectedButonTipi ? item.butonTipi === this.selectedButonTipi.ad || this.selectedButonTipi.id == 1 : true;
-    // const matchesDurakSayisi = this.selectedDurakSayisi? item.durakSayisi === this.selectedDurakSayisi.ad|| this.selectedDurakSayisi.id==1 : true;
-    const matchesButonCesidi = this.selectedButonCesidi ? item.butonCesidi === this.selectedButonCesidi.ad || this.selectedButonCesidi.id == 1 : true;
-    const matchesBoyOzellik = this.selectedBoyOzellik ? item.boyOzellik === this.selectedBoyOzellik.ad || this.selectedBoyOzellik.id == 1 : true;
-    return matchesButonTipi && matchesButonCesidi && matchesBoyOzellik
+  async urunfilter() {
+    const filteredProducts = ((await this.ButonService.GetAll()).items).filter(item => {
+      // const matchesButonTipi = this.selectedButonTipi ? item.butonTipi === this.selectedButonTipi.ad || this.selectedButonTipi.id == 1 : true;
+      // const matchesButonCesidi = this.selectedButonCesidi ? item.butonCesidi === this.selectedButonCesidi.ad || this.selectedButonCesidi.id == 1 : true;
+      // const matchesBoyOzellik = this.selectedBoyOzellik ? item.boyOzellik === this.selectedBoyOzellik.ad || this.selectedBoyOzellik.id == 1 : true;
+       const selectedButon = this.selectedButon ? item.model === this.selectedButon.ad || this.selectedButon.id == 1 : true;
+      return selectedButon
 
-  });
-  this.urunler = filteredProducts;
-  this.selectedUrunRow = filteredProducts[0];
-
-  if (this.urunler.length==0) {
-    const modalRef = this.NgbModal.open(NoResultModalComponents, {
-      size: 'sm',
-      backdrop: 'static',
     });
-    modalRef.componentInstance.data = 'Birim Kartı';
-    modalRef.result.then(async(event) => { });
-  }
-else{
-  const modalRef = this.NgbModal.open(ButonlarModalComponents, {
-    size: 'lg',
-    backdrop: 'static',
-  });
-  modalRef.componentInstance.confirmationBoxTitle = 'Buton Listesi';
-  modalRef.componentInstance.datas = this.urunler;
-  modalRef.result.then((item) => {
-    if (item != false) {
-      this.selectedURUN=item  
-      this.bilesenler = item?.urunBilesenler;
-      this.iscilikGiderler = item?.iscilikGiderler;
-      let totalMaas = 0;
-      this.iscilikGiderler.forEach(element => {
-        totalMaas += element.personel.maas;
-      });
-  
-      if (this.iscilikGiderler.length != 0) {
-        this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
-        this.frm.personelSayisi = this.iscilikGiderler.length;
-      }
-      else {
-        this.frm.ortalamaPersonelMaasi = 0;
-        this.frm.personelSayisi = 0;
-      }
+    this.urunler = filteredProducts;
+    this.selectedUrunRow = filteredProducts[0];
 
-  
-      if (this.bilesenler.length > 0) {
-        this.hesaplaButtonDisabled = false;
-      }
+    if (this.urunler.length == 0) {
+      const modalRef = this.NgbModal.open(NoResultModalComponents, {
+        size: 'sm',
+        backdrop: 'static',
+      });
+      modalRef.componentInstance.data = 'Birim Kartı';
+      modalRef.result.then(async (event) => { });
+    }
+    else {
+      const modalRef = this.NgbModal.open(ButonlarModalComponents, {
+        size: 'lg',
+        backdrop: 'static',
+      });
+      modalRef.componentInstance.confirmationBoxTitle = 'Buton Listesi';
+      modalRef.componentInstance.datas = this.urunler;
+      modalRef.result.then((item) => {
+        if (item != false) {
+          this.selectedURUN = item
+          this.bilesenler = item?.urunBilesenler;
+          this.iscilikGiderler = item?.iscilikGiderler;
+          let totalMaas = 0;
+          this.iscilikGiderler.forEach(element => {
+            totalMaas += element.personel.maas;
+          });
+
+          if (this.iscilikGiderler.length != 0) {
+            this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
+            this.frm.personelSayisi = this.iscilikGiderler.length;
+          }
+          else {
+            this.frm.ortalamaPersonelMaasi = 0;
+            this.frm.personelSayisi = 0;
+          }
+
+
+          if (this.bilesenler.length > 0) {
+            this.hesaplaButtonDisabled = false;
+          }
+
+        }
+      });
 
     }
-  });
-  
-}
 
 
 
@@ -336,8 +288,30 @@ else{
 
 
   }
-
-
+  selectedButon: any = {
+    ad: "YLP 01",
+    img: '../../../../../assets/img/buton-models/.PNG',
+    kontrolPaneli: "Kat Kontrol Paneli",
+    ozellikler:
+    {
+      sivaAltiUstu: "Sıva Üstü Kat Butonu",
+      kaplama: "Paslanmaz Çelik Kaplama",
+      butonTipi: "Mekanik Tekli Buton",
+      ekran: "Dot Matrix Ekran",
+      sistem: "Simplex Sistem",
+    }
+  };
+  selectDialogOpen() {
+    const modalRef = this.NgbModal.open(ButonKartListModalComponents, {
+      size: 'xl',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.confirmationBoxTitle = 'Buton Listesi';
+    modalRef.result.then((item) => {
+      if (item != false) {
+        this.selectedButon = item;
+      }
+    });
+  }
 }
-
 

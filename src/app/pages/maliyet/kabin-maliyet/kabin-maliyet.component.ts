@@ -17,9 +17,6 @@ import { NoResultModalComponents } from 'src/shared/dialogs/informations/no-resu
 })
 export class KabinMaliyetComponent implements OnInit {
 
-
-
-
   kabinler: any = [];
   bilesenler: any = [];
   iscilikGiderler: any = []
@@ -43,15 +40,11 @@ export class KabinMaliyetComponent implements OnInit {
 
   async ngOnInit() {
     // this.modeller.push({id:1,ad:"Hepsi"})
-
     this.genelGiderler = ((await this.GenelGiderService.GetAll()).items);
     this.genelGiderKatsayi = (await this.GenelGiderKatsayiService.GetAll()).items
     this.birlesmisVeri = this.birlestir();
     this.gruplanmisVeri = this.gruplamaYap();
     this.objectKeys = Object.keys(this.gruplanmisVeri)
-
-
-
   }
 
   birlestir() {
@@ -92,6 +85,7 @@ export class KabinMaliyetComponent implements OnInit {
     ortalamaPersonelMaasi: 0,
     model: {
       ad: "BELUGA",
+      img: '../../../../../assets/img/kabin-models/BELUGA.PNG',
       ozellikler:
       {
         kabinDuvar: "Ral 7040 Boyalı Cam & Satine Paslanmaz",
@@ -107,8 +101,6 @@ export class KabinMaliyetComponent implements OnInit {
 
     },
     kapasite: { id: 1, deger: '320' }
-
-
   }
 
 
@@ -121,9 +113,46 @@ export class KabinMaliyetComponent implements OnInit {
 
 
   selectedModel: any;
-  onModelChange(item: any): void {
+ onModelChange(item: any):void {
     this.selectedModel = item;
+   this.dropdownChangedUrun();
+
   };
+
+
+
+
+
+ async dropdownChangedUrun(){
+    const filteredProducts = ((await this.KabinService.GetAll()).items).filter(item => {
+      const matchesModel = this.selectedModel ? item.model === this.selectedModel.ad || this.selectedModel.id == 1 : true;
+      const matchesKapasite = this.selectedKapasite ? item.kapasite === this.selectedKapasite.deger || this.selectedKapasite.id == 1 : true;
+      return matchesModel && matchesKapasite;
+    });
+
+
+    this.selectedURUN = filteredProducts[0];
+    this.bilesenler = filteredProducts[0]?.urunBilesenler;
+    this.iscilikGiderler = filteredProducts[0]?.iscilikGiderler;
+    let totalMaas = 0;
+    this.iscilikGiderler.forEach(element => {
+      totalMaas += element.personel.maas;
+    });
+
+    if (this.iscilikGiderler.length != 0) {
+      this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
+      this.frm.personelSayisi = this.iscilikGiderler.length;
+    }
+    else {
+      this.frm.ortalamaPersonelMaasi = 0;
+      this.frm.personelSayisi = 0;
+    }
+
+
+    if (this.bilesenler.length > 0) {
+      this.hesaplaButtonDisabled = false;
+    }
+  }
 
 
 
@@ -145,15 +174,18 @@ export class KabinMaliyetComponent implements OnInit {
     { id: 7, deger: '1250' },
     { id: 8, deger: '1600' },
   ];
-  onKapasiteChange(kapasite: any): void {
+ async onKapasiteChange(kapasite: any) {
     this.selectedKapasite = kapasite;
+
+
+
   };
 
 
 
 
 
- 
+
 
 
 
@@ -188,7 +220,7 @@ export class KabinMaliyetComponent implements OnInit {
 
   selectedPersonelEkle: any;
   async personelEkleDialog(event) {
-  
+
     this.selectedPersonelEkle = []
     this.iscilikGiderler = event;
   }
@@ -225,14 +257,14 @@ export class KabinMaliyetComponent implements OnInit {
       totalMaas += element.personel.maas;
     });
     if (this.iscilikGiderler.length != 0) {
-        this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
-        this.frm.personelSayisi = this.iscilikGiderler.length;
-        this.iscilikToplam = (this.frm.ortalamaPersonelMaasi * this.frm.personelSayisi / 28) / this.frm.gunlukUretimSayisi;
+      this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
+      this.frm.personelSayisi = this.iscilikGiderler.length;
+      this.iscilikToplam = (this.frm.ortalamaPersonelMaasi * this.frm.personelSayisi / 28) / this.frm.gunlukUretimSayisi;
     }
     else {
-        this.frm.ortalamaPersonelMaasi = 0;
-        this.frm.personelSayisi = 0;
-        this.iscilikToplam = 0;
+      this.frm.ortalamaPersonelMaasi = 0;
+      this.frm.personelSayisi = 0;
+      this.iscilikToplam = 0;
     }
 
   }
@@ -306,66 +338,66 @@ export class KabinMaliyetComponent implements OnInit {
 
 
 
-async urunfilter(){
-  this.selectedURUN = []
-  const filteredProducts = ((await this.KabinService.GetAll()).items).filter(item => {
-    const matchesModel = this.selectedModel ? item.model === this.selectedModel.ad || this.selectedModel.id == 1 : true;
-    const matchesKapasite = this.selectedKapasite ? item.kapasite === this.selectedKapasite.deger || this.selectedKapasite.id == 1 : true;
-    return  matchesModel && matchesKapasite;
-  });
-  this.kabinler = filteredProducts;
+  // async urunfilter() {
+  //   this.selectedURUN = []
+  //   const filteredProducts = ((await this.KabinService.GetAll()).items).filter(item => {
+  //     const matchesModel = this.selectedModel ? item.model === this.selectedModel.ad || this.selectedModel.id == 1 : true;
+  //     const matchesKapasite = this.selectedKapasite ? item.kapasite === this.selectedKapasite.deger || this.selectedKapasite.id == 1 : true;
+  //     return matchesModel && matchesKapasite;
+  //   });
+  //   this.kabinler = filteredProducts;
 
-  if (this.kabinler.length==0) {
-    const modalRef = this.NgbModal.open(NoResultModalComponents, {
-      size: 'sm',
-      backdrop: 'static',
-    });
-    modalRef.componentInstance.data = 'Birim Kartı';
-    modalRef.result.then(async(event) => { });
-  }
-else{
-  const modalRef = this.NgbModal.open(KabinlerModalComponents, {
-    size: 'lg',
-    backdrop: 'static',
-  });
-  modalRef.componentInstance.confirmationBoxTitle = 'Kabin Listesi';
-  modalRef.componentInstance.datas = this.kabinler;
-  modalRef.result.then((item) => {
-    if (item != false) {
-      this.selectedURUN=item  
-      this.bilesenler = item?.urunBilesenler;
-      this.iscilikGiderler = item?.iscilikGiderler;
-      let totalMaas = 0;
-      this.iscilikGiderler.forEach(element => {
-        totalMaas += element.personel.maas;
-      });
-  
-      if (this.iscilikGiderler.length != 0) {
-        this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
-        this.frm.personelSayisi = this.iscilikGiderler.length;
-      }
-      else {
-        this.frm.ortalamaPersonelMaasi = 0;
-        this.frm.personelSayisi = 0;
-      }
+  //   if (this.kabinler.length == 0) {
+  //     const modalRef = this.NgbModal.open(NoResultModalComponents, {
+  //       size: 'sm',
+  //       backdrop: 'static',
+  //     });
+  //     modalRef.componentInstance.data = 'Birim Kartı';
+  //     modalRef.result.then(async (event) => { });
+  //   }
+  //   else {
+  //     const modalRef = this.NgbModal.open(KabinlerModalComponents, {
+  //       size: 'lg',
+  //       backdrop: 'static',
+  //     });
+  //     modalRef.componentInstance.confirmationBoxTitle = 'Kabin Listesi';
+  //     modalRef.componentInstance.datas = this.kabinler;
+  //     modalRef.result.then((item) => {
+  //       if (item != false) {
+  //         this.selectedURUN = item
+  //         this.bilesenler = item?.urunBilesenler;
+  //         this.iscilikGiderler = item?.iscilikGiderler;
+  //         let totalMaas = 0;
+  //         this.iscilikGiderler.forEach(element => {
+  //           totalMaas += element.personel.maas;
+  //         });
 
-  
-      if (this.bilesenler.length > 0) {
-        this.hesaplaButtonDisabled = false;
-      }
-
-    }
-  });
-  
-}
+  //         if (this.iscilikGiderler.length != 0) {
+  //           this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
+  //           this.frm.personelSayisi = this.iscilikGiderler.length;
+  //         }
+  //         else {
+  //           this.frm.ortalamaPersonelMaasi = 0;
+  //           this.frm.personelSayisi = 0;
+  //         }
 
 
+  //         if (this.bilesenler.length > 0) {
+  //           this.hesaplaButtonDisabled = false;
+  //         }
+
+  //       }
+  //     });
+
+  //   }
 
 
 
 
 
-  }
+
+
+  // }
 
 
 

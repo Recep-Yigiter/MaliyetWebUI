@@ -177,7 +177,7 @@ async yeni(){
 sil(){
   if (this.selectedKasnak) {
     const modalRef = this.NgbModal.open(DeleteModalComponents, {
-      size: 'sm',
+      size: 'md',
       backdrop: 'static',
     });
     modalRef.componentInstance.data = 'Birim Kartı';
@@ -201,7 +201,7 @@ guncelle(){
     modalRef.componentInstance.data = this.selectedKasnak;
     modalRef.result.then(async (item) => {
       if (item) {
-        location.reload()
+        this.rowData =(await this.KasnakService.GetAll()).items;
       }
     });
   }

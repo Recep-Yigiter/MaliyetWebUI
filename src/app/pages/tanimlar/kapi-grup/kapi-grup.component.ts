@@ -93,7 +93,7 @@ async yeni(){
 sil(){
   if (this.selectedKapi) {
     const modalRef = this.NgbModal.open(DeleteModalComponents, {
-      size: 'sm',
+      size: 'md',
       backdrop: 'static',
     });
     modalRef.componentInstance.data = 'Birim Kartı';

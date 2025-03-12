@@ -1,7 +1,9 @@
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { firstValueFrom, Observable } from 'rxjs';
 import { ApiClientService } from 'src/app/core/services/api-client.service';
+import { ErrorMessageModalComponents } from 'src/shared/dialogs/informations/error-message-modal';
 
 
 @Injectable({
@@ -11,12 +13,16 @@ export class KabinService {
   decode: any;
   loggedUserData:any;
   constructor(
-    private apiService: ApiClientService,
+    private apiService: ApiClientService,private NgbModal:NgbModal
 
   ) {
 
   }
 
+
+
+
+  
   async create(create: any, successCallBack?: () => void, errorCallback?: (errorMessage: HttpErrorResponse) => void) {
      
 
@@ -60,22 +66,31 @@ export class KabinService {
     promiseData.then(successCallBack).catch(errorCallback);
     return await promiseData;
   }
-  async GetAll(successCallBack?: () => void, errorCallBack?: (errorMessage: HttpErrorResponse) => void) {
+  // async GetAll(successCallBack?: () => void, errorCallBack?: (errorMessage: HttpErrorResponse) => void) {
       
-    const observable: Observable<any> = this.apiService.get(
+  //   const observable: Observable<any> = this.apiService.get(
+  //     {
+  //       controller: "Kabins",
+  //       action: "GetAllKabins",
+  //     });
+  //   const promiseData = firstValueFrom(observable);
+
+  //   promiseData.then(successCallBack).catch(errorCallBack);
+
+   
+  //   return await promiseData;
+  // }
+
+ async GetAll(successCallBack?: () => void, errorCallBack?: (errorMessage: HttpErrorResponse) => void) {
+    const observable: Observable<any> =  this.apiService.get(
       {
         controller: "Kabins",
         action: "GetAllKabins",
       });
-    const promiseData = firstValueFrom(observable);
-
-    promiseData.then(successCallBack).catch(errorCallBack);
-
-   
-    return await promiseData;
+      const promiseData = firstValueFrom(observable);
+      promiseData.then(successCallBack).catch(errorCallBack);
+      return await promiseData;
   }
-
-
   async getById(id: string, successCallBack?: () => void, errorCallback?: (errorMessage: HttpErrorResponse) => void) {
      
     const observable = this.apiService.get({

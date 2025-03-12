@@ -70,9 +70,7 @@ export class ButonlarModalComponents {
     @Input() confirmationMessage;
     @Input() datas;
 
-    constructor(public activeModal: NgbActiveModal,) {
-
-    }
+    constructor(public activeModal: NgbActiveModal) { }
 
     rowData: any[];
 
@@ -82,10 +80,13 @@ export class ButonlarModalComponents {
 
     colDefs: ColDef[] = [
         { field: 'ad', width: 300 },
-        { field: 'butonTipi', width: 120 },
-        { field: 'durakSayisi', width: 70 },
-        { field: 'butonCesidi', width: 70 },
-        { field: 'butonOzellik', width: 70 },
+        { field: 'model', width: 150 },
+        { field: 'kontrolPaneli', width: 150 },
+        { field: 'sivaAltiUstu', width: 150 },
+        { field: 'kaplama', width: 200 },
+        { field: 'butonTipi', width: 200 },
+        { field: 'ekran', width: 150 },
+        { field: 'sistem', width: 150 },
 
       ];
     

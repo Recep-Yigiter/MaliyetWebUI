@@ -149,7 +149,7 @@ export class KabinMalzemeGiderlerTableComponent {
             modalRef.componentInstance.data = this.selectedMalzemeGiderler.stok;
             modalRef.result.then(async (item) => {
                 if (item) {
-                    location.reload()
+                    location.reload();
                 }
             });
         }

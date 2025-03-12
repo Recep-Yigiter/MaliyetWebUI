@@ -1,12 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StokService } from 'src/app/core/services/repository/stok.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CurrencyPipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-update-stok',
   templateUrl: './update-stok.component.html',
-  styleUrls: ['./update-stok.component.scss']
+  styleUrls: ['./update-stok.component.scss'],
+   providers:[CurrencyPipe]
 })
 export class UpdateStokComponent implements OnInit {
   @Input() data;
@@ -87,12 +89,16 @@ export class UpdateStokComponent implements OnInit {
     
     selectedStokGrubu:any;
     stokGrubu=[
-      { ad: 'Sac' },
-      { ad: 'Paslanmaz Sac' },
-      { ad: 'Galvanizli Sac' },
-      { ad: 'Civata-Somun-Pul' },
-      { ad: 'Alüminyum' },
-      { ad: 'Diğer' },
+      {ad: 'SAC' },
+      {ad: 'Paslanmaz Sac+ decoplate' },
+      {ad: 'Galvanizli Sac' },
+      {ad: 'Civata-Somun-Pul' },
+      {ad: 'Alüminyum' },
+      {ad: 'Profil' },
+      {ad: 'Granit' },
+      {ad: 'Ayna/Cam' },
+      {ad: 'Elektronik' },
+      {ad: 'Diğer' },
     ]
     onStokGrubuChange(item: any): void {
       this.selectedStokGrubu=item;

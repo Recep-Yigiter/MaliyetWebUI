@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tanimlar.component.scss']
 })
 export class TanimlarComponent {
+  
   menu = [
     {
       label: 'Kartlar',
@@ -110,9 +111,6 @@ export class TanimlarComponent {
   
 
   ];
-
-
-
   constructor(private router:Router) {
     
   }

@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StokService } from 'src/app/core/services/repository/stok.service';
+import { AG_GRID_LOCALE_TR } from 'src/AG_GRID_LOCALE_TR ';
+import { defaultColDef } from 'src/default-col-def';
 
 @Component({
     selector: 'app-stok-select-modal',
@@ -32,7 +34,7 @@ import { StokService } from 'src/app/core/services/repository/stok.service';
 
         <div>
 
-            <ag-grid-angular style="width: 100%; height:390px;"
+            <!-- <ag-grid-angular style="width: 100%; height:390px;"
             class="ag-theme-quartz" 
             [rowData]="rowData" 
             [columnDefs]="colDefs"
@@ -43,7 +45,13 @@ import { StokService } from 'src/app/core/services/repository/stok.service';
             [rowSelection]="rowSelection" 
             [rowHeight]="22" 
             [headerHeight]="23">
-        </ag-grid-angular> 
+        </ag-grid-angular>  -->
+
+        <ag-grid-angular #agGrid style="width: 100%; height:390px;" class="ag-theme-quartz" [rowData]="rowData" 
+      [defaultColDef]="defaultColDef" [columnDefs]="colDefs" 
+      (gridReady)="getList($event)" (selectionChanged)="onSelectionChanged()" [rowSelection]="rowSelection" [rowHeight]="22"
+      [headerHeight]="23" [localeText]="localeText">
+    </ag-grid-angular>
 
         </div>
 
@@ -56,7 +64,7 @@ import { StokService } from 'src/app/core/services/repository/stok.service';
 
 <div class="modal-footer">
 <button type="button" class="btn btn-success"
-    (click)="close()"
+    (click)="ekle()"
     style="padding:2px 10px; border-radius: 3px; background-color: #017e84;">
     <i class="fa fa-plus" style="color: #fff; margin-right: 5px; font-weight: 700;"></i>
     <span class="d-none d-sm-inline" style="font-size: 13px;">Ekle</span>
@@ -73,7 +81,8 @@ import { StokService } from 'src/app/core/services/repository/stok.service';
 export class StokSelectModalComponents {
     @Input() confirmationBoxTitle;
     @Input() confirmationMessage;
-
+  public localeText: {[key:string]:string} = AG_GRID_LOCALE_TR;
+  public defaultColDef = defaultColDef;
     constructor(public activeModal: NgbActiveModal, private StokService: StokService) {
 
     }
@@ -86,19 +95,30 @@ export class StokSelectModalComponents {
     colDefs: ColDef[] = [
         {
             headerCheckboxSelection: true,
-      headerCheckboxSelectionFilteredOnly: true,
-      checkboxSelection: true,
+            headerCheckboxSelectionFilteredOnly: true,
+            checkboxSelection: true,
             field: "ad",
-            minWidth: 200
+            minWidth: 600,
+            filter: "agTextColumnFilter",
+            filterParams: {
+            filterOptions: ["contains", "notContains"],
+            textCustomComparator:this.customFilter
+      } 
         },
-        { field: "kod" },
-        { field: "StokAdi" },
+        { field: 'stokGrubu', width: 130 },
+        { field: 'birim', width: 70 },
+        {
+          field: 'birimFiyat', width: 70,
+          valueFormatter: (params) => {
+            return new Intl.NumberFormat('tr-TR', {
+              style: 'currency',
+              currency: 'TRY'
+            }).format(params.value);
+          }
+        },
+        { field: 'dovizCinsi', width: 70 },
 
     ];
-    public defaultColDef: ColDef = {
-        flex: 1,
-        minWidth: 100,
-    };
 
     async getList(params: GridReadyEvent<any>) {
         this.gridApi = params.api;
@@ -109,14 +129,45 @@ export class StokSelectModalComponents {
 
     onSelectionChanged() {
         this.selectedRows = this.gridApi.getSelectedRows();
+        console.log(this.selectedRows);
     }
 
     Stoks: any[] = [];
-    close() {
+    ekle() {
 
-
-        this.activeModal.close(this.selectedRows)
+      console.log(this.selectedRows);
+      this.activeModal.close(this.selectedRows)
 
     }
+
+
+
+    customFilter(filterType, filterValue, cellValue) {
+        if (!filterValue) {
+          return true;
+        }
+        const normalizeString = (str) => {
+          let normalizedStr = str
+            .normalize('NFD') 
+            .replace(/[\u0300-\u036f]/g, '') 
+            .toLowerCase();
+    
+          normalizedStr = normalizedStr
+            .replace(/i/g, 'ı')
+            .replace(/ı/g, 'i');
+    
+          return normalizedStr;
+        };
+    
+    
+    
+        const normalizedFilterValue = normalizeString(filterValue);
+        const normalizedCellValue = normalizeString(cellValue.toString());
+    
+        if (filterType === 'contains') {
+          return normalizedFilterValue.includes(normalizedCellValue);
+        }
+        return true;
+      }
 }
 

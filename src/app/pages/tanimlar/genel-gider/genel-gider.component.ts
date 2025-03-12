@@ -177,7 +177,7 @@ export class GenelGiderComponent implements OnInit {
   sil() {
     if (this.selectedGenelGider) {
       const modalRef = this.NgbModal.open(DeleteModalComponents, {
-        size: 'sm',
+        size: 'md',
         backdrop: 'static',
       });
       modalRef.componentInstance.data = 'Genel Gider';

@@ -88,8 +88,51 @@
                             <input form-control [(ngModel)]="frm.ad" name="ad" style="height: 26px;"
                                 class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1">
                           </buton-form>
-                    
-                        <buton-form [span]="170" [label]="'Buton tipi'">
+                          <buton-form [span]="170" [label]="'Butonlar'">
+                            <input readonly style=" padding: 0px 0 0px 0.75rem; "   form-control [(ngModel)]="selectedButon.ad" name="ad" style="height: 26px;"
+                            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1"> 
+                            <div  form-control style="position: absolute;top: 0;right: 3px; display: flex;align-items: center;justify-content: center; height: 100%; width: 20px;">
+                              <button (click)="selectDialogOpen()"   style="height: 20px;
+                                               border-radius: 0;
+                                               border-left: 1px solid rgb(145, 145, 243);
+                                              width: 20px;
+                                              display: flex;
+                                              align-items: center;
+                                              justify-content: center;" class="selected-ellipsis btn">
+                                   <i class="fa-solid fa-ellipsis"></i>
+                                </button>
+                            </div>
+                          </buton-form>
+      
+      
+                            <buton-form [span]="170" [label]="'Kontrol Paneli'">
+                              <input disabled="true" form-control [(ngModel)]="selectedButon.kontrolPaneli" name="ad"
+                                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                                id="exampleFormControlInput1">
+                            </buton-form>
+                            <buton-form [span]="170" [label]="'Ekran'">
+                              <input disabled="true" form-control [(ngModel)]="selectedButon.ozellikler.ekran" name="ad"
+                                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                                id="exampleFormControlInput1">
+                            </buton-form>
+                            <buton-form [span]="170" [label]="'Buton Tipi'">
+                              <input disabled="true" form-control [(ngModel)]="selectedButon.ozellikler.butonTipi" name="ad"
+                                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                                id="exampleFormControlInput1">
+                            </buton-form>
+                      
+                            <buton-form [span]="170" [label]="'Kaplama'">
+                              <input disabled="true" form-control [(ngModel)]="selectedButon.ozellikler.kaplama" name="ad"
+                                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                                id="exampleFormControlInput1">
+                            </buton-form>
+                            <buton-form [span]="170" [label]="'Sistem'">
+                              <input disabled="true" form-control [(ngModel)]="selectedButon.ozellikler.sistem" name="ad"
+                                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                                id="exampleFormControlInput1">
+                            </buton-form>
+
+                        <!-- <buton-form [span]="170" [label]="'Buton tipi'">
                             <p-dropdown form-control [options]="butonTipi" [(ngModel)]="frm.butonTipi" optionLabel="ad"
                                 (ngModelChange)="onButonTipiChange(frm.butonTipi)" />
                         </buton-form>
@@ -100,7 +143,7 @@
                         <buton-form [span]="170" [label]="'Buton Çeşidi'">
                             <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
                                 (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
-                        </buton-form>
+                        </buton-form> -->
                     </div>
                 
                    

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { SatisFiyatiComponent } from './satis-fiyati/satis-fiyati.component';
 import { MaliyetComponent } from './maliyet/maliyet.component';
 import { TanimlarComponent } from './tanimlar/tanimlar.component';
+import { TanimlarModule } from '../pages/tanimlar/tanimlar.module';
 
 
 

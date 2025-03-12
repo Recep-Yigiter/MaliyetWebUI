@@ -1,35 +1,81 @@
-
-
-
-
- <div style="display: grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr ; gap: 4px;">
+<div style="display: grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr ; gap: 4px;">
     <div style="display: flex;
             flex-direction: column;
             border: 1px solid rgb(230, 230, 230);
             color: white; padding: 4px;">
-       <buton-maliyet-form [span]="170" [label]="'Buton tipi'">
-        <p-dropdown form-control [options]="butonTipi" [(ngModel)]="frm.butonTipi" optionLabel="ad"
-            (ngModelChange)="onButonTipiChange(frm.butonTipi)" />
-    </buton-maliyet-form>
-    <buton-maliyet-form [span]="170" [label]="'Buton Çeşidi'">
-        <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
-            (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
-    </buton-maliyet-form>
-   
+        <!-- <buton-maliyet-form [span]="170" [label]="'Buton tipi'">
+            <p-dropdown form-control [options]="butonTipi" [(ngModel)]="frm.butonTipi" optionLabel="ad"
+                (ngModelChange)="onButonTipiChange(frm.butonTipi)" />
+        </buton-maliyet-form>
+        <buton-maliyet-form [span]="170" [label]="'Buton Çeşidi'">
+            <p-dropdown form-control [options]="butonCesidi" [(ngModel)]="frm.butonCesidi" optionLabel="ad"
+                (ngModelChange)="onButonCesidiChange(frm.butonCesidi)" />
+        </buton-maliyet-form> -->
+        <buton-maliyet-form [span]="170" [label]="'Butonlar'">
+            <input readonly style=" padding: 0px 0 0px 0.75rem; " form-control [(ngModel)]="selectedButon.ad" name="ad"
+                style="height: 26px;" class="form-control shadow-none form-control-nullable"
+                id="exampleFormControlInput1">
+            <div form-control
+                style="position: absolute;top: 0;right: 3px; display: flex;align-items: center;justify-content: center; height: 100%; width: 20px;">
+                <button (click)="selectDialogOpen()" style="height: 20px;
+                             border-radius: 0;
+                             border-left: 1px solid rgb(145, 145, 243);
+                            width: 20px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;" class="selected-ellipsis btn">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+            </div>
+        </buton-maliyet-form>
+
+
+        <buton-maliyet-form [span]="170" [label]="'Kontrol Paneli'">
+            <input disabled="true" form-control [(ngModel)]="selectedButon.kontrolPaneli" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </buton-maliyet-form>
+        <buton-maliyet-form [span]="170" [label]="'Ekran'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.ekran" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </buton-maliyet-form>
+
+
+
     </div>
 
     <div
         style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
-        <buton-maliyet-form [span]="170" [label]="'Durak Sayısı'">
+
+        <buton-maliyet-form [span]="170" [label]="'Buton Tipi'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.butonTipi" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </buton-maliyet-form>
+
+        <buton-maliyet-form [span]="170" [label]="'Kaplama'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.kaplama" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </buton-maliyet-form>
+        <buton-maliyet-form [span]="170" [label]="'Sistem'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.sistem" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </buton-maliyet-form>
+
+
+        <!-- <buton-maliyet-form [span]="170" [label]="'Durak Sayısı'">
             <p-dropdown form-control [options]="durakSayisi" [(ngModel)]="frm.durakSayisi" optionLabel="ad"
                 (ngModelChange)="onDurakSayisiChange(frm.durakSayisi)" />
         </buton-maliyet-form>
-    
+
         <buton-maliyet-form [span]="170" [label]="'Boy Özellik'">
             <p-dropdown form-control [options]="boyOzellik" [(ngModel)]="frm.boyOzellik" optionLabel="ad"
                 (ngModelChange)="onBoyOzellikChange(frm.boyOzellik)" />
-        </buton-maliyet-form>
-    
+        </buton-maliyet-form> -->
+
         <div (click)="urunfilter()" form-control style="display: flex;margin-top: 10px;
                  align-items: center;
                  justify-content: center; 
@@ -37,9 +83,9 @@
                  cursor: pointer; 
                  background-color: #cacaca;
                  color: #201a1a;">
-                Ürünleri Göster
-            </div>
-        
+            Ürünleri Göster
+        </div>
+
     </div>
 </div>
 
@@ -55,14 +101,15 @@
             </p-accordion>
         </div>
         <div style="display: grid; grid-template-columns:2fr 2fr 2fr 3fr  ; gap: 4px;">
-            <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231); ">
+            <div
+                style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231); ">
                 <div class="card-container">
                     <div class="card">
                         <div *ngIf="!selectedURUN" class="label" style="border-bottom-left-radius: 0;
                                                                         font-size: 16px;
                                                                         border-bottom-right-radius: 0;
                                                                         height: 20px;">
-                         Ürün Seçimi Yapılmadı!
+                            Ürün Seçimi Yapılmadı!
                         </div>
                         <div *ngIf="selectedURUN" class="label" style="border-bottom-left-radius: 0; font-size: 16px;
              border-bottom-right-radius: 0; height: 20px;">
@@ -86,13 +133,15 @@
                             <div>
                                 <buton-maliyet-form [span]="196" [label]="'Ortalama Çalışan Maaşı'">
                                     <input [disabled]="true" form-control [(ngModel)]="frm.ortalamaPersonelMaasi"
-                                        style="height: 27px;color: gray;" class="form-control shadow-none form-control-nullable"
+                                        style="height: 27px;color: gray;"
+                                        class="form-control shadow-none form-control-nullable"
                                         id="exampleFormControlInput1">
                                 </buton-maliyet-form>
 
                                 <buton-maliyet-form [span]="196" [label]="'Personel Sayısı'">
                                     <input [disabled]="true" form-control [(ngModel)]="frm.personelSayisi"
-                                        style="height: 27px;color: gray;" class="form-control shadow-none form-control-nullable"
+                                        style="height: 27px;color: gray;"
+                                        class="form-control shadow-none form-control-nullable"
                                         id="exampleFormControlInput1">
                                 </buton-maliyet-form>
 
@@ -123,10 +172,8 @@
                                 [genelGiderToplam]="genelGiderToplam/frm.gunlukUretimSayisi"
                                 [toplamMaliyet]="toplamMaliyet"></buton-maliyet-table>
 
-                            <buton-fiyat-table [pesinFiyat]="pesinFiyat"
-                            [vade1Fiyat]="vade1Fiyat"
-                            [vade2Fiyat]="vade2Fiyat"
-                            [vade3Fiyat]="vade3Fiyat"></buton-fiyat-table>
+                            <buton-fiyat-table [pesinFiyat]="pesinFiyat" [vade1Fiyat]="vade1Fiyat"
+                                [vade2Fiyat]="vade2Fiyat" [vade3Fiyat]="vade3Fiyat"></buton-fiyat-table>
                         </div>
 
 
@@ -143,22 +190,18 @@
     <div>
         <p-accordion [activeIndex]="0">
             <p-accordionTab header="İşçilik Giderleri">
-                <buton-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler" (childFunc)="IscilikDeleteFunc($event)" (personelChildFunc)="personelEkleDialog($event)"
-                    [iscilikToplam]="iscilikToplam"></buton-iscilik-giderler-table> 
+                <buton-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler"
+                    (childFunc)="IscilikDeleteFunc($event)" (personelChildFunc)="personelEkleDialog($event)"
+                    [iscilikToplam]="iscilikToplam"></buton-iscilik-giderler-table>
 
-                    
+
             </p-accordionTab>
             <p-accordionTab header="Genel Giderler (Gün Bazında)">
-                <buton-genel-giderler-table [genelGiderler]="gruplanmisVeri['Kabin Fabrikası']" [genelGiderToplam]="genelGiderToplam"
+                <buton-genel-giderler-table [genelGiderler]="gruplanmisVeri['Kabin Fabrikası']"
+                    [genelGiderToplam]="genelGiderToplam"
                     [selectedGenelGiderler]="selectedBilesenRow"></buton-genel-giderler-table>
             </p-accordionTab>
         </p-accordion>
 
     </div>
 </div>
-
-
-
-
-
-

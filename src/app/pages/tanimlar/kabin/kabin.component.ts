@@ -9,6 +9,7 @@ import { defaultColDef } from 'src/default-col-def';
 import { CreateKabinComponent } from './create-kabin/create-kabin.component';
 import { DeleteModalComponents } from 'src/shared/dialogs/informations/delete-modal';
 import { UpdateKabinComponent } from './update-kabin/update-kabin.component';
+import { ErrorMessageModalComponents } from 'src/shared/dialogs/informations/error-message-modal';
 
 @Component({
   selector: 'app-kabin',
@@ -19,7 +20,7 @@ export class KabinComponent implements OnInit {
   rowData: any[];
   public rowSelection: 'single' | 'multiple' = 'multiple';
   private gridApi!: GridApi<any>;
-  public localeText: {[key:string]:string} = AG_GRID_LOCALE_TR;
+  public localeText: { [key: string]: string } = AG_GRID_LOCALE_TR;
   public defaultColDef = defaultColDef;
   buttonDisabled: boolean = true;
   selectedKabin: any;
@@ -28,20 +29,18 @@ export class KabinComponent implements OnInit {
 
 
 
-  constructor(private KabinService:KabinService,private NgbModal:NgbModal) {
-    
-    
+  constructor(private KabinService: KabinService, private NgbModal: NgbModal) {
+
+
   }
   ngOnInit(): void {
 
   }
 
-
-
   colDefs: ColDef[] = [
     { field: 'ad', width: 300 },
     { field: 'model', width: 150 },
-    { field: 'kapasite', width: 150 },
+    { field: 'kapasite', width: 100 },
     { field: 'kabinDuvar', width: 150 },
     { field: 'girisDuvar', width: 150 },
     { field: 'arkaDuvar', width: 150 },
@@ -55,11 +54,18 @@ export class KabinComponent implements OnInit {
 
   async getList(params: GridReadyEvent<any>) {
     this.gridApi = params.api;
-    this.rowData =(await this.KabinService.GetAll()).items;
+    this.rowData = (await this.KabinService.GetAll(
+    ()=>{},
+    (errorMessage) => {
+
+        
+
+    })).items;
+
   }
 
   rowClick() {
- 
+
     const selectedRow = this.gridApi.getSelectedRows()[0];
     this.selectedKabin = selectedRow;
 
@@ -69,65 +75,53 @@ export class KabinComponent implements OnInit {
       this.buttonDisabled = true;
     }
 
-    
+
   }
 
-
-
-
-
-
-async yeni(){
-  const modalRef = this.NgbModal.open(CreateKabinComponent, {
-    size: 'lg',
-    backdrop: 'static',
-  });
-  modalRef.result.then(async (item) => {
-    if (item) {
-      this.rowData=(await this.KabinService.GetAll()).items
-    }
-  });
-}
-
-sil(){
-  if (this.selectedKabin) {
-    const modalRef = this.NgbModal.open(DeleteModalComponents, {
-      size: 'sm',
-      backdrop: 'static',
-    });
-    modalRef.componentInstance.data = 'Birim Kartı';
-    modalRef.result.then(async(event) => {
-      if (event == true) {
-        this.KabinService.delete(this.selectedKabin.id, async() => {
-          this.rowData=(await this.KabinService.GetAll()).items
-        });
-      
-      }
-    });
-  }
-}
-
-guncelle(){
-  if (this.selectedKabin) {
-    const modalRef = this.NgbModal.open(UpdateKabinComponent, {
+  async yeni() {
+    const modalRef = this.NgbModal.open(CreateKabinComponent, {
       size: 'xl',
       backdrop: 'static',
     });
-    modalRef.componentInstance.data = this.selectedKabin;
     modalRef.result.then(async (item) => {
       if (item) {
-        location.reload()
+        this.rowData = (await this.KabinService.GetAll()).items
       }
     });
   }
-  
-}
 
+  sil() {
+    if (this.selectedKabin) {
+      const modalRef = this.NgbModal.open(DeleteModalComponents, {
+        size: 'md',
+        backdrop: 'static',
+      });
+      modalRef.componentInstance.data = 'Birim Kartı';
+      modalRef.result.then(async (event) => {
+        if (event == true) {
+          this.KabinService.delete(this.selectedKabin.id, async () => {
+            this.rowData = (await this.KabinService.GetAll()).items
+          });
 
+        }
+      });
+    }
+  }
 
+  guncelle() {
+    if (this.selectedKabin) {
+      const modalRef = this.NgbModal.open(UpdateKabinComponent, {
+        size: 'xl',
+        backdrop: 'static',
+      });
+      modalRef.componentInstance.data = this.selectedKabin;
+      modalRef.result.then(async (item) => {
+        if (item) {
+          this.rowData = (await this.KabinService.GetAll()).items;
+        }
+      });
+    }
 
-
-
-
+  }
 
 }

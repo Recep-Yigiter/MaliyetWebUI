@@ -32,21 +32,17 @@ export class KapiComponent implements OnInit {
   constructor(
     private KapiService:KapiService,
     private NgbModal:NgbModal
-  ) {
-    
-    
-  }
-  ngOnInit(): void {
+  ) {}
   
-  }
+  ngOnInit() {}
 
 
 
   colDefs: ColDef[] = [
    { field: 'ad', width: 300 },
    { field: 'yon', width: 70 },
-   { field: 'kapiYuksekligi', width: 70 },
-   { field: 'kapiGenisligi', width: 70 },
+   { field: 'kapiYuksekligi', width: 120 },
+   { field: 'kapiGenisligi', width: 120 },
    { field: 'kapiTipi', width: 70 },
    { field: 'uygunluk', width: 70 },
    { field: 'kaplama', width: 70 },
@@ -102,7 +98,7 @@ async yeniKapi(){
 sil(){
   if (this.selectedKapi) {
     const modalRef = this.NgbModal.open(DeleteModalComponents, {
-      size: 'sm',
+      size: 'md',
       backdrop: 'static',
     });
     modalRef.componentInstance.data = 'Birim Kartı';
@@ -126,7 +122,7 @@ guncelle(){
     modalRef.componentInstance.data = this.selectedKapi;
     modalRef.result.then(async (item) => {
       if (item) {
-        location.reload()
+        this.rowData =(await this.KapiService.GetAll()).items;
       }
     });
   }

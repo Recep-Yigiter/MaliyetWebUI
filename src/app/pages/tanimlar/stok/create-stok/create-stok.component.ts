@@ -5,12 +5,14 @@ import { Router } from '@angular/router';
 import { StokService } from 'src/app/core/services/repository/stok.service';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CurrencyPipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-create-stok',
   templateUrl: './create-stok.component.html',
-  styleUrls: ['./create-stok.component.scss']
+  styleUrls: ['./create-stok.component.scss'],
+  providers:[CurrencyPipe]
 })
 export class CreateStokComponent implements OnInit {
 
@@ -54,7 +56,7 @@ export class CreateStokComponent implements OnInit {
   frm:any={
     ad:"",
     birim: { id: 1, ad: 'ADET' },
-    stokGrubu:{ id: 1, ad: 'Sac' },
+    stokGrubu:{ ad: 'SAC' },
     birimFiyat:0,
     dovizCinsi:{ id: 1, ad: 'TL' },
   }
@@ -85,12 +87,16 @@ export class CreateStokComponent implements OnInit {
     
     selectedStokGrubu:any;
     stokGrubu=[
-      { id: 1, ad: 'Sac' },
-      { id: 2, ad: 'Paslanmaz Sac' },
-      { id: 3, ad: 'Galvanizli Sac' },
-      { id: 4, ad: 'Civata-Somun-Pul' },
-      { id: 5, ad: 'Alüminyum' },
-      { id: 6, ad: 'Diğer' },
+      {ad: 'SAC' },
+      {ad: 'Paslanmaz Sac+ decoplate' },
+      {ad: 'Galvanizli Sac' },
+      {ad: 'Civata-Somun-Pul' },
+      {ad: 'Alüminyum' },
+      {ad: 'Profil' },
+      {ad: 'Granit' },
+      {ad: 'Ayna/Cam' },
+      {ad: 'Elektronik' },
+      {ad: 'Diğer' },
     ]
     onStokGrubuChange(item: any): void {
       this.selectedStokGrubu=item;

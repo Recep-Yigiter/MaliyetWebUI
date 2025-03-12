@@ -40,7 +40,7 @@ import { PersonelService } from 'src/app/core/services/repository/personel.servi
             [defaultColDef]="defaultColDef"
             (gridReady)="getList($event)"
             [rowMultiSelectWithClick]="true"
-            (rowClicked)="onSelectionChanged()"
+            (selectionChanged)="onSelectionChanged()"
             [rowSelection]="rowSelection" 
             [rowHeight]="22" 
             [headerHeight]="23">

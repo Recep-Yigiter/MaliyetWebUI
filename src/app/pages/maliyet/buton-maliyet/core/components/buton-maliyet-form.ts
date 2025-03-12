@@ -29,7 +29,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/cor
                 font-size: 13px; 
                 display: flex;
                 align-items:  center;
-                font-style: oblique;">
+                font-style: oblique;position: relative;">
 
             <!-- <input  [(ngModel)]="field" name="{{name}}"   [ngClass]="status ? 'form-control-required' : 'form-control-nullable' "  class="form-control shadow-none  " id="exampleFormControlInput1">  -->
            

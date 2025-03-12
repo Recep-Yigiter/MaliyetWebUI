@@ -1,12 +1,14 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, lastValueFrom } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, lastValueFrom, throwError } from 'rxjs';
+import { ErrorMessageModalComponents } from 'src/shared/dialogs/informations/error-message-modal';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Injectable({
   providedIn: 'root'
 })
 
 export class ApiClientService{
-    constructor(private http:HttpClient,@Inject("baseUrl") private baseUrl: string) {}
+    constructor(private http:HttpClient,@Inject("baseUrl") private baseUrl: string,private NgbModal:NgbModal) {}
 
     private url(requestParameter: Partial<RequestParameters>): string {
       return `${requestParameter.baseUrl ? requestParameter.baseUrl : this.baseUrl}/${requestParameter.controller}${requestParameter.action ? `/${requestParameter.action}` : ""}`;

@@ -1,35 +1,34 @@
-
 <div style="display: grid; grid-template-columns:1fr 1fr; gap: 4px;">
     <div style="display: flex;
                     flex-direction: column;
                     border: 1px solid rgb(230, 230, 230);
                     color: white; padding: 4px;">
-      
 
-      <kabin-maliyet-form [span]="170" [label]="'Model'">
-        <p-dropdown form-control [options]="modeller" [(ngModel)]="frm.model" optionLabel="ad"
-          (ngModelChange)="onModelChange(frm.model)" />
-      </kabin-maliyet-form>
-      <kabin-maliyet-form [span]="170" [label]="'Kapasite'">
-        <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
-          (ngModelChange)="onKapasiteChange(frm.kapasite)" />
-      </kabin-maliyet-form>
 
-      <kabin-maliyet-form [span]="170" [label]="'Kabin Duvarları'">
-        <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.kabinDuvar" name="ad"
-          class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
-          id="exampleFormControlInput1">
-      </kabin-maliyet-form>
-      <kabin-maliyet-form [span]="170" [label]="'Giriş Duvarları'">
-        <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.girisDuvar" name="ad"
-          class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
-          id="exampleFormControlInput1">
-      </kabin-maliyet-form>
-      <kabin-maliyet-form [span]="170" [label]="'Taban'">
-        <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.taban" name="ad"
-          class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
-          id="exampleFormControlInput1">
-      </kabin-maliyet-form>
+        <kabin-maliyet-form [span]="170" [label]="'Model'">
+            <p-dropdown form-control [options]="modeller" [(ngModel)]="frm.model" optionLabel="ad"
+                (ngModelChange)="onModelChange(frm.model)" />
+        </kabin-maliyet-form>
+        <kabin-maliyet-form [span]="170" [label]="'Kapasite'">
+            <p-dropdown form-control [options]="kapasiteler" [(ngModel)]="frm.kapasite" optionLabel="deger"
+                (ngModelChange)="onKapasiteChange(frm.kapasite)" />
+        </kabin-maliyet-form>
+
+        <kabin-maliyet-form [span]="170" [label]="'Kabin Duvarları'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.kabinDuvar" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </kabin-maliyet-form>
+        <kabin-maliyet-form [span]="170" [label]="'Giriş Duvarları'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.girisDuvar" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </kabin-maliyet-form>
+        <kabin-maliyet-form [span]="170" [label]="'Taban'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.taban" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </kabin-maliyet-form>
 
 
 
@@ -37,44 +36,44 @@
     </div>
 
     <div
-      style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
+        style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
 
-      
-      <kabin-maliyet-form [span]="170" [label]="'Aydinlatma'">
-        <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.aydinlatma" name="ad"
-          class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
-          id="exampleFormControlInput1">
-      </kabin-maliyet-form>
-      <kabin-maliyet-form [span]="170" [label]="'Küpeşte'">
-        <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.kupeste" name="ad"
-          class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
-          id="exampleFormControlInput1">
-      </kabin-maliyet-form>
-      <kabin-maliyet-form [span]="170" [label]="'Süpürgelik'">
-        <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.supurgelik" name="ad"
-          class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
-          id="exampleFormControlInput1">
-      </kabin-maliyet-form>
-      <kabin-maliyet-form [span]="170" [label]="'Opsiyonel'">
-        <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.opsiyonel" name="ad"
-          class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
-          id="exampleFormControlInput1">
-      </kabin-maliyet-form>
-      <div (click)="urunfilter()" form-control style="display: flex;margin-top: 10px;
-      align-items: center;
-      justify-content: center; 
-      font-weight: bold; 
-      cursor: pointer; 
-      background-color: #cacaca;
-      color: #201a1a;">
-     Ürünleri Göster
- </div>
+
+        <kabin-maliyet-form [span]="170" [label]="'Aydinlatma'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.aydinlatma" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </kabin-maliyet-form>
+        <kabin-maliyet-form [span]="170" [label]="'Küpeşte'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.kupeste" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </kabin-maliyet-form>
+        <kabin-maliyet-form [span]="170" [label]="'Süpürgelik'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.supurgelik" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </kabin-maliyet-form>
+        <kabin-maliyet-form [span]="170" [label]="'Opsiyonel'">
+            <input disabled="true" form-control [(ngModel)]="frm.model.ozellikler.opsiyonel" name="ad"
+                class="form-control shadow-none form-control-nullable" style="height: 26px; color: #afafaf"
+                id="exampleFormControlInput1">
+        </kabin-maliyet-form>
+        <!-- <div (click)="urunfilter()" form-control style="display: flex;margin-top: 10px;
+               align-items: center;
+               justify-content: center; 
+               font-weight: bold; 
+               cursor: pointer; 
+               background-color: #cacaca;
+               color: #201a1a;">
+               Ürünleri Göster
+            </div> -->
 
 
 
 
     </div>
-  </div>
+</div>
 
 <div style="display: grid; grid-template-columns:1fr 1fr; gap: 12px;">
     <div>
@@ -82,20 +81,21 @@
             <p-accordion [activeIndex]="0">
                 <p-accordionTab header="Malzeme Giderleri">
                     <kabin-malzeme-giderler-table [malzemeGiderler]="bilesenler"
-                        [selectedMalzemeGiderler]="selectedBilesenRow"
-                        [malzemeToplam]="malzemeToplam" (childFuncStokEkle)="childFuncStokEkle($event)"></kabin-malzeme-giderler-table>
+                        [selectedMalzemeGiderler]="selectedBilesenRow" [malzemeToplam]="malzemeToplam"
+                        (childFuncStokEkle)="childFuncStokEkle($event)"></kabin-malzeme-giderler-table>
                 </p-accordionTab>
             </p-accordion>
         </div>
         <div style="display: grid; grid-template-columns:2fr 2fr 2fr 3fr  ; gap: 4px;">
-            <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231); ">
+            <div
+                style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px; background-color: rgb(231 231 231); ">
                 <div class="card-container">
                     <div class="card">
                         <div *ngIf="!selectedURUN" class="label" style="border-bottom-left-radius: 0;
                                                                         font-size: 16px;
                                                                         border-bottom-right-radius: 0;
                                                                         height: 20px;">
-                         Ürün Seçimi Yapılmadı!
+                            Ürün Seçimi Yapılmadı!
                         </div>
                         <div *ngIf="selectedURUN" class="label" style="border-bottom-left-radius: 0; font-size: 16px;
                        border-bottom-right-radius: 0; height: 20px;">
@@ -119,13 +119,15 @@
                             <div>
                                 <kabin-maliyet-form [span]="196" [label]="'Ortalama Çalışan Maaşı'">
                                     <input [disabled]="true" form-control [(ngModel)]="frm.ortalamaPersonelMaasi"
-                                        style="height: 27px;color: gray;" class="form-control shadow-none form-control-nullable"
+                                        style="height: 27px;color: gray;"
+                                        class="form-control shadow-none form-control-nullable"
                                         id="exampleFormControlInput1">
                                 </kabin-maliyet-form>
 
                                 <kabin-maliyet-form [span]="196" [label]="'Personel Sayısı'">
                                     <input [disabled]="true" form-control [(ngModel)]="frm.personelSayisi"
-                                        style="height: 27px;color: gray;" class="form-control shadow-none form-control-nullable"
+                                        style="height: 27px;color: gray;"
+                                        class="form-control shadow-none form-control-nullable"
                                         id="exampleFormControlInput1">
                                 </kabin-maliyet-form>
 
@@ -155,10 +157,8 @@
                                 [genelGiderToplam]="genelGiderToplam/frm.gunlukUretimSayisi"
                                 [toplamMaliyet]="toplamMaliyet"></kabin-maliyet-table>
 
-                            <kabin-fiyat-table [pesinFiyat]="pesinFiyat"
-                            [vade1Fiyat]="vade1Fiyat"
-                            [vade2Fiyat]="vade2Fiyat"
-                            [vade3Fiyat]="vade3Fiyat"></kabin-fiyat-table>
+                            <kabin-fiyat-table [pesinFiyat]="pesinFiyat" [vade1Fiyat]="vade1Fiyat"
+                                [vade2Fiyat]="vade2Fiyat" [vade3Fiyat]="vade3Fiyat"></kabin-fiyat-table>
                         </div>
 
 
@@ -175,19 +175,17 @@
     <div>
         <p-accordion [activeIndex]="0">
             <p-accordionTab header="İşçilik Giderleri">
-                <kabin-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler" (childFunc)="IscilikDeleteFunc($event)" (personelChildFunc)="personelEkleDialog($event)"
-                    [iscilikToplam]="iscilikToplam"></kabin-iscilik-giderler-table>    
+                <kabin-iscilik-giderler-table [iscilikGiderler]="iscilikGiderler"
+                    (childFunc)="IscilikDeleteFunc($event)" (personelChildFunc)="personelEkleDialog($event)"
+                    [iscilikToplam]="iscilikToplam"></kabin-iscilik-giderler-table>
             </p-accordionTab>
             <p-accordionTab header="Genel Giderler (Gün Bazında)">
-               <kabin-genel-giderler-table [genelGiderler]="gruplanmisVeri['Kabin Fabrikası']" [genelGiderToplam]="genelGiderToplam"
-                    [selectedGenelGiderler]="selectedBilesenRow"></kabin-genel-giderler-table> 
+                <kabin-genel-giderler-table [genelGiderler]="gruplanmisVeri['Kabin Fabrikası']"
+                    [genelGiderToplam]="genelGiderToplam"
+                    [selectedGenelGiderler]="selectedBilesenRow"></kabin-genel-giderler-table>
 
             </p-accordionTab>
         </p-accordion>
 
     </div>
 </div>
-
-
-
-

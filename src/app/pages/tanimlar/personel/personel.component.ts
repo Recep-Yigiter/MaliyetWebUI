@@ -90,7 +90,7 @@ async yeni(){
 sil(){
   if (this.selectedPersonel) {
     const modalRef = this.NgbModal.open(DeleteModalComponents, {
-      size: 'sm',
+      size: 'md',
       backdrop: 'static',
     });
 

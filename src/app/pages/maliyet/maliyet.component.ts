@@ -88,7 +88,9 @@ export class MaliyetComponent implements OnInit {
 
   constructor(private router:Router) {}
   ngOnInit(): void {
+
     const local = JSON.parse(localStorage.getItem('maliyet'));
+    console.log(local);
     this.selectedTab=local.tabItem;
   }
 

@@ -4,6 +4,7 @@ import { ButonService } from 'src/app/core/services/repository/buton.service';
 import { IscilikGiderService } from 'src/app/core/services/repository/iscilik-gider.service';
 import { KabinService } from 'src/app/core/services/repository/kabin.service';
 import { UrunBilesenService } from 'src/app/core/services/repository/urun-bilesen.service';
+import { ButonKartListModalComponents } from 'src/shared/dialogs/other-dialogs/buton-kart-list-modal';
 import { PersonelSelectModalComponents } from 'src/shared/dialogs/personel-selected-modal';
 import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
 
@@ -32,13 +33,15 @@ export class UpdateButonComponent implements OnInit {
   ) {}
 
  async ngOnInit() {
-  this.frm={
-    ad:this.data.ad,
-    butonTipi: {ad: this.selectedButonTipi?this.selectedButonTipi:this.data.butonTipi},
-    durakSayisi:{ad: this.selectedDurakSayisi?this.selectedDurakSayisi:this.data.durakSayisi},
-    butonCesidi:{ad: this.selectedButonCesidi?this.selectedButonCesidi:this.data.butonCesidi},
-    boyOzellik: {ad: this.selectedBoyOzellik?this.selectedBoyOzellik:this.data.boyOzellik},
-  }
+this.frm.ad=this.data.ad
+  this.selectedButon.ad=this.data.model;
+  this.selectedButon.kontrolPaneli=this.data.kontrolPaneli;
+  this.selectedButon.ozellikler.sivaAltiUstu=this.data.sivaAltiUstu;
+  this.selectedButon.ozellikler.kaplama=this.data.kaplama;
+  this.selectedButon.ozellikler.butonTipi=this.data.butonTipi;
+  this.selectedButon.ozellikler.ekran=this.data.ekran;
+  this.selectedButon.ozellikler.sistem=this.data.sistem;
+
 
 
   this.iscilikGiderler=this.data.iscilikGiderler
@@ -53,7 +56,8 @@ export class UpdateButonComponent implements OnInit {
       kapiGrupId:null,
       makineSasesiId: null,
       suspansiyonId: null,
-      miktar:element.miktar?element.miktar:0
+      miktar:element.miktar?element.miktar:0,
+      aciklama: element.aciklama,
 
 }
 
@@ -66,19 +70,21 @@ export class UpdateButonComponent implements OnInit {
 
 
   Kaydet() {
-
-      var createModel={
-         id:this.data.id,
-         ad:this.frm.ad,
-         birim:"ADET",
-         butonTipi:this.frm.butonTipi.ad,
-         durakSayisi:this.frm.durakSayisi.ad,
-         butonCesidi:this.frm.butonCesidi.ad,
-         butonOzellik:this.frm.boyOzellik.ad,
-         urunBilesenler:[],
-         iscilikGiderler:[]
-      }
-
+    var createModel = {
+      id:this.data.id,
+      ad: this.frm.ad,
+      birim: "ADET",
+      model: this.selectedButon.ad,
+      kontrolPaneli: this.selectedButon.kontrolPaneli,
+      sivaAltiUstu: this.selectedButon.ozellikler.sivaAltiUstu,
+      kaplama: this.selectedButon.ozellikler.kaplama,
+      butonTipi: this.selectedButon.ozellikler.butonTipi,
+      ekran: this.selectedButon.ozellikler.ekran,
+      sistem: this.selectedButon.ozellikler.sistem,
+      urunBilesenler:[],
+      iscilikGiderler:[]
+    }
+      
       this.malzemeGiderler.forEach(element => {
         element.butonId=this.data.id
       });
@@ -100,8 +106,6 @@ export class UpdateButonComponent implements OnInit {
       var modelIscilikGider={
       items: this.iscilikGiderler
       }
-
-
 
       this.ButonService.update(
         createModel,
@@ -133,74 +137,12 @@ export class UpdateButonComponent implements OnInit {
 
 
 
-  frm:any={ }
+  frm:any={ ad:""}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-  selectedButonTipi:any;
-  butonTipi=[
-    { ad: 'Kabin Butonu' },
-    { ad: 'Kat Butonu' },
-  ]
-  onButonTipiChange(item: any): void {
-    this.selectedButonTipi=item;
-  };
-
-
-  selectedDurakSayisi:any;
-  durakSayisi=[
-    {  ad: '2' },
-    {  ad: '3' },
-    {  ad: '4' },
-    {  ad: '5' },
-    {  ad: '6' },
-    {  ad: '7' },
-    {  ad: '8' },
-    {  ad: '9' },
-    {  ad: '10' },
-    {  ad: '11' },
-    {  ad: '12' },
-    {  ad: '13' },
-    {  ad: '14' },
-  ]
-  onDurakSayisiChange(item: any): void {
-    this.selectedDurakSayisi=item;
-  };
-
-
-
-  selectedButonCesidi:any;
-  butonCesidi=[
-    { ad: 'Cam' },
-    { ad: 'Mekanik' },
-  ]
-  onButonCesidiChange(item: any): void {
-    this.selectedButonCesidi=item;
-  };
-
-
-
-
-
-  selectedBoyOzellik:any;
-  boyOzellik=[
-    {ad: 'Tam Boy' },
-    {ad: 'Yarım Boy' },
-  ]
-  onBoyOzellikChange(item: any): void {
-    this.selectedBoyOzellik=item;
-  };
 
 
 
@@ -233,7 +175,8 @@ export class UpdateButonComponent implements OnInit {
             kapiGrupId:null,
             makineSasesiId: null,
             suspansiyonId: null,
-            miktar:element.miktar?element.miktar:0
+            miktar:element.miktar?element.miktar:0,
+            aciklama: element.aciklama,
           }
           const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
           if (customerExists) {
@@ -302,7 +245,35 @@ export class UpdateButonComponent implements OnInit {
 
 
 
+  selectedButon: any = {
+    ad: "YLP 01",
+    img: '../../../../../assets/img/buton-models/.PNG',
+    kontrolPaneli: "Kat Kontrol Paneli",
+    ozellikler:
+    {
+      sivaAltiUstu: "Sıva Üstü Kat Butonu",
+      kaplama: "Paslanmaz Çelik Kaplama",
+      butonTipi: "Mekanik Tekli Buton",
+      ekran: "Dot Matrix Ekran",
+      sistem: "Simplex Sistem",
+    }
+  };
+  selectDialogOpen() {
+    const modalRef = this.NgbModal.open(ButonKartListModalComponents, {
+      size: 'lg',
+      backdrop: 'static',
+       windowClass:"custom-modal"
+    });
+    modalRef.componentInstance.confirmationBoxTitle = 'Buton Listesi';
+    modalRef.result.then((item) => {
+      if (item != false) {
 
+        this.selectedButon = item
+
+
+      }
+    });
+  }
 
 
 }

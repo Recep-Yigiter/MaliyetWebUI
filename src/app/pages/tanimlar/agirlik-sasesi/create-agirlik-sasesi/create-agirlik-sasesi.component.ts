@@ -134,7 +134,8 @@ export class CreateAgirlikSasesiComponent  implements OnInit {
             kapiGrupId:null,
             makineSasesiId: null,
             AgirlikSasesiId: null,
-            miktar:element.miktar?element.miktar:0
+            miktar:element.miktar?element.miktar:0,
+            aciklama: element.aciklama,
           }
           const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
         

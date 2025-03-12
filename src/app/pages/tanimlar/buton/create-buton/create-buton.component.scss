@@ -186,3 +186,63 @@
         opacity: 0.5; /* Görsel olarak daha belirgin hale getirmek için */
       }
 }
+
+
+
+
+
+.custom-select {
+    // position: relative;
+    // width: 200px;
+    // font-family: Arial, sans-serif;
+  }
+  
+  .selected-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .selected-item img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    
+  }
+  
+  .dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 4px;
+    z-index: 10;
+  }
+  
+  .dropdown-options div {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .dropdown-options div:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .option-image {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .custom-modal .modal-dialog {
+    max-width: 100%; /* Genişliği %90 yap */
+    width: 100%; /* Genişliği %80 yap */
+  }
