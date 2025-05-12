@@ -6,6 +6,7 @@ import { SatisFiyatiComponent } from './satis-fiyati/satis-fiyati.component';
 import { MaliyetComponent } from './maliyet/maliyet.component';
 import { TanimlarComponent } from './tanimlar/tanimlar.component';
 import { TanimlarModule } from '../pages/tanimlar/tanimlar.module';
+import { GenelComponent } from './genel/genel.component';
 
 
 
@@ -34,6 +35,10 @@ import { TanimlarModule } from '../pages/tanimlar/tanimlar.module';
       {
         path: '',
         children: [{path: 'satis-fiyati',component: SatisFiyatiComponent,loadChildren: () =>import('../pages/satis-fiyati/satis-fiyati.module').then((m) => m.SatisFiyatiModule),},],
+      },
+      {
+        path: '',
+        children: [{path: 'genel',component: GenelComponent,loadChildren: () =>import('../pages/genel/genel.module').then((m) => m.GenelModule),},],
       },
       
 

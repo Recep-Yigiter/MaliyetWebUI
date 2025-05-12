@@ -51,36 +51,10 @@ scrollHeight="400px" selectionMode="single" [(selection)]="selectedGenelGiderler
     <th style="font-size: 13px;text-align: center;">Döviz</th>
     <th style="font-size: 13px;">c=axb=Tutar(TL)</th>
     </tr>
-    <!-- <tr>
-       
-        <th style="font-size: 13px;">Malzeme Adı</th>
-        <th style="font-size: 13px;">a=Miktar</th>
-        <th style="font-size: 13px;">Birim</th>
-        <th style="font-size: 13px;">b=Fiyat(TL)</th>
-        <th style="font-size: 13px;text-align: center;">Döviz</th>
-        <th style="font-size: 13px;">c=axb=Tutar(TL)</th>
-    </tr> -->
+
 </ng-template>
 <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
-    <!-- <tr [pSelectableRow]="product" [pSelectableRowIndex]="rowIndex" [pEditableRow]="product">
-        <td>{{ product.ad }}</td>
-        <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar">
-            <p-cellEditor>
-                <ng-template pTemplate="input">
-                    <input form-control [(ngModel)]="product.miktar" name="miktar"
-                        class="form-control shadow-none form-control-nullable"
-                        id="exampleFormControlInput1">
-                </ng-template>
-                <ng-template pTemplate="output">
-                    {{ product.miktar }}
-                </ng-template>
-            </p-cellEditor>
-        </td>
-        <td>{{ product.birim }}</td>
-        <td>{{ product.tutar* (product.etkiOrani/100)| currency:' ₺':'symbol':'1.2-2'}}</td>
-        <td>{{ product.dovizCinsi }}</td>
-        <td>{{ product.tutar*product.miktar* (product.etkiOrani/100)  | currency:' ₺':'symbol':'1.2-2'}}</td>
-    </tr> -->
+
 
     <tr >                   
       <td>{{ product.ad }}</td>

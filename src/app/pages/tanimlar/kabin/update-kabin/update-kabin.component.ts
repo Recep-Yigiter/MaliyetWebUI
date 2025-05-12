@@ -271,10 +271,7 @@ createModel.ad=createModel.ad+" Kopya"
           }
           const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
 
-          if (customerExists) {
-            alert(`Bu ${element.ad} zaten mevcut! `);
-            return;
-          }
+         
           this.malzemeGiderler = [...this.malzemeGiderler, newValue];
 
 

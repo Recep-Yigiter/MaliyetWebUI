@@ -8,8 +8,8 @@
 }
 
 :host ::ng-deep {
-    p-table{
-        .p-datatable .p-datatable-thead > tr > th {
+    p-table {
+        .p-datatable .p-datatable-thead>tr>th {
 
             border-width: 0 0 1px 0;
             font-weight: 400 !important;
@@ -17,6 +17,7 @@
             font-size: 14px;
 
         }
+
         .p-datatable .p-datatable-tbody>tr>td {
             text-align: left;
             border: 1px solid #dee2e6;
@@ -39,29 +40,33 @@
             border-radius: 0px;
         }
 
-        
-            .p-datatable .p-datatable-tbody > tr.p-highlight {
-                background: #EFF6FF;
-                color: #1D4ED8;
-                font-weight: 700;
-            }
-           .p-datatable .p-datatable-tbody > tr {
-                background: #ffffff;
-                color: #c1c1c1;
-                transition: box-shadow 0.2s;
-            }
-  
-        
-       
-    }
 
-    p-table#row-check{
-        .p-datatable .p-datatable-tbody > tr.p-highlight {
+        .p-datatable .p-datatable-tbody>tr.p-highlight {
             background: #EFF6FF;
             color: #1D4ED8;
             font-weight: 700;
         }
-       .p-datatable .p-datatable-tbody > tr {
+
+        .p-datatable .p-datatable-tbody>tr {
+            background: #ffffff;
+            color: #c1c1c1;
+            transition: box-shadow 0.2s;
+        }
+
+
+
+    }
+
+
+
+    p-table#row-check {
+        .p-datatable .p-datatable-tbody>tr.p-highlight {
+            background: #EFF6FF;
+            color: #1D4ED8;
+            font-weight: 700;
+        }
+
+        .p-datatable .p-datatable-tbody>tr {
             background: #ffffff;
             color: #1f1f1f;
             transition: box-shadow 0.2s;
@@ -156,16 +161,33 @@
             color: black;
             font-weight: 600;
         }
-        p-dropdownitem li{
+
+        p-dropdownitem li {
             padding: 0.2rem 1.25rem !important;
         }
+
         .p-dropdown .p-dropdown-label.p-placeholder {
             color: #aab1b7 !important;
             font-weight: 400 !important;
- 
+
         }
     }
 
 
 }
 
+
+
+
+.elevated-box {
+    width: 200px;
+    height: 200px;
+    background-color: #3498db; /* Arka plan rengi */
+    border-radius: 10px; /* Köşe yuvarlama */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Tümsek görünümü için gölge */
+    transition: box-shadow 0.3s ease-in-out; /* Gölgenin animasyonla geçişi */
+  }
+  
+  .elevated-box:hover {
+    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.3); /* Hover durumunda gölgeyi büyütme */
+  }

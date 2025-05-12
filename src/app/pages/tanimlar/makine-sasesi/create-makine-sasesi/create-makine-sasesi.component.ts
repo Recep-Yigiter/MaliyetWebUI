@@ -72,26 +72,23 @@ export class CreateMakineSasesiComponent implements OnInit {
   frm: any = {
     ad: "",
     saseTipi: { ad: 'Ağırlık Arkada Duvardan Şase' },
-    kapasite: { ad: '320' },
+    kapasite:{  ad: "0 - 110" },
   };
 
 
   saseTipi: any = [
     { ad: 'Ağırlık Arkada Duvardan Şase' },
     { ad: 'MRL Duvardan' },
-    { ad: "MRL Ray'a bağlı" },
+    { ad: "MRL Ray'a Bağlı" },
     { ad: "MR Dişlili" },
     { ad: "MR Dişlisiz" },
   ]
+
+
   kapasite: any = [
-    {  ad: "320" },
-    {  ad: "450" },
-    {  ad: "630" },
-    {  ad: "800" },
-    {  ad: "1000" },
-    {  ad: "1600" },
-    {  ad: "2000" },
-    {  ad: "3000" },
+    { ad: '0-105cm' },
+    { ad: '105-240cm' },
+    { ad: '240cm - ∞' },
 
   ]
   selectedSaseTipi: any
@@ -134,10 +131,10 @@ export class CreateMakineSasesiComponent implements OnInit {
           }
           const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
 
-          if (customerExists) {
-            alert(`Bu ${element.ad} zaten mevcut! `);
-            return;
-          }
+          // if (customerExists) {
+          //   alert(`Bu ${element.ad} zaten mevcut! `);
+          //   return;
+          // }
           this.malzemeGiderler = [...this.malzemeGiderler, newValue];
 
 
@@ -204,6 +201,49 @@ export class CreateMakineSasesiComponent implements OnInit {
 
 
 
+  selectedTab: string = 'malzeme-giderleri';  // Varsayılan olarak "kabin" sekmesi seçili
+
+  selectTab(tab: any) {
+
+    var local = localStorage.setItem('tanimlar', JSON.stringify(tab))
+    this.selectedTab = tab.tabItem;
+    console.log(this.selectedTab);
+  }
+  menu = [
+    {
+      label: 'Kartlar',
+      expanded: false,
+      icon: '',
+      href: '',
+      submenu: [
+        {
+          label: 'Malzeme Giderleri',
+          tabItem: 'malzeme-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+        {
+          label: 'İşçilik Giderleri',
+          tabItem: 'iscilik-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+
+
+
+
+
+
+
+      ],
+    },
+
+
+  ];
 
 
 

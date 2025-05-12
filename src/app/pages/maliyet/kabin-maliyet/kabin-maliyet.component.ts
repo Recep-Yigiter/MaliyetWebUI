@@ -44,7 +44,8 @@ export class KabinMaliyetComponent implements OnInit {
     this.genelGiderKatsayi = (await this.GenelGiderKatsayiService.GetAll()).items
     this.birlesmisVeri = this.birlestir();
     this.gruplanmisVeri = this.gruplamaYap();
-    this.objectKeys = Object.keys(this.gruplanmisVeri)
+    this.objectKeys = Object.keys(this.gruplanmisVeri);
+
   }
 
   birlestir() {
@@ -84,38 +85,29 @@ export class KabinMaliyetComponent implements OnInit {
     personelSayisi: 10,
     ortalamaPersonelMaasi: 0,
     model: {
-      ad: "BELUGA",
-      img: '../../../../../assets/img/kabin-models/BELUGA.PNG',
+      ad: "KOLYOZ-S",
+      img: '../../../../../assets/img/kabin-models/5-kolyoz-s-yukselis.jpg',
       ozellikler:
       {
-        kabinDuvar: "Ral 7040 Boyalı Cam & Satine Paslanmaz",
+        kabinDuvar: "Satine Paslanmaz",
         girisDuvar: "Satine Paslanmaz",
-        arkaDuvar: "Füme Ayna",
-        taban: "Silver Waves Granit",
-        aydinlatma: "Kare Spot (Gün Işığı)",
-        tavan: "Decoplate GS-05",
+        arkaDuvar: "Satine Paslanmaz",
+        taban: "PVC-YF-01",
+        aydinlatma: "YKS Led C-122",
+        tavan: "Satine Paslanmaz",
         kupeste: "Ø38 Parlak Satine Paslanmaz Boru",
-        supurgelik: "Paslanmaz Çelik",
-        opsiyonel: "-",
+        supurgelik: "Satine Paslanmaz",
+        opsiyonel: "Koltuk, Amortisörlü Kendinden Toplama Yapabilen",
       }
-
     },
-    kapasite: { id: 1, deger: '320' }
+    kapasite: { id: 1, deger: '320 KG' },
   }
 
 
-
-
-
-
-
-
-
-
   selectedModel: any;
- onModelChange(item: any):void {
+  onModelChange(item: any): void {
     this.selectedModel = item;
-   this.dropdownChangedUrun();
+    this.dropdownChangedUrun();
 
   };
 
@@ -123,10 +115,10 @@ export class KabinMaliyetComponent implements OnInit {
 
 
 
- async dropdownChangedUrun(){
+  async dropdownChangedUrun() {
     const filteredProducts = ((await this.KabinService.GetAll()).items).filter(item => {
       const matchesModel = this.selectedModel ? item.model === this.selectedModel.ad || this.selectedModel.id == 1 : true;
-      const matchesKapasite = this.selectedKapasite ? item.kapasite === this.selectedKapasite.deger || this.selectedKapasite.id == 1 : true;
+      const matchesKapasite = this.selectedKapasite ? item.kapasite === this.selectedKapasite.deger: true;
       return matchesModel && matchesKapasite;
     });
 
@@ -165,18 +157,49 @@ export class KabinMaliyetComponent implements OnInit {
 
   selectedKapasite: any;
   kapasiteler = [
-    { id: 1, deger: '320' },
-    { id: 2, deger: '400' },
-    { id: 3, deger: '480' },
-    { id: 4, deger: '630' },
-    { id: 5, deger: '800' },
-    { id: 6, deger: '1000' },
-    { id: 7, deger: '1250' },
-    { id: 8, deger: '1600' },
+    { id: 1, deger: '320 KG' },
+    { id: 2, deger: '400 KG' },
+    { id: 3, deger: '480 KG' },
+    { id: 4, deger: '630 KG' },
+    { id: 5, deger: '800 KG' },
+    { id: 6, deger: '1000 KG' },
+    { id: 7, deger: '1250 KG' },
+    { id: 8, deger: '1600 KG' },
   ];
- async onKapasiteChange(kapasite: any) {
+  async onKapasiteChange(kapasite: any) {
     this.selectedKapasite = kapasite;
 
+    const filteredProducts = ((await this.KabinService.GetAll()).items).filter(item => {
+      const matchesModel = this.selectedModel ? item.model === this.selectedModel.ad || this.selectedModel.id == 1 : true;
+      const matchesKapasite = this.selectedKapasite ? item.kapasite === this.selectedKapasite.deger  : true;
+
+      return matchesModel && matchesKapasite;
+    });
+
+
+
+    this.selectedURUN = filteredProducts[0];
+    this.bilesenler = filteredProducts[0]?.urunBilesenler;
+    this.iscilikGiderler = filteredProducts[0]?.iscilikGiderler;
+
+    let totalMaas = 0;
+    this.iscilikGiderler.forEach(element => {
+      totalMaas += element.personel.maas;
+    });
+
+    if (this.iscilikGiderler.length != 0) {
+      this.frm.ortalamaPersonelMaasi = totalMaas / this.iscilikGiderler.length;
+      this.frm.personelSayisi = this.iscilikGiderler.length;
+    }
+    else {
+      this.frm.ortalamaPersonelMaasi = 0;
+      this.frm.personelSayisi = 0;
+    }
+
+
+    if (this.bilesenler.length > 0) {
+      this.hesaplaButtonDisabled = false;
+    }
 
 
   };

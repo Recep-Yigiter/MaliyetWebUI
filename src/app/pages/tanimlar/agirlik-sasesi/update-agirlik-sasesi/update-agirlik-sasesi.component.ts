@@ -33,8 +33,7 @@ export class UpdateAgirlikSasesiComponent implements OnInit {
   ngOnInit(): void {
 
     this.frm={
-      
-  
+
       ad:this.data.ad,
       birim:"ADET",
       kapasite:{ad: this.selectedKapasite?this.selectedKapasite:this.data.kapasite},
@@ -43,7 +42,6 @@ export class UpdateAgirlikSasesiComponent implements OnInit {
       rayArasi:this.data.rayArasi,
       urunBilesenler:this.malzemeGiderler,
       iscilikGiderler:this.iscilikGiderler
-
     }
   
       this.iscilikGiderler=this.data.iscilikGiderler
@@ -76,7 +74,7 @@ export class UpdateAgirlikSasesiComponent implements OnInit {
     kapasite:this.frm.kapasite.ad,
     askiTipi:this.frm.askiTipi.ad,
     karkasSekli:this.frm.karkasSekli.ad,
-    rayArasi:String(this.frm.rayArasi)+" mm",
+    rayArasi:String(this.frm.rayArasi),
     urunBilesenler:[],
     iscilikGiderler:[]
   }
@@ -284,6 +282,49 @@ export class UpdateAgirlikSasesiComponent implements OnInit {
 
 
 
-    
+  selectedTab: string = 'malzeme-giderleri';  // Varsayılan olarak "kabin" sekmesi seçili
+
+  selectTab(tab: any) {
+
+    var local = localStorage.setItem('tanimlar', JSON.stringify(tab))
+    this.selectedTab = tab.tabItem;
+    console.log(this.selectedTab);
+  }
+  menu = [
+    {
+      label: 'Kartlar',
+      expanded: false,
+      icon: '',
+      href: '',
+      submenu: [
+        {
+          label: 'Malzeme Giderleri',
+          tabItem: 'malzeme-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+        {
+          label: 'İşçilik Giderleri',
+          tabItem: 'iscilik-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+
+
+
+
+
+
+
+      ],
+    },
+
+
+  ];
+
 
 }

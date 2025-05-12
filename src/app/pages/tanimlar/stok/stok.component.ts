@@ -32,8 +32,9 @@ export class StokComponent {
       filter: "agTextColumnFilter",
       filterParams: {
         filterOptions: ["contains", "notContains"],
-        textCustomComparator:this.customFilter
-      } 
+        textCustomComparator: this.customFilter,
+        debounceMs: 500,
+      },
     },
     { field: 'stokGrubu', width: 130 },
     { field: 'birim', width: 70 },
@@ -146,15 +147,8 @@ export class StokComponent {
       return true;
     }
     const normalizeString = (str) => {
-      let normalizedStr = str
-        .normalize('NFD') 
-        .replace(/[\u0300-\u036f]/g, '') 
-        .toLowerCase();
-
-      normalizedStr = normalizedStr
-        .replace(/i/g, 'ı')
-        .replace(/ı/g, 'i');
-
+      let normalizedStr = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+          normalizedStr = normalizedStr.replace(/i/g, 'ı').replace(/ı/g, 'i');
       return normalizedStr;
     };
 

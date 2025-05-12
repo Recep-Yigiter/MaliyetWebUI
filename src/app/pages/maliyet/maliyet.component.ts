@@ -72,6 +72,14 @@ export class MaliyetComponent implements OnInit {
           href: '/maliyet/agirlik-sasesi-maliyet',
           expanded: false,
         },
+        {
+          label: 'Genel',
+          tabItem:'genel',
+          icon: 'fa fa-inbox',
+          submenu: [],
+          href: '/maliyet/genel',
+          expanded: false,
+        },
         
        
       
@@ -90,7 +98,7 @@ export class MaliyetComponent implements OnInit {
   ngOnInit(): void {
 
     const local = JSON.parse(localStorage.getItem('maliyet'));
-    console.log(local);
+ 
     this.selectedTab=local.tabItem;
   }
 

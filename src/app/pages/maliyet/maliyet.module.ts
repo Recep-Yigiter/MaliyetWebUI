@@ -10,6 +10,7 @@ import { MakineSasesiComponent } from './makine-sasesi/makine-sasesi.component';
 import { KasnakMaliyetComponent } from './kasnak-maliyet/kasnak-maliyet.component';
 import { KapiMaliyetComponent } from './kapi-maliyet/kapi-maliyet.component';
 import { TableModule } from 'primeng/table';
+import { GenelComponent } from './genel/genel.component';
 
 
 
@@ -33,6 +34,7 @@ import { TableModule } from 'primeng/table';
              { path: 'suspansiyon-maliyet', component: SuspansiyonMaliyetComponent, loadChildren: () => import("../maliyet/suspansiyon-maliyet/suspansiyon-maliyet.module").then(m => m.SuspansiyonMaliyetModule) },
              { path: 'kasnak-maliyet', component: KasnakMaliyetComponent, loadChildren: () => import("../maliyet/kasnak-maliyet/kasnak-maliyet.module").then(m => m.KasnakMaliyetModule) },
              { path: 'kapi-maliyet', component: KapiMaliyetComponent, loadChildren: () => import("../maliyet/kapi-maliyet/kapi-maliyet.module").then(m => m.KapiMaliyetModule) },
+             { path: 'genel', component: GenelComponent, loadChildren: () => import("../maliyet/genel/genel.module").then(m => m.GenelModule) },
 
           ]
         },

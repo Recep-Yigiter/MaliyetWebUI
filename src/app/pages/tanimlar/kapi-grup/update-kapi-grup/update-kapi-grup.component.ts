@@ -194,10 +194,10 @@ stokEkle() {
         }
         const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
       
-        if (customerExists) {
-          alert(`Bu ${element.ad} zaten mevcut! `);
-          return;
-        }
+        // if (customerExists) {
+        //   alert(`Bu ${element.ad} zaten mevcut! `);
+        //   return;
+        // }
         this.malzemeGiderler = [...this.malzemeGiderler, newValue];
       
 
@@ -266,7 +266,62 @@ personelEkle() {
 
 
 
+  selectedTab: string = 'malzeme-giderleri';  // Varsayılan olarak "kabin" sekmesi seçili
 
+  selectTab(tab: any) {
+
+    var local = localStorage.setItem('tanimlar', JSON.stringify(tab))
+    this.selectedTab = tab.tabItem;
+    console.log(this.selectedTab);
+  }
+  menu = [
+    {
+      label: 'Kartlar',
+      expanded: false,
+      icon: '',
+      href: '',
+      submenu: [
+        {
+          label: 'Malzeme Giderleri',
+          tabItem: 'malzeme-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+        {
+          label: 'İşçilik Giderleri',
+          tabItem: 'iscilik-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+
+
+
+
+
+
+
+      ],
+    },
+
+
+  ];
+
+  isModalOpen = false;
+  selectedImage: any = null;
+
+  openModal(image: any) {
+    this.selectedImage = image;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedImage = null;
+  }
     
 
 }

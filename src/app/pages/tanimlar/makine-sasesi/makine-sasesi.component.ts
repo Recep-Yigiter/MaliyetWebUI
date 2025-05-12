@@ -29,22 +29,16 @@ export class MakineSasesiComponent implements OnInit {
 
 
 
-  constructor(private MakineSasesiService:MakineSasesiService,private NgbModal:NgbModal) {
-    
-    
-  }
-  ngOnInit(): void {
-  
-  }
+  constructor(private MakineSasesiService:MakineSasesiService,private NgbModal:NgbModal) {}
+  ngOnInit(): void {}
 
   saseTipi
   kapasite
 
   colDefs: ColDef[] = [
-    { field: 'ad', width: 300 },
-    { field: 'saseTipi', width: 200 },
-    { field: 'kapasite', width: 70 },
-
+    { field: 'ad', width: 700 },
+    // { field: 'saseTipi', width: 200 },
+    // { field: 'kapasite', headerName:"Ray Arası", width: 70 },
   ];
 
   async getList(params: GridReadyEvent<any>) {

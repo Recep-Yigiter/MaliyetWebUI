@@ -87,10 +87,15 @@ export class CreateAgirlikSasesiComponent  implements OnInit {
  
    selectedKarkasSekli:any
    karkasSekli =  [
-     { ad: 'Tek Sıra Ağırlık' },
-     { ad: 'Çift Sıra Ağırlık' },
-     { ad: 'Tek Sıra Dublex Ağırlık' },
-     { ad: 'Çift Sıra Dublex Ağırlık ' },
+     { ad: '2/1 Tek Sıra Ağırlık' },
+     { ad: '2/1 Çift Sıra Ağırlık' },
+     { ad: '2/1 Tek Sıra Dublex Ağırlık' },
+     { ad: '2/1 Çift Sıra Dublex Ağırlık ' },
+
+     { ad: '1/1 Tek Sıra Ağırlık' },
+     { ad: '1/1 Çift Sıra Ağırlık' },
+     { ad: '1/1 Tek Sıra Dublex Ağırlık' },
+     { ad: '1/1 Çift Sıra Dublex Ağırlık ' },
      ]
  
    onKarkasSekliChange(id): void {
@@ -208,6 +213,49 @@ export class CreateAgirlikSasesiComponent  implements OnInit {
 
 
 
+  selectedTab: string = 'malzeme-giderleri';  // Varsayılan olarak "kabin" sekmesi seçili
+
+  selectTab(tab: any) {
+
+    var local = localStorage.setItem('tanimlar', JSON.stringify(tab))
+    this.selectedTab = tab.tabItem;
+    console.log(this.selectedTab);
+  }
+  menu = [
+    {
+      label: 'Kartlar',
+      expanded: false,
+      icon: '',
+      href: '',
+      submenu: [
+        {
+          label: 'Malzeme Giderleri',
+          tabItem: 'malzeme-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+        {
+          label: 'İşçilik Giderleri',
+          tabItem: 'iscilik-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+
+
+
+
+
+
+
+      ],
+    },
+
+
+  ];
 
 
 

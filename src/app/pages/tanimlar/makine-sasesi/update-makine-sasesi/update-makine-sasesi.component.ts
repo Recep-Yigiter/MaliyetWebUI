@@ -4,6 +4,7 @@ import { IscilikGiderService } from 'src/app/core/services/repository/iscilik-gi
 import { KasnakService } from 'src/app/core/services/repository/kasnak.service';
 import { MakineSasesiService } from 'src/app/core/services/repository/makine-sasesi.service';
 import { UrunBilesenService } from 'src/app/core/services/repository/urun-bilesen.service';
+import { ConfirmModalComponents } from 'src/shared/dialogs/informations/confirm-modal';
 import { PersonelSelectModalComponents } from 'src/shared/dialogs/personel-selected-modal';
 import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
 
@@ -119,7 +120,43 @@ export class UpdateMakineSasesiComponent implements OnInit {
 
 
   }
+  KopyaOlustur() {
+   
+    var createModel = {
+      id: this.data.id,
+      ad: this.frm.ad,
+      birim: "ADET",
+      saseTipi: this.frm.saseTipi.ad,
+      kapasite: this.frm.kapasite.ad,
+      urunBilesenler:this.malzemeGiderler,
+      iscilikGiderler:this.iscilikGiderler
+    }
 
+
+
+    createModel.ad=createModel.ad+" Kopya"
+
+     const modalRef = this.NgbModal.open(ConfirmModalComponents, {
+          size: 'sm',
+          backdrop: 'static',
+        });
+        modalRef.componentInstance.content = 'Kopya oluşturmak istediğinize emin misiniz?';
+        modalRef.result.then(async(event) => {
+          if (event == true) {
+            this.MakineSasesiService.create(
+              createModel,
+              async () => {
+                this.activeModal.close(true);
+              }, (errorMessage) => { }
+            );
+          
+          }
+        });
+
+   
+
+
+  }
 
 
   cikis() {
@@ -141,19 +178,14 @@ export class UpdateMakineSasesiComponent implements OnInit {
   saseTipi: any = [
     { ad: 'Ağırlık Arkada Duvardan Şase' },
     { ad: 'MRL Duvardan' },
-    { ad: "MRL Ray'a bağlı" },
+    { ad: "MRL Ray'a Bağlı" },
     { ad: "MR Dişlili" },
     { ad: "MR Dişlisiz" },
   ]
   kapasite: any = [
-    { ad: "320" },
-    { ad: "450" },
-    { ad: "630" },
-    { ad: "800" },
-    { ad: "1000" },
-    { ad: "1600" },
-    { ad: "2000" },
-    { ad: "3000" },
+    { ad: '0-105cm' },
+    { ad: '105-240cm' },
+    { ad: '240cm - ∞' },
 
   ]
   selectedSaseTipi: any
@@ -193,11 +225,11 @@ export class UpdateMakineSasesiComponent implements OnInit {
           }
           const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
 
-          if (customerExists) {
-            alert(`Bu ${element.ad} zaten mevcut! `);
-            return;
-          }
-          this.malzemeGiderler = [...this.malzemeGiderler, newValue];
+          // if (customerExists) {
+          //   alert(`Bu ${element.ad} zaten mevcut! `);
+          //   return;
+          // }
+           this.malzemeGiderler = [...this.malzemeGiderler, newValue];
 
 
         });
@@ -260,6 +292,50 @@ export class UpdateMakineSasesiComponent implements OnInit {
   }
 
 
+
+  selectedTab: string = 'malzeme-giderleri';  // Varsayılan olarak "kabin" sekmesi seçili
+
+  selectTab(tab: any) {
+
+    var local = localStorage.setItem('tanimlar', JSON.stringify(tab))
+    this.selectedTab = tab.tabItem;
+    console.log(this.selectedTab);
+  }
+  menu = [
+    {
+      label: 'Kartlar',
+      expanded: false,
+      icon: '',
+      href: '',
+      submenu: [
+        {
+          label: 'Malzeme Giderleri',
+          tabItem: 'malzeme-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+        {
+          label: 'İşçilik Giderleri',
+          tabItem: 'iscilik-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+
+
+
+
+
+
+
+      ],
+    },
+
+
+  ];
 
 
 

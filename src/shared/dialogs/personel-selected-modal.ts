@@ -92,8 +92,11 @@ export class PersonelSelectModalComponents {
             field: "ad",
             minWidth: 200
         },
-        { field: "kod" },
-        { field: "PersonelAdi" },
+        {
+            field: "soyad",
+            minWidth: 200
+        },
+
 
     ];
     public defaultColDef: ColDef = {

@@ -1,0 +1,107 @@
+<genel-design>
+
+
+
+  <div design-buttons>
+    <div class="button-container">
+
+      <div (click)="yeni()" class="button-grup ">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/add-file.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Yeni</span>
+      </div>
+
+
+
+
+
+      <div class="button-grup disabled">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/refresh.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Yenile</span>
+      </div>
+
+      <div class="button-grup disabled">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/filter.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Filtrele</span>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div full-page style="overflow: auto; height: calc(100vh - 136px);">
+
+    <div class="table-container">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th *ngFor="let type of ['70 lik', '80 lik','90 lık','100 lük','110 lık','120 lik']">{{
+              type }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let grup of objectKeys">
+            <tr style="background: transparent;cursor: default;">
+              <td colspan="1"><strong> {{ grup }}</strong></td>
+              <td colspan="7" class="tr-options"><a (click)="genelGiderModal()">Genel Giderler için tıklayın.</a></td>
+            </tr>
+            <tr *ngFor="let grupVeri of gruplanmisVeri[grup];let i = index">
+              <td class="hover-td" style="width: 120px;">
+                <a (click)="iscilikSetting(grupVeri.ad)">İşçilik Ayarları.</a>
+              </td>
+              <td>{{ grupVeri.ad }}</td>
+              <td *ngFor="let type of ['70', '80','90','100','110','120']" class="hover-td">
+                <ng-container *ngIf="grupVeri._DATA[type]">
+                  <a (click)="guncelle(grupVeri._DATA[type])"> {{ grupVeri._DATA[type].malzemeGider
+                    +grupVeri._DATA[type].iscilikGider +grupVeri._DATA[type].genelGider| currency:'₺':'symbol':'1.2-2'}}
+                  </a>
+                  <ng-container *ngIf="grupVeri._DATA[type].urunBilesenler.length == 0">
+
+                    <a (click)="guncelle(grupVeri._DATA[type])"> {{ 0 | currency:'₺':'symbol':'1.2-2'}} </a>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="!grupVeri._DATA[type]">
+                  <div style="display: flex;justify-content: space-between;">
+                    {{ '-' }}
+                  </div>
+                </ng-container>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-weight: 600; text-align: end;">İşçilik ve Genel Giderler Dahil Toplam</td>
+              <td> <span style="color: brown; font-weight: 700;">{{gruplanmisVerideToplamFiyat["70"]?.toplamFiyat |
+                  currency:'
+                  ₺':'symbol':'1.2-2'}} </span> </td>
+              <td> <span style="color: brown; font-weight: 700;">{{gruplanmisVerideToplamFiyat["80"]?.toplamFiyat |
+                  currency:'
+                  ₺':'symbol':'1.2-2'}} </span> </td>
+              <td> <span style="color: brown; font-weight: 700;">{{gruplanmisVerideToplamFiyat["90"]?.toplamFiyat|
+                  currency:'
+                  ₺':'symbol':'1.2-2'}} </span> </td>
+              <td> <span style="color: brown; font-weight: 700;">{{gruplanmisVerideToplamFiyat["100"]?.toplamFiyat |
+                  currency:'
+                  ₺':'symbol':'1.2-2'}} </span> </td>
+              <td> <span style="color: brown; font-weight: 700;">{{gruplanmisVerideToplamFiyat["110"]?.toplamFiyat |
+                  currency:'
+                  ₺':'symbol':'1.2-2'}} </span> </td>
+              <td> <span style="color: brown; font-weight: 700;">{{gruplanmisVerideToplamFiyat["120"]?.toplamFiyat |
+                  currency:'
+                  ₺':'symbol':'1.2-2'}} </span> </td>
+            </tr>
+          </ng-container>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</genel-design>

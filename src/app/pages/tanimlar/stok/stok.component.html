@@ -1,85 +1,68 @@
-
-
-
 <stok-tanimlar-design>
+  <div design-buttons>
+    <div class="button-container" style="align-items: center;">
 
-
-
-    <div design-buttons>
-      <div class="button-container">
-  
-        <div  (click)="yeni()" class="button-grup ">
-          <div class="img-container">
-            <img src="../../../../../assets/icons/add-file.png" alt="">
-          </div>
-          <span class="d-none d-sm-inline button-label">Yeni</span>
-          <!-- <i class="fa-solid fa-sort-down sort-down-icon"></i> -->
+      <div (click)="yeni()" class="button-grup ">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/add-file.png" alt="">
         </div>
-  
-        <div  (click)="sil()" class="button-grup" [ngClass]="buttonDisabled?'disabled':''">
-          <div class="img-container">
-            <img src="../../../../../assets/icons/delete-file.png" alt="">
-          </div>
-          <span class="d-none d-sm-inline button-label">Sil</span>
-  
-        </div>
-  
-        <div  (click)="guncelle()" class="button-grup"
-        [ngClass]="buttonDisabled?'disabled':'' " [ngClass]="buttonUpdateDisabled?'disabled':''">
-          <div class="img-container">
-            <img src="../../../../../assets/icons/edit-file.png" alt="">
-          </div>
-          <span class="d-none d-sm-inline button-label">Düzelt</span>
-  
-        </div>
-  
-        <div  class="button-grup disabled">
-          <div class="img-container">
-            <img src="../../../../../assets/icons/refresh.png" alt="">
-          </div>
-          <span class="d-none d-sm-inline button-label">Yenile</span>
-  
-        </div>
-  
-        <div  class="button-grup disabled">
-          <div class="img-container">
-            <img src="../../../../../assets/icons/filter.png" alt="">
-          </div>
-          <span class="d-none d-sm-inline button-label">Filtrele</span>
-  
-        </div>
-  
-        <div class="button-grup disabled">
-          <div class="img-container">
-            <img src="../../../../../assets/icons/printer.png" alt="">
-          </div>
-          <span class="d-none d-sm-inline button-label">Yazdır</span>
-  
-        </div>
-
-        <!-- <p-divider layout="vertical"></p-divider> -->
-  
+        <span class="d-none d-sm-inline button-label">Yeni</span>
+        <!-- <i class="fa-solid fa-sort-down sort-down-icon"></i> -->
       </div>
-  
+
+      <div (click)="sil()" class="button-grup" [ngClass]="buttonDisabled?'disabled':''">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/delete-file.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Sil</span>
+
+      </div>
+
+      <div (click)="guncelle()" class="button-grup" [ngClass]="buttonDisabled?'disabled':'' "
+        [ngClass]="buttonUpdateDisabled?'disabled':''">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/edit-file.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Düzelt</span>
+
+      </div>
+
+      <div class="button-grup disabled">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/refresh.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Yenile</span>
+
+      </div>
+
+      <div class="button-grup disabled">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/filter.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Filtrele</span>
+
+      </div>
+
+      <div class="button-grup disabled">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/printer.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Yazdır</span>
+
+      </div>
+
+
+
     </div>
-  
-  
-  
-    <div full-page>
-        <ag-grid-angular #agGrid style="height:calc(-130px + 100vh);" class="ag-theme-quartz" [rowData]="rowData"
-        [defaultColDef]="defaultColDef" [columnDefs]="colDefs" (rowDoubleClicked)="rowDblClick($event)"
-        (gridReady)="getList($event)" (selectionChanged)="rowClick()" [rowSelection]="rowSelection" [rowHeight]="22"
-        [headerHeight]="23" [localeText]="localeText">
-      </ag-grid-angular>
-    </div>
-  
+  </div>
 
-  </stok-tanimlar-design>
+  <div full-page>
+    <ag-grid-angular #agGrid style="height:calc(-130px + 100vh);" class="ag-theme-quartz" [rowData]="rowData"
+      [defaultColDef]="defaultColDef" [columnDefs]="colDefs" (rowDoubleClicked)="rowDblClick($event)"
+      (gridReady)="getList($event)" (selectionChanged)="rowClick()" [rowSelection]="rowSelection" [rowHeight]="22"
+      [headerHeight]="23" [localeText]="localeText">
+    </ag-grid-angular>
+  </div>
 
 
-
-
-
-
-    
-  
+</stok-tanimlar-design>

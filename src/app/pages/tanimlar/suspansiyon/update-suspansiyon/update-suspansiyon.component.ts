@@ -40,7 +40,7 @@ export class UpdateSuspansiyonComponent  implements OnInit {
       kapasite:{ad: this.selectedKapasite?this.selectedKapasite:this.data.kapasite},
       askiTipi:{ad: this.selectedAskiTipi?this.selectedAskiTipi:this.data.askiTipi},
       karkasSekli:{ad: this.selectedKarkasSekli?this.selectedKarkasSekli:this.data.karkasSekli},
-      rayArasi:this.data.rayArasi,
+      rayArasi:{ad: this.selectedRayArasi?this.selectedRayArasi:this.data.rayArasi},
       urunBilesenler:this.malzemeGiderler,
       iscilikGiderler:this.iscilikGiderler
 
@@ -75,8 +75,8 @@ export class UpdateSuspansiyonComponent  implements OnInit {
     birim:"ADET",
     kapasite:this.frm.kapasite.ad,
     askiTipi:this.frm.askiTipi.ad,
-    karkasSekli:this.frm.karkasSekli.ad,
-    rayArasi:String(this.frm.rayArasi)+" mm",
+    // karkasSekli:this.frm.karkasSekli.ad,
+    rayArasi:this.frm.rayArasi.ad,
     urunBilesenler:[],
     iscilikGiderler:[]
   }
@@ -146,7 +146,17 @@ export class UpdateSuspansiyonComponent  implements OnInit {
    onKarkasTipiChange(karkas: any): void {
      this.selectedKarkasTipi = karkas;
    };
+   selectedRayArasi:any
+   rayArasi = [
+     { ad: '0-105cm' },
+     { ad: '105-240cm' },
+     { ad: '240cm - ∞' },
+
  
+   ];
+   onRayArasiChange(rayArasi: any): void {
+     this.selectedRayArasi = rayArasi;
+   };
  
    selectedAskiTipi:any
    askiTipi=[
@@ -281,7 +291,50 @@ export class UpdateSuspansiyonComponent  implements OnInit {
 
 
 
+ selectedTab: string = 'malzeme-giderleri';  // Varsayılan olarak "kabin" sekmesi seçili
 
+  selectTab(tab: any) {
+
+    var local = localStorage.setItem('tanimlar', JSON.stringify(tab))
+    this.selectedTab = tab.tabItem;
+    console.log(this.selectedTab);
+  }
+  menu = [
+    {
+      label: 'Kartlar',
+      expanded: false,
+      icon: '',
+      href: '',
+      submenu: [
+        {
+          label: 'Malzeme Giderleri',
+          tabItem: 'malzeme-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+        {
+          label: 'İşçilik Giderleri',
+          tabItem: 'iscilik-giderleri',
+          icon: 'fa fa-inbox',
+          submenu: [],
+
+          expanded: false,
+        },
+
+
+
+
+
+
+
+      ],
+    },
+
+
+  ];
+    
 
     
 

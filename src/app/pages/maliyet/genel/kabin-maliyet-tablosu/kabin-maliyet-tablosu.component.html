@@ -1,0 +1,36 @@
+<table class="table table-bordered" style="width: 1000px;">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th *ngFor="let type of ['320 Kg', '400 Kg','480 Kg', '630 Kg', '800 Kg','1000 Kg','1250 Kg','2000 Kg']">{{
+          type }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let fabrika of objectKeys">
+        <tr style="background: transparent;cursor: default;">
+          <td colspan="10"><strong> {{ fabrika }}</strong></td>
+        </tr>
+        <tr *ngFor="let gider of gruplanmisVeri[fabrika];let i = index">
+          <td> </td>
+          <td>{{ gider.model }}</td>
+          <td *ngFor="let type of ['320 KG', '400 KG','480 KG', '630 KG', '800 KG','1000 KG','1250 KG','2000 KG']" class="hover-td">
+            <ng-container *ngIf="gider.kabinler[type]">
+
+                <div style="display: flex;justify-content: space-between;">
+                    {{ gider.kabinler[type].malzemeGider | currency:' ₺':'symbol':'1.2-2'}} 
+                </div>
+             
+            </ng-container>
+            <ng-container *ngIf="!gider.kabinler[type]" >
+              <div style="display: flex;justify-content: space-between;">
+                {{ '-' }} 
+              </div>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+
+    </tbody>
+  </table>

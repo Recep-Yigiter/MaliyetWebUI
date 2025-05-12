@@ -1,0 +1,97 @@
+<genel-design>
+
+
+
+  <div design-buttons>
+    <div class="button-container">
+
+      <div (click)="yeni()" class="button-grup ">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/add-file.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Yeni</span>
+      </div>
+
+      <div (click)="sil()" class="button-grup">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/delete-file.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Sil</span>
+      </div>
+
+      <div (click)="guncelle()" class="button-grup">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/edit-file.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Düzelt</span>
+      </div>
+
+
+
+      <div class="button-grup disabled">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/refresh.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Yenile</span>
+      </div>
+
+      <div class="button-grup disabled">
+        <div class="img-container">
+          <img src="../../../../../assets/icons/filter.png" alt="">
+        </div>
+        <span class="d-none d-sm-inline button-label">Filtrele</span>
+      </div>
+
+
+    </div> 
+
+  </div>
+
+
+
+  <div full-page style="overflow: auto; height: calc(100vh - 136px);">
+
+    <div>
+      <!-- <table class="table table-bordered" style="width: 1000px;">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th *ngFor="let type of ['320 Kg', '400 Kg','480 Kg', '630 Kg', '800 Kg','1000 Kg','1250 Kg','2000 Kg']">{{
+              type }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let fabrika of objectKeys">
+            <tr style="background: transparent;cursor: default;">
+              <td colspan="10"><strong> {{ fabrika }}</strong></td>
+            </tr>
+            <tr *ngFor="let gider of gruplanmisVeri[fabrika];let i = index">
+              <td> </td>
+              <td>{{ gider.model }}</td>
+              <td *ngFor="let type of ['320 KG', '400 KG','480 KG', '630 KG', '800 KG','1000 KG','1250 KG','2000 KG']">
+                <ng-container *ngIf="gider.kabinler[type]">
+                  {{ gider.kabinler[type].malzemeGider | currency:' ₺':'symbol':'1.2-2'}}
+                </ng-container>
+                <ng-container *ngIf="!gider.kabinler[type]">
+                  {{ '-' }}
+                </ng-container>
+              </td>
+            </tr>
+          </ng-container>
+
+        </tbody>
+      </table> -->
+
+
+      <app-kabin-maliyet-tablosu></app-kabin-maliyet-tablosu>
+
+
+
+    </div>
+
+
+
+  </div>
+
+</genel-design>

@@ -95,7 +95,7 @@
             </div>
           </div>
   
-          <div style="display: grid; grid-template-columns:1fr 1fr; gap: 12px;">
+          <!-- <div style="display: grid; grid-template-columns:1fr 1fr; gap: 12px;">
             <div>
               <div style="height: 485px;">
                 <p-accordion [activeIndex]="0">
@@ -268,8 +268,174 @@
               </p-accordion>
   
             </div>
-          </div>
+          </div> -->
+          <div style="display: grid; grid-template-columns:1fr; gap: 12px;">
+            <div>
+              <div style=" margin-top: 10px;">
+                <ul class="nav nav-tabs">
+                  <ng-container *ngFor="let item of menu">
+                    <ng-container *ngFor="let item of item.submenu">
+                      <li [class.active]="selectedTab === item.tabItem" (click)="selectTab(item)">
+                        <a class="tab-item text-slate-600 text-2xl group-hover:text-cyan-700">{{item.label}}</a>
+                      </li>
+                    </ng-container>
+                  </ng-container>
+                </ul>
+        
+                <p-table *ngIf="selectedTab=='malzeme-giderleri'" id="row-check" [value]="malzemeGiderler"
+                  [style]="{'min-height':' 400px'}" [scrollable]="true" scrollHeight="400px" selectionMode="single"
+                  [(selection)]="selectedMalzemeGiderRow" dataKey="id" [tableStyle]="{ 'min-width': '45rem' }">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">
+                        <div style='height:25px;padding:0.3rem 1rem;'></div>
+                        <div class="button-container" style="position: absolute;left: 0;top: 0;">
+                          <div (click)="stokEkle()" class="button-grup " style="gap: 3px !important;">
+                            <div class="img-container">
+                              <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/add-file.png"
+                                alt="">
+                            </div>
+                          </div>
+                          <div class="button-grup " style="gap: 3px !important;">
+                            <div class="img-container">
+                              <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/edit-file.png"
+                                alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <th pSortableColumn="ad" style="font-size: 13px;">Malzeme Adı <p-sortIcon field="ad"></p-sortIcon>
+                      </th>
+                      <th style="font-size: 13px; width: 370px;">Açıklama</th>
+                      <th style="font-size: 13px;">a=Miktar</th>
+                      <th style="font-size: 13px;">Birim</th>
   
+                      <th></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product let-editing="editing" let-rowIndex="rowIndex">
+                    <tr >
+                      <td> <button (click)="deleteStokItem(rowIndex)"
+                          style="color: rgb(99, 0, 0); font-style:italic;font-weight:bold;border:1px solid gray;">KALDIR</button>
+                      </td>
+                      <td>{{ product.ad }}</td>
+                      <td [pEditableColumn]="product.aciklama" pEditableColumnField="aciklama"  style="background-color: #ffffff;
+                      box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+                      padding: 0;">
+                        <p-cellEditor>
+                          <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="product.aciklama"  style="min-width:250px; height: 31px;"
+                            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1"/>
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                            <span  *ngIf="product.aciklama"
+                              style="margin-left: 10px;font-weight: bold;">{{ product.aciklama }}</span>
+                            
+                            <span *ngIf="!product.aciklama"
+                              style="color: rgb(187, 187, 187);font-weight: 400;margin-left: 10px;">Açıklama giriniz..</span>
+                          </ng-template>
+                        </p-cellEditor>
+                      </td>
+                      <td [pEditableColumn]="product.miktar" pEditableColumnField="miktar"  style="background-color: #ffffff;
+                      box-shadow: inset 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+                      padding: 0;" >
+                        <p-cellEditor>
+                          <ng-template pTemplate="input">
+                            <input type="number" [(ngModel)]="product.miktar" style="height: 31px; width: 90px;
+      padding: 0 !important;;"
+                            class="form-control shadow-none form-control-nullable" id="exampleFormControlInput1"/>
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                            {{ product.miktar }}
+                          </ng-template>
+                        </p-cellEditor>
+                      </td>
+  
+                      <td>{{ product.birim }}</td>
+  
+                    </tr>
+                  </ng-template>
+                </p-table>
+  
+                <p-table *ngIf="selectedTab=='iscilik-giderleri'" id="row-check" [value]="iscilikGiderler"
+                  rowGroupMode="rowspan" sortField="gorev.ad" sortMode="single" dataKey="personel.id"
+                  groupRowsBy="gorev.ad" [style]="{'min-height':' 395px'}" [scrollable]="true" selectionMode="single"
+                  [(selection)]="selectedIscilikGiderRow" scrollHeight="448px">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">
+                        <div style='height:25px;padding:0.3rem 1rem;'></div>
+                        <div class="button-container" style="position: absolute;left: 0;top: 0;">
+  
+                          <div (click)="personelEkle()" class="button-grup " style="gap: 3px !important;">
+                            <div class="img-container">
+                              <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/add-file.png"
+                                alt="">
+                            </div>
+  
+                          </div>
+  
+  
+  
+                          <div class="button-grup " style="gap: 3px !important;">
+                            <div class="img-container">
+                              <img style="width: 25px; height: 25px;" src="../../../../../assets/icons/edit-file.png"
+                                alt="">
+                            </div>
+  
+                          </div>
+  
+  
+  
+  
+  
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+  
+                      <th style="font-size: 13px;width:6rem;">Gorev</th>
+                      <th style="font-size: 13px;">Ad</th>
+                      <th style="font-size: 13px;"></th>
+                      <th style="font-size: 13px;"></th>
+                      <th style="font-size: 13px;"></th>
+                      <th style="font-size: 13px;"></th>
+                    </tr>
+                  </ng-template>
+  
+  
+                  <ng-template pTemplate="body" let-customer let-rowIndex="rowIndex" let-rowgroup="rowgroup"
+                    let-rowspan="rowspan">
+                    <tr [pSelectableRow]="customer" [pSelectableRowIndex]="rowIndex">
+                      <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+                        <span class="font-bold ml-2"
+                          style="text-align:center;display:flex;">{{customer.personel.gorev.ad}}</span>
+                      </td>
+                      <td>
+                        <button (click)="deletePersonelItem(customer)"
+                          style="color: rgb(99, 0, 0); font-style:italic;font-weight:bold;border:1px solid gray;">KALDIR</button>
+                        {{customer.personel.ad}}
+                      </td>
+                      <td>
+                        <span class="ml-1 vertical-align-middle"></span>
+                      </td>
+                      <td>
+  
+                      </td>
+                      <td>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+  
+              </div>
+            </div>
+          </div>
         </div>
   
   

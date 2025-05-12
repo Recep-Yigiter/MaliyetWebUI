@@ -60,10 +60,11 @@ export class GenelGiderComponent implements OnInit {
     this.genelGider = (await this.GenelGiderService.GetAll()).items
     this.genelGiderKatsayi = (await this.GenelGiderKatsayiService.GetAll()).items
 
-
     this.birlesmisVeri = this.birlestir();
     this.gruplanmisVeri = this.gruplamaYap();
     this.objectKeys = Object.keys(this.gruplanmisVeri)
+
+console.log(this.genelGider);
 
 
   }

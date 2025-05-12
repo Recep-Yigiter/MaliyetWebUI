@@ -58,6 +58,14 @@ export class AppComponent implements OnInit {
       disabled: false,
       localStorage: 'stok'
     },
+    {
+      modul: 'Genel',
+      icon: 'fa-solid fa-receipt',
+      class: 'text-slate-600 text-2xl group-hover:text-cyan-700',
+      href: '/genel/kabin',
+      disabled: false,
+      localStorage: 'stok'
+    },
 
 
   ];
