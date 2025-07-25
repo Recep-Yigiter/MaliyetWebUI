@@ -9,19 +9,19 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { AccordionModule } from 'primeng/accordion';
 import { RouterModule } from '@angular/router';
-import { GenelDesignComponent } from './core/design/design.component';
 import { GenelFormComponent } from './core/components/urun-form';
 import { CreateSuspansiyonComponent } from './create-suspansiyon/create-suspansiyon.component';
 import { UpdateSuspansiyonComponent } from './update-suspansiyon/update-suspansiyon.component';
 import { SuspansiyonIscilikModalComponent } from './core/settings/suspansiyon-iscilik';
 import { SuspansiyonGenelGiderModalComponent } from './core/settings/suspansiyon-genel-gider';
+import { GenelSuspansiyonDesignComponent } from './core/design/design.component';
 
 
 
 @NgModule({
   declarations: [
     SuspansiyonComponent,
-    GenelDesignComponent,
+    GenelSuspansiyonDesignComponent,
     GenelFormComponent,
     CreateSuspansiyonComponent,
     UpdateSuspansiyonComponent,

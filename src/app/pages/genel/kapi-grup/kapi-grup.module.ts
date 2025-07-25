@@ -9,7 +9,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { AccordionModule } from 'primeng/accordion';
 import { RouterModule } from '@angular/router';
-import { GenelDesignComponent } from './core/design/design.component';
 import { GenelFormComponent } from './core/components/urun-form';
 import { CreateKapiGrupComponent } from './create-kapi-grup/create-kapi-grup.component';
 import { UpdateKapiGrupComponent } from './update-kapi-grup/update-kapi-grup.component';
@@ -17,12 +16,13 @@ import { KasaKapiGrupIscilikModalComponent } from './core/settings/iscilik/kasa-
 import { MekanizmaKapiGrupIscilikModalComponent } from './core/settings/iscilik/mekanizma-kapi-grup-iscilik';
 import { PanelKapiGrupIscilikModalComponent } from './core/settings/iscilik/panel-kapi-grup-iscilik';
 import { KapiGrupGenelGiderModalComponent } from './core/settings/kapi-grup-genel-gider';
+import { GenelKapiGrupDesignComponent } from './core/design/design.component';
 
 
 @NgModule({
   declarations: [
     KapiGrupComponent,
-    GenelDesignComponent,
+    GenelKapiGrupDesignComponent,
     GenelFormComponent,
     CreateKapiGrupComponent,
     UpdateKapiGrupComponent,

@@ -67,13 +67,10 @@ import { GenelGiderKatsayiService } from 'src/app/core/services/repository/genel
 
                 <div style="display: grid; grid-template-columns:1fr; gap: 4px;">
                     <div style="display: flex; flex-direction: column; border: 1px solid rgb(230, 230, 230); color: white; padding: 4px;">
-
-
-                    <p-table id="row-check" [value]="gruplanmisVeri['Kabin Fabrikası']" [style]="{'min-height':' 400px'}" dataKey="id" [scrollable]="true"
+                    <p-table id="row-check" [value]="gruplanmisVeri['Kapı Fabrikası']" [style]="{'min-height':' 400px'}" dataKey="id" [scrollable]="true"
                          scrollHeight="400px" selectionMode="single" [(selection)]="selectedGenelGiderler">
                          <ng-template pTemplate="header">
                              <tr>
-                                 <!-- <th style="width: 50px;font-size: 13px;" rowspan="3">Sıra No</th> -->
                                  <th style="text-align: center;color: rgb(99, 0, 0);" colspan="6">
                                  <div style='height:25px;padding:0.3rem 1rem;'></div> 
                                      <div class="button-container" style="position: absolute;left: 0;top: 0;">
@@ -114,7 +111,7 @@ import { GenelGiderKatsayiService } from 'src/app/core/services/repository/genel
                          
                              <tr >                   
                                <td>{{ product.ad }}</td>
-                               <td *ngFor="let type of ['kabin']">
+                               <td *ngFor="let type of ['kapi']" >
                                  <ng-container *ngIf="product.katsayilar[type]">
                                    {{ product.katsayilar[type]/28 | currency:' ₺':'symbol':'1.2-2'}}
                                  </ng-container>
@@ -144,6 +141,7 @@ import { GenelGiderKatsayiService } from 'src/app/core/services/repository/genel
         </div>
     </div>
 </div>
+
   `
 
 })
@@ -155,9 +153,7 @@ export class KabinGenelGiderModalComponent implements OnInit {
     gruplanmisVeri: any = {};
     objectKeys: any;
     genelGiderKatsayi: any;
-
     toplamGenelGiderTutar: any;
-
     constructor(public activeModal: NgbActiveModal, private GenelGiderService: GenelGiderService, private GenelGiderKatsayiService: GenelGiderKatsayiService) {
 
     }
@@ -171,7 +167,7 @@ export class KabinGenelGiderModalComponent implements OnInit {
 
         let toplamGenelGider = 0
         this.gruplanmisVeri['Kabin Fabrikası'].forEach(element => {
-            toplamGenelGider += element.katsayilar["agirlik-sasesi"] / 28;
+            toplamGenelGider += element.katsayilar["kabin"] / 28;
         })
         this.toplamGenelGiderTutar = toplamGenelGider;
     }
@@ -209,7 +205,6 @@ export class KabinGenelGiderModalComponent implements OnInit {
 
             return acc;
         }, {});
-        console.log(gruplanmisVeri);
         return gruplanmisVeri;
 
     }

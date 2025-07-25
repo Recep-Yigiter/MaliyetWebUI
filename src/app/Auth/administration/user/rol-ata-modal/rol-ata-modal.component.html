@@ -1,0 +1,87 @@
+<div class="modal-header " style="    padding: 0rem 0rem;">
+  <h4 class="modal-title"></h4>
+  <h4 class="modal-title"> </h4>
+  <button type="button" class="btn-close" style="border: none; height: 30px; width: 30px;" aria-label="Close"
+    (click)="activeModal.close(false)">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+
+
+<div class="">
+  <div class="container-fluid">
+    <div class="panel header" data-resize-name="header">
+      <div class="content">
+        <div class="actions" style="padding: 2px 0px 2px 0px; display: flex;">
+          <div class="action-items" style="width: 100%; display: flex; align-items: center;">
+            <div class="action-left">
+              <div class="btn-group ml-1 mr-1">
+                <div class="button-container">
+                  <div class="button-grup disabled">
+                    <div class="img-container">
+                      <img src="../../../../../assets/icons/add-file.png" alt="">
+                    </div>
+                    <span class="d-none d-sm-inline button-label">Yeni</span>
+                  </div>
+                  <div (click)="Kaydet()" class="button-grup ">
+                    <div class="img-container">
+                      <img src="../../../../../assets/icons/save.png" alt="">
+                    </div>
+                    <span class="d-none d-sm-inline button-label">Kaydet</span>
+                  </div>
+
+                  <div (click)="sil()" class="button-grup disabled">
+                    <div class="img-container">
+                      <img src="../../../../../assets/icons/delete-file.png" alt="">
+                    </div>
+                    <span class="d-none d-sm-inline button-label">Sil</span>
+                  </div>
+                  <div (click)="cikis()" class="button-grup">
+                    <div class="img-container">
+                      <img src="../../../../../assets/icons/close.png" alt="">
+                    </div>
+                    <span class="d-none d-sm-inline button-label">Çıkış</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <div style="display: grid; grid-template-columns:2fr 200px; gap: 4px;">
+          <div style="display: flex;
+                            flex-direction: column;
+                            border: 1px solid rgb(230, 230, 230);
+                            color: white; padding: 4px;">
+
+
+          </div>
+
+
+
+
+
+
+
+        </div>
+
+        <div style="display: grid; grid-template-columns:1fr; gap: 12px;">
+          <mat-selection-list #rolesComponent>
+            <!-- @for (shoe of typesOfShoes; track shoe) {
+           
+            } -->
+             <mat-list-option *ngFor="let row of rowData" [value]="row" [selected]="assignRoles?.includes(row)">{{row}}</mat-list-option>
+          </mat-selection-list>
+
+          <p>
+            Options selected: {{rolesComponent.selectedOptions.selected.length}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

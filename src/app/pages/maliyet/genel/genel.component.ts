@@ -17,6 +17,8 @@ export class GenelComponent {
 
   }
 
+
+
   genelModeller: any;
   kabinler: any;
 
@@ -25,7 +27,26 @@ export class GenelComponent {
   gruplanmisVeri: any = {};
   objectKeys: any;
 
+
+
+  excelSatirSayisi:any=[];
+  excelHucreSayisi:any=[];
+
   async ngOnInit() {
+
+
+    for (let i = 1; i < 100; i++) {
+      this.excelSatirSayisi.push(i)
+    }
+    this.excelSatirSayisi
+
+
+    for (let i = 1; i < 1090; i++) {
+      this.excelHucreSayisi.push(i)
+    }
+    this.excelHucreSayisi
+
+
 
     this.kabinler = (await this.KabinService.GetAll()).items
 

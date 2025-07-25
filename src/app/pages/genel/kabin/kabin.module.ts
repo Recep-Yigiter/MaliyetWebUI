@@ -10,18 +10,18 @@ import { TableModule } from 'primeng/table';
 import { AccordionModule } from 'primeng/accordion';
 import { RouterModule } from '@angular/router';
 import { GenelComponent } from '../genel.component';
-import { GenelDesignComponent } from './core/design/design.component';
 import { GenelFormComponent } from './core/components/urun-form';
 import { CreateKabinComponent } from './create-kabin/create-kabin.component';
 import { UpdateKabinComponent } from './update-kabin/update-kabin.component';
 import { KabinIscilikModalComponent } from './core/settings/kabin-iscilik';
 import { KabinGenelGiderModalComponent } from './core/settings/kabin-genel-gider';
+import { GenelKabinDesignComponent } from './core/design/design.component';
 
 
 @NgModule({
   declarations: [
     KabinComponent,
-    GenelDesignComponent,
+    GenelKabinDesignComponent,
     GenelFormComponent,
     CreateKabinComponent,
     UpdateKabinComponent,

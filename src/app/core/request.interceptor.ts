@@ -3,9 +3,10 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpResponse
 } from '@angular/common/http';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 
 
 
@@ -14,16 +15,21 @@ export class RequestInterceptor implements HttpInterceptor {
 
   constructor() { }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let token = JSON.parse(localStorage.getItem("tokenData"))
-
-
-    if (token) {
-
-
-      return;
-    }
-
-    return next.handle(request)
-  }
+intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  return next.handle(req).pipe(
+    tap(event => {
+      if (event instanceof HttpResponse) {
+        // Eğer response'un body’si undefined veya boşsa parse etmeye çalışma
+        if (event.body && typeof event.body === 'string') {
+          try {
+            const parsed = JSON.parse(event.body);
+            // parsed veriyi bir işlemde kullan
+          } catch (e) {
+            console.error('Geçersiz JSON:', event.body);
+          }
+        }
+      }
+    })
+  );
+}
 }

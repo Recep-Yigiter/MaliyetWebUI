@@ -35,6 +35,7 @@ export class UpdateKabinComponent implements OnInit {
 
   async ngOnInit() {
 
+
     var model = this.modeller.filter(c => c.ad == this.data.model)[0]
     this.frm = {
       ad: this.data.ad,
@@ -63,19 +64,21 @@ export class UpdateKabinComponent implements OnInit {
         makineSasesiId: null,
         suspansiyonId: null,
         miktar: element.miktar ? element.miktar : 0,
+        birimFiyat: element.stok.birimFiyat,
+        dovizFiyat: element.stok.dovizFiyat,
+        doviz: element.stok.dovizCinsi,
         aciklama: element.aciklama,
 
       }
 
       this.malzemeGiderler.push(test)
     });
+    this.malzemeGiderler.sort((a, b) => a.ad.localeCompare(b.ad))
 
 
-    // this.malzemeGiderler=this.data.urunBilesenler
-    // console.log(this.data.urunBilesenler);
   }
 
-kopyaKabin:any;
+  kopyaKabin: any;
   Kaydet() {
 
     var kapasiteDeger = this.selectedKapasite ? this.selectedKapasite.deger : this.frm.kapasite.deger;
@@ -83,7 +86,7 @@ kopyaKabin:any;
 
     var createModel = {
       id: this.data.id,
-      ad:kapasiteDeger +' '+ modelAd + " MODEL KABİN",
+      ad: kapasiteDeger + ' ' + modelAd + " MODEL KABİN",
       kapasite: this.frm.kapasite.deger,
       model: this.frm.model.ad,
       kabinDuvar: this.frm.model.ozellikler.kabinDuvar,
@@ -121,7 +124,7 @@ kopyaKabin:any;
       items: this.iscilikGiderler
     }
 
-this.kopyaKabin=createModel;
+    this.kopyaKabin = createModel;
     this.KabinService.update(
       createModel,
       async () => {
@@ -140,68 +143,59 @@ this.kopyaKabin=createModel;
 
   }
   KopyaOlustur() {
-    // this.Kaydet();
-    // this.kopyaKabin.urunBilesenler= this.malzemeGiderler;
-    // this.kopyaKabin.iscilikGiderler= this.iscilikGiderler;
+    //this.Kaydet();
+    //this.kopyaKabin.urunBilesenler= this.malzemeGiderler;
+    //this.kopyaKabin.iscilikGiderler= this.iscilikGiderler;
     var createModel = {
       ad: this.frm.ad,
-      kapasite:this.frm.kapasite.deger,
-      model:this.frm.model.ad,
+      kapasite: this.frm.kapasite.deger,
+      model: this.frm.model.ad,
       kabinDuvar: this.frm.model.ozellikler.kabinDuvar,
-      girisDuvar:  this.frm.model.ozellikler.girisDuvar,
-      arkaDuvar:  this.frm.model.ozellikler.arkaDuvar,
-      taban:  this.frm.model.ozellikler.taban,
-      aydinlatma:  this.frm.model.ozellikler.aydinlatma,
-      tavan:  this.frm.model.ozellikler.tavan,
-      kupeste:  this.frm.model.ozellikler.kupeste,
-      supurgelik:  this.frm.model.ozellikler.supurgelik,
-      opsiyonel:  this.frm.model.ozellikler.opsiyonel,
-      urunBilesenler:this.malzemeGiderler,
-      iscilikGiderler:this.iscilikGiderler
+      girisDuvar: this.frm.model.ozellikler.girisDuvar,
+      arkaDuvar: this.frm.model.ozellikler.arkaDuvar,
+      taban: this.frm.model.ozellikler.taban,
+      aydinlatma: this.frm.model.ozellikler.aydinlatma,
+      tavan: this.frm.model.ozellikler.tavan,
+      kupeste: this.frm.model.ozellikler.kupeste,
+      supurgelik: this.frm.model.ozellikler.supurgelik,
+      opsiyonel: this.frm.model.ozellikler.opsiyonel,
+      urunBilesenler: this.malzemeGiderler,
+      iscilikGiderler: this.iscilikGiderler
     }
 
 
 
-createModel.ad=createModel.ad+" Kopya"
-
-     const modalRef = this.NgbModal.open(ConfirmModalComponents, {
-          size: 'sm',
-          backdrop: 'static',
-        });
-        modalRef.componentInstance.content = 'Kopya oluşturmak istediğinize emin misiniz?';
-        modalRef.result.then(async(event) => {
-          if (event == true) {
-            this.KabinService.create(
-              createModel,
-              async () => {
-                this.activeModal.close(true);
-              }, (errorMessage) => { }
-            );
-          
-          }
-        });
-
-   
-
-
+    createModel.ad = createModel.ad + " Kopya"
+    const modalRef = this.NgbModal.open(ConfirmModalComponents, {
+      size: 'sm',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.content = 'Kopya oluşturmak istediğinize emin misiniz?';
+    modalRef.result.then(async (event) => {
+      if (event == true) {
+        this.KabinService.create(
+          createModel,
+          async () => {
+            this.activeModal.close(true);
+          }, (errorMessage) => { }
+        );
+      }
+    });
   }
 
-  sil(){
-  
-      const modalRef = this.NgbModal.open(DeleteModalComponents, {
-        size: 'md',
-        backdrop: 'static',
-      });
-      modalRef.componentInstance.data = 'Birim Kartı';
-      modalRef.result.then(async (event) => {
-        if (event == true) {
-          this.KabinService.delete(this.data.id, async () => {
-            this.activeModal.close(true);
-          });
-
-        }
-      });
- 
+  sil() {
+    const modalRef = this.NgbModal.open(DeleteModalComponents, {
+      size: 'md',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.data = 'Birim Kartı';
+    modalRef.result.then(async (event) => {
+      if (event == true) {
+        this.KabinService.delete(this.data.id, async () => {
+          this.activeModal.close(true);
+        });
+      }
+    });
   }
 
 
@@ -237,14 +231,14 @@ createModel.ad=createModel.ad+" Kopya"
 
   selectedKapasite: any;
   kapasiteler = [
-    {deger: '320 KG' },
-    {deger: '400 KG' },
-    {deger: '480 KG' },
-    {deger: '630 KG' },
-    {deger: '800 KG' },
-    {deger: '1000 KG' },
-    {deger: '1250 KG' },
-    {deger: '1600 KG' },
+    { deger: '320 KG' },
+    { deger: '400 KG' },
+    { deger: '480 KG' },
+    { deger: '630 KG' },
+    { deger: '800 KG' },
+    { deger: '1000 KG' },
+    { deger: '1250 KG' },
+    { deger: '1600 KG' },
   ];
   onKapasiteChange(kapasite: any): void {
     this.selectedKapasite = kapasite;
@@ -289,7 +283,7 @@ createModel.ad=createModel.ad+" Kopya"
           }
           const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
 
-         
+
           this.malzemeGiderler = [...this.malzemeGiderler, newValue];
 
 

@@ -55,7 +55,8 @@ export class CreateKabinComponent implements OnInit {
       createModel,
       async () => {
         this.activeModal.close(true);
-      }, (errorMessage) => { }
+      }, (errorMessage) => {
+       }
     );
 
   }
@@ -72,27 +73,26 @@ export class CreateKabinComponent implements OnInit {
   frm: any = {
     ad: "",
     model: {
-      ad: "BELUGA",
-      img: '../../../../../assets/img/kabin-models/BELUGA.PNG',
+      ad: "LİTRİNOS",
+        img:'../../../../../assets/img/kabin-models/24-litrinos-yukselis.jpg',
       ozellikler:
-      {
-        kabinDuvar: "Ral 7040 Boyalı Cam & Satine Paslanmaz",
-        girisDuvar: "Satine Paslanmaz",
-        arkaDuvar: "Füme Ayna",
-        taban: "Silver Waves Granit",
-        aydinlatma: "Kare Spot (Gün Işığı)",
-        tavan: "Decoplate GS-05",
-        kupeste: "Ø38 Parlak Satine Paslanmaz Boru",
-        supurgelik: "Paslanmaz Çelik",
-        opsiyonel: "-",
-      }
+            {
+                kabinDuvar:"Satine Paslanmaz, Mirror Ti-Black, Decoplate NP08",
+                girisDuvar:"Satine Paslanmaz",
+                arkaDuvar:"Satine Paslanmaz, Mirror Ti-Black, Decoplate NP08",
+                taban:"Star Galaxy Granit",
+                aydinlatma:"Led Gi-Spot",
+                tavan:"Satine Paslanmaz, Mirror Ti-Black, Decoplate NP08",
+                kupeste:"Satine Paslanmaz",
+                supurgelik:"Satine Paslanmaz",
+                opsiyonel:"Küpeşte İçi, Tavan,Taban Ve ArkaDuvar İçin Gizli Led Paketi",
+            }
 
     },
     kapasite: { id: 1, deger: '320 KG' },
 
 
   }
-
 
 
 
@@ -180,10 +180,10 @@ export class CreateKabinComponent implements OnInit {
           }
           const customerExists = this.malzemeGiderler.some(customer => customer.stokId === newValue.stokId);
 
-          if (customerExists) {
-            alert(`Bu ${element.ad} zaten mevcut! `);
-            return;
-          }
+          // if (customerExists) {
+          //   alert(`Bu ${element.ad} zaten mevcut! `);
+          //   return;
+          // }
           this.malzemeGiderler = [...this.malzemeGiderler, newValue];
 
         });

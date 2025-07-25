@@ -5,7 +5,7 @@ import { GorevService } from 'src/app/core/services/repository/gorev.service';
 import { IscilikSettingService } from 'src/app/core/services/repository/iscilik-setting.service';
 
 @Component({
-    selector: 'app-kapi-grup-iscilik-modal',
+    selector: 'app-mekanizma-kapi-grup-iscilik-modal',
     styleUrls: ['../../../create-kapi-grup/create-kapi-grup.component.scss'],
     template: `
 <div class="modal-header " style="padding: 0rem 0rem;">

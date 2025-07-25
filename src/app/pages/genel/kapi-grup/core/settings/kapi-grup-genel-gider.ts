@@ -7,7 +7,7 @@ import { GenelGiderService } from 'src/app/core/services/repository/genel-gider.
 import { GenelGiderKatsayiService } from 'src/app/core/services/repository/genel-gider-katsayi.service';
 
 @Component({
-    selector: 'app-kapi-grup-iscilik-modal',
+    selector: 'app-kapi-grup-genel-gider-modal',
     styleUrls: ['../../create-kapi-grup/create-kapi-grup.component.scss'],
     template: `
 <div class="modal-header " style="padding: 0rem 0rem;">
@@ -169,10 +169,8 @@ export class KapiGrupGenelGiderModalComponent implements OnInit {
         let toplamGenelGider = 0
         this.gruplanmisVeri['Kapı Fabrikası'].forEach(element => {
             toplamGenelGider += element.katsayilar["kapi"] / 28;
-            console.log(element.katsayilar["kapi"] / 28);
         })
         this.toplamGenelGiderTutar = toplamGenelGider;
-        console.log(this.gruplanmisVeri);
     }
 
 

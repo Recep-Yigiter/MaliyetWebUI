@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'genel-design',
+  selector: 'genel-kabin-design',
   templateUrl: './design.component.html',
   styleUrls: ['./design.component.scss']
 })
-export class GenelDesignComponent {
+export class GenelKabinDesignComponent {
 
 
 

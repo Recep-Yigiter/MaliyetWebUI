@@ -7,6 +7,7 @@ import { MaliyetComponent } from './maliyet/maliyet.component';
 import { TanimlarComponent } from './tanimlar/tanimlar.component';
 import { TanimlarModule } from '../pages/tanimlar/tanimlar.module';
 import { GenelComponent } from './genel/genel.component';
+import { roleGuard } from '../Auth/core/guards/role.guard';
 
 
 
@@ -20,10 +21,8 @@ import { GenelComponent } from './genel/genel.component';
      
       {
         path: '',
-       
-        
         children: [
-          {path: 'maliyet',component: MaliyetComponent,loadChildren: () =>import(  '../pages/maliyet/maliyet.module').then((m) => m.MaliyetModule), },
+          {path: 'maliyet',component: MaliyetComponent,loadChildren: () =>import(  '../pages/maliyet/maliyet.module').then((m) => m.MaliyetModule),},
         ],
       },
       {

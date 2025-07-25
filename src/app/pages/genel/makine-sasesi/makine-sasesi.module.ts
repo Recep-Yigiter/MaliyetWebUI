@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MakineSasesiComponent } from './makine-sasesi.component';
-import { GenelDesignComponent } from './core/design/design.component';
 import { GenelFormComponent } from './core/components/urun-form';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgGridAngular } from 'ag-grid-angular';
@@ -15,13 +14,14 @@ import { CreateMakineSasesiComponent } from './create-makine-sasesi/create-makin
 import { UpdateMakineSasesiComponent } from './update-makine-sasesi/update-makine-sasesi.component';
 import { MakineSasesiIscilikModalComponent } from './core/settings/makine-sasesi-iscilik';
 import { MakineSasesiGenelGiderModalComponent } from './core/settings/makine-sasesi-genel-gider';
+import { GenelMakineSasesiDesignComponent } from './core/design/design.component';
 
 
 
 @NgModule({
   declarations: [
     MakineSasesiComponent,
-    GenelDesignComponent,
+    GenelMakineSasesiDesignComponent,
     GenelFormComponent,
     CreateMakineSasesiComponent,
     UpdateMakineSasesiComponent,

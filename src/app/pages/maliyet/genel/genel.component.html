@@ -1,4 +1,4 @@
-<genel-design>
+<!-- <genel-design>
 
 
 
@@ -52,36 +52,7 @@
   <div full-page style="overflow: auto; height: calc(100vh - 136px);">
 
     <div>
-      <!-- <table class="table table-bordered" style="width: 1000px;">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-            <th *ngFor="let type of ['320 Kg', '400 Kg','480 Kg', '630 Kg', '800 Kg','1000 Kg','1250 Kg','2000 Kg']">{{
-              type }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let fabrika of objectKeys">
-            <tr style="background: transparent;cursor: default;">
-              <td colspan="10"><strong> {{ fabrika }}</strong></td>
-            </tr>
-            <tr *ngFor="let gider of gruplanmisVeri[fabrika];let i = index">
-              <td> </td>
-              <td>{{ gider.model }}</td>
-              <td *ngFor="let type of ['320 KG', '400 KG','480 KG', '630 KG', '800 KG','1000 KG','1250 KG','2000 KG']">
-                <ng-container *ngIf="gider.kabinler[type]">
-                  {{ gider.kabinler[type].malzemeGider | currency:' ₺':'symbol':'1.2-2'}}
-                </ng-container>
-                <ng-container *ngIf="!gider.kabinler[type]">
-                  {{ '-' }}
-                </ng-container>
-              </td>
-            </tr>
-          </ng-container>
 
-        </tbody>
-      </table> -->
 
 
       <app-kabin-maliyet-tablosu></app-kabin-maliyet-tablosu>
@@ -94,4 +65,71 @@
 
   </div>
 
-</genel-design>
+</genel-design> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="main-content">
+
+
+
+  <div class="cells">
+    <div class="cells__spacer"></div>
+    <div class="cells__alphabet">A</div>
+    <div class="cells__alphabet">B</div>
+    <div class="cells__alphabet">C</div>
+    <div class="cells__alphabet">D</div>
+    <div class="cells__alphabet">E</div>
+    <div class="cells__alphabet">F</div>
+    <div class="cells__alphabet">G</div>
+    <div class="cells__alphabet">H</div>
+    <div class="cells__alphabet">I</div>
+    <div class="cells__alphabet">J</div>
+    <div class="cells__alphabet">K</div>
+    
+
+    <div style="color: rgb(97, 0, 0);" class="cells__number" *ngFor="let item of excelSatirSayisi">
+      {{item|json}}
+    </div>
+
+
+
+    
+     
+
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+    <input class="cells__input"/>
+
+
+
+     <input class="cells__input" *ngFor="let item of excelHucreSayisi"/>
+
+
+
+    
+
+    
+  </div>
+</div>
+
+

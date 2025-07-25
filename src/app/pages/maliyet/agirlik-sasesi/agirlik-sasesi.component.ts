@@ -45,6 +45,7 @@ export class AgirlikSasesiComponent implements OnInit {
   }
 
   birlestir() {
+ 
     return this.genelGiderler.map(gider => {
       const katsayilar = this.genelGiderKatsayi
         .filter(katsayi => katsayi.ad === gider.ad && katsayi.fabrika === gider.fabrika)
@@ -58,6 +59,8 @@ export class AgirlikSasesiComponent implements OnInit {
         katsayilar
       };
     });
+
+
   }
   gruplamaYap() {
     const gruplanmisVeri = this.birlesmisVeri.reduce((acc, gider) => {

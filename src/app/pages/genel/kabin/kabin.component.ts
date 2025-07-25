@@ -29,8 +29,6 @@ export class KabinComponent {
     private KabinGenelGiderTutarService: KabinGenelGiderTutarService,
     private KabinIscilikGiderTutarService: KabinIscilikGiderTutarService) {
     this.rowData = [];
-
-
   }
 
   varyasyonlar: any;
@@ -42,7 +40,12 @@ export class KabinComponent {
   objectKeys: any;
 
   async ngOnInit() {
+
+
+
+
     this.result();
+
 
   }
 
@@ -76,6 +79,7 @@ export class KabinComponent {
       }
     });
     this.varyasyonlar = [
+      { ad: 'SATİNE PASLANMAZ', grup: 'Kabin', },
       { ad: 'KOLYOZ-S', grup: 'Kabin', },
       { ad: 'LAGOS', grup: 'Kabin', },
       { ad: 'ORFOZ', grup: 'Kabin', },
@@ -114,13 +118,14 @@ export class KabinComponent {
     this.gruplanmisVeri = this.gruplamaYap();
     this.objectKeys = Object.keys(this.gruplanmisVeri)
 
+   
+
   }
 
 
 
 
   birlestir() {
-
 
 
     return this.varyasyonlar.map(item => {
@@ -138,6 +143,7 @@ export class KabinComponent {
     });
   }
   gruplamaYap() {
+
     const gruplanmisVeri = this.birlesmisVeri.reduce((acc, data) => {
       if (!acc[data.grup]) {
         acc[data.grup] = [];
@@ -146,7 +152,6 @@ export class KabinComponent {
 
       return acc;
     }, {});
-
     return gruplanmisVeri;
 
   }

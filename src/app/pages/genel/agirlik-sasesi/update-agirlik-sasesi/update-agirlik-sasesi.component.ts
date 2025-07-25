@@ -4,6 +4,7 @@ import { AgirlikSasesiService } from 'src/app/core/services/repository/agirlik-s
 import { IscilikGiderService } from 'src/app/core/services/repository/iscilik-gider.service';
 import { KasnakService } from 'src/app/core/services/repository/kasnak.service';
 import { UrunBilesenService } from 'src/app/core/services/repository/urun-bilesen.service';
+import { DeleteModalComponents } from 'src/shared/dialogs/informations/delete-modal';
 import { PersonelSelectModalComponents } from 'src/shared/dialogs/personel-selected-modal';
 import { StokSelectModalComponents } from 'src/shared/dialogs/stok-selected-modal';
 
@@ -113,11 +114,23 @@ export class UpdateAgirlikSasesiComponent implements OnInit {
 
      },(errorMessage) => {}
    );
-    
-    
+
   }
 
-
+sil() {
+    const modalRef = this.NgbModal.open(DeleteModalComponents, {
+      size: 'md',
+      backdrop: 'static',
+    });
+    modalRef.componentInstance.data = 'Birim Kartı';
+    modalRef.result.then(async (event) => {
+      if (event == true) {
+        this.AgirlikSasesiService.delete(this.data.id, async () => {
+          this.activeModal.close(true);
+        });
+      }
+    });
+  }
 
   cikis() {
     this.activeModal.close(false);
